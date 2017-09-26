@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WechatController@index');
+
+Route::get('/oauth_callback', 'WechatController@oauthCallback');
+
+Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind.mobile');
+
+Auth::routes();
