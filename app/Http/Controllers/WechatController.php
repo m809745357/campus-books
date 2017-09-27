@@ -61,15 +61,19 @@ class WechatController extends Controller
     {
         $oauthUser = session()->get('wechat.oauth_user');
 
-        $user = User::create([
-            'nickname' => $oauthUser->nickname,
-            'name' => $oauthUser->name,
-            'email' => $oauthUser->email,
-            'avatar' => $oauthUser->avatar,
-            'openid' => $oauthUser->id,
-            'sex' => $oauthUser->original['sex'],
-            'password' => bcrypt('huishuoit'),
-        ]);
+        if (! User::where(['openid' => $oauthUser->id])->exists()) {
+            $user = User::create([
+                'nickname' => $oauthUser->nickname,
+                'name' => $oauthUser->name,
+                'email' => $oauthUser->email,
+                'avatar' => $oauthUser->avatar,
+                'openid' => $oauthUser->id,
+                'sex' => $oauthUser->original['sex'],
+                'password' => bcrypt('huishuoit'),
+            ]);
+        } else {
+            $user = User::where(['openid' => $oauthUser->id])->firstOrFail();
+        }
 
         \Auth::login($user);
 
