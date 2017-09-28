@@ -19,6 +19,10 @@ Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
 
+Route::get('/threads/create', 'ThreadController@create')->name('threads.create');
+
+Route::post('/threads', 'ThreadController@store')->name('threads.store');
+
 Route::get('/threads/{thread}', 'ThreadController@show')->name('threads.show');
 
 Route::post('/threads/{thread}/reply', 'ReplyController@store')->name('reply.store');

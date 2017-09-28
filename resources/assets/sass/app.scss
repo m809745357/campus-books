@@ -68,6 +68,7 @@
     margin: 0;
     font-size: 12px;
     font-weight: 400;
+    color: #343434;
 }
 
 .thread-reward {
@@ -118,6 +119,35 @@
 .thread-reward-money {
     color: #ff1613;
     font-size: 16px;
+}
+
+.thread-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 1.46666667rem;
+    background-color: #fff;
+    border-bottom: .26666667rem solid #f3f3f3;
+}
+
+.thread-create {
+    flex: 1;
+    margin-left: .25333333rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffda44;
+
+    a {
+        color: #ffda44;
+    }
+}
+
+.thread-menu {
+    margin-right: .25333333rem;
 }
 
 /**

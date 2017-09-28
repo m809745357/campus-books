@@ -39,6 +39,22 @@ class ThreadsTest extends TestCase
         $response->assertSee($thread->title);
     }
 
+    /** @test*/
+    public function is_an_authenticate_user_can_post_thread()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->make(['user_id' => $user->id]);
+
+        $response = $this->post('/threads', $thread->toArray());
+
+        $this->get($response->headers->get('Location'))
+            ->assertSee($thread->title)
+            ->assertSee($thread->body);
+    }
+
     /**
      * A basic test example.
      *
