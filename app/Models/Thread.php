@@ -25,7 +25,11 @@ class Thread extends Model
 
     public function addReply($reply)
     {
-        return $this->replies()->create($reply);
+        return $this->replies()->create([
+            'user_id' => auth()->id(),
+            'favorites_count' => 0,
+            'body' => $reply
+        ]);
     }
 
     public function getIsRewardAttribute()

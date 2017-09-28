@@ -51,6 +51,7 @@ $factory->define(App\Models\Reply::class, function (Faker $faker) {
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'body' => $faker->paragraph
+        'body' => $faker->paragraph,
+        'favorites_count' => 0,
     ];
 });

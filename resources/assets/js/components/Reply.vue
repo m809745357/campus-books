@@ -5,11 +5,25 @@
             <div class="user-profile">
                 <h4 class="user-nickname">{{ onwer.nickname }}</h4>
             </div>
+            <div class="thread-favorite">
+                <div class="replaies-count" @click="favorited">
+                    <img :src="favoritedImg" width="32px" height="32px" style="border: none">
+                    <span class="icon-count">{{ favorites_count }}</span>
+                </div>
+            </div>
         </div>
         <div class="thread-body">
             <p class="thread-desc">
                 {{ reply['body'] }}
             </p>
+        </div>
+        <div class="thread-footer">
+            <span class="">
+
+            </span>
+            <div class="thread-options">
+                <span class="thread-delete" v-if="canDelete" @click="destroy">删除</span>
+            </div>
         </div>
     </div>
 </template>
@@ -20,7 +34,47 @@
         data() {
             return {
                 reply: this.attributes,
-                onwer: this.attributes.onwer
+                onwer: this.attributes.onwer,
+                is_favorited: this.attributes.is_favorited,
+                favorites_count: this.attributes.favorites_count
+            }
+        },
+        watch: {
+            is_favorited(now, old) {
+                console.log(now, old);
+            }
+        },
+        computed: {
+            canDelete() {
+                return this.authorize(user => this.attributes.user_id == user.id);
+            },
+            favoritedImg() {
+                return this.is_favorited ? '/images/zand.png' : '/images/zan.png';
+            }
+        },
+        methods: {
+            destroy() {
+                axios.delete(this.url());
+
+                this.$emit('deleted', this.attributes.id);
+            },
+            url() {
+                return `/replies/${this.attributes.id}`;
+            },
+            favorited() {
+                return this.is_favorited ? this.delete() : this.create();
+            },
+            create() {
+                axios.post(this.url() + '/favorites');
+
+                this.is_favorited = true;
+                this.favorites_count ++;
+            },
+            delete() {
+                axios.delete(this.url() + '/favorites');
+
+                this.is_favorited = false;
+                this.favorites_count --;
             }
         }
     }

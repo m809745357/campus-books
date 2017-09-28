@@ -6,13 +6,15 @@
                 <h4 class="user-nickname">{{ onwer.nickname }}</h4>
                 <p class="thread-time">{{ thread.created_at }}</p>
             </div>
-            <div class="thread-reward" v-if="thread.is_reward">
+            <div class="thread-reward" v-show="thread.is_reward">
                 悬赏
             </div>
         </div>
         <div class="thread-body">
             <h4 class="thread-title">
-                {{ thread.title }}
+                <strong v-show="thread.is_reward" class="thread-reward-money">
+                     <img src="" alt="">￥ {{ thread.money }}
+                </strong> {{ thread.title }}
             </h4>
             <p class="thread-desc">
                 {{ thread.body }}
@@ -50,6 +52,7 @@
                     replies_count: this.attributes.replies_count,
                     views_count: this.attributes.views_count,
                     is_reward: this.attributes.isReward,
+                    money: this.attributes.money,
                 },
                 onwer: {
                     avatar: this.attributes.onwer.avatar,

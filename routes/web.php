@@ -23,4 +23,10 @@ Route::get('/threads/{thread}', 'ThreadController@show')->name('threads.show');
 
 Route::post('/threads/{thread}/reply', 'ReplyController@store')->name('reply.store');
 
+Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
+
+Route::post('/replies/{reply}/favorites', 'FavoriteController@store')->name('reply.favorite');
+
+Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name('reply.delete');
+
 Auth::routes();

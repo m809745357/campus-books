@@ -8586,3 +8586,13 @@ button.close {
   color: #aaa;
 }
 
+.thread-delete {
+  height: .57333333rem;
+  width: 1.4rem;
+  border: 1px solid #959595;
+  display: block;
+  border-radius: .28666666rem;
+  text-align: center;
+  line-height: .57333333rem;
+}
+

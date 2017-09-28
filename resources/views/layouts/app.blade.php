@@ -11,6 +11,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <script>
+        window.App = <?php echo json_encode([
+             'user' => Auth::user(),
+             'signedIn' => Auth::check()
+        ]); ?>
+    </script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

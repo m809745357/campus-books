@@ -9,11 +9,11 @@
 
             <div class="replies-body">
                 <div v-for="(reply, key) in replies">
-                    <reply :attributes="reply" v-if="key < more_count"></reply>
+                    <reply :attributes="reply" v-if="key < more_count" @deleted="remove(key)"></reply>
                 </div>
             </div>
 
-            <div class="replies-more" @click="show" v-if="judge()">
+            <div class="replies-more" @click="show" v-if="judge">
                 {{ this.tips }}
             </div>
 
@@ -49,9 +49,15 @@
             this.tips = `收起剩余个${this.replies_count - this.more_count}回答，点击展开`;
         },
 
+        computed: {
+            judge() {
+                return parseInt(this.replies_count) > 2 && this.more_count !== this.replies_count;
+            }
+        },
+
         watch: {
             replies_count(curVal, oldVal) {
-                this.attributes.replies_count = curVal;
+                this.thread.replies_count = curVal;
                 console.log(curVal, oldVal);
             },
             more_count(curVal, oldVal) {
@@ -68,6 +74,7 @@
 
                 this.replies_count ++;
             },
+
             url() {
                 return `/threads/${this.attributes.id}/reply`;
             },
@@ -75,14 +82,12 @@
                 this.more_count = this.attributes.replies_count;
                 this.more = true;
             },
-            judge() {
-                if (this.more == false && this.replies_count > 2) {
-                    return true;
-                } else {
-                    return ! this.more;
-                }
+            remove(index) {
+                this.replies.splice(index, 1);
+
+                // this.$emit('removed');
+                this.replies_count --;
             }
         }
-
     }
 </script>

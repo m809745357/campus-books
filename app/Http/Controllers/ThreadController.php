@@ -17,6 +17,7 @@ class ThreadController extends Controller
     public function show(Thread $thread)
     {
         $thread = $thread->load('onwer', 'replies', 'replies.onwer');
+        $thread->increment('views_count');
         return view('threads.show', compact('thread'));
     }
 }
