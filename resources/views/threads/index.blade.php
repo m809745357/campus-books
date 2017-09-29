@@ -11,12 +11,12 @@
                 </a>
             </div>
             <div class="thread-channel">
-                <img src="/images/reply-menu.png" alt="">
+                <a href="{{ route('threads.channels') }}"><img src="/images/reply-menu.png" alt=""></a>
             </div>
         </div>
         <div class="thread-menu">
-            <li><a class="{{ request()->query('type') == 'reward' ? 'on' : '' }}" href="{{ route('threads.index') }}?type=reward">悬赏</a></li>
-            <li><a class="{{ request()->query('type') == 'ordinary' ? 'on' : '' }}" href="{{ route('threads.index') }}?type=ordinary">普通</a></li>
+            <li><a class="{{ request()->query('type') == 'reward' ? 'on' : '' }}" href="{{ request()->url() }}?type=reward">悬赏</a></li>
+            <li><a class="{{ request()->query('type') == 'ordinary' ? 'on' : '' }}" href="{{ request()->url() }}?type=ordinary">普通</a></li>
         </div>
         @foreach ($threads as $thread)
             <thread :attributes="{{ $thread }}"></thread>

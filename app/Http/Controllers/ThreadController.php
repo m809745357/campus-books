@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Thread;
+use App\Models\Channel;
 use App\Filters\ThreadFilters;
 
 class ThreadController extends Controller
@@ -13,22 +14,20 @@ class ThreadController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(ThreadFilters $filters)
+    public function index(Channel $channel, ThreadFilters $filters)
     {
-        // $threads = $this->getThreads($filters);
+        $threads = Thread::with('onwer', 'channel')->latest()->filter($filters);
 
-        $threads = Thread::with('onwer')->latest()->filter($filters);
-
-        // if ($channel->exists) {
-        //     $threads->where('channel_id', $channel->id);
-        // }
+        if ($channel->exists) {
+            $threads->where('channel_id', $channel->id);
+        }
         // return $threads->paginate(25);
         $threads = $threads->get();
 
         return view('threads.index', compact('threads'));
     }
 
-    public function show(Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
         $thread = $thread->load('onwer', 'replies', 'replies.onwer');
         $thread->increment('views_count');
@@ -47,6 +46,7 @@ class ThreadController extends Controller
             'title' => request('title'),
             'body' => request('body'),
             'money' => request('money'),
+            'channel_id' => request('channel_id'),
             'replies_count' => 0,
             'views_count' => 0,
         ]);
@@ -55,11 +55,12 @@ class ThreadController extends Controller
             return response($thread, 201);
         }
 
-        return redirect()->route('threads.show', ['thread' => $thread->id]);
+        return redirect($thread->path());
     }
 
     public function create()
     {
-        return view('threads.create');
+        $channels = Channel::all();
+        return view('threads.create', compact('channels'));
     }
 }

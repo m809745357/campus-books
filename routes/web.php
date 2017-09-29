@@ -21,11 +21,15 @@ Route::get('/threads', 'ThreadController@index')->name('threads.index');
 
 Route::get('/threads/create', 'ThreadController@create')->name('threads.create');
 
+Route::get('/threads/channels', 'ChannelController@index')->name('threads.channels');
+
+Route::get('/threads/{channel}', 'ThreadController@index')->name('threads.index.channel');
+
 Route::post('/threads', 'ThreadController@store')->name('threads.store');
 
-Route::get('/threads/{thread}', 'ThreadController@show')->name('threads.show');
+Route::get('/threads/{channel}/{thread}', 'ThreadController@show')->name('threads.show');
 
-Route::post('/threads/{thread}/reply', 'ReplyController@store')->name('reply.store');
+Route::post('/threads/{channel}/{thread}/reply', 'ReplyController@store')->name('reply.store');
 
 Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
 

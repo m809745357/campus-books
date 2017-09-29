@@ -34,6 +34,9 @@ $factory->define(App\Models\Thread::class, function (Faker $faker) {
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
+        'channel_id' => function () {
+            return factory('App\Models\Channel')->create()->id;
+        },
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
         'replies_count' => 0,
@@ -53,5 +56,15 @@ $factory->define(App\Models\Reply::class, function (Faker $faker) {
         },
         'body' => $faker->paragraph,
         'favorites_count' => 0,
+    ];
+});
+
+$factory->define(App\Models\Channel::class, function (Faker $faker) {
+
+    return [
+        'slug' => $faker->word,
+        'name' => $faker->word,
+        'icon' => $faker->imageUrl(50, 50),
+        'desc' => $faker->sentence,
     ];
 });

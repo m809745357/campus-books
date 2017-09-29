@@ -67,7 +67,7 @@
 
         methods: {
             detail(id) {
-                window.location.href = `/threads/${id}`;
+                window.location.href = `/threads/${this.attributes.channel.slug}/${id}`;
             }
         }
     }

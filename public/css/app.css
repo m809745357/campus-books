@@ -8678,3 +8678,118 @@ button.close {
   line-height: .57333333rem;
 }
 
+/**
+ * thread-form
+ */
+
+.thread-form {
+  background-color: #fff;
+}
+
+.thread-form-group {
+  margin: 0 .25333333rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1.13333333rem;
+}
+
+.thread-form-group label {
+  -webkit-box-flex: 13;
+      -ms-flex: 13;
+          flex: 13;
+  font-size: 12.5px;
+  margin: 0;
+  color: #000000;
+  font-weight: unset;
+}
+
+.thread-form-group input {
+  -webkit-box-flex: 57;
+      -ms-flex: 57;
+          flex: 57;
+  background-color: #f8f8f8;
+  border: none;
+  height: .64rem;
+  padding-left: 10px;
+  color: #000000;
+}
+
+.thread-form-group select {
+  -webkit-box-flex: 25;
+      -ms-flex: 25;
+          flex: 25;
+  background-color: #f8f8f8;
+  border: none;
+  height: .64rem;
+  padding-left: 10px;
+  color: #000000;
+}
+
+.thread-form-group textarea {
+  -webkit-box-flex: 57;
+      -ms-flex: 57;
+          flex: 57;
+  background-color: #f8f8f8;
+  border: none;
+  height: 2.66666667rem;
+  padding-left: 10px;
+  color: #000000;
+}
+
+/**
+ * threads.channels
+ */
+
+.thread-channels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 .25333333rem;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  height: 1.74666667rem;
+  margin-bottom: .26666667rem;
+  background-color: #fff;
+}
+
+.channel-icon {
+  margin-left: .34666667rem;
+  width: 1.13333333rem;
+  height: 1.13333333rem;
+  border-radius: .56666667rem;
+}
+
+.channel-slug {
+  margin-left: .36rem;
+  width: 6.78666667rem;
+}
+
+.channel-name {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.channel-desc {
+  margin: 0;
+  color: #aaa;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

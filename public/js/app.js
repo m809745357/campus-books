@@ -16857,6 +16857,7 @@ Vue.component('thread', __webpack_require__(157));
 Vue.component('thread-detail', __webpack_require__(128));
 Vue.component('thread-reply', __webpack_require__(165));
 Vue.component('thread-new', __webpack_require__(176));
+Vue.component('thread-channels', __webpack_require__(190));
 
 var app = new Vue({
     el: '#app'
@@ -58292,7 +58293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         detail: function detail(id) {
-            window.location.href = '/threads/' + id;
+            window.location.href = '/threads/' + this.attributes.channel.slug + '/' + id;
         }
     }
 });
@@ -59256,17 +59257,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(177)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(179)
 /* template */
 var __vue_template__ = __webpack_require__(180)
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -59302,46 +59299,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 177 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(178);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("53f00d2c", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1dd36d6e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./ThreadNew.vue", function() {
-     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1dd36d6e\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./ThreadNew.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 178 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.thread-form {\n    background-color: #fff;\n}\n.thread-form-group {\n    margin: 0 .25333333rem;\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    height: 1.13333333rem;\n}\n.thread-form-group label {\n    flex: 13;\n    font-size: 12.5px;\n    margin: 0;\n    color: #000000;\n    font-weight: unset;\n}\n.thread-form-group input {\n    flex: 57;\n    background-color: #f8f8f8;\n    border: none;\n    height: .64rem;\n    padding-left: 10px;\n    color: #000000;\n}\n.thread-form-group select {\n    flex: 25;\n    background-color: #f8f8f8;\n    border: none;\n    height: .64rem;\n    padding-left: 10px;\n    color: #000000;\n}\n.thread-form-group textarea {\n    flex: 57;\n    background-color: #f8f8f8;\n    border: none;\n    height: 2.66666667rem;\n    padding-left: 10px;\n    color: #000000;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 177 */,
+/* 178 */,
 /* 179 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -59385,14 +59344,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['attributes'],
     data: function data() {
         return {
             thread: {
                 money: 0,
                 title: 'title',
-                body: 'this is example'
+                body: 'this is example',
+                channel_id: ''
             },
-            type: true
+            type: true,
+            channels: this.attributes,
+            slug: ''
         };
     },
 
@@ -59413,6 +59376,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changeType: function changeType(e) {
             this.type = e.target.value == 1 ? true : false;
         },
+        changeChannel: function changeChannel(e) {
+            var select = e.target;
+            this.thread.channel_id = select.value;
+            this.slug = select.options[select.selectedIndex].getAttribute("data-slug");
+        },
         addThread: function addThread() {
             var _this = this;
 
@@ -59424,7 +59392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         success: function success(data) {
-            location.href = '/threads/' + data.id;
+            location.href = '/threads/' + this.slug + '/' + data.id;
         },
         error: function error() {}
     }
@@ -59512,6 +59480,32 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "thread-form-group" }, [
+      _c("label", [_vm._v("问题分类:")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { attrs: { name: "select" }, on: { change: _vm.changeChannel } },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("请选择问题分类")]),
+          _vm._v(" "),
+          _vm._l(_vm.channels, function(channel, index) {
+            return _c(
+              "option",
+              {
+                attrs: { "data-slug": channel.slug },
+                domProps: { value: channel.id }
+              },
+              [_vm._v(_vm._s(channel.slug))]
+            )
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("span", { staticStyle: { flex: "32" } })
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -59587,6 +59581,155 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(193)
+/* template */
+var __vue_template__ = __webpack_require__(194)
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ThreadChannels.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ThreadChannels.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5cc933f7", Component.options)
+  } else {
+    hotAPI.reload("data-v-5cc933f7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 191 */,
+/* 192 */,
+/* 193 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['attributes'],
+    data: function data() {
+        return {
+            channels: this.attributes
+        };
+    },
+
+    methods: {
+        chreadChannels: function chreadChannels(slug) {
+            window.location.href = '/threads/' + slug;
+        }
+    }
+
+});
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticStyle: { "margin-top": ".37333333rem" } },
+    _vm._l(_vm.channels, function(channel, index) {
+      return _c(
+        "div",
+        {
+          staticClass: "thread-channels",
+          on: {
+            click: function($event) {
+              _vm.chreadChannels(channel.slug)
+            }
+          }
+        },
+        [
+          _c("img", {
+            staticClass: "channel-icon",
+            attrs: { src: channel.icon, alt: "" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "channel-slug" }, [
+            _c("h4", { staticClass: "channel-name" }, [
+              _vm._v(_vm._s(channel.name))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "channel-desc" }, [
+              _vm._v(_vm._s(channel.desc))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("\n            >\n        ")])
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-5cc933f7", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

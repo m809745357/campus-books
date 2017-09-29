@@ -35,7 +35,7 @@ class ReplaiesTest extends TestCase
 
         $this->actingAs($user);
 
-        $thread = factory('App\Models\Thread')->create();
+        $thread = factory('App\Models\Thread')->create(['user_id' => $user->id]);
 
         $response =$this->json('POST', $thread->path() . '/reply', [
             'body' => 'it was something'

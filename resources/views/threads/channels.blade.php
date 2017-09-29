@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <thread-new :attributes="{{ $channels }}"></thread-new>
+        <thread-channels :attributes="{{ $channels }}"></thread-channels>
     </div>
 </div>
 @endsection

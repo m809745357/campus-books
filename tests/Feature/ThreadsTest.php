@@ -32,9 +32,26 @@ class ThreadsTest extends TestCase
 
         $this->actingAs($user);
 
+        $channel = factory('App\Models\Channel')->create();
+
+        $thread = factory('App\Models\Thread')->create(['user_id' => $user->id, 'channel_id' => $channel->id]);
+
+        $response = $this->get("/threads/{$channel->slug}/{$thread->id}");
+
+        $response->assertSee($thread->title);
+    }
+
+
+    /** @test*/
+    public function is_an_authenticate_user_can_view_all_threads_to_channels()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
         $thread = factory('App\Models\Thread')->create(['user_id' => $user->id]);
 
-        $response = $this->get($thread->path());
+        $response = $this->get("/threads/{$thread->channel->slug}");
 
         $response->assertSee($thread->title);
     }

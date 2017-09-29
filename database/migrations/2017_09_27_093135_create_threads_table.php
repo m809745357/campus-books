@@ -16,11 +16,12 @@ class CreateThreadsTable extends Migration
         Schema::create('threads', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('channel_id');
+            $table->unsignedInteger('replies_count')->default(0);
+            $table->unsignedInteger('views_count')->default(0);
             $table->string('title');
             $table->text('body');
             $table->integer('money');
-            $table->integer('replies_count');
-            $table->integer('views_count');
             $table->timestamps();
         });
     }
