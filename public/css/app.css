@@ -8379,6 +8379,7 @@ button.close {
   color: #323232;
   font-size: 16px;
   margin: 0;
+  margin-bottom: 5px;
 }
 
 .thread-desc {
@@ -8552,8 +8553,42 @@ button.close {
   color: #ffda44;
 }
 
-.thread-menu {
+.thread-channel {
   margin-right: .25333333rem;
+}
+
+.thread-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1.46666667rem;
+  border-bottom: 1px solid #f3f3f3;
+  list-style: none;
+  background-color: #fff;
+  font-size: 16px;
+  color: #fff;
+}
+
+.thread-menu li > a {
+  display: block;
+  height: 1.46666667rem;
+  line-height: 1.46666667rem;
+  width: 1.73333333rem;
+  text-align: center;
+  color: #333;
+}
+
+.thread-menu li > a.on {
+  border-bottom: 4px solid #ffda44;
 }
 
 /**

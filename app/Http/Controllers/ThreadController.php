@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Thread;
+use App\Filters\ThreadFilters;
 
 class ThreadController extends Controller
 {
@@ -12,9 +13,17 @@ class ThreadController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(ThreadFilters $filters)
     {
-        $threads = Thread::with('onwer')->latest()->get();
+        // $threads = $this->getThreads($filters);
+
+        $threads = Thread::with('onwer')->latest()->filter($filters);
+
+        // if ($channel->exists) {
+        //     $threads->where('channel_id', $channel->id);
+        // }
+        // return $threads->paginate(25);
+        $threads = $threads->get();
 
         return view('threads.index', compact('threads'));
     }

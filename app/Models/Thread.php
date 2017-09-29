@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Filters\ThreadFilters;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class Thread extends Model
 {
@@ -37,5 +40,17 @@ class Thread extends Model
     public function getIsRewardAttribute()
     {
         return $this->money !== 0;
+    }
+
+    /**
+     * Apply all relevant thread filters.
+     *
+     * @param  Builder       $query
+     * @param  ThreadFilters $filters
+     * @return Builder
+     */
+    public function scopeFilter(Builder $query, ThreadFilters $filters)
+    {
+        return $filters->apply($query);
     }
 }
