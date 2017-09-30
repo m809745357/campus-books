@@ -24,4 +24,5 @@
         @endforeach
     </div>
 </div>
+@include('threads.menu')
 @endsection

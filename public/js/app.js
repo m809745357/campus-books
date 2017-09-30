@@ -58278,7 +58278,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 replies_count: this.attributes.replies_count,
                 views_count: this.attributes.views_count,
                 is_reward: this.attributes.isReward,
-                money: this.attributes.money
+                money: this.attributes.money,
+                channel_name: this.attributes.channel.name,
+                channel_slug: this.attributes.channel.slug
             },
             onwer: {
                 avatar: this.attributes.onwer.avatar,
@@ -58294,6 +58296,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         detail: function detail(id) {
             window.location.href = '/threads/' + this.attributes.channel.slug + '/' + id;
+        },
+        threadChannel: function threadChannel(slug) {
+            window.location.href = '/threads/' + slug;
         }
     }
 });
@@ -58306,48 +58311,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "thread",
-      on: {
-        click: function($event) {
-          _vm.detail(_vm.thread.id)
-        }
-      }
-    },
-    [
-      _c("div", { staticClass: "user-profile-panel" }, [
-        _c("img", { attrs: { src: _vm.onwer.avatar } }),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-profile" }, [
-          _c("h4", { staticClass: "user-nickname" }, [
-            _vm._v(_vm._s(_vm.onwer.nickname))
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "thread-time" }, [
-            _vm._v(_vm._s(_vm.thread.created_at))
-          ])
+  return _c("div", { staticClass: "thread" }, [
+    _c("div", { staticClass: "user-profile-panel" }, [
+      _c("img", { attrs: { src: _vm.onwer.avatar } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "user-profile" }, [
+        _c("h4", { staticClass: "user-nickname" }, [
+          _vm._v(_vm._s(_vm.onwer.nickname))
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.thread.is_reward,
-                expression: "thread.is_reward"
-              }
-            ],
-            staticClass: "thread-reward"
-          },
-          [_vm._v("\n            悬赏\n        ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "thread-body" }, [
+        _c("p", { staticClass: "thread-time" }, [
+          _vm._v(_vm._s(_vm.thread.created_at))
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "thread-body",
+        on: {
+          click: function($event) {
+            _vm.detail(_vm.thread.id)
+          }
+        }
+      },
+      [
         _c("h4", { staticClass: "thread-title" }, [
           _c(
             "strong",
@@ -58363,8 +58352,8 @@ var render = function() {
               staticClass: "thread-reward-money"
             },
             [
-              _c("img", { attrs: { src: "", alt: "" } }),
-              _vm._v("￥ " + _vm._s(_vm.thread.money) + "\n            ")
+              _c("img", { attrs: { src: "/images/price.png", width: "19" } }),
+              _vm._v(" " + _vm._s(_vm.thread.money) + "\n            ")
             ]
           ),
           _vm._v(" " + _vm._s(_vm.thread.title) + "\n        ")
@@ -58373,39 +58362,50 @@ var render = function() {
         _c("p", { staticClass: "thread-desc" }, [
           _vm._v("\n            " + _vm._s(_vm.thread.body) + "\n        ")
         ])
-      ]),
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "thread-footer" }, [
+      _c(
+        "span",
+        {
+          staticClass: "thread-channel-name",
+          on: {
+            click: function($event) {
+              _vm.threadChannel(_vm.thread.channel_slug)
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\n            " + _vm._s(_vm.thread.channel_name) + "\n        "
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "thread-footer" }, [
-        _c("span", {}),
-        _vm._v(" "),
-        _c("div", { staticClass: "thread-count" }, [
-          _c("div", { staticClass: "replaies-count" }, [
-            _c("img", {
-              attrs: {
-                src: "/images/replay.png",
-                width: "32px",
-                height: "32px"
-              }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "icon-count" }, [
-              _vm._v(_vm._s(_vm.thread.replies_count))
-            ])
-          ]),
-          _vm._v("\n                \n            "),
-          _c("div", { staticClass: "views-count" }, [
-            _c("img", {
-              attrs: { src: "/images/view.png", width: "32px", height: "32px" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "icon-count" }, [
-              _vm._v(_vm._s(_vm.thread.views_count))
-            ])
+      _c("div", { staticClass: "thread-count" }, [
+        _c("div", { staticClass: "replaies-count" }, [
+          _c("img", {
+            attrs: { src: "/images/replay.png", width: "32px", height: "32px" }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-count" }, [
+            _vm._v(_vm._s(_vm.thread.replies_count))
+          ])
+        ]),
+        _vm._v("\n                \n            "),
+        _c("div", { staticClass: "views-count" }, [
+          _c("img", {
+            attrs: { src: "/images/view.png", width: "32px", height: "32px" }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-count" }, [
+            _vm._v(_vm._s(_vm.thread.views_count))
           ])
         ])
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

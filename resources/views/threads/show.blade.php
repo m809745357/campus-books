@@ -6,4 +6,5 @@
         <thread-reply :attributes="{{ $thread }}"></thread-reply>
     </div>
 </div>
+@include('threads.menu')
 @endsection

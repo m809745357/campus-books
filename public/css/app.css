@@ -8350,6 +8350,10 @@ button.close {
   }
 }
 
+@font-face {
+  font-family: PingFangSC-Regular, sans-serif;
+}
+
 .thread {
   width: 100%;
   height: 4rem;
@@ -8376,9 +8380,9 @@ button.close {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  color: #323232;
+  color: #333333;
   font-size: 16px;
-  margin: 0;
+  margin-top: 8px;
   margin-bottom: 5px;
 }
 
@@ -8386,9 +8390,20 @@ button.close {
   height: 3em;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #ababab;
+  color: #aaaaaa;
   font-size: 14px;
   margin: 0;
+}
+
+.thread-channel-name {
+  display: block;
+  background-color: #e9e9e9;
+  font-size: 10px;
+  text-align: center;
+  min-width: 1.28rem;
+  min-height: .45333333rem;
+  padding: 0 1em;
+  color: #aaaaaa;
 }
 
 .user-profile-panel {
@@ -8404,7 +8419,7 @@ button.close {
 
 .user-profile-panel img {
   border-radius: 50%;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #e9e9e9;
   width: .8rem;
   height: .8rem;
 }
@@ -8430,7 +8445,7 @@ button.close {
   margin: 0;
   font-size: 12px;
   font-weight: 400;
-  color: #343434;
+  color: #333333;
 }
 
 .thread-reward {
@@ -8445,7 +8460,7 @@ button.close {
 
 .thread-time {
   font-size: 12px;
-  color: #ababab;
+  color: #aaaaaa;
   margin: 0;
 }
 
@@ -8507,7 +8522,7 @@ button.close {
 }
 
 .thread-reward-money {
-  color: #ff1613;
+  color: #ff1616;
   font-size: 16px;
 }
 
@@ -8527,7 +8542,7 @@ button.close {
           flex-direction: row;
   height: 1.46666667rem;
   background-color: #fff;
-  border-bottom: .26666667rem solid #f3f3f3;
+  border-bottom: 0.26666667rem solid #e9e9e9;
 }
 
 .thread-create {
@@ -8546,11 +8561,11 @@ button.close {
           justify-content: center;
   font-size: 16px;
   font-weight: 400;
-  color: #ffda44;
+  color: #fdd504;
 }
 
 .thread-create a {
-  color: #ffda44;
+  color: #fdd504;
 }
 
 .thread-channel {
@@ -8571,7 +8586,7 @@ button.close {
       -ms-flex-align: center;
           align-items: center;
   height: 1.46666667rem;
-  border-bottom: 1px solid #f3f3f3;
+  border-bottom: 1px solid #e9e9e9;
   list-style: none;
   background-color: #fff;
   font-size: 16px;
@@ -8584,7 +8599,7 @@ button.close {
   line-height: 1.46666667rem;
   width: 1.73333333rem;
   text-align: center;
-  color: #333;
+  color: #333333;
 }
 
 .thread-menu li > a.on {
@@ -8604,13 +8619,13 @@ button.close {
   margin: 0 .4rem;
   height: 1.30666667rem;
   line-height: 1.30666667rem;
-  border-bottom: 2px solid #f9f9f9;
+  border-bottom: 2px solid #e9e9e9;
 }
 
 .reply {
   padding-top: .37333333rem;
   padding-bottom: .26666667rem;
-  border-bottom: 1px solid #f3f3f3;
+  border-bottom: 1px solid #e9e9e9;
 }
 
 .reply-user-profile-panel {
@@ -8626,7 +8641,7 @@ button.close {
 
 .reply-user-profile-panel img {
   border-radius: 50%;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #e9e9e9;
   width: .8rem;
   height: .8rem;
 }
@@ -8654,14 +8669,14 @@ button.close {
   text-align: center;
   border-radius: 4px;
   margin: 0 auto;
-  border: 1px solid #d2d2d2;
+  border: 1px solid #e9e9e9;
   margin-top: .48rem;
 }
 
 .reply-thread-body {
   margin-top: 10px;
   width: 100%;
-  border-color: #d2d2d2;
+  border-color: #e9e9e9;
   border-radius: 4px;
   padding: 10px;
   font-size: 12px;
@@ -8671,7 +8686,7 @@ button.close {
 .thread-delete {
   height: .57333333rem;
   width: 1.4rem;
-  border: 1px solid #959595;
+  border: 1px solid #e9e9e9;
   display: block;
   border-radius: .28666666rem;
   text-align: center;
@@ -8759,7 +8774,7 @@ button.close {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 .25333333rem;
-  border: 1px solid #e3e3e3;
+  border: 1px solid #e9e9e9;
   border-radius: 4px;
   height: 1.74666667rem;
   margin-bottom: .26666667rem;
@@ -8791,5 +8806,53 @@ button.close {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/**
+  * menu
+  */
+
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  height: 1.32rem;
+  width: 100vw;
+  background-color: #fff;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  border-top: 1px solid #e9e9e9;
+}
+
+.menu li {
+  list-style: none;
+}
+
+.menu-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #333333;
+  font-size: 12px;
+  height: 1.32rem;
+}
+
+.menu-item img {
+  width: .6rem;
+  height: .6rem;
+  margin-top: .1em;
+  margin-bottom: .1em;
 }
 

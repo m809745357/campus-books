@@ -6,4 +6,5 @@
         <thread-channels :attributes="{{ $channels }}"></thread-channels>
     </div>
 </div>
+@include('threads.menu')
 @endsection

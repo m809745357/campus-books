@@ -6,4 +6,5 @@
         <thread-new :attributes="{{ $channels }}"></thread-new>
     </div>
 </div>
+@include('threads.menu')
 @endsection
