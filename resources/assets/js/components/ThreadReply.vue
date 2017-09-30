@@ -8,7 +8,7 @@
             </div>
 
             <div class="replies-body">
-                <div v-for="(reply, key) in replies">
+                <div v-for="(reply, key) in replies" :key="reply.id">
                     <reply :attributes="reply" v-if="key < more_count" @deleted="remove(key)"></reply>
                 </div>
             </div>
@@ -58,6 +58,7 @@
         watch: {
             replies_count(curVal, oldVal) {
                 this.thread.replies_count = curVal;
+                this.replies_count = curVal;
                 console.log(curVal, oldVal);
             },
             more_count(curVal, oldVal) {

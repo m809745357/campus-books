@@ -15,6 +15,7 @@
             </div>
         </div>
         <div class="thread-menu">
+            <li><a class="{{ request()->query('type') == null ? 'on' : '' }}" href="{{ request()->url() }}">全部</a></li>
             <li><a class="{{ request()->query('type') == 'reward' ? 'on' : '' }}" href="{{ request()->url() }}?type=reward">悬赏</a></li>
             <li><a class="{{ request()->query('type') == 'ordinary' ? 'on' : '' }}" href="{{ request()->url() }}?type=ordinary">普通</a></li>
         </div>
