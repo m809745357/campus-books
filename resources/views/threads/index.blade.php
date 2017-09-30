@@ -22,7 +22,7 @@
         @foreach ($threads as $thread)
             <thread :attributes="{{ $thread }}"></thread>
         @endforeach
+        @include('threads.menu')
     </div>
 </div>
-@include('threads.menu')
 @endsection

@@ -58902,6 +58902,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         favoritedImg: function favoritedImg() {
             return this.is_favorited ? '/images/zand.png' : '/images/zan.png';
+        },
+        favoritedClass: function favoritedClass() {
+            return this.is_favorited ? 'icon-count favorited' : 'icon-count';
         }
     },
     methods: {
@@ -58955,11 +58958,11 @@ var render = function() {
           { staticClass: "replaies-count", on: { click: _vm.favorited } },
           [
             _c("img", {
-              staticStyle: { border: "none" },
-              attrs: { src: _vm.favoritedImg, width: "32px", height: "32px" }
+              staticClass: "favorited-img",
+              attrs: { src: _vm.favoritedImg, width: "20", height: "20" }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "icon-count" }, [
+            _c("span", { class: _vm.favoritedClass }, [
               _vm._v(_vm._s(_vm.favorites_count))
             ])
           ]

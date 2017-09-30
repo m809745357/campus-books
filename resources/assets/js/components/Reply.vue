@@ -7,8 +7,8 @@
             </div>
             <div class="thread-favorite">
                 <div class="replaies-count" @click="favorited">
-                    <img :src="favoritedImg" width="32px" height="32px" style="border: none">
-                    <span class="icon-count">{{ favorites_count }}</span>
+                    <img :src="favoritedImg" width="20" height="20" class="favorited-img">
+                    <span :class="favoritedClass">{{ favorites_count }}</span>
                 </div>
             </div>
         </div>
@@ -50,6 +50,9 @@
             },
             favoritedImg() {
                 return this.is_favorited ? '/images/zand.png' : '/images/zan.png';
+            },
+            favoritedClass() {
+                return this.is_favorited ? 'icon-count favorited' : 'icon-count';
             }
         },
         methods: {
