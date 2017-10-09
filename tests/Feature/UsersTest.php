@@ -68,7 +68,7 @@ class UsersTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get('/users/' . $user->id);
+        $response = $this->get('/users/');
 
         $response->assertStatus(200);
     }
@@ -82,10 +82,8 @@ class UsersTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get('/users/' . $user->id);
+        $response = $this->get('/users/');
 
-        $response = $this->get('/users/' . $othreUser->id);
-
-        $response->assertStatus(302);
+        $response->assertStatus(200);
     }
 }

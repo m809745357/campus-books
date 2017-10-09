@@ -16854,6 +16854,7 @@ moment.updateLocale('en', {
  */
 
 Vue.component('thread', __webpack_require__(157));
+Vue.component('reply', __webpack_require__(167));
 Vue.component('thread-detail', __webpack_require__(128));
 Vue.component('thread-reply', __webpack_require__(165));
 Vue.component('thread-new', __webpack_require__(176));
@@ -58803,13 +58804,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             tips: ''
         };
     },
-    mounted: function mounted() {
-        this.tips = '\u6536\u8D77\u5269\u4F59\u4E2A' + (this.replies_count - this.more_count) + '\u56DE\u7B54\uFF0C\u70B9\u51FB\u5C55\u5F00';
-    },
+    mounted: function mounted() {},
 
 
     computed: {
         judge: function judge() {
+            this.tips = '\u6536\u8D77\u5269\u4F59\u4E2A' + (this.replies_count - this.more_count) + '\u56DE\u7B54\uFF0C\u70B9\u51FB\u5C55\u5F00';
             return parseInt(this.replies_count) > 2 && this.more_count !== this.replies_count;
         }
     },
@@ -58932,9 +58932,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['attributes'],
+    props: ['attributes', 'thread'],
     data: function data() {
         return {
             reply: this.attributes,
@@ -58987,6 +58992,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.is_favorited = false;
             this.favorites_count--;
+        },
+        threadDetail: function threadDetail() {
+            window.location.href = '/threads/' + this.thread.channel.name + '/' + this.thread.id;
         }
     }
 });
@@ -59028,6 +59036,36 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "thread-body" }, [
+      this.thread
+        ? _c(
+            "h4",
+            { staticClass: "thread-title", on: { click: _vm.threadDetail } },
+            [
+              _c(
+                "strong",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: this.thread.is_reward,
+                      expression: "this.thread.is_reward"
+                    }
+                  ],
+                  staticClass: "thread-reward-money"
+                },
+                [
+                  _c("img", {
+                    attrs: { src: "/images/price.png", width: "19" }
+                  }),
+                  _vm._v(" " + _vm._s(this.thread.money) + "\n            ")
+                ]
+              ),
+              _vm._v(" " + _vm._s(this.thread.title) + "\n        ")
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c("p", { staticClass: "thread-desc" }, [
         _vm._v("\n            " + _vm._s(_vm.reply["body"]) + "\n        ")
       ])
@@ -59888,11 +59926,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, {
                 icon: '/images/favorites.png',
                 name: '我的收藏',
-                url: '/users/' + window.App.user.id + '/favorites'
+                url: '/users/favorites'
             }, {
                 icon: '/images/threads.png',
                 name: '我的问题',
-                url: '/threads?by=' + window.App.user.id
+                url: '/users/threads'
             }]
         };
     },

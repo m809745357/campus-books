@@ -46,11 +46,12 @@
         },
 
         mounted() {
-            this.tips = `收起剩余个${this.replies_count - this.more_count}回答，点击展开`;
+
         },
 
         computed: {
             judge() {
+                this.tips = `收起剩余个${this.replies_count - this.more_count}回答，点击展开`;
                 return parseInt(this.replies_count) > 2 && this.more_count !== this.replies_count;
             }
         },

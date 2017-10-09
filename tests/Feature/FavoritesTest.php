@@ -135,7 +135,7 @@ class FavoritesTest extends TestCase
 
         $this->post($thread->path() . '/favorites?type=thread');
 
-        $response = $this->get("/users/{$user->id}/favorites");
+        $response = $this->get("/users/favorites");
 
         $response->assertSee($thread->title);
     }

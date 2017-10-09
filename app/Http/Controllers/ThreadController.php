@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Thread;
 use App\Models\Channel;
 use App\Filters\ThreadFilters;
+use App\User;
 
 class ThreadController extends Controller
 {
@@ -21,7 +22,7 @@ class ThreadController extends Controller
         if ($channel->exists) {
             $threads->where('channel_id', $channel->id);
         }
-        // return $threads->paginate(25);
+
         $threads = $threads->get();
 
         return view('threads.index', compact('threads'));

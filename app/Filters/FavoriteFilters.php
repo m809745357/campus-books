@@ -29,6 +29,6 @@ class FavoriteFilters extends Filters
 
     protected function thread()
     {
-        return $this->builder->where('favorited_type', '=', 'App\\Models\\Thread');
+        return $this->builder->where('favorited_type', '=', 'App\\Models\\Thread')->with('favorited.channel');
     }
 }

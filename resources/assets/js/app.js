@@ -45,6 +45,7 @@ moment.updateLocale('en', {
  */
 
 Vue.component('thread', require('./components/Thread.vue'));
+Vue.component('reply', require('./components/Reply.vue'));
 Vue.component('thread-detail', require('./components/ThreadDetail.vue'));
 Vue.component('thread-reply', require('./components/ThreadReply.vue'));
 Vue.component('thread-new', require('./components/ThreadNew.vue'));

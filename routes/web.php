@@ -17,9 +17,13 @@ Route::get('/oauth_callback', 'WechatController@oauthCallback');
 
 Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind.mobile');
 
-Route::get('/users/{user}', 'UserController@index')->name('user.index');
+Route::get('/users', 'UserController@index')->name('user.index');
 
-Route::get('/users/{user}/favorites', 'FavoriteController@index')->name('favorites.index');
+Route::get('/users/favorites', 'UserController@favorites')->name('user.favorites');
+
+Route::get('/users/threads', 'UserController@threads')->name('user.threads');
+
+Route::get('/users/replies', 'UserController@replies')->name('user.replies');
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
 

@@ -58,12 +58,12 @@
                     {
                         icon: '/images/favorites.png',
                         name: '我的收藏',
-                        url: `/users/${window.App.user.id}/favorites`,
+                        url: `/users/favorites`,
                     },
                     {
                         icon: '/images/threads.png',
                         name: '我的问题',
-                        url: `/threads?by=${window.App.user.id}`,
+                        url: `/users/threads`,
                     },
                 ]
             }

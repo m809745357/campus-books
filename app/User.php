@@ -34,9 +34,19 @@ class User extends Authenticatable
     public function favorited(FavoriteFilters $filters)
     {
         return $this->favorites()
-            ->with('favorited', 'favorited.onwer', 'favorited.channel')
+            ->with('favorited', 'favorited.onwer')
             ->latest()
             ->filter($filters)
             ->get();
+    }
+
+    public function threads()
+    {
+        return $this->hasMany(Models\Thread::class, 'user_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Models\Reply::class, 'user_id');
     }
 }

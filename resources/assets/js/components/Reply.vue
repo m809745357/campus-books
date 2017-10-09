@@ -13,6 +13,11 @@
             </div>
         </div>
         <div class="thread-body">
+            <h4 class="thread-title" v-if="this.thread" @click="threadDetail">
+                <strong v-show="this.thread.is_reward" class="thread-reward-money">
+                     <img src="/images/price.png" width="19"> {{ this.thread.money }}
+                </strong> {{ this.thread.title }}
+            </h4>
             <p class="thread-desc">
                 {{ reply['body'] }}
             </p>
@@ -30,7 +35,7 @@
 
 <script>
     export default {
-        props: ['attributes'],
+        props: ['attributes', 'thread'],
         data() {
             return {
                 reply: this.attributes,
@@ -78,6 +83,9 @@
 
                 this.is_favorited = false;
                 this.favorites_count --;
+            },
+            threadDetail() {
+                window.location.href = `/threads/${this.thread.channel.name}/${this.thread.id}`;
             }
         }
     }
