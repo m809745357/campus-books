@@ -25,7 +25,7 @@ class FavoritesTest extends TestCase
 
         $this->assertEquals(1, $reply->fresh()->favorites_count);
 
-        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $reply->id]);
+        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $reply->id, 'favorited_type' => 'App\Models\Reply']);
     }
 
     /** @test*/
@@ -45,7 +45,7 @@ class FavoritesTest extends TestCase
 
         $this->assertEquals(1, $reply->fresh()->favorites_count);
 
-        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $reply->id]);
+        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $reply->id, 'favorited_type' => 'App\Models\Reply']);
     }
 
     /** @test*/
@@ -64,6 +64,62 @@ class FavoritesTest extends TestCase
         $this->assertCount(0, $reply->favorites);
 
         $this->assertEquals(0, $reply->fresh()->favorites_count);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_favorite_any_threads()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->create();
+
+        $this->post($thread->path() . '/favorites');
+
+        $this->assertCount(1, $thread->favorites);
+
+        $this->assertEquals(1, $thread->fresh()->favorites_count);
+
+        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $thread->id, 'favorited_type' => 'App\Models\Thread']);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_favorite_any_threads_once()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->create();
+
+        $this->post($thread->path() . '/favorites');
+
+        $this->post($thread->path() . '/favorites');
+
+        $this->assertCount(1, $thread->favorites);
+
+        $this->assertEquals(1, $thread->fresh()->favorites_count);
+
+        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $thread->id, 'favorited_type' => 'App\Models\Thread']);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_delete_favorite_thread()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->create();
+
+        $thread->favorited();
+
+        $this->delete($thread->path() . '/favorites');
+
+        $this->assertCount(0, $thread->favorites);
+
+        $this->assertEquals(0, $thread->fresh()->favorites_count);
     }
 
     /**

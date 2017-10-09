@@ -1,13 +1,19 @@
 <template>
     <div class="thread">
         <div class="user-profile-panel">
-            <img :src="onwer.avatar">
+            <img :src="onwer.avatar" class="avatar">
             <div class="user-profile">
                 <h4 class="user-nickname">{{ onwer.nickname }}</h4>
                 <p class="thread-time">{{ thread.created_at }}</p>
             </div>
-            <div class="thread-reward-money" v-if="thread.is_reward">
-                悬赏 ￥{{ thread.money }}
+            <div class="">
+                <div class="replaies-count" style="justify-content: flex-end;" @click="favorited">
+                    <img :src="collected" class="collect">
+                    <span class="icon-count">{{ thread.favorites_count }}</span>
+                </div>
+                <div class="thread-reward-money" v-if="thread.is_reward">
+                    悬赏 ￥{{ thread.money }}
+                </div>
             </div>
         </div>
         <div class="thread-body">
@@ -49,7 +55,9 @@
                     created_at: moment(this.attributes.created_at).fromNow(),
                     replies_count: this.attributes.replies_count,
                     views_count: this.attributes.views_count,
-                    is_reward: this.attributes.isReward,
+                    favorites_count: this.attributes.favorites_count,
+                    is_reward: this.attributes.is_reward,
+                    is_favorited: this.attributes.is_favorited,
                     money: this.attributes.money
                 },
                 onwer: {
@@ -63,8 +71,31 @@
             console.log('Component mounted.')
         },
 
-        methods: {
+        computed: {
+            collected() {
+                return this.thread.is_favorited ? '/images/collected.png' : '/images/collect.png';
+            }
+        },
 
+        methods: {
+            url() {
+                return window.location.href;
+            },
+            favorited() {
+                return this.thread.is_favorited ? this.delete() : this.create();
+            },
+            create() {
+                axios.post(this.url() + '/favorites');
+
+                this.thread.is_favorited = true;
+                this.thread.favorites_count ++;
+            },
+            delete() {
+                axios.delete(this.url() + '/favorites');
+
+                this.thread.is_favorited = false;
+                this.thread.favorites_count --;
+            }
         }
     }
 </script>
@@ -93,7 +124,7 @@
         border-bottom: .4rem solid #f3f3f3;
     }
 
-    .user-profile-panel img {
+    .user-profile-panel .avatar {
         width: 1.06666667rem;
         height: 1.06666667rem;
     }
@@ -102,5 +133,12 @@
         height: auto;
         overflow: unset;
         text-overflow: unset;
+    }
+
+    .collect {
+      border: none !important;
+      border-radius: unset !important;
+      width: 17.5px !important;
+      height: 17.5px !important;
     }
 </style>

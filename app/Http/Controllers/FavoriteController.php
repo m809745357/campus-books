@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Thread;
+use App\Models\Channel;
 use App\Models\Reply;
 use Illuminate\Http\Request;
 
@@ -20,5 +22,15 @@ class FavoriteController extends Controller
     public function destory(Reply $reply)
     {
         $reply->favorites->each->delete();
+    }
+
+    public function storeThreads(Channel $channel, Thread $thread)
+    {
+        $thread->favorited();
+    }
+
+    public function destoryThreads(Channel $channel, Thread $thread)
+    {
+        $thread->favorites->each->delete();
     }
 }

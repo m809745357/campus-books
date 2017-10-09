@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Models\Traits\Favorites;
 
 class Thread extends Model
 {
+    use Favorites;
+
     protected $guarded = [];
 
-    protected $appends = ['isReward'];
+    protected $appends = ['is_reward', 'is_favorited'];
 
     public function path()
     {

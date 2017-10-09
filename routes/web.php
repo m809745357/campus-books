@@ -32,12 +32,16 @@ Route::post('/threads', 'ThreadController@store')->name('threads.store');
 
 Route::get('/threads/{channel}/{thread}', 'ThreadController@show')->name('threads.show');
 
+Route::post('/threads/{channel}/{thread}/favorites', 'FavoriteController@storeThreads')->name('threads.favorite');
+
+Route::delete('/threads/{channel}/{thread}/favorites', 'FavoriteController@destoryThreads')->name('threads.unfavorite');
+
 Route::post('/threads/{channel}/{thread}/reply', 'ReplyController@store')->name('reply.store');
 
 Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
 
 Route::post('/replies/{reply}/favorites', 'FavoriteController@store')->name('reply.favorite');
 
-Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name('reply.delete');
+Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name('reply.unfavorite');
 
 Auth::routes();

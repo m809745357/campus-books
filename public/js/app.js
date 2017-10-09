@@ -58453,7 +58453,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.thread-title {\n    text-overflow: unset;\n    white-space: unset;\n    overflow: unset;\n}\n.thread-body, .user-profile-panel, .thread-footer {\n    margin: 0 .4rem\n}\n.user-profile-panel {\n    height: 1.06666667rem;\n}\n.thread-body {\n    margin-top: 0.4rem /* 40/75 */;\n}\n.thread {\n    padding-top: .57333333rem;\n    height: auto;\n    border-bottom: .4rem solid #f3f3f3;\n}\n.user-profile-panel img {\n    width: 1.06666667rem;\n    height: 1.06666667rem;\n}\n.thread-desc {\n    height: auto;\n    overflow: unset;\n    text-overflow: unset;\n}\n", ""]);
+exports.push([module.i, "\n.thread-title {\n    text-overflow: unset;\n    white-space: unset;\n    overflow: unset;\n}\n.thread-body, .user-profile-panel, .thread-footer {\n    margin: 0 .4rem\n}\n.user-profile-panel {\n    height: 1.06666667rem;\n}\n.thread-body {\n    margin-top: 0.4rem /* 40/75 */;\n}\n.thread {\n    padding-top: .57333333rem;\n    height: auto;\n    border-bottom: .4rem solid #f3f3f3;\n}\n.user-profile-panel .avatar {\n    width: 1.06666667rem;\n    height: 1.06666667rem;\n}\n.thread-desc {\n    height: auto;\n    overflow: unset;\n    text-overflow: unset;\n}\n.collect {\n  border: none !important;\n  border-radius: unset !important;\n  width: 17.5px !important;\n  height: 17.5px !important;\n}\n", ""]);
 
 // exports
 
@@ -58536,6 +58536,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
@@ -58548,7 +58554,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 created_at: moment(this.attributes.created_at).fromNow(),
                 replies_count: this.attributes.replies_count,
                 views_count: this.attributes.views_count,
-                is_reward: this.attributes.isReward,
+                favorites_count: this.attributes.favorites_count,
+                is_reward: this.attributes.is_reward,
+                is_favorited: this.attributes.is_favorited,
                 money: this.attributes.money
             },
             onwer: {
@@ -58562,7 +58570,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
-    methods: {}
+    computed: {
+        collected: function collected() {
+            return this.thread.is_favorited ? '/images/collected.png' : '/images/collect.png';
+        }
+    },
+
+    methods: {
+        url: function url() {
+            return window.location.href;
+        },
+        favorited: function favorited() {
+            return this.thread.is_favorited ? this.delete() : this.create();
+        },
+        create: function create() {
+            axios.post(this.url() + '/favorites');
+
+            this.thread.is_favorited = true;
+            this.thread.favorites_count++;
+        },
+        delete: function _delete() {
+            axios.delete(this.url() + '/favorites');
+
+            this.thread.is_favorited = false;
+            this.thread.favorites_count--;
+        }
+    }
 });
 
 /***/ }),
@@ -58575,7 +58608,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "thread" }, [
     _c("div", { staticClass: "user-profile-panel" }, [
-      _c("img", { attrs: { src: _vm.onwer.avatar } }),
+      _c("img", { staticClass: "avatar", attrs: { src: _vm.onwer.avatar } }),
       _vm._v(" "),
       _c("div", { staticClass: "user-profile" }, [
         _c("h4", { staticClass: "user-nickname" }, [
@@ -58587,13 +58620,36 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.thread.is_reward
-        ? _c("div", { staticClass: "thread-reward-money" }, [
-            _vm._v(
-              "\n            悬赏 ￥" + _vm._s(_vm.thread.money) + "\n        "
-            )
-          ])
-        : _vm._e()
+      _c("div", {}, [
+        _c(
+          "div",
+          {
+            staticClass: "replaies-count",
+            staticStyle: { "justify-content": "flex-end" },
+            on: { click: _vm.favorited }
+          },
+          [
+            _c("img", {
+              staticClass: "collect",
+              attrs: { src: _vm.collected }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "icon-count" }, [
+              _vm._v(_vm._s(_vm.thread.favorites_count))
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm.thread.is_reward
+          ? _c("div", { staticClass: "thread-reward-money" }, [
+              _vm._v(
+                "\n                悬赏 ￥" +
+                  _vm._s(_vm.thread.money) +
+                  "\n            "
+              )
+            ])
+          : _vm._e()
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "thread-body" }, [

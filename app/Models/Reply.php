@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\Favorites;
 
 class Reply extends Model
 {
+    use Favorites;
+
     protected $guarded = [];
 
     protected $appends = ['is_favorited'];
@@ -36,28 +39,5 @@ class Reply extends Model
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');
-    }
-
-    public function favorites()
-    {
-        return $this->morphMany(Favorite::class, 'favorited');
-    }
-
-    public function favorited()
-    {
-        if (! $this->isFavorited()) {
-            return $this->favorites()->create(['user_id' => auth()->id()]);
-        }
-        return $this->favorites();
-    }
-
-    public function isFavorited()
-    {
-        return $this->favorites()->where(['user_id' => auth()->id()])->exists();
-    }
-
-    public function getIsFavoritedAttribute()
-    {
-        return $this->favorites()->where(['user_id' => auth()->id()])->exists();
     }
 }
