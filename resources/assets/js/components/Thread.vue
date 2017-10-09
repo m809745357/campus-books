@@ -51,7 +51,7 @@
                     created_at: moment(this.attributes.created_at).format('DD.MM.YYYY'),
                     replies_count: this.attributes.replies_count,
                     views_count: this.attributes.views_count,
-                    is_reward: this.attributes.isReward,
+                    is_reward: this.attributes.is_reward,
                     money: this.attributes.money,
                     channel_name: this.attributes.channel.name,
                     channel_slug: this.attributes.channel.slug

@@ -122,6 +122,24 @@ class FavoritesTest extends TestCase
         $this->assertEquals(0, $thread->fresh()->favorites_count);
     }
 
+    /** @test */
+    public function is_an_authenticate_user_can_view_onwer_favorites()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->create();
+
+        $thread->favorited();
+
+        $this->post($thread->path() . '/favorites?type=thread');
+
+        $response = $this->get("/users/{$user->id}/favorites");
+
+        $response->assertSee($thread->title);
+    }
+
     /**
      * A basic test example.
      *

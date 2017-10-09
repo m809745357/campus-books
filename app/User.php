@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Filters\FavoriteFilters;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -24,4 +25,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'openid', 'email'
     ];
+
+    public function favorites()
+    {
+        return $this->hasMany(Models\Favorite::class, 'user_id');
+    }
+
+    public function favorited(FavoriteFilters $filters)
+    {
+        return $this->favorites()
+            ->with('favorited', 'favorited.onwer', 'favorited.channel')
+            ->latest()
+            ->filter($filters)
+            ->get();
+    }
 }

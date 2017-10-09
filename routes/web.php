@@ -19,6 +19,7 @@ Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind
 
 Route::get('/users/{user}', 'UserController@index')->name('user.index');
 
+Route::get('/users/{user}/favorites', 'FavoriteController@index')->name('favorites.index');
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
 
