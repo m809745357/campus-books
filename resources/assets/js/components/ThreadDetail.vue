@@ -84,7 +84,7 @@
     }
 
     .thread-body {
-        margin-top: .58666667rem;
+        margin-top: 0.4rem /* 40/75 */;
     }
 
     .thread {

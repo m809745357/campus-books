@@ -8350,8 +8350,36 @@ button.close {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .con {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .con {
+    width: 750px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .con {
+    width: 970px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .con {
+    width: 1170px;
+  }
+}
+
 @font-face {
   font-family: PingFangSC-Regular, sans-serif;
+}
+
+.container {
+  min-height: 100vh;
 }
 
 .thread {
@@ -8557,7 +8585,7 @@ button.close {
           flex-direction: row;
   height: 1.46666667rem;
   background-color: #fff;
-  border-bottom: 0.26666667rem solid #e9e9e9;
+  margin-bottom: .26666667rem;
 }
 
 .thread-create {
@@ -8838,8 +8866,6 @@ button.close {
   position: fixed;
   bottom: 0;
   height: 1.32rem;
-  width: 100%;
-  max-width: 1170px;
   background-color: #fff;
   -ms-flex-pack: distribute;
       justify-content: space-around;
@@ -8874,5 +8900,155 @@ button.close {
   height: .6rem;
   margin-top: .1em;
   margin-bottom: .1em;
+}
+
+/**
+  * users-profile
+  */
+
+.users-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1.16rem;
+  background-color: #fff;
+}
+
+.users-item-icon {
+  width: 1.81rem;
+  height: 1.16rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.users-item-icon img {
+  width: 0.53rem;
+  height: 0.53rem;
+}
+
+.users-item-desc {
+  width: calc(100vw - 1.81rem);
+  height: 1.16rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.users-item-name {
+  margin: 0;
+  font-size: 13px;
+  color: #333333;
+}
+
+.arrow {
+  height: 0.32rem;
+  width: 0.32rem;
+  margin-right: 0.27rem;
+}
+
+.user-profile-center {
+  height: 1.87rem;
+  background-color: #fff;
+  margin-top: 0.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #e9e9e9;
+  margin-bottom: 0.19rem;
+}
+
+.user-profile-headimgurl {
+  width: 1.93rem;
+  height: 1.87rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.user-profile-headimgurl img {
+  width: 1.53rem;
+  height: 1.53rem;
+  border: 2px solid #333;
+  border-radius: 4px;
+}
+
+.user-profile-content {
+  width: calc(100vw - 1.93rem);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.user-profile-desc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 1.87rem;
+}
+
+.user-profile-nickname {
+  margin: 0;
+  padding: 0;
+}
+
+.user-profile-mobile {
+  margin: 0;
+  padding: 0;
 }
 

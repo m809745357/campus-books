@@ -60,4 +60,32 @@ class UsersTest extends TestCase
 
         $user = session()->get('wechat.oauth_user');
     }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_view_user_profile()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/users/' . $user->id);
+
+        $response->assertStatus(200);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_view_other_user_profile()
+    {
+        $user = factory('App\User')->create();
+
+        $othreUser = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/users/' . $user->id);
+
+        $response = $this->get('/users/' . $othreUser->id);
+
+        $response->assertStatus(302);
+    }
 }

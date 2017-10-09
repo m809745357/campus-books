@@ -17,6 +17,9 @@ Route::get('/oauth_callback', 'WechatController@oauthCallback');
 
 Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind.mobile');
 
+Route::get('/users/{user}', 'UserController@index')->name('user.index');
+
+
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
 
 Route::get('/threads/create', 'ThreadController@create')->name('threads.create');

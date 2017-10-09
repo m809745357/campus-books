@@ -49,6 +49,7 @@ Vue.component('thread-detail', require('./components/ThreadDetail.vue'));
 Vue.component('thread-reply', require('./components/ThreadReply.vue'));
 Vue.component('thread-new', require('./components/ThreadNew.vue'));
 Vue.component('thread-channels', require('./components/ThreadChannels.vue'));
+Vue.component('users-profile', require('./components/UsersProfile.vue'));
 
 const app = new Vue({
     el: '#app'
