@@ -59983,6 +59983,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {
         userItem: __WEBPACK_IMPORTED_MODULE_0__UsersItem_vue___default.a
+    },
+
+    methods: {
+        profile: function profile() {
+            window.location.href = '/users/profile';
+        }
     }
 
 });
@@ -60158,28 +60164,32 @@ var render = function() {
     "div",
     {},
     [
-      _c("div", { staticClass: "user-profile-center" }, [
-        _c("div", { staticClass: "user-profile-headimgurl" }, [
-          _c("img", { attrs: { src: _vm.user.avatar, alt: "" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-profile-content" }, [
-          _c("div", { staticClass: "user-profile-desc" }, [
-            _c("h4", { staticClass: "user-profile-nickname" }, [
-              _vm._v(_vm._s(_vm.user.nickname))
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "user-profile-phone" }, [
-              _vm._v(_vm._s(_vm.user.mobile))
-            ])
+      _c(
+        "div",
+        { staticClass: "user-profile-center", on: { click: _vm.profile } },
+        [
+          _c("div", { staticClass: "user-profile-headimgurl" }, [
+            _c("img", { attrs: { src: _vm.user.avatar, alt: "" } })
           ]),
           _vm._v(" "),
-          _c("img", {
-            staticClass: "arrow",
-            attrs: { src: "/images/arrow.png", alt: "" }
-          })
-        ])
-      ]),
+          _c("div", { staticClass: "user-profile-content" }, [
+            _c("div", { staticClass: "user-profile-desc" }, [
+              _c("h4", { staticClass: "user-profile-nickname" }, [
+                _vm._v(_vm._s(_vm.user.nickname))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "user-profile-phone" }, [
+                _vm._v(_vm._s(_vm.user.mobile))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "arrow",
+              attrs: { src: "/images/arrow.png", alt: "" }
+            })
+          ])
+        ]
+      ),
       _vm._v(" "),
       _vm._l(_vm.items, function(item, key) {
         return _c("userItem", { attrs: { attributes: item } })

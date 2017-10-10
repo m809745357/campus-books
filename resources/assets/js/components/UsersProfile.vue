@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <div class="user-profile-center">
+        <div class="user-profile-center" @click="profile">
             <div class="user-profile-headimgurl">
                 <img :src="user.avatar" alt="">
             </div>
@@ -71,6 +71,12 @@
         components: {
             userItem
         },
+
+        methods: {
+            profile() {
+                window.location.href = '/users/profile';
+            }
+        }
 
     }
 </script>

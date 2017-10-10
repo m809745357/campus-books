@@ -18,6 +18,11 @@ class UserController extends Controller
         return view('users.index');
     }
 
+    public function profile()
+    {
+        return view('users.profile');
+    }
+
     public function favorites(FavoriteFilters $filters)
     {
         $favorites = auth()->user()->favorited($filters);

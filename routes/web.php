@@ -19,6 +19,8 @@ Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind
 
 Route::get('/users', 'UserController@index')->name('user.index');
 
+Route::get('/users/profile', 'UserController@profile')->name('user.profile');
+
 Route::get('/users/favorites', 'UserController@favorites')->name('user.favorites');
 
 Route::get('/users/threads', 'UserController@threads')->name('user.threads');
