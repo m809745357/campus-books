@@ -82,7 +82,11 @@
                 return window.location.href;
             },
             favorited() {
-                return this.thread.is_favorited ? this.delete() : this.create();
+                if (window.App.signedIn) {
+                    return this.thread.is_favorited ? this.delete() : this.create();
+                }
+
+                window.location.href = '/login'
             },
             create() {
                 axios.post(this.url() + '/favorites');

@@ -70,7 +70,11 @@
                 return `/replies/${this.attributes.id}`;
             },
             favorited() {
-                return this.is_favorited ? this.delete() : this.create();
+                if (window.App.signedIn) {
+                    return this.is_favorited ? this.delete() : this.create();
+                }
+
+                window.location.href = '/login'
             },
             create() {
                 axios.post(this.url() + '/favorites');
