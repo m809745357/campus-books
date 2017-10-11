@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <thread-reply :attributes="{{ $thread }}"></thread-reply>
-        @include('threads.menu')
     </div>
+    @include('threads.menu')
 </div>
 @endsection

@@ -62,28 +62,32 @@ class UsersTest extends TestCase
     }
 
     /** @test*/
+    public function is_an_authenticate_user_can_view_user_center()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/users/');
+
+        $response->assertStatus(200);
+
+        $response->assertSee($user->nickname);
+    }
+
+    /** @test*/
     public function is_an_authenticate_user_can_view_user_profile()
     {
         $user = factory('App\User')->create();
 
         $this->actingAs($user);
 
-        $response = $this->get('/users/');
+        $response = $this->get('/users/profile');
 
         $response->assertStatus(200);
-    }
 
-    /** @test*/
-    public function is_an_authenticate_user_can_view_other_user_profile()
-    {
-        $user = factory('App\User')->create();
-
-        $othreUser = factory('App\User')->create();
-
-        $this->actingAs($user);
-
-        $response = $this->get('/users/');
-
-        $response->assertStatus(200);
+        $response->assertSee($user->nickname)
+            ->assertSee($user->school)
+            ->assertSee($user->specialty);
     }
 }

@@ -23,6 +23,8 @@ $factory->define(App\User::class, function (Faker $faker) {
         'avatar' => $faker->imageUrl(50, 50),
         'openid' => str_random(10),
         'sex' => rand(1, 2),
+        'school' => $faker->word,
+        'specialty' => $faker->word,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];

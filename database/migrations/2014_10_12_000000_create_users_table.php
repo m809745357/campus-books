@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('nickname');
             $table->string('avatar');
             $table->tinyinteger('sex');
+            $table->string('school')->nullable();
+            $table->string('specialty')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
             $table->string('openid')->unique();

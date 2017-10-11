@@ -20,7 +20,7 @@
         @foreach ($favorites as $favorite)
             <thread :attributes="{{ $favorite->favorited }}"></thread>
         @endforeach
-        @include('users.menu')
     </div>
+    @include('users.menu')
 </div>
 @endsection

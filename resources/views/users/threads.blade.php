@@ -10,7 +10,7 @@
         @foreach ($threads as $thread)
             <thread :attributes="{{ $thread }}"></thread>
         @endforeach
-        @include('users.menu')
     </div>
+    @include('users.menu')
 </div>
 @endsection

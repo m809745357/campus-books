@@ -10,7 +10,7 @@
         @foreach ($replies as $reply)
             <reply :attributes="{{ $reply }}" :thread="{{ $reply->thread }}"></reply>
         @endforeach
-        @include('users.menu')
     </div>
+    @include('users.menu')
 </div>
 @endsection

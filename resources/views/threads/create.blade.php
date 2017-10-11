@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <thread-new :attributes="{{ $channels }}"></thread-new>
-        @include('threads.menu')
     </div>
+    @include('threads.menu')
 </div>
 @endsection

@@ -20,7 +20,8 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('users.profile');
+        $user = auth()->user();
+        return view('users.profile', compact('user'));
     }
 
     public function favorites(FavoriteFilters $filters)

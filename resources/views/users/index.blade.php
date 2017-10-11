@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <users-profile></users-profile>
-        @include('users.menu')
     </div>
+    @include('users.menu')
 </div>
 @endsection
