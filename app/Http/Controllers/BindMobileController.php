@@ -10,4 +10,17 @@ class BindMobileController extends Controller
     {
         return view('users.bindmobile');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'mobile' => 'required',
+        ]);
+
+        if (app()->environment('testing')) {
+            if (request()->wantsJson()) {
+                return response(['code' => '666666'], 201);
+            }
+        }
+    }
 }

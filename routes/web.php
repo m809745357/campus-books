@@ -15,9 +15,13 @@ Route::get('/', 'WechatController@index');
 
 Route::get('/oauth_callback', 'WechatController@oauthCallback');
 
-Route::get('/users/{user}/bindmobile', 'BindMobileController@index')->name('bind.mobile');
-
 Route::get('/users', 'UserController@index')->name('user.index');
+
+Route::get('/users/bindmobile', 'BindMobileController@index')->name('bind.mobile');
+
+Route::post('/users/bindmobile', 'UserController@mobile')->name('user.bindmobile');
+
+Route::post('/users/sendmobile', 'BindMobileController@store')->name('user.send.mobile');
 
 Route::get('/users/profile', 'UserController@profile')->name('user.profile');
 

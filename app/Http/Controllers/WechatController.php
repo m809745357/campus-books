@@ -25,7 +25,7 @@ class WechatController extends Controller
         $user = $this->createUserAndLogin();
 
         if (! $user->mobile) {
-            return redirect()->route('bind.mobile', ['user' => $user->id]);
+            return redirect()->route('bind.mobile');
         }
 
         return view('home');

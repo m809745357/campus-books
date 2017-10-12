@@ -26,11 +26,22 @@ class User extends Authenticatable
         'password', 'remember_token', 'openid', 'email'
     ];
 
+    /**
+     * 用户有很多的收藏
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function favorites()
     {
         return $this->hasMany(Models\Favorite::class, 'user_id');
     }
 
+    /**
+     * 查询用户收藏
+     *
+     * @param  FavoriteFilters $filters 过滤
+     * @return Model
+     */
     public function favorited(FavoriteFilters $filters)
     {
         return $this->favorites()
@@ -40,11 +51,21 @@ class User extends Authenticatable
             ->get();
     }
 
+    /**
+     * 用户有很多的问答
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function threads()
     {
         return $this->hasMany(Models\Thread::class, 'user_id');
     }
 
+    /**
+     * 用户有很多的回答
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function replies()
     {
         return $this->hasMany(Models\Reply::class, 'user_id');

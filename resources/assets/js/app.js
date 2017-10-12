@@ -16,6 +16,11 @@ Vue.prototype.authorize = function (handler) {
     return user ? handler(user) : false;
 };
 
+window.events = new Vue();
+
+window.flash = function (message, level = 'success') {
+    window.events.$emit('flash', { message, level });
+};
 
 window.moment = require('moment');
 
@@ -44,6 +49,7 @@ moment.updateLocale('en', {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('reply', require('./components/Reply.vue'));
 Vue.component('thread-detail', require('./components/ThreadDetail.vue'));
@@ -51,6 +57,7 @@ Vue.component('thread-reply', require('./components/ThreadReply.vue'));
 Vue.component('thread-new', require('./components/ThreadNew.vue'));
 Vue.component('thread-channels', require('./components/ThreadChannels.vue'));
 Vue.component('users-profile', require('./components/UsersProfile.vue'));
+Vue.component('users-bind-mobile', require('./components/UsersBindMobile.vue'));
 
 const app = new Vue({
     el: '#app'

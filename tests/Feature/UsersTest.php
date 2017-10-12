@@ -90,4 +90,28 @@ class UsersTest extends TestCase
             ->assertSee($user->school)
             ->assertSee($user->specialty);
     }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_send_code_message()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->json('post', '/users/sendmobile', [
+            'mobile' => '18367831980'
+        ]);
+
+        $response->assertStatus(201)->assertJson([
+            'code' => '666666',
+        ]);
+
+        $response = $this->json('post', '/users/sendmobile', [
+            'mobile' => null
+        ]);
+
+        $response->assertStatus(201)->assertJson([
+            'code' => '666666',
+        ]);
+    }
 }
