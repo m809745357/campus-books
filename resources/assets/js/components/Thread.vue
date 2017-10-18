@@ -6,15 +6,16 @@
                 <h4 class="user-nickname">{{ onwer.nickname }}</h4>
                 <p class="thread-time">{{ thread.created_at }}</p>
             </div>
-            <!-- <div class="thread-reward" v-show="thread.is_reward">
+            <div class="thread-reward" v-show="thread.is_reward">
                 悬赏
-            </div> -->
+            </div>
         </div>
         <div class="thread-body" @click="detail(thread.id)">
             <h4 class="thread-title">
+                <span>{{ thread.title }}</span>
                 <strong v-show="thread.is_reward" class="thread-reward-money">
                      <img src="/images/price.png" width="19"> {{ thread.money }}
-                </strong> {{ thread.title }}
+                </strong>
             </h4>
             <p class="thread-desc">
                 {{ thread.body }}

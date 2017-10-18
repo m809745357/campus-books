@@ -13,7 +13,7 @@ class BindMobileController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'mobile' => 'required',
         ]);
 

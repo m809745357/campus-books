@@ -1,12 +1,7 @@
 <template>
     <div class="users-item" @click="jump">
-        <div class="users-item-icon">
-            <img :src="icon" alt="" class="">
-        </div>
-        <div class="users-item-desc">
-            <p class="users-item-name">{{ name }}</p>
-            <img src="/images/arrow.png" alt="" class="arrow">
-        </div>
+        <img :src="icon" alt="" class="users-item-icon">
+        <p class="users-item-name">{{ name }}</p>
     </div>
 </template>
 

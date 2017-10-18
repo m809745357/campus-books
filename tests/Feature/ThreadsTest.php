@@ -72,6 +72,19 @@ class ThreadsTest extends TestCase
             ->assertSee($thread->body);
     }
 
+    /** @test*/
+    public function is_an_authenticate_user_can_view_two_threads_on_home(){
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread', 10)->create();
+
+        $reply = factory('App\Models\Reply', 20)->create(['thread_id' => $thread->first()->id, 'body' => 'it was something']);
+
+        $this->get('/')->assertSee($thread->first()->title);
+    }
+
     /**
      * A basic test example.
      *

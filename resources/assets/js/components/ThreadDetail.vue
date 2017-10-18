@@ -111,7 +111,7 @@
         overflow: unset;
     }
     .thread-body, .user-profile-panel, .thread-footer {
-        margin: 0 .4rem
+        margin: 0 0.44rem /* 33/75 */;
     }
 
     .user-profile-panel {
@@ -119,7 +119,7 @@
     }
 
     .thread-body {
-        margin-top: 0.4rem /* 40/75 */;
+        margin-top: 0.44rem /* 33/75 */;
     }
 
     .thread {

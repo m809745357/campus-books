@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WechatController@index');
+Route::get('/', 'WechatController@index')->name('home');
 
 Route::get('/oauth_callback', 'WechatController@oauthCallback');
 
@@ -54,5 +54,9 @@ Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete
 Route::post('/replies/{reply}/favorites', 'FavoriteController@store')->name('reply.favorite');
 
 Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name('reply.unfavorite');
+
+Route::get('/posts', 'PostController@index')->name('posts.index');
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
 
 Auth::routes();

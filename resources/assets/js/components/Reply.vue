@@ -14,9 +14,10 @@
         </div>
         <div class="thread-body">
             <h4 class="thread-title" v-if="this.thread" @click="threadDetail">
+                <span>{{ thread.title }}</span>
                 <strong v-show="this.thread.is_reward" class="thread-reward-money">
                      <img src="/images/price.png" width="19"> {{ this.thread.money }}
-                </strong> {{ this.thread.title }}
+                </strong>
             </h4>
             <p class="thread-desc">
                 {{ reply['body'] }}

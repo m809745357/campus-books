@@ -106,12 +106,34 @@ class UsersTest extends TestCase
             'code' => '666666',
         ]);
 
+        $this->withExceptionHandling();
         $response = $this->json('post', '/users/sendmobile', [
             'mobile' => null
+        ]);
+
+        $response->assertStatus(422)->assertJson(['message' => 'The given data was invalid.']);
+    }
+
+    /** @test */
+    public function is_an_authenticate_user_can_bind_mobile()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->json('post', '/users/sendmobile', [
+            'mobile' => '18367831980'
         ]);
 
         $response->assertStatus(201)->assertJson([
             'code' => '666666',
         ]);
+
+        $response = $this->json('post', '/users/bindmobile', [
+            'mobile' => '18367831980',
+            'code' => '666666'
+        ]);
+
+        $this->assertTrue($user->fresh()->mobile === '18367831980');
     }
 }

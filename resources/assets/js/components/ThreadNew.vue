@@ -29,7 +29,7 @@
             <textarea type="text" name="body" v-model="thread.body" rows="8" placeholder="请输入问题描述" required></textarea>
         </div>
         <div class="thread-form-group" style="margin-top: .70666667rem;">
-            <button type="button" name="button" class="btn btn-warning btn-block" @click="addThread">提交</button>
+            <button type="button" name="button" class="submit-button" @click="addThread">提交</button>
         </div>
     </div>
 </template>

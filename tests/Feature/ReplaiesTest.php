@@ -104,6 +104,20 @@ class ReplaiesTest extends TestCase
         $repsonse->assertStatus(403);
     }
 
+    /** @test*/
+    public function is_an_authenticate_user_can_reward_thread()
+    {
+        // $user = factory('App\User')->create();
+        //
+        // $this->actingAs($user);
+        //
+        // $thread = factory('App\Models\Thread')->create();
+        //
+        // $reply = factory('App\Models\Reply')->create(['thread_id' => $thread->id, 'body' => 'it is best reply']);
+        //
+        // $this->post();
+    }
+
     /**
      * A basic test example.
      *

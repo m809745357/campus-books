@@ -60,4 +60,8 @@ class Thread extends Model
     {
         return $filters->apply($query);
     }
+
+    public static function hot($num){
+        return \App\Models\Thread::with('onwer', 'channel')->latest('replies_count')->take(2)->get();
+    }
 }

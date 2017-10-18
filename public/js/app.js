@@ -58534,6 +58534,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
@@ -58592,7 +58593,23 @@ var render = function() {
         _c("p", { staticClass: "thread-time" }, [
           _vm._v(_vm._s(_vm.thread.created_at))
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.thread.is_reward,
+              expression: "thread.is_reward"
+            }
+          ],
+          staticClass: "thread-reward"
+        },
+        [_vm._v("\n            悬赏\n        ")]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -58607,6 +58624,8 @@ var render = function() {
       },
       [
         _c("h4", { staticClass: "thread-title" }, [
+          _c("span", [_vm._v(_vm._s(_vm.thread.title))]),
+          _vm._v(" "),
           _c(
             "strong",
             {
@@ -58624,8 +58643,7 @@ var render = function() {
               _c("img", { attrs: { src: "/images/price.png", width: "19" } }),
               _vm._v(" " + _vm._s(_vm.thread.money) + "\n            ")
             ]
-          ),
-          _vm._v(" " + _vm._s(_vm.thread.title) + "\n        ")
+          )
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "thread-desc" }, [
@@ -58692,6 +58710,7 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -58835,6 +58854,8 @@ var render = function() {
             "h4",
             { staticClass: "thread-title", on: { click: _vm.threadDetail } },
             [
+              _c("span", [_vm._v(_vm._s(_vm.thread.title))]),
+              _vm._v(" "),
               _c(
                 "strong",
                 {
@@ -58854,8 +58875,7 @@ var render = function() {
                   }),
                   _vm._v(" " + _vm._s(this.thread.money) + "\n            ")
                 ]
-              ),
-              _vm._v(" " + _vm._s(this.thread.title) + "\n        ")
+              )
             ]
           )
         : _vm._e(),
@@ -58925,7 +58945,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "\n.thread-title {\n    text-overflow: unset;\n    white-space: unset;\n    overflow: unset;\n}\n.thread-body, .user-profile-panel, .thread-footer {\n    margin: 0 .4rem\n}\n.user-profile-panel {\n    height: 1.06666667rem;\n}\n.thread-body {\n    margin-top: 0.4rem /* 40/75 */;\n}\n.thread {\n    padding-top: .57333333rem;\n    height: auto;\n    border-bottom: .4rem solid #f3f3f3;\n}\n.user-profile-panel .avatar {\n    width: 1.06666667rem;\n    height: 1.06666667rem;\n}\n.thread-desc {\n    height: auto;\n    overflow: unset;\n    text-overflow: unset;\n}\n.collect {\n  border: none !important;\n  border-radius: unset !important;\n  width: 17.5px !important;\n  height: 17.5px !important;\n}\n", ""]);
+exports.push([module.i, "\n.thread-title {\n    text-overflow: unset;\n    white-space: unset;\n    overflow: unset;\n}\n.thread-body, .user-profile-panel, .thread-footer {\n    margin: 0 0.44rem /* 33/75 */;\n}\n.user-profile-panel {\n    height: 1.06666667rem;\n}\n.thread-body {\n    margin-top: 0.44rem /* 33/75 */;\n}\n.thread {\n    padding-top: .57333333rem;\n    height: auto;\n    border-bottom: .4rem solid #f3f3f3;\n}\n.user-profile-panel .avatar {\n    width: 1.06666667rem;\n    height: 1.06666667rem;\n}\n.thread-desc {\n    height: auto;\n    overflow: unset;\n    text-overflow: unset;\n}\n.collect {\n  border: none !important;\n  border-radius: unset !important;\n  width: 17.5px !important;\n  height: 17.5px !important;\n}\n", ""]);
 
 // exports
 
@@ -59457,7 +59477,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-warning btn-block",
+        staticClass: "submit-button",
         attrs: { type: "button" },
         on: { click: _vm.addReply }
       },
@@ -59850,7 +59870,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-warning btn-block",
+            staticClass: "submit-button",
             attrs: { type: "button", name: "button" },
             on: { click: _vm.addThread }
           },
@@ -60125,6 +60145,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60133,20 +60164,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             user: window.App.user,
-            items: [{
-                icon: '/images/notifications.png',
-                name: '我的消息',
-                url: ''
-            }, {
-                icon: '/images/balances.png',
-                name: '我的余额',
-                url: ''
-            }, {
-                icon: '/images/details.png',
+            items: [
+            // {
+            //     icon: '/images/notifications.png',
+            //     name: '我的消息',
+            //     url: '',
+            // },
+            // {
+            //     icon: '/images/balances.png',
+            //     name: '我的余额',
+            //     url: '',
+            // },
+            {
+                icon: '/images/orders.png',
                 name: '账户明细',
                 url: ''
             }, {
-                icon: '/images/orders.png',
+                icon: '/images/posts.png',
+                name: '我的发布',
+                url: ''
+            }, {
+                icon: '/images/details.png',
                 name: '我的订单',
                 url: ''
             }, {
@@ -60154,17 +60192,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 name: '我的求购',
                 url: ''
             }, {
-                icon: '/images/posts.png',
-                name: '我的发布',
-                url: ''
+                icon: '/images/threads.png',
+                name: '我的问题',
+                url: '/users/threads'
             }, {
                 icon: '/images/favorites.png',
                 name: '我的收藏',
                 url: '/users/favorites'
-            }, {
-                icon: '/images/threads.png',
-                name: '我的问题',
-                url: '/users/threads'
             }]
         };
     },
@@ -60284,11 +60318,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
@@ -60316,18 +60345,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "users-item", on: { click: _vm.jump } }, [
-    _c("div", { staticClass: "users-item-icon" }, [
-      _c("img", { attrs: { src: _vm.icon, alt: "" } })
-    ]),
+    _c("img", {
+      staticClass: "users-item-icon",
+      attrs: { src: _vm.icon, alt: "" }
+    }),
     _vm._v(" "),
-    _c("div", { staticClass: "users-item-desc" }, [
-      _c("p", { staticClass: "users-item-name" }, [_vm._v(_vm._s(_vm.name))]),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "arrow",
-        attrs: { src: "/images/arrow.png", alt: "" }
-      })
-    ])
+    _c("p", { staticClass: "users-item-name" }, [_vm._v(_vm._s(_vm.name))])
   ])
 }
 var staticRenderFns = []
@@ -60348,45 +60371,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {},
-    [
+  return _c("div", {}, [
+    _c("div", { staticClass: "user-profile-top" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "user-profile-center", on: { click: _vm.profile } },
         [
-          _c("div", { staticClass: "user-profile-headimgurl" }, [
-            _c("img", { attrs: { src: _vm.user.avatar, alt: "" } })
+          _c("img", {
+            staticClass: "user-profile-headimgurl",
+            attrs: { src: _vm.user.avatar, alt: "" }
+          }),
+          _vm._v(" "),
+          _c("h4", { staticClass: "user-profile-nickname" }, [
+            _vm._v(_vm._s(_vm.user.nickname))
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "user-profile-content" }, [
-            _c("div", { staticClass: "user-profile-desc" }, [
-              _c("h4", { staticClass: "user-profile-nickname" }, [
-                _vm._v(_vm._s(_vm.user.nickname))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "user-profile-phone" }, [
-                _vm._v(_vm._s(_vm.user.mobile))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "arrow",
-              attrs: { src: "/images/arrow.png", alt: "" }
-            })
-          ])
+          _c("p", { staticClass: "user-profile-phone" }, [
+            _vm._v(_vm._s(_vm.user.mobile))
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
         ]
       ),
       _vm._v(" "),
-      _vm._l(_vm.items, function(item, key) {
-        return _c("userItem", { attrs: { attributes: item } })
+      _vm._m(2)
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "users-items" },
+      _vm._l(_vm.items, function(item) {
+        return _c("userItem", { key: item.id, attrs: { attributes: item } })
       })
-    ],
-    2
-  )
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "user-notify" }, [
+      _c("img", { attrs: { src: "/images/notifications.png", alt: "" } }),
+      _c("h4", [_vm._v("我的消息")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "user-balance-panel" }, [
+      _c("img", { attrs: { src: "/images/balances.png" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "user-balance-body" }, [
+        _c("h4", [_vm._v("我的余额")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("￥200.00")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "user-setting" }, [
+      _c("img", { attrs: { src: "/images/setting.png", alt: "" } })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
