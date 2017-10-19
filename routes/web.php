@@ -13,7 +13,7 @@
 
 Route::get('/', 'WechatController@index')->name('home');
 
-Route::get('/oauth_callback', 'WechatController@oauthCallback');
+Route::get('/oauth_callback', 'Auth\LoginController@oauthCallback');
 
 Route::get('/users', 'UserController@index')->name('user.index');
 
@@ -30,6 +30,8 @@ Route::get('/users/favorites', 'UserController@favorites')->name('user.favorites
 Route::get('/users/threads', 'UserController@threads')->name('user.threads');
 
 Route::get('/users/replies', 'UserController@replies')->name('user.replies');
+
+Route::get('/users/demands', 'UserController@demands')->name('user.demands');
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
 
@@ -58,5 +60,9 @@ Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name(
 Route::get('/posts', 'PostController@index')->name('posts.index');
 
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
+
+Route::get('/demands', 'DemandController@index')->name('demands.index');
+
+Route::get('/demands/{demand}', 'DemandController@show')->name('demands.show');
 
 Auth::routes();

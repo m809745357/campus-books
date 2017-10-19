@@ -46,14 +46,14 @@ class LoginController extends Controller
      */
     public function showLoginForm(Application $app)
     {
-        $user = $this->createUserAndLogin();
-
         if (! session()->has('wechat.oauth_user')) {
             $response = $app->oauth->scopes(['snsapi_userinfo'])
                                       ->redirect();
 
             return $response;
         }
+
+        $user = $this->createUserAndLogin();
 
         // return view('auth.login');
         if (! $user->mobile) {

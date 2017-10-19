@@ -64,7 +64,7 @@
                     {
                         icon: '/images/buies.png',
                         name: '我的求购',
-                        url: '',
+                        url: `/users/demands`,
                     },
                     {
                         icon: '/images/threads.png',

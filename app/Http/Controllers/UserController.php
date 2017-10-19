@@ -74,6 +74,13 @@ class UserController extends Controller
         return view('users.replies', compact('replies'));
     }
 
+    public function demands()
+    {
+        $demands = auth()->user()->demands()->latest()->get();
+
+        return view('users.demands', compact('demands'));
+    }
+
     /**
      * 绑定手机号码
      * @param  Request $request 用户请求

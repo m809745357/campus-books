@@ -70,4 +70,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Models\Reply::class, 'user_id');
     }
+
+    /**
+     * 用户有很多的求购
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function demands()
+    {
+        return $this->hasMany(Models\Demand::class, 'user_id');
+    }
 }

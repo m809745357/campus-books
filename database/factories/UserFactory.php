@@ -70,3 +70,20 @@ $factory->define(App\Models\Channel::class, function (Faker $faker) {
         'desc' => $faker->sentence,
     ];
 });
+
+$factory->define(App\Models\Demand::class, function (Faker $faker) {
+
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph,
+        'money' => $faker->randomNumber(2),
+        'images' => json_encode([
+            $faker->imageUrl(200, 200),
+            $faker->imageUrl(200, 200),
+            $faker->imageUrl(200, 200)
+        ]),
+    ];
+});

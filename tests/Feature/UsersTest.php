@@ -16,7 +16,7 @@ class UsersTest extends TestCase
         session()->forget('wechat.oauth_user');
         config(['wechat.enable_mock' => false]);
 
-        $response = $this->get('/');
+        $response = $this->get('/login');
 
         $response->assertStatus(302);
 
@@ -26,7 +26,7 @@ class UsersTest extends TestCase
     /** @test*/
     public function a_user_logs_on_for_the_second_time()
     {
-        $response = $this->get('/');
+        $response = $this->get('/login');
 
         $user = session()->get('wechat.oauth_user');
 

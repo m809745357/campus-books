@@ -10,7 +10,7 @@
         <img class="home-top" src="/images/home-top.png" alt="">
         <div class="hot-replies">
             <h4>热门回答</h4>
-            <p>查看更多</p>
+            <p onclick="location.href='/threads'">查看更多</p>
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
         @foreach ($hotThreads as $thread)
@@ -19,10 +19,19 @@
         @endforeach
         <div class="hot-replies">
             <h4>热门求购</h4>
-            <p>查看更多</p>
+            <p onclick="location.href='/demands'">查看更多</p>
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
+        @foreach ($hotDemands as $demand)
+            <demand :attributes="{{ $demand }}"></demand>
+        @endforeach
+        <div style="height: 10px;background-color: #e5e5e5"></div>
+        <div class="thread-menu">
+            <li><a class="on" href="">热门图书</a></li>
+            <li><a href="">热门电子书</a></li>
+        </div>
     </div>
+    <div style="height: 1.32rem"></div>
     <div class="menu con">
         <li><a href="{{ route('home') }}" class="menu-item"><img src="/images/home-on.png" alt="">首页</a></li>
         <li><a href="{{ route('categories.index') }}" class="menu-item"><img src="/images/category.png" alt="">分类</a></li>
