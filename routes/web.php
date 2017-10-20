@@ -15,6 +15,8 @@ Route::get('/', 'WechatController@index')->name('home');
 
 Route::get('/oauth_callback', 'Auth\LoginController@oauthCallback');
 
+
+
 Route::get('/users', 'UserController@index')->name('user.index');
 
 Route::get('/users/bindmobile', 'BindMobileController@index')->name('bind.mobile');
@@ -32,6 +34,13 @@ Route::get('/users/threads', 'UserController@threads')->name('user.threads');
 Route::get('/users/replies', 'UserController@replies')->name('user.replies');
 
 Route::get('/users/demands', 'UserController@demands')->name('user.demands');
+
+Route::get('/users/balances', 'UserController@balances')->name('user.balances');
+
+Route::get('/users/recharges', 'UserController@recharges')->name('user.recharges');
+
+Route::get('/users/bills', 'UserController@bills')->name('user.bills');
+
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
 
@@ -51,18 +60,24 @@ Route::delete('/threads/{channel}/{thread}/favorites', 'FavoriteController@desto
 
 Route::post('/threads/{channel}/{thread}/reply', 'ReplyController@store')->name('reply.store');
 
+
 Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
 
 Route::post('/replies/{reply}/favorites', 'FavoriteController@store')->name('reply.favorite');
 
 Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name('reply.unfavorite');
 
+
 Route::get('/posts', 'PostController@index')->name('posts.index');
 
+
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
+
 
 Route::get('/demands', 'DemandController@index')->name('demands.index');
 
 Route::get('/demands/{demand}', 'DemandController@show')->name('demands.show');
+
+Route::post('/recharge/{recharge}/bill', 'BillController@store')->name('bill.create');
 
 Auth::routes();

@@ -1,23 +1,23 @@
 <template>
     <div class="">
         <div class="user-profile-top">
-            <div class="user-notify">
+            <div class="user-notify" @click="notifications">
                 <img src="/images/notifications.png" alt=""><h4>我的消息</h4>
             </div>
-            <div class="user-profile-center" @click="profile">
+            <div class="user-profile-center">
                 <img :src="user.avatar" alt="" class="user-profile-headimgurl">
                 <h4 class="user-profile-nickname">{{ user.nickname }}</h4>
                 <p class="user-profile-phone">{{ user.mobile }}</p>
-                <div class="user-balance-panel">
+                <div class="user-balance-panel" @click="balances">
                     <img src="/images/balances.png">
                     <div class="user-balance-body">
                         <h4>我的余额</h4>
-                        <p>￥200.00</p>
+                        <p>￥{{ user.balances }}</p>
                     </div>
                 </div>
             </div>
             <div class="user-setting">
-                <img src="/images/setting.png" alt="">
+                <img src="/images/setting.png" alt="" @click="profile">
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                     {
                         icon: '/images/orders.png',
                         name: '账户明细',
-                        url: '',
+                        url: 'users/bills',
                     },
                     {
                         icon: '/images/posts.png',
@@ -86,6 +86,12 @@
         methods: {
             profile() {
                 window.location.href = '/users/profile';
+            },
+            balances() {
+                window.location.href = '/users/balances';
+            },
+            notifications() {
+                window.location.href = '/users/notifications';
             }
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Recharge;
 use App\Filters\FavoriteFilters;
 
 class UserController extends Controller
@@ -74,11 +75,47 @@ class UserController extends Controller
         return view('users.replies', compact('replies'));
     }
 
+    /**
+     * 我的求购
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function demands()
     {
         $demands = auth()->user()->demands()->latest()->get();
 
         return view('users.demands', compact('demands'));
+    }
+
+    /**
+     * 我的余额
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function balances()
+    {
+        $balances = auth()->user()->balances;
+
+        return view('users.balances', compact('balances'));
+    }
+
+    /**
+     * 充值界面
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function recharges()
+    {
+        $recharges = Recharge::latest('money')->get();
+
+        return view('users.recharges', compact('recharges'));
+    }
+
+    public function bills()
+    {
+        $bills = auth()->user()->bills->load('billed');
+
+        return view('users.bills', compact('bills'));
     }
 
     /**

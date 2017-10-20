@@ -9808,3 +9808,223 @@ button.close {
   bottom: 0;
 }
 
+/**
+ * users.balances
+ */
+
+.balances {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.balances img {
+  width: 4.67rem;
+  height: 4.67rem;
+  margin-top: 2.03rem;
+  margin-bottom: 0.41rem;
+}
+
+.balances h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  color: #333333;
+  margin-bottom: 0.41rem;
+}
+
+.balances p {
+  margin: 0;
+  padding: 0;
+  font-size: 32px;
+  color: #fa8e3e;
+  margin-bottom: 1.13rem;
+}
+
+.balances .recharge {
+  width: 8.11rem;
+  height: 1.33rem;
+  border-radius: 0.13rem;
+  background-color: #3e85fa;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.33rem;
+  margin-bottom: 0.32rem;
+  border: none;
+  text-align: center;
+}
+
+.balances .withdraw {
+  width: 8.11rem;
+  height: 1.33rem;
+  border-radius: 0.13rem;
+  background-color: #fff;
+  color: #333333;
+  font-size: 20px;
+  line-height: 1.33rem;
+  border: 1px solid #e9e9e9;
+  text-align: center;
+}
+
+/**
+ * users.recharge
+ */
+
+.recharges {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.recharges .recharges-items {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-gap: 0.21rem;
+  margin: 1.09rem 0.4rem;
+}
+
+.recharges .recharges-items li {
+  width: 2.91rem;
+  height: 1.6rem;
+  background: #fff;
+  list-style: none;
+  border: 1px solid #e9e9e9;
+  border-radius: 0.05rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #aaaaaa;
+  font-size: 18px;
+}
+
+.recharges .recharges-items li.on {
+  border: 1px solid #fa8e3e;
+  color: #fa8e3e;
+}
+
+.recharges .recharge {
+  width: 9.2rem;
+  height: 1.33rem;
+  border-radius: 0.13rem;
+  background-color: #3e85fa;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.33rem;
+  margin-bottom: 0.32rem;
+  border: none;
+  text-align: center;
+}
+
+/**
+ * users.bills
+ */
+
+.bills {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #fff;
+}
+
+.bills .bills-balances {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 1.23rem;
+  width: 100%;
+  border-bottom: 2px solid #e9e9e9;
+}
+
+.bills .bills-balances img {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.23rem;
+}
+
+.bills .bills-balances h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+.bills .bills-title {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 100%;
+  height: 1.23rem;
+  border-bottom: 2px solid #e9e9e9;
+}
+
+.bills .bills-title li {
+  list-style: none;
+  text-align: center;
+  font-size: 15px;
+  color: #fa8e3e;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+}
+
+.bills .bills-desc {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: 100%;
+  height: 1.23rem;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.bills .bills-desc li {
+  list-style: none;
+  text-align: center;
+  font-size: 15px;
+  color: #aaaaaa;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+}
+

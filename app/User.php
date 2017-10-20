@@ -80,4 +80,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Models\Demand::class, 'user_id');
     }
+
+    /**
+     * 用户的账户明细
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bills()
+    {
+        return $this->hasMany(Models\Bill::class, 'user_id');
+    }
 }

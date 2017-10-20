@@ -26,6 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'school' => $faker->word,
         'specialty' => $faker->word,
         'password' => $password ?: $password = bcrypt('secret'),
+        'balances' => 0,
         'remember_token' => str_random(10),
     ];
 });
@@ -85,5 +86,13 @@ $factory->define(App\Models\Demand::class, function (Faker $faker) {
             $faker->imageUrl(200, 200),
             $faker->imageUrl(200, 200)
         ]),
+    ];
+});
+
+$factory->define(App\Models\Recharge::class, function (Faker $faker) {
+
+    return [
+        'money' => $faker->randomNumber(4),
+        'status' => 1,
     ];
 });

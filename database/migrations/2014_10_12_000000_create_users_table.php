@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->nullable();
             $table->string('email')->nullable();
             $table->string('openid')->unique();
+            $table->unsignedInteger('balances')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

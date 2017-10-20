@@ -1211,3 +1211,178 @@ $background-color: #efefef;
         bottom: 0;
     }
 }
+
+/**
+ * users.balances
+ */
+.balances {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+
+    img {
+        width: 4.67rem /* 350/75 */;
+        height: 4.67rem /* 350/75 */;
+        margin-top: 2.03rem /* 152/75 */;
+        margin-bottom: 0.41rem /* 31/75 */;
+    }
+
+    h4 {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+        color: $font-title-color;
+        margin-bottom: 0.41rem /* 31/75 */;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        font-size: 32px;
+        color: $price-color;
+        margin-bottom: 1.13rem /* 85/75 */;
+    }
+
+    .recharge {
+        width: 8.11rem /* 608/75 */;
+        height: 1.33rem /* 100/75 */;
+        border-radius: 0.13rem /* 10/75 */;
+        background-color: $theme-color;
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.33rem /* 100/75 */;
+        margin-bottom: 0.32rem /* 24/75 */;
+        border: none;
+        text-align: center;
+    }
+
+    .withdraw {
+        width: 8.11rem /* 608/75 */;
+        height: 1.33rem /* 100/75 */;
+        border-radius: 0.13rem /* 10/75 */;
+        background-color: #fff;
+        color: $font-title-color;
+        font-size: 20px;
+        line-height: 1.33rem /* 100/75 */;
+        border: 1px solid $border-color;
+        text-align: center;
+    }
+}
+
+/**
+ * users.recharge
+ */
+.recharges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .recharges-items {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-gap: 0.21rem /* 16/75 */;
+        margin: 1.09rem /* 82/75 */ 0.4rem /* 30/75 */;
+
+
+        li {
+            width: 2.91rem /* 218/75 */;
+            height: 1.6rem /* 120/75 */;
+            background: #fff;
+            list-style: none;
+            border: 1px solid $border-color;
+            border-radius: 0.05rem /* 4/75 */;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $font-desc-color;
+            font-size: 18px;
+        }
+
+        li.on {
+            border: 1px solid $price-color;
+            color: $price-color;
+        }
+    }
+
+    .recharge {
+        width: 9.2rem /* 690/75 */;
+        height: 1.33rem /* 100/75 */;
+        border-radius: 0.13rem /* 10/75 */;
+        background-color: $theme-color;
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.33rem /* 100/75 */;
+        margin-bottom: 0.32rem /* 24/75 */;
+        border: none;
+        text-align: center;
+    }
+}
+
+/**
+ * users.bills
+ */
+.bills {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+
+    .bills-balances {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        height: 1.23rem /* 92/75 */;
+        width: 100%;
+        border-bottom: 2px solid $border-color;
+
+        img {
+            width: 0.55rem /* 41/75 */;
+            height: 0.55rem /* 41/75 */;
+            margin-right: 0.23rem /* 17/75 */;
+        }
+
+        h4 {
+            margin: 0;
+            padding: 0;
+            font-size: 15px;
+        }
+    }
+
+    .bills-title {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        width: 100%;
+        height: 1.23rem /* 92/75 */;
+        border-bottom: 2px solid $border-color;
+
+        li {
+            list-style: none;
+            text-align: center;
+            font-size: 15px;
+            color: $price-color;
+            align-self: center;
+            justify-self: center;
+        }
+    }
+
+    .bills-desc {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        width: 100%;
+        height: 1.23rem /* 92/75 */;
+        border-bottom: 1px solid $border-color;
+
+        li {
+            list-style: none;
+            text-align: center;
+            font-size: 15px;
+            color: $font-desc-color;
+            align-self: center;
+            justify-self: center;
+        }
+    }
+}
