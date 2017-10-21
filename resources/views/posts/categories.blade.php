@@ -3,34 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="categories">
-            <div class="categories-left">
-                <li class="on">教育</li>
-                <li>小说</li>
-                <li>文艺</li>
-                <li>生活</li>
-                <li>人文社科</li>
-            </div>
-
-            <div class="categories-right">
-                <img src="/images/category-top.png" alt="">
-
-                <div class="categories-desc">
-                    <h4>教材</h4>
-                    <div class="categories-content">
-                        <li><img src="/images/categories/1.png" alt=""><h4>公共课</h4></li>
-                        <li><img src="/images/categories/2.png" alt=""><h4>工学</h4></li>
-                        <li><img src="/images/categories/3.png" alt=""><h4>理学学</h4></li>
-                    </div>
-                    <h4>外语</h4>
-                    <div class="categories-content">
-                        <li><img src="/images/categories/4.png" alt=""><h4>公共课</h4></li>
-                        <li><img src="/images/categories/5.png" alt=""><h4>工学</h4></li>
-                        <li><img src="/images/categories/6.png" alt=""><h4>理学学</h4></li>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <category :attributes="{{ $categories }}"></category>
     </div>
     <div style="height: 1.32rem"></div>
     <div class="menu con">

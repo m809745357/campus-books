@@ -96,3 +96,47 @@ $factory->define(App\Models\Recharge::class, function (Faker $faker) {
         'status' => 1,
     ];
 });
+
+$factory->define(App\Models\Book::class, function (Faker $faker) {
+
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'author' => $faker->name,
+        'published_at' => $faker->year() . '-' . $faker->month(),
+        'press' => $faker->address,
+        'type' => 'PBook',
+        'keywords' => json_encode($faker->words(3)),
+        'category_id' => function () {
+            return factory('App\Models\Category')->create()->id;
+        },
+        'money' => $faker->randomNumber(2),
+        'logistics' => 'express', //face, online
+        'freight' => $faker->randomNumber(2),
+        'cover' => $faker->imageUrl(200, 200),
+        'images' => json_encode([
+            $faker->imageUrl(200, 200),
+            $faker->imageUrl(200, 200),
+            $faker->imageUrl(200, 200)
+        ]),
+        'body' => $faker->paragraph,
+        'annex' => $faker->imageUrl(200, 200)
+    ];
+});
+
+$factory->define(App\Models\Category::class, function (Faker $faker) {
+
+    return [
+        'name' => $faker->word,
+        'slug' => $faker->word,
+        'parent_id' => function () {
+            return factory('App\Models\Category')->create([
+                'parent_id' => function () {
+                    return factory('App\Models\Category')->create(['parent_id' => 0])->id;
+                }
+            ])->id;
+        }
+    ];
+});

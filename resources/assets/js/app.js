@@ -51,6 +51,8 @@ moment.updateLocale('en', {
 
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('thread', require('./components/Thread.vue'));
+Vue.component('hot-books', require('./components/HotBooks.vue'));
+Vue.component('category', require('./components/Category.vue'));
 Vue.component('demand', require('./components/Demand.vue'));
 Vue.component('recharges', require('./components/Recharges.vue'));
 Vue.component('reply', require('./components/Reply.vue'));

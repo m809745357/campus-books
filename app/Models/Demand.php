@@ -17,6 +17,6 @@ class Demand extends Model
     }
 
     public static function hot($num){
-        return \App\Models\Demand::with('onwer')->latest('views_count')->take(3)->get();
+        return \App\Models\Demand::with('onwer')->latest('views_count')->take($num)->get();
     }
 }

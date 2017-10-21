@@ -8666,7 +8666,7 @@ button.close {
   color: #fff;
 }
 
-.thread-menu li > a {
+.thread-menu li {
   display: block;
   height: 1.46666667rem;
   line-height: 1.46666667rem;
@@ -8674,7 +8674,7 @@ button.close {
   color: #333333;
 }
 
-.thread-menu li > a.on {
+.thread-menu li.on {
   border-bottom: 4px solid #3e85fa;
   color: #3e85fa;
 }
@@ -9389,6 +9389,14 @@ button.close {
   margin-right: 0;
 }
 
+.hot-books {
+  background-color: #fff;
+}
+
+.hot-books .books-desc {
+  margin-top: 0;
+}
+
 /**
  * posts
  */
@@ -9547,6 +9555,10 @@ button.close {
   font-size: 12px;
   color: #aaaaaa;
   text-align: center;
+  width: 1.19rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /**
@@ -9608,8 +9620,41 @@ button.close {
  * demands
  */
 
-.demands {
+.demands,
+.books {
   background-color: #fff;
+}
+
+.books-menu {
+  height: 1.05rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  border-bottom: 1px solid #e9e9e9;
+  position: fixed;
+  background-color: #fff;
+}
+
+.books-menu li {
+  list-style: none;
+}
+
+.books-menu li:not(:last-child) {
+  border-right: 1px solid #e9e9e9;
+}
+
+.books-menu li a {
+  font-size: 16px;
+  color: #333333;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 1.05rem;
 }
 
 .demands-menu {
@@ -9638,15 +9683,18 @@ button.close {
   color: #333333;
 }
 
-.demands-desc {
+.demands-desc,
+.books-desc {
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-gap: 0.49rem;
   margin: 0 0.4rem;
-  margin-top: 1.45rem;
+  margin-top: 1.05rem;
+  padding-top: 0.59rem;
 }
 
-.demands-item {
+.demands-item,
+.books-item {
   -ms-flex-item-align: center;
       align-self: center;
   justify-self: center;
@@ -9665,15 +9713,17 @@ button.close {
           flex-direction: column;
 }
 
-.demands-item img {
+.demands-item img,
+.books-item img {
   width: 4.31rem;
-  height: 4.67rem;
+  height: 4.33rem;
   padding: 0.2rem 0.8rem 0.19rem 0.4rem;
   background-color: #f9f9f9;
-  margin-bottom: 0.21rem;
+  margin-bottom: 0.06rem;
 }
 
-.demands-item h4 {
+.demands-item h4,
+.books-item h4 {
   margin: 0;
   padding: 0;
   width: 4.31rem;
@@ -9683,13 +9733,35 @@ button.close {
   overflow: hidden;
   font-size: 12px;
   color: #333333;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
-.demands-item p {
+.demands-item p,
+.books-item p {
   margin: 0;
   padding: 0;
   width: 4.31rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.demands-item .author,
+.books-item .author {
+  font-size: 8px;
+  color: #aaaaaa;
+  margin-bottom: 0.05rem;
+}
+
+.demands-item .press,
+.books-item .press {
+  font-size: 8px;
+  color: #aaaaaa;
+  margin-bottom: 0.21rem;
+}
+
+.demands-item .price,
+.books-item .price {
   font-size: 10px;
   color: #fa8e3e;
 }
@@ -9729,7 +9801,7 @@ button.close {
 }
 
 .demand-detail-title {
-  margin: 0.4rem 0.4rem 0.4rem 0.4rem;
+  margin: 0.4rem 0.4rem 0.13rem 0.4rem;
 }
 
 .demand-detail-title h4 {
@@ -9744,7 +9816,7 @@ button.close {
 }
 
 .demand-footer {
-  margin: 0.53rem 0.4rem 0 0.4rem;
+  margin: 0.4rem 0.4rem 0 0.4rem;
   padding-bottom: 0.55rem;
 }
 
@@ -9795,6 +9867,29 @@ button.close {
   margin-bottom: 1.28rem;
 }
 
+.demand-contact-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #e9e9e9;
+  height: 1.28rem;
+  background-color: #fff;
+}
+
 .demand-contact-button button {
   background-color: #3e85fa;
   text-align: center;
@@ -9803,9 +9898,9 @@ button.close {
   line-height: 1.28rem;
   height: 1.28rem;
   border: none;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 /**
@@ -10026,5 +10121,111 @@ button.close {
   -ms-flex-item-align: center;
       align-self: center;
   justify-self: center;
+}
+
+/**
+ * books
+ */
+
+.books-item {
+  height: 7rem;
+}
+
+.keywords {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-bottom: 0.21rem;
+}
+
+.keywords span {
+  background-color: #3e85fa;
+  color: #fff;
+  font-size: 9px;
+  width: 1.28rem;
+  height: 0.44rem;
+  line-height: 0.44rem;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/**
+ * book-detail
+ */
+
+.book-detail {
+  margin: 0 0.4rem;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: auto;
+}
+
+.book-detail span {
+  background-color: #fff;
+  color: #aaaaaa;
+  width: auto;
+  margin-right: 0.4rem;
+}
+
+.book-options {
+  width: 3.33rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.book-options .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1.28rem;
+}
+
+.book-options .options img {
+  width: 0.53rem;
+  height: 0.53rem;
+}
+
+.book-options .options p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.book-options .options p.customer {
+  color: #3e85fa;
 }
 

@@ -12,7 +12,7 @@
                     <div class="demands-item" onclick="location.href='{{ $demand->path() }}'">
                         <img src="{{ json_decode($demand->images)[0] }}" alt="">
                         <h4>{{ $demand->title }}</h4>
-                        <p>￥ {{ $demand->money }}</p>
+                        <p class="price">￥ {{ $demand->money }}</p>
                     </div>
                 @endforeach
             </div>

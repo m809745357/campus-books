@@ -26,10 +26,7 @@
             <demand :attributes="{{ $demand }}"></demand>
         @endforeach
         <div style="height: 10px;background-color: #e5e5e5"></div>
-        <div class="thread-menu">
-            <li><a class="on" href="">热门图书</a></li>
-            <li><a href="">热门电子书</a></li>
-        </div>
+        <hot-books :hotpbooks="{{ $hotPbooks }}" :hotebooks="{{ $hotEbooks }}"></hot-books>
     </div>
     <div style="height: 1.32rem"></div>
     <div class="menu con">

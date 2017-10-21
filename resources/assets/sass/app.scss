@@ -262,7 +262,7 @@ $background-color: #efefef;
     color: #fff;
 }
 
-.thread-menu li > a {
+.thread-menu li{
     display: block;
     height: 1.46666667rem;
     line-height: 1.46666667rem;
@@ -270,7 +270,7 @@ $background-color: #efefef;
     color: $font-title-color;
 }
 
-.thread-menu li > a.on {
+.thread-menu li.on {
     border-bottom: 4px solid $theme-color;
     color: $theme-color;
 }
@@ -853,6 +853,14 @@ $background-color: #efefef;
     }
 }
 
+.hot-books {
+    background-color: #fff;
+
+    .books-desc {
+        margin-top: 0;
+    }
+}
+
 /**
  * posts
  */
@@ -978,6 +986,10 @@ $background-color: #efefef;
                     font-size: 12px;
                     color: $font-desc-color;
                     text-align: center;
+                    width: 1.19rem /* 89/75 */;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
                 }
             }
         }
@@ -1036,8 +1048,36 @@ $background-color: #efefef;
 /**
  * demands
  */
-.demands {
+.demands, .books {
     background-color: #fff
+}
+
+.books-menu {
+    height: 1.05rem /* 79/75 */;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    border-bottom: 1px solid $border-color;
+    position: fixed;
+    background-color: #fff;
+
+    li {
+        list-style: none;
+
+        &:not(:last-child) {
+            border-right: 1px solid $border-color;
+        }
+
+        a {
+            font-size: 16px;
+            color: $font-title-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 1.05rem /* 79/75 */;
+        }
+    }
+
+
 }
 
 .demands-menu {
@@ -1060,15 +1100,16 @@ $background-color: #efefef;
     }
 }
 
-.demands-desc {
+.demands-desc, .books-desc {
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-gap: 0.49rem /* 37/75 */;
     margin: 0 0.4rem /* 30/75 */;
-    margin-top: 1.45rem /* 109/75 */;
+    margin-top: 1.05rem /* 79/75 */;
+    padding-top: 0.59rem /* 44/75 */;
 }
 
-.demands-item {
+.demands-item, .books-item {
     align-self: center;
     justify-self: center;
     display: flex;
@@ -1078,10 +1119,10 @@ $background-color: #efefef;
 
     img {
         width: 4.31rem /* 323/75 */;
-        height: 4.67rem /* 350/75 */;
+        height: 4.33rem /* 325/75 */;
         padding: 0.2rem /* 15/75 */ 0.8rem /* 60/75 */ 0.19rem /* 14/75 */ 0.4rem /* 30/75 */;
         background-color: #f9f9f9;
-        margin-bottom: 0.21rem /* 16/75 */;
+        margin-bottom: 0.06rem;
     }
 
     h4 {
@@ -1094,13 +1135,31 @@ $background-color: #efefef;
         overflow: hidden;
         font-size: 12px;
         color: $font-title-color;
-        margin-bottom: 0.25rem /* 19/75 */;
+        margin-bottom: 0.2rem /* 15/75 */;
     }
 
     p {
         margin: 0;
         padding: 0;
         width: 4.31rem /* 323/75 */;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .author {
+        font-size: 8px;
+        color: $font-desc-color;
+        margin-bottom: 0.05rem /* 4/75 */;
+    }
+
+    .press {
+        font-size: 8px;
+        color: $font-desc-color;
+        margin-bottom: 0.21rem /* 16/75 */;
+    }
+
+    .price {
         font-size: 10px;
         color: $price-color;
     }
@@ -1130,7 +1189,7 @@ $background-color: #efefef;
 }
 
 .demand-detail-title {
-    margin: 0.4rem /* 30/75 */ 0.4rem /* 30/75 */ 0.4rem /* 30/75 */ 0.4rem /* 30/75 */;
+    margin: 0.4rem /* 30/75 */ 0.4rem /* 30/75 */ 0.13rem /* 10/75 */ 0.4rem /* 30/75 */;
 
     h4 {
         margin: 0;
@@ -1145,7 +1204,7 @@ $background-color: #efefef;
 }
 
 .demand-footer {
-    margin: 0.53rem /* 40/75 */ 0.4rem /* 30/75 */ 0 0.4rem /* 30/75 */;
+    margin: 0.4rem /* 30/75 */ 0.4rem /* 30/75 */ 0 0.4rem /* 30/75 */;
     padding-bottom: 0.55rem /* 41/75 */;
 
     p {
@@ -1195,8 +1254,16 @@ $background-color: #efefef;
 }
 
 .demand-contact-button {
-    // margin-top: 0.4rem /* 30/75 */;
-    // margin-bottom: 1rem /* 75/75 */;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid $border-color;
+    height: 1.28rem /* 96/75 */;
+    background-color: #fff;
 
     button {
         background-color: $theme-color;
@@ -1206,9 +1273,7 @@ $background-color: #efefef;
         line-height: 1.28rem /* 96/75 */;
         height: 1.28rem /* 96/75 */;
         border: none;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
+        flex: 1;
     }
 }
 
@@ -1383,6 +1448,82 @@ $background-color: #efefef;
             color: $font-desc-color;
             align-self: center;
             justify-self: center;
+        }
+    }
+}
+
+/**
+ * books
+ */
+.books-item {
+    height: 7rem /* 525/75 */;
+}
+.keywords {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.21rem /* 16/75 */;
+
+    span {
+        background-color: $theme-color;
+        color: #fff;
+        font-size: 9px;
+        width: 1.28rem /* 96/75 */;
+        height: 0.44rem /* 33/75 */;
+        line-height: 0.44rem /* 33/75 */;
+        text-align: center;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}
+
+/**
+ * book-detail
+ */
+.book-detail {
+    margin: 0 0.4rem /* 30/75 */;
+    justify-content: flex-start;
+    width: auto;
+
+    span {
+        background-color: #fff;
+        color: $font-desc-color;
+        width: auto;
+        margin-right: 0.4rem /* 30/75 */;
+    }
+}
+
+.book-options {
+    width: 3.33rem /* 250/75 */;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+
+    .options {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+        height: 1.28rem /* 96/75 */;
+
+        img {
+            width: 0.53rem /* 40/75 */;
+            height: 0.53rem /* 40/75 */;
+        }
+
+        p {
+            margin: 0px;
+            padding: 0px;
+            font-size: 12px;
+            color: $font-desc-color;
+
+            &.customer {
+                color: $theme-color;
+            }
         }
     }
 }

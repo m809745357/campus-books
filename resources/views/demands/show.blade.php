@@ -13,7 +13,7 @@
                 <div class="demand-detail-title">
                     <h4>{{ $demand->title }}{{ $demand->title }}{{ $demand->title }}</h4>
                 </div>
-                <div class="demand-money" style="margin: 0 0.4rem;">
+                <div class="demand-money" style="margin: 0.4rem 0.4rem 0 0.4rem;">
                     ￥ {{ $demand->money}}
                 </div>
                 <div class="demand-footer">
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="demand-contact-button">
+            <div class="demand-contact-button con">
                 <button type="button" name="button">在线联系</button>
             </div>
         </div>

@@ -62,6 +62,6 @@ class Thread extends Model
     }
 
     public static function hot($num){
-        return \App\Models\Thread::with('onwer', 'channel')->latest('replies_count')->take(2)->get();
+        return \App\Models\Thread::with('onwer', 'channel')->latest('replies_count')->take($num)->get();
     }
 }
