@@ -8,6 +8,12 @@ use App\Models\Category;
 
 class BookController extends Controller
 {
+    /**
+     * 图书列表
+     *
+     * @param  Category $category
+     * @return \Illuminate\Http\Response
+     */
     public function index(Category $category)
     {
         $book = Book::with('onwer', 'category')->latest();
@@ -21,6 +27,13 @@ class BookController extends Controller
         return view('books.index', compact('books'));
     }
 
+    /**
+     * 单个图书展示
+     *
+     * @param  Category $category
+     * @param  Book     $book
+     * @return \Illuminate\Http\Response
+     */
     public function show(Category $category, Book $book)
     {
         $book->increment('views_count');

@@ -31,11 +31,19 @@ class Reply extends Model
         });
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function thread()
     {
         return $this->belongsTo(Thread::class, 'thread_id');
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');

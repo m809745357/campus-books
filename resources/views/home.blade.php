@@ -15,7 +15,7 @@
         </div>
         @foreach ($hotThreads as $thread)
             <thread :attributes="{{ $thread }}"></thread>
-            <div style="height: 10px;background-color: #e5e5e5"></div>
+            <div style="height: 10px;"></div>
         @endforeach
         <div class="hot-replies">
             <h4>热门求购</h4>
@@ -25,7 +25,7 @@
         @foreach ($hotDemands as $demand)
             <demand :attributes="{{ $demand }}"></demand>
         @endforeach
-        <div style="height: 10px;background-color: #e5e5e5"></div>
+        <div style="height: 10px;"></div>
         <hot-books :hotpbooks="{{ $hotPbooks }}" :hotebooks="{{ $hotEbooks }}"></hot-books>
     </div>
     <div style="height: 1.32rem"></div>

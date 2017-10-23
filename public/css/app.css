@@ -9691,6 +9691,9 @@ button.close {
   margin: 0 0.4rem;
   margin-top: 1.05rem;
   padding-top: 0.59rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .demands-item,
@@ -9711,6 +9714,7 @@ button.close {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 4.15rem;
 }
 
 .demands-item img,

@@ -19,11 +19,19 @@ class Bill extends Model
         });
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
     public function billed()
     {
         return $this->morphTo();
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');

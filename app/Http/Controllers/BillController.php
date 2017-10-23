@@ -17,6 +17,12 @@ class BillController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * 创建充值
+     *
+     * @param  Recharge $recharge
+     * @return [type]             [description]
+     */
     public function store(Recharge $recharge)
     {
         $recharge->billed();

@@ -20,16 +20,28 @@ class Thread extends Model
         return "/threads/{$this->channel->slug}/{$this->id}";
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function channel()
     {
         return $this->belongsTo(Channel::class);
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function replies()
     {
         return $this->hasMany(Reply::class, 'thread_id');

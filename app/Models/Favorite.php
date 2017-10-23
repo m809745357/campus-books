@@ -23,6 +23,10 @@ class Favorite extends Model
         });
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
     public function favorited()
     {
         return $this->morphTo();

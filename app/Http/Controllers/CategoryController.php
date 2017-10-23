@@ -7,9 +7,13 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    /**
+     * [index description]
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $categories =  Category::with('childCategories', 'childCategories.childCategories')->where('parent_id', 0)->latest()->get();
+        $categories = Category::with('childCategories', 'childCategories.childCategories')->where('parent_id', 0)->latest()->get();
         return view('posts.categories', compact('categories'));
     }
 }

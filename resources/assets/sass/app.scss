@@ -1107,6 +1107,7 @@ $background-color: #efefef;
     margin: 0 0.4rem /* 30/75 */;
     margin-top: 1.05rem /* 79/75 */;
     padding-top: 0.59rem /* 44/75 */;
+    justify-content: space-between;
 }
 
 .demands-item, .books-item {
@@ -1116,6 +1117,7 @@ $background-color: #efefef;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 4.15rem /* 311.5/75 */;
 
     img {
         width: 4.31rem /* 323/75 */;

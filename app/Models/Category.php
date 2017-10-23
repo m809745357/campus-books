@@ -16,6 +16,10 @@ class Category extends Model
        return 'slug';
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function childCategories()
     {
         return $this->hasMany(self::class, 'parent_id');

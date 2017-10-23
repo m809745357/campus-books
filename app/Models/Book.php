@@ -11,6 +11,10 @@ class Book extends Model
         return "/books/{$this->category->slug}/$this->id";
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');
@@ -24,6 +28,10 @@ class Book extends Model
         return $hots->get();
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

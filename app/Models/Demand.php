@@ -11,6 +11,10 @@ class Demand extends Model
         return '/demands/' . $this->id;
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');

@@ -9,11 +9,22 @@ use Illuminate\Http\Request;
 
 class ReplyController extends Controller
 {
+    /**
+     * [__construct description]
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * 添加回复
+     *
+     * @param  Request $request
+     * @param  Channel $channel
+     * @param  Thread  $thread
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request, Channel $channel, Thread $thread)
     {
         $request->validate([
@@ -27,6 +38,12 @@ class ReplyController extends Controller
         }
     }
 
+    /**
+     * 删除回复
+     *
+     * @param  Reply  $reply
+     * @return \Illuminate\Http\Response
+     */
     public function destory(Reply $reply)
     {
         $this->authorize('delete', $reply);
