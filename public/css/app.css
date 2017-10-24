@@ -8935,6 +8935,10 @@ button.close {
   margin-bottom: .1em;
 }
 
+.menu-item.on {
+  color: #3e85fa;
+}
+
 .menu-item.post {
   position: absolute;
   margin-left: -0.74rem;

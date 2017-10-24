@@ -480,6 +480,10 @@ $background-color: #efefef;
         margin-top: .1em;
         margin-bottom: .1em;
     }
+
+    &.on {
+        color: $theme-color;
+    }
 }
 
 .menu-item.post {
