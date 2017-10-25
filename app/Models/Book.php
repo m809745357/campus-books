@@ -21,7 +21,7 @@ class Book extends Model
     }
 
     public static function hot($num, $where){
-        $hots = \App\Models\Book::with('onwer')->latest('views_count')->take($num);
+        $hots = \App\Models\Book::with('onwer', 'category')->latest('views_count')->take($num);
         if ($where) {
             $hots->where($where);
         }

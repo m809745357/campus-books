@@ -140,3 +140,16 @@ $factory->define(App\Models\Category::class, function (Faker $faker) {
         }
     ];
 });
+
+$factory->define(App\Models\Message::class, function (Faker $faker) {
+
+    return [
+        'from_user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'to_user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'message' => $faker->paragraph
+    ];
+});

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use App\Filters\FavoriteFilters;
+use App\Notifications\UserChatNotifications;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -89,5 +90,15 @@ class User extends Authenticatable
     public function bills()
     {
         return $this->hasMany(Models\Bill::class, 'user_id');
+    }
+
+    public function messaged()
+    {
+        return $this->hasMany(Models\Message::class, 'from_user_id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Models\Message::class, 'to_user_id');
     }
 }

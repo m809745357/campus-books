@@ -49,6 +49,7 @@ moment.updateLocale('en', {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('chat', require('./components/Chat.vue'));
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('hot-books', require('./components/HotBooks.vue'));

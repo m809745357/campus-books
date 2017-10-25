@@ -60,4 +60,11 @@ Route::get('/books', 'BookController@index')->name('books.index');
 Route::get('/books/{category}', 'BookController@index')->name('books.category.index');
 Route::get('/books/{category}/{book}', 'BookController@show')->name('books.show');
 
+Route::get('/users/{user}/chat', 'ChatController@index')->name('users.chat.index');
+Route::post('/users/{user}/chat', 'ChatController@store')->name('users.chat.store');
+
+Route::get('/users/{user}/guest', function () {
+    \Auth::login(\App\User::find(20));
+});
+
 Auth::routes();
