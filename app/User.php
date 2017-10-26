@@ -101,4 +101,32 @@ class User extends Authenticatable
     {
         return $this->hasMany(Models\Message::class, 'to_user_id');
     }
+
+    /**
+     * 用户的联系人
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany(Models\Contact::class, 'user_id');
+    }
+
+    public function addContacts($user)
+    {
+        if (! $this->isContacted($user)) {
+            return $this->contacts()->create(['contact_user_id' => $user->id]);
+        }
+        return $this->contacts();
+    }
+
+    public function isContacted($user)
+    {
+        return $this->contacts()->where(['contact_user_id' => $user->id])->exists();
+    }
+
+    public function chats()
+    {
+        return $this->contacts;
+    }
 }

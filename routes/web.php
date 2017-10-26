@@ -27,6 +27,7 @@ Route::get('/users/demands', 'UserController@demands')->name('user.demands');
 Route::get('/users/balances', 'UserController@balances')->name('user.balances');
 Route::get('/users/recharges', 'UserController@recharges')->name('user.recharges');
 Route::get('/users/bills', 'UserController@bills')->name('user.bills');
+Route::get('/users/notifications', 'NotificationController@index')->name('user.notifications');
 
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
@@ -35,14 +36,14 @@ Route::get('/threads/channels', 'ChannelController@index')->name('threads.channe
 Route::get('/threads/{channel}', 'ThreadController@index')->name('threads.index.channel');
 Route::post('/threads', 'ThreadController@store')->name('threads.store');
 Route::get('/threads/{channel}/{thread}', 'ThreadController@show')->name('threads.show');
-Route::post('/threads/{channel}/{thread}/favorites', 'FavoriteController@storeThreads')->name('threads.favorite');
-Route::delete('/threads/{channel}/{thread}/favorites', 'FavoriteController@destoryThreads')->name('threads.unfavorite');
+Route::post('/threads/{channel}/{thread}/favorites', 'ThreadFavoriteController@store')->name('threads.favorite');
+Route::delete('/threads/{channel}/{thread}/favorites', 'ThreadFavoriteController@destory')->name('threads.unfavorite');
 Route::post('/threads/{channel}/{thread}/reply', 'ReplyController@store')->name('reply.store');
 
 
 Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
-Route::post('/replies/{reply}/favorites', 'FavoriteController@store')->name('reply.favorite');
-Route::delete('/replies/{reply}/favorites', 'FavoriteController@destory')->name('reply.unfavorite');
+Route::post('/replies/{reply}/favorites', 'ReplyFavoriteController@store')->name('reply.favorite');
+Route::delete('/replies/{reply}/favorites', 'ReplyFavoriteController@destory')->name('reply.unfavorite');
 
 
 Route::get('/posts', 'PostController@index')->name('posts.index');

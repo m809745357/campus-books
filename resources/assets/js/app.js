@@ -50,6 +50,7 @@ moment.updateLocale('en', {
  */
 
 Vue.component('chat', require('./components/Chat.vue'));
+Vue.component('notifications', require('./components/Notifications.vue'));
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('hot-books', require('./components/HotBooks.vue'));

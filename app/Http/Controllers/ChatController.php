@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 use App\User;
+use App\Models\Contact;
 
 class ChatController extends Controller
 {
@@ -15,7 +16,18 @@ class ChatController extends Controller
 
     public function index(User $user)
     {
-        $notifications = DatabaseNotification::whereIn('notifiable_id', [auth()->id(), $user->id])->orderBy('created_at', 'asc')->get();
+        auth()->user()->addContacts($user);
+
+        $user->addContacts(auth()->user());
+
+        $notifications = auth()->user()->notifications
+                            ->where('data.from_user_id', $user->id)
+                            ->merge(
+                                $user->notifications->where('data.from_user_id', auth()->id())
+                            )
+                            ->sortBy('created_at')
+                            ->values();
+
         return view('chats.index', compact('notifications', 'user'));
     }
 

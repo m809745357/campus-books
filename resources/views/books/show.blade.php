@@ -41,7 +41,7 @@
             <div class="demand-contact-button con">
                 <div class="book-options">
                     <div class="options">
-                        <img src="/images/customer.png" alt="">
+                        <img src="/images/customer.png" alt="" onclick="window.location.href='/users/{{$book->onwer->id}}/chat'">
                         <p class="customer">卖家</p>
                     </div>
                     <div class="options">

@@ -90,7 +90,7 @@
                 this.favorites_count --;
             },
             threadDetail() {
-                window.location.href = `/threads/${this.thread.channel.name}/${this.thread.id}`;
+                window.location.href = `/threads/${this.thread.channel.slug}/${this.thread.id}`;
             }
         }
     }

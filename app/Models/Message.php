@@ -14,6 +14,7 @@ class Message extends Model
         parent::bootTraits();
 
         static::created(function ($query) {
+            Contact::whereIn('user_id', [$query->from_user_id, $query->to_user_id])->update(['message' => $query->message]);
             event(new UserReceivedNewChatMessage($query));
         });
     }

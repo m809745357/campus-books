@@ -10332,3 +10332,120 @@ button.close {
   border-radius: 2px;
 }
 
+/**
+ * notifications
+ */
+
+.notifications {
+  background-color: #fff;
+}
+
+.notifications .notify-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #fff;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 0.4rem;
+  height: 2.08rem;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.notifications .notify-item .notify-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-right: 0.4rem;
+}
+
+.notifications .notify-item .notify-left img {
+  width: 1.32rem;
+  height: 1.32rem;
+  border-radius: 2px;
+}
+
+.notifications .notify-item .notify-left.after {
+  margin-right: 0;
+}
+
+.notifications .notify-item .notify-left.after:after {
+  content: attr(data-count);
+  font-size: 8px;
+  text-align: center;
+  line-height: 0.35rem;
+  color: #fff;
+  background: #fa8e3e;
+  position: relative;
+  width: 0.4rem;
+  height: 0.4rem;
+  top: -0.2rem;
+  left: -0.2rem;
+  border-radius: 50%;
+}
+
+.notifications .notify-item .notify-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.notifications .notify-item .notify-center h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #333333;
+}
+
+.notifications .notify-item .notify-center p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.notifications .notify-item .notify-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  height: 1.32rem;
+}
+

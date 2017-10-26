@@ -8,7 +8,7 @@ use App\Models\Reply;
 use App\User;
 use Illuminate\Http\Request;
 
-class FavoriteController extends Controller
+class ThreadFavoriteController extends Controller
 {
     /**
      * [__construct description]
@@ -21,33 +21,11 @@ class FavoriteController extends Controller
     /**
      * 创建
      *
-     * @param  Reply  $reply
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Reply $reply)
-    {
-        $reply->favorited();
-    }
-
-    /**
-     * 删除
-     *
-     * @param  Reply  $reply
-     * @return \Illuminate\Http\Response
-     */
-    public function destory(Reply $reply)
-    {
-        $reply->favorites->each->delete();
-    }
-
-    /**
-     * 创建
-     *
      * @param  Channel  $channel
      * @param  Thread   $thread
      * @return \Illuminate\Http\Response
      */
-    public function storeThreads(Channel $channel, Thread $thread)
+    public function store(Channel $channel, Thread $thread)
     {
         $thread->favorited();
     }
@@ -59,7 +37,7 @@ class FavoriteController extends Controller
      * @param  Thread   $thread
      * @return \Illuminate\Http\Response
      */
-    public function destoryThreads(Channel $channel, Thread $thread)
+    public function destory(Channel $channel, Thread $thread)
     {
         $thread->favorites->each->delete();
     }

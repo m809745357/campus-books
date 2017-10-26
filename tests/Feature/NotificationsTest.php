@@ -37,11 +37,57 @@ class NotificationsTest extends TestCase
 
         $otherUser = factory('App\User')->create();
 
+        $this->get("users/{$otherUser->id}/chat");
         $this->post("users/{$otherUser->id}/chat", [
             'message' => 'hello world'
         ]);
 
         $this->assertCount(1, $otherUser->fresh()->notifications);
+
+        $this->assertDatabaseHas('contacts', ['message' => 'hello world']);
+    }
+
+    /** @test */
+    public function is_an_authenticate_user_can_view_all_notifications()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $otherUser = factory('App\User')->create();
+
+        $user->addContacts($otherUser);
+
+        $otherUser->addContacts($user);
+
+        $this->post("users/{$otherUser->id}/chat", [
+            'message' => 'hello world'
+        ]);
+
+        $response = $this->get('/users/notifications');
+
+        $response->assertSee($user->nickname);
+    }
+
+    /** @test */
+    public function is_an_authenticate_user_can_view_one_notification()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $otherUser = factory('App\User')->create();
+
+        $otherUser->messages()->create([
+            'from_user_id' => auth()->id(),
+            'message' => 'my name is shen yi fei'
+        ]);
+
+        $this->assertCount(1, $otherUser->fresh()->notifications);
+
+        $response = $this->get("/users/$otherUser->id/chat");
+
+        $response->assertSee('my name is shen yi fei');
     }
 
     /**
