@@ -4,7 +4,12 @@
             <li class="on" :data-change="1" @click="changeMenu">热门图书</li>
             <li :data-change="2" @click="changeMenu">热门电子书</li>
         </div>
-        <book :attributes="books"></book>
+
+        <div class="hot-books">
+            <div class="books-desc">
+                <book v-for="(book, index) in books" :key="book.id" :attributes="book"></book>
+            </div>
+        </div>
     </div>
 
 </template>

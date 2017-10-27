@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Recharge;
-use App\Filters\FavoriteFilters;
 
 class UserController extends Controller
 {
@@ -37,18 +36,6 @@ class UserController extends Controller
     {
         $user = auth()->user();
         return view('users.profile', compact('user'));
-    }
-
-    /**
-     * 我的收藏
-     *
-     * @param  FavoriteFilters $filters 过滤函数
-     * @return \Illuminate\Http\Response
-     */
-    public function favorites(FavoriteFilters $filters)
-    {
-        $favorites = auth()->user()->favorited($filters);
-        return view('users.favorites', compact('favorites'));
     }
 
     /**

@@ -40,16 +40,24 @@ class User extends Authenticatable
     /**
      * 查询用户收藏
      *
-     * @param  FavoriteFilters $filters 过滤
      * @return Model
      */
-    public function favorited(FavoriteFilters $filters)
+    public function favorited($type)
     {
-        return $this->favorites()
-            ->with('favorited', 'favorited.onwer')
-            ->latest()
-            ->filter($filters)
-            ->get();
+        if ($type == 'App\\Models\\Thread') {
+            return $this->favorites()
+                ->with('favorited', 'favorited.onwer', 'favorited.channel')
+                ->where('favorited_type', $type)
+                ->latest()
+                ->get();
+        }
+        if ($type == 'App\\Models\\Book') {
+            return $this->favorites()
+                ->with('favorited', 'favorited.onwer', 'favorited.category')
+                ->where('favorited_type', $type)
+                ->latest()
+                ->get();
+        }
     }
 
     /**

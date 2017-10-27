@@ -3,9 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\Favorites;
 
 class Book extends Model
 {
+    use Favorites;
+
+    protected $guarded = [];
+
+    protected $appends = ['is_favorited'];
+
     public function path()
     {
         return "/books/{$this->category->slug}/$this->id";

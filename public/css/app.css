@@ -8672,6 +8672,7 @@ button.close {
   line-height: 1.46666667rem;
   text-align: center;
   color: #333333;
+  min-width: 1.73rem;
 }
 
 .thread-menu li.on {

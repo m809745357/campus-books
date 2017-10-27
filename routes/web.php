@@ -20,7 +20,8 @@ Route::get('/users/bindmobile', 'BindMobileController@index')->name('bind.mobile
 Route::post('/users/bindmobile', 'UserController@mobile')->name('user.bindmobile');
 Route::post('/users/sendmobile', 'BindMobileController@store')->name('user.send.mobile');
 Route::get('/users/profile', 'UserController@profile')->name('user.profile');
-Route::get('/users/favorites', 'UserController@favorites')->name('user.favorites');
+Route::get('/users/favorites/book', 'BookFavoriteController@index')->name('user.favorites.book');
+Route::get('/users/favorites/thread', 'ThreadFavoriteController@index')->name('user.favorites.thread');
 Route::get('/users/threads', 'UserController@threads')->name('user.threads');
 Route::get('/users/replies', 'UserController@replies')->name('user.replies');
 Route::get('/users/demands', 'UserController@demands')->name('user.demands');
@@ -60,6 +61,8 @@ Route::post('/recharge/{recharge}/bill', 'BillController@store')->name('bill.cre
 Route::get('/books', 'BookController@index')->name('books.index');
 Route::get('/books/{category}', 'BookController@index')->name('books.category.index');
 Route::get('/books/{category}/{book}', 'BookController@show')->name('books.show');
+Route::post('/books/{category}/{book}/favorites', 'BookFavoriteController@store')->name('books.favorite');
+Route::delete('/books/{category}/{book}/favorites', 'BookFavoriteController@destory')->name('books.unfavorite');
 
 Route::get('/users/{user}/chat', 'ChatController@index')->name('users.chat.index');
 Route::post('/users/{user}/chat', 'ChatController@store')->name('users.chat.store');

@@ -19,6 +19,17 @@ class ThreadFavoriteController extends Controller
     }
 
     /**
+     * 我的收藏
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $favorites = auth()->user()->favorited('App\\Models\\Thread');
+        return view('favorites.threads', compact('favorites'));
+    }
+
+    /**
      * 创建
      *
      * @param  Channel  $channel

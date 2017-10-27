@@ -18,7 +18,7 @@ class CreateRepliesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('thread_id');
             $table->text('body');
-            $table->integer('favorites_count');
+            $table->integer('favorites_count')->default(0);
             $table->timestamps();
         });
     }

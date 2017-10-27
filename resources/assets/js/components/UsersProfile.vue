@@ -36,30 +36,20 @@
             return {
                 user: window.App.user,
                 items: [
-                    // {
-                    //     icon: '/images/notifications.png',
-                    //     name: '我的消息',
-                    //     url: '',
-                    // },
-                    // {
-                    //     icon: '/images/balances.png',
-                    //     name: '我的余额',
-                    //     url: '',
-                    // },
                     {
                         icon: '/images/orders.png',
                         name: '账户明细',
-                        url: 'users/bills',
+                        url: `users/bills`,
                     },
                     {
                         icon: '/images/posts.png',
                         name: '我的发布',
-                        url: ''
+                        url: `/users/books`
                     },
                     {
                         icon: '/images/details.png',
                         name: '我的订单',
-                        url: '',
+                        url: `/users/orders`,
                     },
                     {
                         icon: '/images/buies.png',
@@ -74,7 +64,7 @@
                     {
                         icon: '/images/favorites.png',
                         name: '我的收藏',
-                        url: `/users/favorites`,
+                        url: `/users/favorites/book`,
                     },
                 ]
             }

@@ -15,23 +15,20 @@
             </div>
         </div>
         <div class="thread-menu">
-            <li><a
+            <li
                 class="{{ request()->query('type') == null ? 'on' : '' }}"
-                href="{{ request()->url() }}{{ request()->query('by') ? 'by=' . request()->query('by') : '' }}">
+                onclick="window.location.href='{{ request()->url() }}{{ request()->query('by') ? 'by=' . request()->query('by') : '' }}'">
                 全部
-                </a>
             </li>
-            <li><a
+            <li
                 class="{{ request()->query('type') == 'reward' ? 'on' : '' }}"
-                href="{{ request()->url() }}?{{ request()->query('by') ? 'by=' . request()->query('by') . '&' : '' }}type=reward">
+                onclick="window.location.href='{{ request()->url() }}?{{ request()->query('by') ? 'by=' . request()->query('by') . '&' : '' }}type=reward'">
                 悬赏
-                </a>
             </li>
-            <li><a
+            <li
                 class="{{ request()->query('type') == 'ordinary' ? 'on' : '' }}"
-                href="{{ request()->url() }}?{{ request()->query('by') ? 'by=' . request()->query('by') . '&' : '' }}type=ordinary">
+                onclick="window.location.href='{{ request()->url() }}?{{ request()->query('by') ? 'by=' . request()->query('by') . '&' : '' }}type=ordinary'">
                 普通
-                </a>
             </li>
         </div>
         @foreach ($threads as $thread)

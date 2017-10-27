@@ -122,6 +122,62 @@ class FavoritesTest extends TestCase
         $this->assertEquals(0, $thread->fresh()->favorites_count);
     }
 
+    /** @test*/
+    public function is_an_authenticate_user_can_favorite_any_books()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $book = factory('App\Models\Book')->create();
+
+        $this->post($book->path() . '/favorites');
+
+        $this->assertCount(1, $book->favorites);
+
+        $this->assertEquals(1, $book->fresh()->favorites_count);
+
+        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $book->id, 'favorited_type' => 'App\Models\Book']);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_favorite_any_books_once()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $book = factory('App\Models\Book')->create();
+
+        $this->post($book->path() . '/favorites');
+
+        $this->post($book->path() . '/favorites');
+
+        $this->assertCount(1, $book->favorites);
+
+        $this->assertEquals(1, $book->fresh()->favorites_count);
+
+        $this->assertDatabaseHas('favorites', ['user_id' => $user->id, 'favorited_id' => $book->id, 'favorited_type' => 'App\Models\Book']);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_delete_favorite_book()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $book = factory('App\Models\Book')->create();
+
+        $book->favorited();
+
+        $this->delete($book->path() . '/favorites');
+
+        $this->assertCount(0, $book->favorites);
+
+        $this->assertEquals(0, $book->fresh()->favorites_count);
+    }
+
     /** @test */
     public function is_an_authenticate_user_can_view_onwer_favorites()
     {
@@ -133,11 +189,16 @@ class FavoritesTest extends TestCase
 
         $thread->favorited();
 
-        $this->post($thread->path() . '/favorites?type=thread');
-
-        $response = $this->get("/users/favorites");
-
+        $response = $this->get("/users/favorites/thread");
         $response->assertSee($thread->title);
+
+        $book = factory('App\Models\Book')->create();
+
+        $book->favorited();
+
+        $response = $this->get("/users/favorites/book");
+
+        $response->assertSee($book->title);
     }
 
     /**
