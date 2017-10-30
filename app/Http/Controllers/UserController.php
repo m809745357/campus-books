@@ -105,6 +105,12 @@ class UserController extends Controller
         return view('users.bills', compact('bills'));
     }
 
+    public function books()
+    {
+        $books = auth()->user()->books->load('category');
+        return view('users.books', compact('books'));
+    }
+
     /**
      * 绑定手机号码
      * @param  Request $request 用户请求

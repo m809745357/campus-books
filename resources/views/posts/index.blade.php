@@ -11,7 +11,7 @@
             </div>
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
-        <div class="posts-panel">
+        <div class="posts-panel" onclick="window.location.href='/books/create'">
             <img src="/images/book.png" alt="" class="posts-panel-img">
             <div class="posts-panel-desc">
                 <h4>发布书籍</h4>

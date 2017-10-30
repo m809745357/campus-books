@@ -29,7 +29,7 @@ class CreateBooksTable extends Migration
             $table->string('cover');
             $table->text('images');
             $table->text('body');
-            $table->string('annex');
+            $table->string('annex')->nullable();
             $table->integer('favorites_count')->default(0);
             $table->unsignedInteger('views_count')->default(0);
             $table->timestamps();

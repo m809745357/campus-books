@@ -49,12 +49,13 @@ moment.updateLocale('en', {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('book', require('./components/Book.vue'));
 Vue.component('chat', require('./components/Chat.vue'));
 Vue.component('notifications', require('./components/Notifications.vue'));
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('hot-books', require('./components/HotBooks.vue'));
+Vue.component('book', require('./components/Book.vue'));
+Vue.component('book-new', require('./components/BookNew.vue'));
 Vue.component('book-detail', require('./components/BookDetail.vue'));
 Vue.component('category', require('./components/Category.vue'));
 Vue.component('demand', require('./components/Demand.vue'));

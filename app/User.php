@@ -100,6 +100,16 @@ class User extends Authenticatable
         return $this->hasMany(Models\Bill::class, 'user_id');
     }
 
+    /**
+     * 用户的发布
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function books()
+    {
+        return $this->HasMany(Models\Book::class, 'user_id');
+    }
+
     public function messaged()
     {
         return $this->hasMany(Models\Message::class, 'from_user_id');

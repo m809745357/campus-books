@@ -8773,6 +8773,7 @@ button.close {
 */
 
 .thread-form {
+  min-height: 100vh;
   background-color: #fff;
 }
 
@@ -8791,46 +8792,51 @@ button.close {
 }
 
 .thread-form-group label {
-  -webkit-box-flex: 13;
-      -ms-flex: 13;
-          flex: 13;
+  width: 2.37rem;
   font-size: 12.5px;
   margin: 0;
   color: #000000;
   font-weight: unset;
 }
 
-.thread-form-group input {
-  -webkit-box-flex: 57;
-      -ms-flex: 57;
-          flex: 57;
-  background-color: #f8f8f8;
-  border: none;
-  height: .64rem;
-  padding-left: 10px;
-  color: #000000;
+.thread-form-other {
+  width: 7.63rem;
 }
 
-.thread-form-group select {
-  -webkit-box-flex: 25;
-      -ms-flex: 25;
-          flex: 25;
+.thread-form-other input {
+  width: 100%;
   background-color: #f8f8f8;
   border: none;
-  height: .64rem;
+  height: 0.51rem;
   padding-left: 10px;
   color: #000000;
+  border-radius: 0;
 }
 
-.thread-form-group textarea {
-  -webkit-box-flex: 57;
-      -ms-flex: 57;
-          flex: 57;
+.thread-form-other select {
+  width: 30%;
+  background-color: #f8f8f8;
+  border: none;
+  height: 0.51rem;
+  padding-left: 10px;
+  color: #000000;
+  border-radius: 0;
+  text-align: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.thread-form-other textarea {
+  width: 100%;
   background-color: #f8f8f8;
   border: none;
   height: 2.66666667rem;
   padding-left: 10px;
   color: #000000;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 /**
@@ -10449,5 +10455,45 @@ button.close {
       -ms-flex-align: end;
           align-items: flex-end;
   height: 1.32rem;
+}
+
+/**
+ * ImageUpload
+ */
+
+.image-upload {
+  margin: .05rem;
+  width: 1.56rem;
+  height: 1.56rem;
+  float: left;
+}
+
+.image-upload img {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.image-upload.after {
+  margin-right: 0;
+}
+
+.image-upload.after span {
+  position: relative;
+  left: 40px;
+  bottom: 55px;
+  background-color: red;
+  width: 15px;
+  height: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50%;
+  color: #fff;
 }
 

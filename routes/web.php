@@ -29,6 +29,7 @@ Route::get('/users/balances', 'UserController@balances')->name('user.balances');
 Route::get('/users/recharges', 'UserController@recharges')->name('user.recharges');
 Route::get('/users/bills', 'UserController@bills')->name('user.bills');
 Route::get('/users/notifications', 'NotificationController@index')->name('user.notifications');
+Route::get('/users/books', 'UserController@books')->name('user.books');
 
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
@@ -59,6 +60,8 @@ Route::get('/demands/{demand}', 'DemandController@show')->name('demands.show');
 Route::post('/recharge/{recharge}/bill', 'BillController@store')->name('bill.create');
 
 Route::get('/books', 'BookController@index')->name('books.index');
+Route::get('/books/create', 'BookController@create')->name('books.create');
+Route::post('/books', 'BookController@store')->name('books.store');
 Route::get('/books/{category}', 'BookController@index')->name('books.category.index');
 Route::get('/books/{category}/{book}', 'BookController@show')->name('books.show');
 Route::post('/books/{category}/{book}/favorites', 'BookFavoriteController@store')->name('books.favorite');
