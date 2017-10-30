@@ -9750,6 +9750,7 @@ button.close {
   margin: 0;
   padding: 0;
   width: 4.31rem;
+  color: #fa8e3e;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
