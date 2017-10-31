@@ -70,6 +70,8 @@ Route::delete('/books/{category}/{book}/favorites', 'BookFavoriteController@dest
 Route::get('/users/{user}/chat', 'ChatController@index')->name('users.chat.index');
 Route::post('/users/{user}/chat', 'ChatController@store')->name('users.chat.store');
 
+Route::post('/upload', 'UploadController@store')->name('upload.file');
+
 Route::get('/users/{user}/guest', function () {
     \Auth::login(\App\User::find(20));
 });

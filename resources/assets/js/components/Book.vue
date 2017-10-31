@@ -1,11 +1,11 @@
 <template lang="html">
     <div class="books-item" @click="detail(book.category.slug, book.id)">
-        <img :src="JSON.parse(book.images)" alt="">
+        <img :src="book.cover" alt="">
         <h4>{{ book.title }}</h4>
         <p class="author">作者： {{ book.author }}</p>
         <p class="press">出版社： {{ book.press }}</p>
         <div class="keywords">
-            <span v-for="keyword in JSON.parse(book.keywords)">{{ keyword }}</span>
+            <span v-for="keyword in book.keywords">{{ keyword }}</span>
         </div>
         <p class="price">￥ {{ book.money }}</p>
     </div>

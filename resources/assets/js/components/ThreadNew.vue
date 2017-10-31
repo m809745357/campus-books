@@ -80,13 +80,20 @@
                     })
                     .catch(error => {
                         console.log(error.response.data);
+                        if (error.response.status == 422) {
+                            this.showModel(error.response.data)
+                        }
                     });
             },
             success(data) {
                 location.href = `/threads/${this.slug}/${data.id}`;
             },
-            error() {
-
+            showModel(data) {
+                $.each(data.errors, (index, val) => {
+                    val.map((value, key) => {
+                        flash(value, 'warning')
+                    })
+                })
             }
         }
     }

@@ -377,6 +377,39 @@ $background-color: #efefef;
 .thread-form-other {
     width: 7.63rem /* 572/75 */;
 
+    .file-upload {
+        display: flex;
+        align-items: center;
+
+        a {
+            color: #fff;
+            width: 2.25rem /* 169/75 */;
+            height: 0.73rem /* 55/75 */;
+            text-align: center;
+            background-color: $theme-color;
+            line-height: 0.73rem /* 55/75 */;
+            margin-right: 0.48rem /* 36/75 */;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+            color: $price-color;
+        }
+
+        .annex {
+            display: none
+        }
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        padding-left: 10px;
+        margin-top: 10px;
+        color: $price-color;
+    }
+
     input {
         width: 100%;
         background-color: #f8f8f8;

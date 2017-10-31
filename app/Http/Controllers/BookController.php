@@ -63,25 +63,9 @@ class BookController extends Controller
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookPost $request)
     {
-        $data = $request->validate([
-            'title' => 'required|unique:books',
-            'author' => 'required',
-            'published_at' => 'required|date',
-            'press' => 'required',
-            'type' => 'required',
-            'category_id' => 'required|integer',
-            'keywords' => 'required',
-            'money' => 'required|integer',
-            'logistics' => 'required',
-            'freight' => 'required|integer',
-            'cover' => 'required',
-            'images.*' => 'required',
-            'body' => 'required'
-        ]);
-
-        $book = auth()->user()->books()->create($data);
+        $book = auth()->user()->books()->create($request->validated());
 
         if (request()->wantsJson()) {
             return response($book, 201);

@@ -15,10 +15,10 @@
         <div class="thread-form-group">
             <label>出版时间：</label>
             <div class="thread-form-other">
-                <select name="year">
+                <select name="year" v-model='defaultYear'>
                     <option v-for="(year, index) in years" :key="index" :value="year">{{ year }}</option>
                 </select>
-                <select name="months">
+                <select name="months" v-model='defaultMonth'>
                     <option v-for="(month, index) in months" :key="index" :value="month">{{ month }}</option>
                 </select>
             </div>
@@ -32,10 +32,22 @@
         <div class="thread-form-group">
             <label>商品类型：</label>
             <div class="thread-form-other">
-                <select name="type">
+                <select name="type" v-model="book.type">
                     <option value="PBook">实体书</option>
                     <option value="EBook">电子书</option>
                 </select>
+            </div>
+        </div>
+        <div class="thread-form-group" v-if="book.type == 'EBook'" style="height: auto; align-items: flex-start;">
+            <label>上传附件：</label>
+            <div class="thread-form-other">
+                <form method="POST" enctype="multipart/form-data" class="file-upload">
+                    <a href="javascript:;" @click="fileClick">浏览
+                        <input type="file" @change="onChange" id="annex" class="annex">
+                    </a>
+                    <p v-html="file"></p>
+                </form>
+                <p>说明：请选择上传pdf电子文件，若没有pdf文件则可以不上传，上传图片后自动生成pdf文件</p>
             </div>
         </div>
         <div class="thread-form-group">
@@ -85,9 +97,9 @@
         <div class="thread-form-group">
             <label>物流方式：</label>
             <div class="thread-form-other">
-                <select name="select">
-                    <option value="EBook">快递</option>
-                    <option value="PBook">见面交易</option>
+                <select name="select" v-model="book.logistics">
+                    <option value="快递">快递</option>
+                    <option value="见面交易">见面交易</option>
                 </select>
             </div>
         </div>
@@ -101,7 +113,7 @@
             <label>商品图片：</label>
             <div class="thread-form-other">
                 <form method="POST" enctype="multipart/form-data">
-                    <image-upload name="images" @loaded="onLoad"></image-upload>
+                    <image-upload name="images" @loaded="onLoad" @canceled="onCancel"></image-upload>
                 </form>
             </div>
         </div>
@@ -126,15 +138,27 @@
             return {
                 categories: this.attributes,
                 book: {
-                    category_id: 0,
-                    money: 0,
-                    title: '',
-                    body: ''
+                    title: '浪潮之巅',
+                    author: '吴军',
+                    published_at: moment().get('year') + '-' + moment().get('month'),
+                    press: '人民邮电出版社',
+                    type: 'EBook',
+                    keywords: '计算机',
+                    logistics: '快递',
+                    category_id: '',
+                    money: 99,
+                    freight: '5',
+                    images: [],
+                    body: '该书主要讲述了IT产业发展的历史脉络和美国硅谷明星公司的兴衰沉浮。'
                 },
                 years: [],
+                defaultYear: moment().get('year'),
                 months: [],
+                defaultMonth: moment().get('month') + 1,
                 main: false,
                 minor: false,
+                slug: '',
+                file: '未选择文件'
             }
         },
         components: {
@@ -153,21 +177,79 @@
             changeMainCategory(e) {
                 this.main = parseInt(e.target.selectedOptions[0].dataset.id);
                 this.minor = false;
+                this.book.category_id = '';
             },
             changeMinorCategory(e) {
                 this.minor = parseInt(e.target.selectedOptions[0].dataset.id);
+                this.book.category_id = '';
             },
             changeCategory(e) {
                 this.book.category_id = parseInt(e.target.selectedOptions[0].dataset.id);
+                this.slug = e.target.selectedOptions[0].value;
+            },
+            changeType(e) {
+                this.type = e.target.value;
+            },
+            onLoad(image) {
+                this.images = image.src;
+                this.persist(image.file);
+            },
+            onCancel(index) {
+                this.book.images.splice(index, 1);
+            },
+            onChange(e) {
+                this.file = e.target.value ? e.target.value : '未选择文件';
+                if (! e.target.files.length) return;
+                let file = e.target.files[0];
+                let data = new FormData();
+                data.append('file', file);
+                axios.post(`/upload`, data)
+                    .then(response => {
+                        flash('电子书上传成功!')
+                    });
+            },
+            fileClick() {
+                $('#annex').click();
+            },
+            persist(image) {
+                let data = new FormData();
+                let that = this;
+                data.append('file', image);
+                axios.post(`/upload`, data)
+                    .then(response => {
+                        that.book.images.push(response.data)
+                        flash('图片上传成功!')
+                    });
             },
             addBook() {
-
+                if (! (this.book.keywords instanceof Array)) {
+                    this.book.keywords = this.book.keywords.split(' ');
+                }
+                this.book.published_at = this.defaultYear + '-' + this.defaultMonth;
+                this.book.cover = this.book.images[0];
+                axios.post('/books', this.book)
+                    .then(response => {
+                        console.log(response.data);
+                        flash('发布成功!')
+                        this.success(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error.response.data);
+                        if (error.response.status == 422) {
+                            this.showModel(error.response.data)
+                        }
+                    });
             },
-            onLoad(images) {
-                this.images = images.src;
-                console.log(this.images, images.file);
-                // this.persist(avatar.file);
+            success(data) {
+                location.href = `/books/${this.slug}/${data.id}`;
             },
+            showModel(data) {
+                $.each(data.errors, (index, val) => {
+                    val.map((value, key) => {
+                        flash(value, 'warning')
+                    })
+                })
+            }
         }
     }
 </script>

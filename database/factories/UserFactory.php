@@ -108,7 +108,7 @@ $factory->define(App\Models\Book::class, function (Faker $faker) {
         'published_at' => $faker->year() . '-' . $faker->month(),
         'press' => $faker->address,
         'type' => 'PBook',
-        'keywords' => json_encode($faker->words(3)),
+        'keywords' => $faker->words(3),
         'category_id' => function () {
             return factory('App\Models\Category')->create()->id;
         },
@@ -116,11 +116,11 @@ $factory->define(App\Models\Book::class, function (Faker $faker) {
         'logistics' => 'express', //face, online
         'freight' => $faker->randomNumber(2),
         'cover' => $faker->imageUrl(200, 200),
-        'images' => json_encode([
+        'images' => [
             $faker->imageUrl(200, 200),
             $faker->imageUrl(200, 200),
             $faker->imageUrl(200, 200)
-        ]),
+        ],
         'body' => $faker->paragraph,
         'annex' => $faker->imageUrl(200, 200)
     ];

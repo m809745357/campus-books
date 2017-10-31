@@ -12,12 +12,12 @@
             <div class="books-desc">
                 @foreach ($books as $book)
                     <div class="books-item" onclick="location.href='{{ $book->path() }}'">
-                        <img src="{{ json_decode($book->images)[0] }}" alt="">
+                        <img src="{{ $book->cover }}" alt="">
                         <h4>{{ $book->title }}</h4>
                         <p class="author">作者： {{ $book->author }}</p>
                         <p class="press">出版社： {{ $book->press }}</p>
                         <div class="keywords">
-                            @foreach (json_decode($book->keywords) as $keyword)
+                            @foreach ($book->keywords as $keyword)
                                 <span>{{ $keyword }}</span>
                             @endforeach
                         </div>

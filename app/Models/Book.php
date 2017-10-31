@@ -43,4 +43,31 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function getCoverAttribute($cover)
+    {
+        return strpos($cover, 'http') !== false ? $cover : \Storage::url($cover);
+    }
+
+    public function setImagesAttribute($images)
+    {
+        return $this->attributes['images'] = json_encode($images);
+    }
+
+    public function getImagesAttribute($images)
+    {
+        return array_map(function ($item) {
+            return strpos($item, 'http') !== false ? $item : \Storage::url($item);
+        }, json_decode($images, true));
+    }
+
+    public function setKeywordsAttribute($keywords)
+    {
+        return $this->attributes['keywords'] = json_encode($keywords);
+    }
+
+    public function getKeywordsAttribute($keywords)
+    {
+        return json_decode($keywords, true);
+    }
 }

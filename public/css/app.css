@@ -8803,6 +8803,43 @@ button.close {
   width: 7.63rem;
 }
 
+.thread-form-other .file-upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.thread-form-other .file-upload a {
+  color: #fff;
+  width: 2.25rem;
+  height: 0.73rem;
+  text-align: center;
+  background-color: #3e85fa;
+  line-height: 0.73rem;
+  margin-right: 0.48rem;
+}
+
+.thread-form-other .file-upload p {
+  margin: 0;
+  padding: 0;
+  color: #fa8e3e;
+}
+
+.thread-form-other .file-upload .annex {
+  display: none;
+}
+
+.thread-form-other p {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  margin-top: 10px;
+  color: #fa8e3e;
+}
+
 .thread-form-other input {
   width: 100%;
   background-color: #f8f8f8;

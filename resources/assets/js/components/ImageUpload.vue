@@ -28,12 +28,13 @@
                 reader.onload = e => {
                     let src = e.target.result;
                     this.images.push(src);
+                    $("#image-upload").val('');
                     this.$emit('loaded', { src, file });
                 };
             },
             cancelImage(index) {
-                console.log(index);
                 this.images.splice(index, 1);
+                this.$emit('canceled', { index });
                 $("#image-upload").val('');
             },
             imageClick() {

@@ -2,13 +2,13 @@
     <div class="demand-detail">
         <div class="demand-detail-desc">
             <div class="demand-detail-gallery">
-                <img v-for="(image, index) in JSON.parse(book.images)" :key="index" :src="image" alt="">
+                <img v-for="(image, index) in book.images" :key="index" :src="image" alt="">
             </div>
             <div class="demand-detail-title">
                 <h4>{{ book.title }}{{ book.title }}{{ book.title }}</h4>
             </div>
             <div class="book-detail keywords">
-                <span v-for="(keyword, index) in JSON.parse(book.keywords)" :key="index" v-text="keyword"></span>
+                <span v-for="(keyword, index) in book.keywords" :key="index" v-text="keyword"></span>
             </div>
             <div class="demand-money" style="margin: 0.4rem 0.4rem 0 0.4rem;">
                 ￥ {{ book.money }}
