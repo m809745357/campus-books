@@ -66,6 +66,8 @@ Route::get('/books/{category}', 'BookController@index')->name('books.category.in
 Route::get('/books/{category}/{book}', 'BookController@show')->name('books.show');
 Route::post('/books/{category}/{book}/favorites', 'BookFavoriteController@store')->name('books.favorite');
 Route::delete('/books/{category}/{book}/favorites', 'BookFavoriteController@destory')->name('books.unfavorite');
+Route::get('/books/{category}/{book}/annex', 'AnnexController@index')->name('books.annex');
+Route::get('/books/{category}/{book}/annex/download', 'AnnexController@download')->name('books.download');
 
 Route::get('/users/{user}/chat', 'ChatController@index')->name('users.chat.index');
 Route::post('/users/{user}/chat', 'ChatController@store')->name('users.chat.store');

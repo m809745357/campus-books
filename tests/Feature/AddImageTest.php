@@ -12,7 +12,7 @@ class AddImageTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function only_members_can_add_image()
+    public function only_members_can_add_file()
     {
         $this->withExceptionHandling();
 
@@ -21,7 +21,7 @@ class AddImageTest extends TestCase
     }
 
     /** @test */
-    public function a_valid_image_must_be_provided()
+    public function a_valid_file_must_be_provided()
     {
         $user = factory('App\User')->create();
 
@@ -30,12 +30,12 @@ class AddImageTest extends TestCase
         $this->withExceptionHandling();
 
         $this->json('POST', 'upload', [
-            'file' => 'not-an-image'
+            'file' => 'not-an-file'
         ])->assertStatus(422);
     }
 
     /** @test */
-    public function a_user_may_add_an_image_to_their_book()
+    public function a_user_may_add_an_file_to_their_book()
     {
         $user = factory('App\User')->create();
 
@@ -46,8 +46,6 @@ class AddImageTest extends TestCase
         $this->json('POST', 'upload', [
             'file' => $file = UploadedFile::fake()->image('image.jpg')
         ]);
-
-        // $this->assertEquals(asset('avatars/'.$file->hashName()), auth()->user()->avatar_path);
 
         Storage::disk('public')->assertExists('books/' . $file->hashName());
     }

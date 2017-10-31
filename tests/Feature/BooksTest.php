@@ -63,7 +63,7 @@ class BooksTest extends TestCase
         $book = factory('App\Models\Book')->make(['user_id' => $user->id]);
 
         $response = $this->post('books', $book->toArray());
-// dd($book->toArray(), $response->headers->get('Location'));
+
         $this->get($response->headers->get('Location'))
             ->assertSee($book->title)
             ->assertSee($book->body);

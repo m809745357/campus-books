@@ -142,7 +142,7 @@
                     author: '吴军',
                     published_at: moment().get('year') + '-' + moment().get('month'),
                     press: '人民邮电出版社',
-                    type: 'EBook',
+                    type: 'PBook',
                     keywords: '计算机',
                     logistics: '快递',
                     category_id: '',

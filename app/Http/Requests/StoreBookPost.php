@@ -36,7 +36,8 @@ class StoreBookPost extends FormRequest
             'freight' => 'required|integer',
             'cover' => 'required',
             'images.*' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'annex' => 'sometimes|required',
         ];
     }
 }

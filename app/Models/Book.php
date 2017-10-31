@@ -9,6 +9,9 @@ class Book extends Model
 {
     use Favorites;
 
+    const PBOOK = 'PBook';
+    const EBOOK = 'EBook';
+
     protected $guarded = [];
 
     protected $appends = ['is_favorited'];
@@ -69,5 +72,25 @@ class Book extends Model
     public function getKeywordsAttribute($keywords)
     {
         return json_decode($keywords, true);
+    }
+
+    public function hasAnnex()
+    {
+        return $this->type == self::EBOOK;
+    }
+
+    public function pdfPath()
+    {
+        return "books/annex/book{$this->id}.pdf";
+    }
+
+    public function realPath()
+    {
+        return public_path() . "/storage/" . $this->pdfPath();
+    }
+
+    public function downloadFileName()
+    {
+        return "{$this->title}-{$this->author}.pdf";
     }
 }
