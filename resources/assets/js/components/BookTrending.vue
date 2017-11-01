@@ -17,10 +17,10 @@
 <script>
     import book from './Book.vue';
     export default {
-        props: ['hotpbooks', 'hotebooks'],
+        props: ['trendingpbooks', 'trendingebooks'],
         data() {
             return {
-                books: this.hotpbooks,
+                books: this.trendingpbooks,
                 change: 1,
             }
         },
@@ -39,7 +39,7 @@
             changeMenu(e) {
                 $(e.target).addClass('on').siblings().removeClass('on');
                 this.change = e.target.dataset.change;
-                this.books = this.change == 1 ? this.hotpbooks : this.hotebooks;
+                this.books = this.change == 1 ? this.trendingpbooks : this.trendingebooks;
             }
         }
     }

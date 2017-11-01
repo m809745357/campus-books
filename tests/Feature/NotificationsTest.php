@@ -42,7 +42,7 @@ class NotificationsTest extends TestCase
             'message' => 'hello world'
         ]);
 
-        $this->assertCount(1, $otherUser->fresh()->notifications);
+        $this->assertCount(2, $otherUser->fresh()->notifications);
 
         $this->assertDatabaseHas('contacts', ['message' => 'hello world']);
     }

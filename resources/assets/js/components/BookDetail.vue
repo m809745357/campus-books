@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="demand-contact-button con">
+        <div class="demand-contact-button con" v-if="onwer">
             <div class="book-options">
                 <div class="options">
                     <img src="/images/customer.png" alt="" @click="gotoChat">
@@ -57,6 +57,9 @@
         computed: {
             collected() {
                 return this.book.is_favorited ? '/images/collected.png' : '/images/collect.png';
+            },
+            onwer() {
+                return window.App.user.id !== this.book.onwer.id
             }
         },
         methods: {

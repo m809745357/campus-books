@@ -147,4 +147,14 @@ class User extends Authenticatable
     {
         return $this->contacts;
     }
+
+    public function sayHello($user)
+    {
+        if (! auth()->user()->messaged()->where(['to_user_id' => $user->id])->exists()) {
+            auth()->user()->messaged()->create([
+                'to_user_id' => $user->id,
+                'message' => '你好！我想了解一下具体情况'
+            ]);
+        }
+    }
 }

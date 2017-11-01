@@ -1,28 +1,34 @@
 <template lang="html">
-    <div class="demand">
-        <div class="user-profile-panel">
-            <img :src="onwer.avatar">
-            <div class="user-profile">
-                <h4 class="user-nickname">{{ onwer.nickname }}</h4>
-                <p class="demand-time">{{ demand.created_at }}</p>
+    <div class="demand-detail">
+        <div class="demand-detail-desc">
+            <div class="demand-detail-gallery">
+                <img v-for="(image, index) in demand.images" :key="index" :src="image" alt="">
             </div>
-        </div>
-        <div class="demand-body" @click="detail(demand.id)">
-            <div class="demand-gallery">
-                <img v-for="(image, index) in demand.images" :src="image" alt="">
+            <div class="demand-detail-title">
+                <h4>{{ demand.title }}{{ demand.title }}{{ demand.title }}</h4>
             </div>
-            <p>{{ demand.title }}</p>
-        </div>
-        <div class="demand-footer">
-            <span class="demand-money">
-                ￥ {{ demand.money }}
-            </span>
-            <div class="demand-count">
-                <div class="views-count">
-                    <img src="/images/view.png" width="32px" height="32px">
-                    <span class="icon-count">{{ demand.views_count }}</span>
+            <div class="demand-money" style="margin: 0.4rem 0.4rem 0 0.4rem;">
+                ￥ {{ demand.money}}
+            </div>
+            <div class="demand-footer">
+                <p>发布时间：{{ demand.created_at }}</p>
+                <div class="demand-footer-img">
+                    <img :src="demand.onwer.avatar" alt="">
                 </div>
+                <span>{{ demand.onwer.nickname }}</span>
             </div>
+        </div>
+        <div class="demand-body">
+            <div class="demand-body-title">
+                <h4>求购信息</h4>
+            </div>
+            <div class="demand-body-content">
+                {{ demand.body }}
+            </div>
+        </div>
+
+        <div class="demand-contact-button con" v-if="onwer">
+            <button type="button" name="button" @click="chat">在线联系</button>
         </div>
     </div>
 </template>
@@ -32,24 +38,18 @@
         props: ['attributes'],
         data() {
             return {
-                demand: {
-                    id: this.attributes.id,
-                    money: this.attributes.money,
-                    title: this.attributes.title,
-                    views_count: this.attributes.views_count,
-                    created_at: moment(this.attributes.created_at).format('DD.MM.YYYY'),
-                    images: this.attributes.images
-                },
-                onwer: {
-                    nickname: this.attributes.onwer.nickname,
-                    avatar: this.attributes.onwer.avatar
-                },
+                demand: this.attributes
+            }
+        },
+        computed: {
+            onwer() {
+                return window.App.user.id !== this.demand.onwer.id
             }
         },
         methods: {
-            detail(id) {
-                window.location.href = `/demands/${id}`;
-            },
+            chat() {
+                window.location.href = `/users/${this.demand.onwer.id}/chat`
+            }
         }
     }
 </script>

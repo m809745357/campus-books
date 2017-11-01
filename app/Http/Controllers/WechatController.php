@@ -17,12 +17,25 @@ class WechatController extends Controller
      */
     public function index()
     {
-        $hotThreads = Thread::hot(2);
-        $hotDemands = Demand::hot(3);
-        $hotPbooks = Book::hot(6, ['type' => 'PBook']);
-        $hotEbooks = Book::hot(6, ['type' => 'EBook']);
+        $minutes = 60 * 60;
 
-        return view('home', compact('hotThreads', 'hotDemands', 'hotPbooks', 'hotEbooks'));
+        $trendingThreads = \Cache::remember('threads.trending', $minutes, function () {
+            return Thread::hot(2);
+        });
+
+        $trendingDemands = \Cache::remember('demands.trending', $minutes, function () {
+            return Demand::hot(3);
+        });
+
+        $trendingPbooks = \Cache::remember('books.trending.pbook', $minutes, function () {
+            return Book::hot(6, ['type' => 'PBook']);
+        });
+
+        $trendingEbooks = \Cache::remember('books.trending.ebook', $minutes, function () {
+            return Book::hot(6, ['type' => 'EBook']);
+        });
+
+        return view('home', compact('trendingThreads', 'trendingDemands', 'trendingPbooks', 'trendingEbooks'));
 
     }
 }

@@ -13,7 +13,7 @@
             <p onclick="location.href='/threads'">查看更多</p>
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
-        @foreach ($hotThreads as $thread)
+        @foreach ($trendingThreads as $thread)
             <thread :attributes="{{ $thread }}"></thread>
             <div style="height: 10px;"></div>
         @endforeach
@@ -22,11 +22,11 @@
             <p onclick="location.href='/demands'">查看更多</p>
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
-        @foreach ($hotDemands as $demand)
-            <demand-detail :attributes="{{ $demand }}"></demand-detail>
+        @foreach ($trendingDemands as $demand)
+            <demand-trending :attributes="{{ $demand }}"></demand-trending>
         @endforeach
         <div style="height: 10px;"></div>
-        <hot-books :hotpbooks="{{ $hotPbooks }}" :hotebooks="{{ $hotEbooks }}"></hot-books>
+        <book-trending :trendingpbooks="{{ $trendingPbooks }}" :trendingebooks="{{ $trendingEbooks }}"></book-trending>
     </div>
     <div style="height: 1.32rem"></div>
     <div class="menu con">
