@@ -39,16 +39,33 @@ class DemandsTest extends TestCase
     }
 
     /** @test*/
-    public function is_an_authenticate_user_can_view_hot_demands_on_home(){
+    public function is_an_authenticate_user_can_view_hot_demands_on_home()
+    {
         $user = factory('App\User')->create();
 
         $this->actingAs($user);
 
-        $thread = factory('App\Models\Demand', 10)->create();
+        $demands = factory('App\Models\Demand', 10)->create();
 
-        $thread->first()->increment('views_count', 20);
+        $demands->first()->increment('views_count', 20);
 
-        $this->get('/')->assertSee($thread->first()->title);
+        $this->get('/')->assertSee($demands->first()->title);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_create_demand()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $demand = factory('App\Models\Demand')->make(['user_id' => $user->id]);
+
+        $response = $this->post('/demands', $demand->toArray());
+
+        $this->get($response->headers->get('Location'))
+            ->assertSee($demand->title)
+            ->assertSee($demand->body);
     }
 
     /**

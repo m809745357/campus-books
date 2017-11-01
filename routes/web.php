@@ -55,6 +55,8 @@ Route::get('/categories', 'CategoryController@index')->name('categories.index');
 
 
 Route::get('/demands', 'DemandController@index')->name('demands.index');
+Route::get('/demands/create', 'DemandController@create')->name('demands.create');
+Route::post('/demands', 'DemandController@store')->name('demands.store');
 Route::get('/demands/{demand}', 'DemandController@show')->name('demands.show');
 
 Route::post('/recharge/{recharge}/bill', 'BillController@store')->name('bill.create');

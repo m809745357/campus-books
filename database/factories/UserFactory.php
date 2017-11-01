@@ -81,11 +81,11 @@ $factory->define(App\Models\Demand::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
         'money' => $faker->randomNumber(2),
-        'images' => json_encode([
+        'images' => [
             $faker->imageUrl(200, 200),
             $faker->imageUrl(200, 200),
             $faker->imageUrl(200, 200)
-        ]),
+        ],
     ];
 });
 

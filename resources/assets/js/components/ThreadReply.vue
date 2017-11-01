@@ -17,7 +17,7 @@
                 {{ this.tips }}
             </div>
 
-            <newReply @created="add"></newReply>
+            <replyNew @created="add"></replyNew>
         </div>
     </div>
 </template>
@@ -25,13 +25,13 @@
 <script>
     import reply from './Reply.vue';
     import threadDetail from './ThreadDetail.vue';
-    import newReply from './NewReply.vue';
+    import replyNew from './ReplyNew.vue';
 
     export default {
         props: ['attributes'],
 
         components: {
-            reply, threadDetail, newReply
+            reply, threadDetail, replyNew
         },
 
         data() {

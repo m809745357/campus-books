@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="posts-panel">
+        <div class="posts-panel" onclick="window.location.href='/demands/create'">
             <img src="/images/gou.png" alt="" class="posts-panel-img">
             <div class="posts-panel-desc">
                 <h4>发布求购</h4>

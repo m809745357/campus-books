@@ -23,7 +23,7 @@
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
         @foreach ($hotDemands as $demand)
-            <demand :attributes="{{ $demand }}"></demand>
+            <demand-detail :attributes="{{ $demand }}"></demand-detail>
         @endforeach
         <div style="height: 10px;"></div>
         <hot-books :hotpbooks="{{ $hotPbooks }}" :hotebooks="{{ $hotEbooks }}"></hot-books>

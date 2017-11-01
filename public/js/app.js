@@ -16967,6 +16967,8 @@ Vue.component('book-new', __webpack_require__(188));
 Vue.component('book-detail', __webpack_require__(196));
 Vue.component('category', __webpack_require__(201));
 Vue.component('demand', __webpack_require__(206));
+Vue.component('demand-detail', __webpack_require__(266));
+Vue.component('demand-new', __webpack_require__(260));
 Vue.component('recharges', __webpack_require__(211));
 Vue.component('reply', __webpack_require__(129));
 Vue.component('thread-detail', __webpack_require__(130));
@@ -60610,7 +60612,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.type = e.target.value;
         },
         onLoad: function onLoad(image) {
-            this.images = image.src;
             this.persist(image.file);
         },
         onCancel: function onCancel(index) {
@@ -62033,50 +62034,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
     data: function data() {
         return {
-            demand: {
-                id: this.attributes.id,
-                money: this.attributes.money,
-                title: this.attributes.title,
-                views_count: this.attributes.views_count,
-                created_at: moment(this.attributes.created_at).format('DD.MM.YYYY'),
-                images: JSON.parse(this.attributes.images)
-            },
-            onwer: {
-                nickname: this.attributes.onwer.nickname,
-                avatar: this.attributes.onwer.avatar
-            }
+            demand: this.attributes
         };
     },
 
     methods: {
-        detail: function detail(id) {
-            window.location.href = '/demands/' + id;
+        detail: function detail() {
+            window.location.href = '/demands/' + this.demand.id;
         }
     }
 });
@@ -62089,61 +62058,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "demand" }, [
-    _c("div", { staticClass: "user-profile-panel" }, [
-      _c("img", { attrs: { src: _vm.onwer.avatar } }),
-      _vm._v(" "),
-      _c("div", { staticClass: "user-profile" }, [
-        _c("h4", { staticClass: "user-nickname" }, [
-          _vm._v(_vm._s(_vm.onwer.nickname))
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "demand-time" }, [
-          _vm._v(_vm._s(_vm.demand.created_at))
-        ])
-      ])
-    ]),
+  return _c("div", { staticClass: "demands-item", on: { click: _vm.detail } }, [
+    _c("img", { attrs: { src: _vm.demand.images[0], alt: "" } }),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "demand-body",
-        on: {
-          click: function($event) {
-            _vm.detail(_vm.demand.id)
-          }
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "demand-gallery" },
-          _vm._l(_vm.demand.images, function(image, index) {
-            return _c("img", { attrs: { src: image, alt: "" } })
-          })
-        ),
-        _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.demand.title))])
-      ]
-    ),
+    _c("h4", [_vm._v(_vm._s(_vm.demand.title))]),
     _vm._v(" "),
-    _c("div", { staticClass: "demand-footer" }, [
-      _c("span", { staticClass: "demand-money" }, [
-        _vm._v("\n            ￥ " + _vm._s(_vm.demand.money) + "\n        ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "demand-count" }, [
-        _c("div", { staticClass: "views-count" }, [
-          _c("img", {
-            attrs: { src: "/images/view.png", width: "32px", height: "32px" }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "icon-count" }, [
-            _vm._v(_vm._s(_vm.demand.views_count))
-          ])
-        ])
-      ])
-    ])
+    _c("p", { staticClass: "price" }, [_vm._v("￥ " + _vm._s(_vm.demand.money))])
   ])
 }
 var staticRenderFns = []
@@ -62854,8 +62774,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Reply_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Reply_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ThreadDetail_vue__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ThreadDetail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ThreadDetail_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NewReply_vue__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__NewReply_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__NewReply_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ReplyNew_vue__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ReplyNew_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ReplyNew_vue__);
 //
 //
 //
@@ -62889,7 +62809,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['attributes'],
 
     components: {
-        reply: __WEBPACK_IMPORTED_MODULE_0__Reply_vue___default.a, threadDetail: __WEBPACK_IMPORTED_MODULE_1__ThreadDetail_vue___default.a, newReply: __WEBPACK_IMPORTED_MODULE_2__NewReply_vue___default.a
+        reply: __WEBPACK_IMPORTED_MODULE_0__Reply_vue___default.a, threadDetail: __WEBPACK_IMPORTED_MODULE_1__ThreadDetail_vue___default.a, replyNew: __WEBPACK_IMPORTED_MODULE_2__ReplyNew_vue___default.a
     },
 
     data: function data() {
@@ -62949,189 +62869,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 224 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(225)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(227)
-/* template */
-var __vue_template__ = __webpack_require__(228)
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/NewReply.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] NewReply.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3e489ce7", Component.options)
-  } else {
-    hotAPI.reload("data-v-3e489ce7", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 225 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(226);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("987e99ca", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e489ce7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./NewReply.vue", function() {
-     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e489ce7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./NewReply.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 226 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 227 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            body: '',
-            endpoint: window.location.pathname + '/reply'
-        };
-    },
-
-
-    methods: {
-        addReply: function addReply() {
-            var _this = this;
-
-            axios.post(this.endpoint, { body: this.body }).then(function (response) {
-                _this.body = '';
-
-                _this.$emit('created', response.data);
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 228 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "replies-thread" }, [
-    _c("textarea", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.body,
-          expression: "body"
-        }
-      ],
-      staticClass: "reply-thread-body",
-      attrs: {
-        name: "body",
-        rows: "7",
-        placeholder: "请输入要发布的内容...",
-        required: ""
-      },
-      domProps: { value: _vm.body },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.body = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "submit-button",
-        attrs: { type: "button" },
-        on: { click: _vm.addReply }
-      },
-      [_vm._v("发布")]
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-3e489ce7", module.exports)
-  }
-}
-
-/***/ }),
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
 /* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -63186,7 +62928,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _c("newReply", { on: { created: _vm.add } })
+          _c("replyNew", { on: { created: _vm.add } })
         ],
         1
       )
@@ -64425,6 +64167,782 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(271)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(273)
+/* template */
+var __vue_template__ = __webpack_require__(274)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DemandNew.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] DemandNew.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-80a55c30", Component.options)
+  } else {
+    hotAPI.reload("data-v-80a55c30", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(262)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(264)
+/* template */
+var __vue_template__ = __webpack_require__(265)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ReplyNew.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ReplyNew.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6e142fda", Component.options)
+  } else {
+    hotAPI.reload("data-v-6e142fda", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(263);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("c7c19440", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6e142fda\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./ReplyNew.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6e142fda\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./ReplyNew.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 264 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            body: '',
+            endpoint: window.location.pathname + '/reply'
+        };
+    },
+
+
+    methods: {
+        addReply: function addReply() {
+            var _this = this;
+
+            axios.post(this.endpoint, { body: this.body }).then(function (response) {
+                _this.body = '';
+
+                _this.$emit('created', response.data);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "replies-thread" }, [
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.body,
+          expression: "body"
+        }
+      ],
+      staticClass: "reply-thread-body",
+      attrs: {
+        name: "body",
+        rows: "7",
+        placeholder: "请输入要发布的内容...",
+        required: ""
+      },
+      domProps: { value: _vm.body },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.body = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "submit-button",
+        attrs: { type: "button" },
+        on: { click: _vm.addReply }
+      },
+      [_vm._v("发布")]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-6e142fda", module.exports)
+  }
+}
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(267)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(269)
+/* template */
+var __vue_template__ = __webpack_require__(270)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DemandDetail.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] DemandDetail.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5b0556b9", Component.options)
+  } else {
+    hotAPI.reload("data-v-5b0556b9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(268);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("5a32f266", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5b0556b9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./DemandDetail.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5b0556b9\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./DemandDetail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 269 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['attributes'],
+    data: function data() {
+        return {
+            demand: {
+                id: this.attributes.id,
+                money: this.attributes.money,
+                title: this.attributes.title,
+                views_count: this.attributes.views_count,
+                created_at: moment(this.attributes.created_at).format('DD.MM.YYYY'),
+                images: this.attributes.images
+            },
+            onwer: {
+                nickname: this.attributes.onwer.nickname,
+                avatar: this.attributes.onwer.avatar
+            }
+        };
+    },
+
+    methods: {
+        detail: function detail(id) {
+            window.location.href = '/demands/' + id;
+        }
+    }
+});
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "demand" }, [
+    _c("div", { staticClass: "user-profile-panel" }, [
+      _c("img", { attrs: { src: _vm.onwer.avatar } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "user-profile" }, [
+        _c("h4", { staticClass: "user-nickname" }, [
+          _vm._v(_vm._s(_vm.onwer.nickname))
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "demand-time" }, [
+          _vm._v(_vm._s(_vm.demand.created_at))
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "demand-body",
+        on: {
+          click: function($event) {
+            _vm.detail(_vm.demand.id)
+          }
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "demand-gallery" },
+          _vm._l(_vm.demand.images, function(image, index) {
+            return _c("img", { attrs: { src: image, alt: "" } })
+          })
+        ),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.demand.title))])
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "demand-footer" }, [
+      _c("span", { staticClass: "demand-money" }, [
+        _vm._v("\n            ￥ " + _vm._s(_vm.demand.money) + "\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "demand-count" }, [
+        _c("div", { staticClass: "views-count" }, [
+          _c("img", {
+            attrs: { src: "/images/view.png", width: "32px", height: "32px" }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "icon-count" }, [
+            _vm._v(_vm._s(_vm.demand.views_count))
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-5b0556b9", module.exports)
+  }
+}
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(272);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("864523d6", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-80a55c30\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./DemandNew.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-80a55c30\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./DemandNew.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 273 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            demand: {
+                title: '',
+                money: 0,
+                body: '',
+                images: []
+            }
+        };
+    },
+
+    components: {
+        ImageUpload: __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue___default.a
+    },
+    methods: {
+        onLoad: function onLoad(image) {
+            this.persist(image.file);
+        },
+        onCancel: function onCancel(index) {
+            this.demand.images.splice(index, 1);
+        },
+        persist: function persist(image) {
+            var data = new FormData();
+            var that = this;
+            data.append('file', image);
+            axios.post('/upload', data).then(function (response) {
+                that.demand.images.push(response.data);
+                flash('图片上传成功!');
+            });
+        },
+        addDemand: function addDemand() {
+            var _this = this;
+
+            axios.post('/demands', this.demand).then(function (response) {
+                console.log(response.data);
+                flash('发布成功!');
+                _this.success(response.data);
+            }).catch(function (error) {
+                console.log(error.response.data);
+                if (error.response.status == 422) {
+                    _this.showModel(error.response.data);
+                }
+            });
+        },
+        success: function success(data) {
+            location.href = '/demands/' + data.id;
+        },
+        showModel: function showModel(data) {
+            $.each(data.errors, function (index, val) {
+                val.map(function (value, key) {
+                    flash(value, 'warning');
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 274 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "thread-form" }, [
+    _c("div", { staticClass: "thread-form-group" }, [
+      _c("label", [_vm._v("求购标题：")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "thread-form-other" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.demand.title,
+              expression: "demand.title"
+            }
+          ],
+          attrs: { type: "text", name: "title", placeholder: "请输入求购标题" },
+          domProps: { value: _vm.demand.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.demand.title = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "thread-form-group" }, [
+      _c("label", [_vm._v("出价金额：")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "thread-form-other" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.demand.money,
+              expression: "demand.money"
+            }
+          ],
+          attrs: {
+            type: "text",
+            name: "money",
+            placeholder: "请输入出价金额",
+            required: ""
+          },
+          domProps: { value: _vm.demand.money },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.demand.money = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "thread-form-group",
+        staticStyle: { height: "auto", "align-items": "flex-start" }
+      },
+      [
+        _c("label", [_vm._v("上传图片：")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "thread-form-other" }, [
+          _c(
+            "form",
+            { attrs: { method: "POST", enctype: "multipart/form-data" } },
+            [
+              _c("image-upload", {
+                attrs: { name: "images" },
+                on: { loaded: _vm.onLoad, canceled: _vm.onCancel }
+              })
+            ],
+            1
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "thread-form-group",
+        staticStyle: { height: "auto", "align-items": "flex-start" }
+      },
+      [
+        _c("label", { staticStyle: { "padding-top": "10px" } }, [
+          _vm._v("求购描述：")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "thread-form-other" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.demand.body,
+                expression: "demand.body"
+              }
+            ],
+            attrs: {
+              type: "text",
+              name: "body",
+              rows: "8",
+              placeholder: "请输入商品描述",
+              required: ""
+            },
+            domProps: { value: _vm.demand.body },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.demand.body = $event.target.value
+              }
+            }
+          })
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "thread-form-group",
+        staticStyle: { "margin-top": ".70666667rem" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "submit-button",
+            attrs: { type: "button", name: "button" },
+            on: { click: _vm.addDemand }
+          },
+          [_vm._v("提交")]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-80a55c30", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

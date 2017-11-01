@@ -54,7 +54,7 @@ class BookController extends Controller
     public function create()
     {
         $categories = Category::with('childCategories', 'childCategories.childCategories')->get();
-        return view('posts.create', compact('categories'));
+        return view('books.create', compact('categories'));
     }
 
     /**

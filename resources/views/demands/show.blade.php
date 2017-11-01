@@ -6,7 +6,7 @@
         <div class="demand-detail">
             <div class="demand-detail-desc">
                 <div class="demand-detail-gallery">
-                    @foreach (json_decode($demand->images) as $image)
+                    @foreach ($demand->images as $image)
                         <img src="{{ $image }}" alt="">
                     @endforeach
                 </div>

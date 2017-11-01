@@ -191,7 +191,6 @@
                 this.type = e.target.value;
             },
             onLoad(image) {
-                this.images = image.src;
                 this.persist(image.file);
             },
             onCancel(index) {
