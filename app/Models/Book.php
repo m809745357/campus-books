@@ -14,7 +14,7 @@ class Book extends Model
 
     protected $guarded = [];
 
-    protected $appends = ['is_favorited'];
+    // protected $appends = ['is_favorited'];
 
     public function path()
     {
@@ -30,8 +30,8 @@ class Book extends Model
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
-    public static function hot($num, $where){
-        $hots = \App\Models\Book::with('onwer', 'category')->latest('views_count')->take($num);
+    public function trending($num, $where){
+        $hots = $this->with('onwer', 'category')->latest('views_count')->take($num);
         if ($where) {
             $hots->where($where);
         }

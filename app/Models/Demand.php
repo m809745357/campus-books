@@ -22,8 +22,8 @@ class Demand extends Model
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
-    public static function hot($num){
-        return \App\Models\Demand::with('onwer')->latest('views_count')->take($num)->get();
+    public function trending($num){
+        return $this->with('onwer')->latest('views_count')->take($num)->get();
     }
 
     public function setImagesAttribute($images)

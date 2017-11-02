@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Traits\Favorites;
+use App\Repository\Repository;
 
-class Thread extends Model
+class Thread extends Model implements Repository
 {
     use Favorites;
 
     protected $guarded = [];
 
-    protected $appends = ['is_reward', 'is_favorited'];
+    protected $appends = ['is_reward'];//, 'is_favorited'
 
     public function path()
     {
@@ -73,7 +74,8 @@ class Thread extends Model
         return $filters->apply($query);
     }
 
-    public static function hot($num){
-        return \App\Models\Thread::with('onwer', 'channel')->latest('replies_count')->take($num)->get();
+    public function trending($num, $where)
+    {
+        return $this->with('onwer', 'channel')->latest('replies_count')->take($num)->get();
     }
 }

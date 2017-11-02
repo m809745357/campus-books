@@ -157,4 +157,19 @@ class User extends Authenticatable
             ]);
         }
     }
+
+    public function contact()
+    {
+        return $this->contacts->load(['person.messaged', 'onwer.notifications'])
+        ->sortBy('created_at')->map(function ($contact) {
+            return array(
+                'id' => $contact->person->id,
+                'nickname' => $contact->person->nickname,
+                'avatar' => $contact->person->avatar,
+                'message' => $contact->message,
+                'created_at' => \Carbon\Carbon::parse($contact->created_at)->diffForHumans(),
+                'count' => $contact->notifies_count
+            );
+        });
+    }
 }

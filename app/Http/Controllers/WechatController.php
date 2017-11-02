@@ -10,30 +10,21 @@ use Illuminate\Http\Request;
 
 class WechatController extends Controller
 {
+    public function __construct()
+    {
+
+    }
     /**
      * home
      * @param  Application $app wechat
      * @return [type]           [description]
      */
-    public function index()
+    public function index(Thread $thread)
     {
-        $minutes = 60 * 60;
-
-        $trendingThreads = \Cache::remember('threads.trending', $minutes, function () {
-            return Thread::hot(2);
-        });
-
-        $trendingDemands = \Cache::remember('demands.trending', $minutes, function () {
-            return Demand::hot(3);
-        });
-
-        $trendingPbooks = \Cache::remember('books.trending.pbook', $minutes, function () {
-            return Book::hot(6, ['type' => 'PBook']);
-        });
-
-        $trendingEbooks = \Cache::remember('books.trending.ebook', $minutes, function () {
-            return Book::hot(6, ['type' => 'EBook']);
-        });
+        $trendingThreads = resolve('ThreadTrending')->trending(2);
+        $trendingDemands = resolve('DemandTrending')->trending(3);
+        $trendingPbooks = resolve('BookTrending')->trending(6, ['type' => 'PBook']);
+        $trendingEbooks = resolve('BookTrending')->trending(6, ['type' => 'EBook']);
 
         return view('home', compact('trendingThreads', 'trendingDemands', 'trendingPbooks', 'trendingEbooks'));
 
