@@ -1765,3 +1765,173 @@ $background-color: #efefef;
         color: #fff;
     }
 }
+
+.order-preview {
+
+    .order-preview-address {
+        padding: 0 0.27rem /* 20/75 */;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 2.49rem /* 187/75 */;
+        background-image: url(/images/preview.png);
+        background-repeat: repeat-x;
+        background-position: bottom;
+        background-size: 100%;
+        border-bottom: 1px solid $border-color;
+
+        img {
+            width: 0.45rem /* 34/75 */;
+            align-self: center;
+            justify-self: center;
+            margin-left: 0.11rem /* 8/75 */;
+        }
+
+        .order-preview-address-info {
+            margin-left: 0.32rem /* 24/75 */;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-direction: column;
+            color: $font-title-color;
+
+            h4 {
+                margin: 0;
+                padding: 0;
+                font-size: 13px;
+
+                span {
+                    font-size: 10px;
+                }
+            }
+
+            p {
+                margin: 0;
+                padding: 0;
+                font-size: 13px;
+            }
+
+        }
+    }
+
+    .order-preview-detail {
+        margin-top: 0.2rem /* 15/75 */;
+
+        .order-preview-detail-order {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #fff;
+            height: 2.19rem /* 164/75 */;
+            padding: 0 0.45rem /* 34/75 */;
+
+            img {
+                width: 1.56rem /* 117/75 */;
+                height: 1.57rem /* 118/75 */;
+                border-radius: 2px;
+            }
+
+            .order-preview-detail-order-info {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-around;
+                margin-left: 0.41rem /* 31/75 */;
+
+                h4 {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 13px;
+                    color: $font-desc-color;
+                }
+
+                p {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 13px;
+                    color: $price-color;
+                }
+            }
+        }
+    }
+
+    .order-preview-detail-other {
+        margin-top: 0.21rem /* 16/75 */;
+        height: 3.05rem /* 229/75 */;
+        padding: 0 0.27rem /* 20/75 */;
+        background-color: #fff;
+
+        .logistics {
+            display: flex;
+            height: 0.97rem /* 73/75 */;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .freight {
+            display: flex;
+            height: 0.95rem /* 71/75 */;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .remark {
+            display: flex;
+            height: 1.13rem /* 85/75 */;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid $border-color;
+        }
+
+        label {
+            width: 2rem /* 150/75 */;
+            text-align: left;
+            font-size: 13px;
+            color: $font-title-color;
+            font-weight: 400;
+        }
+    }
+
+    .order-preview-bottom {
+        height: 1.27rem /* 95/75 */;
+        position: fixed;
+        bottom: 0;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+
+        p {
+            font-size: 13px;
+            color: $font-title-color;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+            margin-right: 0.75rem /* 56/75 */;
+
+            span {
+                font-size: 13px;
+                color: $price-color;
+            }
+        }
+
+        button {
+            border: none;
+            height: 1.27rem /* 95/75 */;
+            width: 2.96rem /* 222/75 */;
+            line-height: 1.27rem /* 95/75 */;
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+            background-color: $theme-color;
+        }
+    }
+}

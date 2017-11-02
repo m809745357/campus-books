@@ -70,6 +70,7 @@ Route::post('/books/{category}/{book}/favorites', 'BookFavoriteController@store'
 Route::delete('/books/{category}/{book}/favorites', 'BookFavoriteController@destory')->name('books.unfavorite');
 Route::get('/books/{category}/{book}/annex', 'AnnexController@index')->name('books.annex');
 Route::get('/books/{category}/{book}/annex/download', 'AnnexController@download')->name('books.download');
+Route::get('/books/{category}/{book}/preview', 'OrderController@preview')->name('books.order.preview');
 
 Route::get('/users/{user}/chat', 'ChatController@index')->name('users.chat.index');
 Route::post('/users/{user}/chat', 'ChatController@store')->name('users.chat.store');

@@ -153,3 +153,20 @@ $factory->define(App\Models\Message::class, function (Faker $faker) {
         'message' => $faker->paragraph
     ];
 });
+
+$factory->define(App\Models\Address::class, function (Faker $faker) {
+
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'user_name' => $faker->name,
+        'postal_code' => $faker->postcode,
+        'province_name' => $faker->city,
+        'city_name' => $faker->city,
+        'country_name' => $faker->country,
+        'detail_info' => $faker->address,
+        'tel_number' => $faker->phoneNumber,
+        'national_code' => '86'
+    ];
+});

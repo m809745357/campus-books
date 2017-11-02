@@ -42,6 +42,6 @@ trait Favorites
      */
     public function getIsFavoritedAttribute()
     {
-        return $this->favorites()->where(['user_id' => auth()->id()])->exists();
+        return $this->isFavorited();
     }
 }

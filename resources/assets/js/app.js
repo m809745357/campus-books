@@ -57,6 +57,7 @@ Vue.component('book', require('./components/Book.vue'));
 Vue.component('book-new', require('./components/BookNew.vue'));
 Vue.component('book-detail', require('./components/BookDetail.vue'));
 Vue.component('book-trending', require('./components/BookTrending.vue'));
+Vue.component('order-preview', require('./components/OrderPreview.vue'));
 Vue.component('category', require('./components/Category.vue'));
 Vue.component('demand', require('./components/Demand.vue'));
 Vue.component('demand-detail', require('./components/DemandDetail.vue'));

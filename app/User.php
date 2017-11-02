@@ -172,4 +172,9 @@ class User extends Authenticatable
             );
         });
     }
+
+    public function address()
+    {
+        return $this->hasMany(Models\Address::class, 'user_id');;
+    }
 }

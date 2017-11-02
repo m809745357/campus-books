@@ -48,4 +48,13 @@ class Reply extends Model
     {
         return $this->belongsTo(\App\User::class, 'user_id');
     }
+
+    /**
+     * [bills description]
+     * @return Models
+     */
+    public function getIsFavoritedAttribute()
+    {
+        return $this->favorites->count();
+    }
 }

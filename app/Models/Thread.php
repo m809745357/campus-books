@@ -63,6 +63,15 @@ class Thread extends Model implements Repository
     }
 
     /**
+     * [bills description]
+     * @return Models
+     */
+    public function getIsFavoritedAttribute()
+    {
+        return $this->favorites->count();
+    }
+
+    /**
      * Apply all relevant thread filters.
      *
      * @param  Builder       $query
@@ -77,5 +86,19 @@ class Thread extends Model implements Repository
     public function trending($num, $where)
     {
         return $this->with('onwer', 'channel')->latest('replies_count')->take($num)->get();
+    }
+
+    public function detail()
+    {
+        return $this->load([
+            'onwer',
+            'replies.favorites' => function ($query) {
+                return $query->where(['user_id' => auth()->id()]);
+            },
+            'replies.onwer',
+            'favorites' => function ($query) {
+                return $query->where(['user_id' => auth()->id()]);
+            }
+        ])->append('is_favorited');
     }
 }

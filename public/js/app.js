@@ -17011,6 +17011,7 @@ Vue.component('book', __webpack_require__(128));
 Vue.component('book-new', __webpack_require__(184));
 Vue.component('book-detail', __webpack_require__(191));
 Vue.component('book-trending', __webpack_require__(196));
+Vue.component('order-preview', __webpack_require__(275));
 Vue.component('category', __webpack_require__(201));
 Vue.component('demand', __webpack_require__(206));
 Vue.component('demand-detail', __webpack_require__(211));
@@ -65181,6 +65182,257 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(276)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(278)
+/* template */
+var __vue_template__ = __webpack_require__(279)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/OrderPreview.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] OrderPreview.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-38850dd7", Component.options)
+  } else {
+    hotAPI.reload("data-v-38850dd7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(277);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("03cf8564", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38850dd7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./OrderPreview.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-38850dd7\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./OrderPreview.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 278 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['attrbook', 'attraddress'],
+    data: function data() {
+        return {
+            book: this.attrbook,
+            address: this.attraddress
+        };
+    }
+});
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "order-preview" }, [
+    _vm.address
+      ? _c("div", { staticClass: "order-preview-address" }, [
+          _c("img", { attrs: { src: "/images/address.png", alt: "" } }),
+          _vm._v(" "),
+          _c("div", { staticClass: "order-preview-address-info" }, [
+            _c("h4", [
+              _vm._v(_vm._s(_vm.address.user_name)),
+              _c("span", [_vm._v(_vm._s(_vm.address.tel_number))])
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                _vm._s(_vm.address.province_name) +
+                  " " +
+                  _vm._s(_vm.address.city_name) +
+                  " " +
+                  _vm._s(_vm.address.country_name) +
+                  " " +
+                  _vm._s(_vm.address.detail_info)
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "arrow",
+            attrs: { src: "/images/arrow.png", alt: "" }
+          })
+        ])
+      : _c("div", { staticClass: "order-preview-address" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "order-preview-detail" }, [
+      _c("div", { staticClass: "order-preview-detail-order" }, [
+        _c("img", { attrs: { src: _vm.book.images[0], alt: "" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "order-preview-detail-order-info" }, [
+          _c("h4", [_vm._v(_vm._s(_vm.book.title))]),
+          _vm._v(" "),
+          _c("p", [_vm._v("￥ " + _vm._s(_vm.book.money))])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "order-preview-detail-other con" }, [
+      _c("div", { staticClass: "logistics" }, [_c("label", [_vm._v("送货方式：")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "freight" }, [_c("label", [_vm._v("运费：")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "remark" }, [_c("label", [_vm._v("订单备注：")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "order-preview-bottom" }, [
+      _c("p", [_vm._v("合计"), _c("span", [_vm._v("￥12")])]),
+      _vm._v(" "),
+      _c("button", { attrs: { type: "button", name: "button" } }, [
+        _vm._v("提交订单")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-38850dd7", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

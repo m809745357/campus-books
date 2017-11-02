@@ -10534,3 +10534,232 @@ button.close {
   color: #fff;
 }
 
+.order-preview .order-preview-address {
+  padding: 0 0.27rem;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2.49rem;
+  background-image: url(/images/preview.png);
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: 100%;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.order-preview .order-preview-address img {
+  width: 0.45rem;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+  margin-left: 0.11rem;
+}
+
+.order-preview .order-preview-address .order-preview-address-info {
+  margin-left: 0.32rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #333333;
+}
+
+.order-preview .order-preview-address .order-preview-address-info h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+
+.order-preview .order-preview-address .order-preview-address-info h4 span {
+  font-size: 10px;
+}
+
+.order-preview .order-preview-address .order-preview-address-info p {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+
+.order-preview .order-preview-detail {
+  margin-top: 0.2rem;
+}
+
+.order-preview .order-preview-detail .order-preview-detail-order {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  height: 2.19rem;
+  padding: 0 0.45rem;
+}
+
+.order-preview .order-preview-detail .order-preview-detail-order img {
+  width: 1.56rem;
+  height: 1.57rem;
+  border-radius: 2px;
+}
+
+.order-preview .order-preview-detail .order-preview-detail-order .order-preview-detail-order-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-left: 0.41rem;
+}
+
+.order-preview .order-preview-detail .order-preview-detail-order .order-preview-detail-order-info h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  color: #aaaaaa;
+}
+
+.order-preview .order-preview-detail .order-preview-detail-order .order-preview-detail-order-info p {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  color: #fa8e3e;
+}
+
+.order-preview .order-preview-detail-other {
+  margin-top: 0.21rem;
+  height: 3.05rem;
+  padding: 0 0.27rem;
+  background-color: #fff;
+}
+
+.order-preview .order-preview-detail-other .logistics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0.97rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.order-preview .order-preview-detail-other .freight {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0.95rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.order-preview .order-preview-detail-other .remark {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 1.13rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.order-preview .order-preview-detail-other label {
+  width: 2rem;
+  text-align: left;
+  font-size: 13px;
+  color: #333333;
+  font-weight: 400;
+}
+
+.order-preview .order-preview-bottom {
+  height: 1.27rem;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 100%;
+}
+
+.order-preview .order-preview-bottom p {
+  font-size: 13px;
+  color: #333333;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+  margin-right: 0.75rem;
+}
+
+.order-preview .order-preview-bottom p span {
+  font-size: 13px;
+  color: #fa8e3e;
+}
+
+.order-preview .order-preview-bottom button {
+  border: none;
+  height: 1.27rem;
+  width: 2.96rem;
+  line-height: 1.27rem;
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  background-color: #3e85fa;
+}
+

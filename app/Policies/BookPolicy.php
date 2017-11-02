@@ -22,6 +22,11 @@ class BookPolicy
         return $user->id === $book->onwer->id && $book->type === 'EBook';
     }
 
+    public function preview(User $user, Book $book)
+    {
+        return $user->id !== $book->onwer->id;
+    }
+
     /**
      * Determine whether the user can create books.
      *
