@@ -103,6 +103,7 @@ $factory->define(App\Models\Book::class, function (Faker $faker) {
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
+        'book_number' => date("YmdHis") . rand(1000, 9999),
         'title' => $faker->sentence,
         'author' => $faker->name,
         'published_at' => $faker->year() . '-' . $faker->month(),
@@ -168,5 +169,22 @@ $factory->define(App\Models\Address::class, function (Faker $faker) {
         'detail_info' => $faker->address,
         'tel_number' => $faker->phoneNumber,
         'national_code' => '86'
+    ];
+});
+
+$factory->define(App\Models\Order::class, function (Faker $faker) {
+
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'book' => function () {
+            return factory('App\Models\Book')->create()->id;
+        },
+        'address' => function () {
+            return factory('App\Models\Address')->create()->id;
+        },
+        'pay' => '',
+        'order_number' => config('wechat.app_id') . date('YmdHis') . rand(1000, 9999)
     ];
 });

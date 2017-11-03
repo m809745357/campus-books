@@ -9180,6 +9180,21 @@ button.close {
   line-height: 0.44rem;
 }
 
+.user-notify.after:after {
+  content: attr(data-count);
+  font-size: 8px;
+  text-align: center;
+  line-height: 0.35rem;
+  color: #fff;
+  background: #fa8e3e;
+  position: relative;
+  width: 0.4rem;
+  height: 0.4rem;
+  top: -0.2rem;
+  left: -0.2rem;
+  border-radius: 50%;
+}
+
 .user-setting {
   -ms-flex-item-align: start;
       align-self: flex-start;
@@ -10715,6 +10730,26 @@ button.close {
   font-size: 13px;
   color: #333333;
   font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.order-preview .order-preview-detail-other p {
+  color: #333333;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+.order-preview .order-preview-detail-other p.price {
+  color: #fa8e3e;
+}
+
+.order-preview .order-preview-detail-other input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: none;
 }
 
 .order-preview .order-preview-bottom {
@@ -10761,5 +10796,392 @@ button.close {
   font-size: 13px;
   text-align: center;
   background-color: #3e85fa;
+}
+
+/**
+ * order-pay
+ */
+
+.order-pay .order-pay-detail {
+  background-color: #fff;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 3.76rem;
+}
+
+.order-pay .order-pay-detail img {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 0.67rem;
+}
+
+.order-pay .order-pay-detail p {
+  margin: 0;
+  padding: 0;
+  font-size: 11.5px;
+  color: #aaaaaa;
+}
+
+.order-pay .order-pay-money {
+  margin-top: 0.27rem;
+  background-color: #fff;
+  height: 3.33rem;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.order-pay .order-pay-money li {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.order-pay .order-pay-money li label {
+  font-weight: 400;
+}
+
+.order-pay .order-pay-money span.price {
+  color: #fa8e3e;
+}
+
+.order-pay .order-pay-bottom {
+  margin-top: 0.27rem;
+  background-color: #fff;
+  padding: 0 1rem;
+  min-height: calc(100vh - 7.65rem);
+}
+
+.order-pay .order-pay-bottom h4 {
+  padding-top: 0.67rem;
+  color: #fa8e3e;
+  margin-bottom: 0.27rem;
+  font-size: 14px;
+}
+
+.order-pay .order-pay-bottom p {
+  color: #fa8e3e;
+  font-size: 10px;
+  margin: 0;
+}
+
+.order-pay .order-pay-bottom button {
+  margin-top: 1.47rem;
+  position: relative;
+  left: -0.6rem;
+  width: 9.2rem;
+  background-color: #3e85fa;
+  height: 1.16rem;
+  border-radius: 0.13rem;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+}
+
+.order-detail .order-detail-top {
+  height: 2.63rem;
+  background-color: #fff;
+  padding: 0 0.45rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.order-detail .order-detail-top .yi {
+  width: 1.07rem;
+  margin-bottom: 0.67rem;
+}
+
+.order-detail .order-detail-top .order-status {
+  width: 0.96rem;
+  height: 1.47rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.order-detail .order-detail-top .order-status .cricle {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 0.04rem solid #aaaaaa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.order-detail .order-detail-top .order-status .cricle img {
+  width: 0.53rem;
+}
+
+.order-detail .order-detail-top .order-status p {
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  color: #aaaaaa;
+}
+
+.order-detail .order-detail-top .yes .cricle {
+  border: 0.04rem solid #fa8e3e;
+  background-color: #fa8e3e;
+}
+
+.order-detail .order-detail-top .yes p {
+  color: #fa8e3e;
+}
+
+.order-detail .order-detail-center {
+  height: 6.27rem;
+  background-color: #fff;
+  margin-top: 0.27rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.order-detail .order-detail-center li {
+  min-height: 0.92rem;
+  padding: 0 0.45rem;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.order-detail .order-detail-center li label {
+  font-size: 12px;
+  font-weight: 400;
+  width: 2.31rem;
+  margin: 0;
+}
+
+.order-detail .order-detail-center li p {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.order-detail .order-detail-center li:not(:last-child) {
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.order-detail .order-detail-bottom {
+  min-height: calc(100vh - 9.43rem);
+  background-color: #fff;
+  margin-top: 0.27rem;
+  padding: 0 0.45rem;
+}
+
+.order-detail .order-detail-bottom .order-detail-book {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-top: 0.69rem;
+  height: 3.73rem;
+}
+
+.order-detail .order-detail-bottom .order-detail-book img {
+  width: 3.04rem;
+  height: 3.04rem;
+  margin-right: 0.83rem;
+}
+
+.order-detail .order-detail-bottom .order-detail-book .order-detail-book-desc {
+  height: 3.04rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.order-detail .order-detail-bottom .order-detail-book .order-detail-book-desc h4 {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  color: #333333;
+}
+
+.order-detail .order-detail-bottom .order-detail-book .order-detail-book-desc .order-keywords {
+  font-size: 10px;
+  background-color: #fff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.order-detail .order-detail-bottom .order-detail-book .order-detail-book-desc .order-keywords span {
+  color: #aaaaaa !important;
+  margin-right: 0.25rem;
+}
+
+.order-detail .order-detail-bottom .order-detail-book .order-detail-book-desc span {
+  color: #fa8e3e;
+  font-size: 12px;
+  justify-self: flex-end;
+}
+
+.order-detail .order-detail-bottom .order-detail-other {
+  height: 1.07rem;
+  margin-top: 0.69rem;
+}
+
+.order-detail .order-detail-bottom .order-detail-other li {
+  list-style: none;
+  height: 0.53rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.order-detail .order-detail-bottom .order-detail-other li label {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.order-detail .order-detail-bottom .order-detail-other li span {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  text-align: right;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.order-detail .order-detail-bottom .order-buttons {
+  margin-top: 0.87rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 0.91rem;
+}
+
+.order-detail .order-detail-bottom .order-buttons button {
+  border: none;
+  width: 4.31rem;
+  height: 0.91rem;
+  border-radius: 0.05rem;
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+.order-detail .order-detail-bottom .order-buttons button.submit {
+  background-color: #3e85fa;
+  color: #fff;
 }
 

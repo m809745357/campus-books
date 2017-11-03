@@ -41,7 +41,7 @@
                     <p>收藏</p>
                 </div>
             </div>
-            <button type="button" name="button">立即购买</button>
+            <button type="button" name="button" @click="buy">立即购买</button>
         </div>
     </div>
 </template>
@@ -87,6 +87,9 @@
 
                 this.book.is_favorited = false;
                 this.book.favorites_count --;
+            },
+            buy() {
+                window.location.href = window.location.href + '/preview';
             }
         }
     }

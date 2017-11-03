@@ -1,8 +1,14 @@
 <template>
     <div class="">
         <div class="user-profile-top">
-            <div class="user-notify" @click="notifications">
-                <img src="/images/notifications.png" alt=""><h4>我的消息</h4>
+            <div v-if="user.notification_count > 0" :data-count="user.notification_count" class="user-notify after" @click="notifications">
+                <img src="/images/notifications.png" alt="">
+                <h4>我的消息</h4>
+            </div>
+
+            <div v-else class="user-notify" @click="notifications">
+                <img src="/images/notifications.png" alt="">
+                <h4>我的消息</h4>
             </div>
             <div class="user-profile-center">
                 <img :src="user.avatar" alt="" class="user-profile-headimgurl">

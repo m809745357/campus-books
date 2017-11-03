@@ -22,6 +22,8 @@ class ChatController extends Controller
 
         auth()->user()->sayHello($user);
 
+        auth()->user()->markAsRead();
+
         $notifications = auth()->user()->notifications
                             ->where('data.from_user_id', $user->id)
                             ->merge(

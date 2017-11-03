@@ -77,6 +77,11 @@ Route::post('/users/{user}/chat', 'ChatController@store')->name('users.chat.stor
 
 Route::post('/upload', 'UploadController@store')->name('upload.file');
 
+Route::get('/orders', 'OrderController@index')->name('order.index');
+Route::get('/orders/{order}', 'OrderController@show')->name('order.show');
+Route::post('/orders', 'OrderController@store')->name('order.store');
+Route::get('/orders/{order}/pay', 'OrderController@pay')->name('order.pay');
+
 Route::get('/users/{user}/guest', function () {
     \Auth::login(\App\User::find(20));
 });

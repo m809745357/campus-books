@@ -130,6 +130,16 @@ class User extends Authenticatable
         return $this->hasMany(Models\Contact::class, 'user_id');
     }
 
+    /**
+     * 用户订单
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Models\Order::class, 'user_id');
+    }
+
     public function addContacts($user)
     {
         if (! $this->isContacted($user)) {
@@ -176,5 +186,23 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasMany(Models\Address::class, 'user_id');;
+    }
+
+    public function getNotificationCountAttribute()
+    {
+        return $this->unreadNotifications()->count();
+    }
+
+    public function markAsRead()
+    {
+        return $this->unreadNotifications->markAsRead();
+    }
+
+    public function addOrder($order)
+    {
+        return $this->orders()->create(array_merge($order, [
+            'remark' => request()->remark,
+            'order_number' => config('wechat.app_id') . date('YmdHis') . rand(1000, 9999)
+        ]));
     }
 }
