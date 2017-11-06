@@ -98,6 +98,11 @@ class UserController extends Controller
         return view('users.recharges', compact('recharges'));
     }
 
+    /**
+     * 消费记录
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function bills()
     {
         $bills = auth()->user()->bills->load('billed');
@@ -105,10 +110,31 @@ class UserController extends Controller
         return view('users.bills', compact('bills'));
     }
 
+    /**
+     * 我的发布
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function books()
     {
         $books = auth()->user()->books->load('category');
         return view('users.books', compact('books'));
+    }
+
+    /**
+     * 我的订单
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function orders()
+    {
+        if (request()->wantsJson()) {
+            $orders = auth()->user()->orders;
+            return response($orders, 200);
+        }
+
+        $books = auth()->user()->books->load('category');
+        return view('users.orders', compact('books'));
     }
 
     /**

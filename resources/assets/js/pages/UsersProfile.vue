@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import userItem from './UsersItem.vue';
+    import userItem from '../components/UsersItem.vue';
 
     export default {
         props: ['attributes'],

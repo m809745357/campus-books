@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import reply from './Reply.vue';
-    import threadDetail from './ThreadDetail.vue';
-    import replyNew from './ReplyNew.vue';
+    import reply from '../components/Reply.vue';
+    import threadDetail from '../components/ThreadDetail.vue';
+    import replyNew from '../components/ReplyNew.vue';
 
     export default {
         props: ['attributes'],

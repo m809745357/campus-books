@@ -65,7 +65,10 @@ class BookController extends Controller
      */
     public function store(StoreBookPost $request)
     {
-        $book = auth()->user()->books()->create($request->validated());
+        $book = auth()->user()->books()->create(array_merge([
+            'book_number' => date("YmdHis") . rand(1000, 9999)],
+            $request->validated()
+        ));
 
         if (request()->wantsJson()) {
             return response($book, 201);

@@ -14,7 +14,7 @@ class Book extends Model
 
     protected $guarded = [];
 
-    // protected $appends = ['is_favorited'];
+    protected $appends = ['is_favorited'];
 
     public function path()
     {

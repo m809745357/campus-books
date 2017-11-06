@@ -41,7 +41,8 @@
                     <p>收藏</p>
                 </div>
             </div>
-            <button type="button" name="button" @click="buy">立即购买</button>
+            <button type="button" name="button" @click="buy" v-if="book.status == '1'">立即购买</button>
+            <button type="button" name="button" class="sell" v-else>已经出售</button>
         </div>
     </div>
 </template>

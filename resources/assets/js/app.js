@@ -49,30 +49,32 @@ moment.updateLocale('en', {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('chat', require('./components/Chat.vue'));
-Vue.component('notifications', require('./components/Notifications.vue'));
-Vue.component('flash', require('./components/Flash.vue'));
-Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('book', require('./components/Book.vue'));
-Vue.component('book-new', require('./components/BookNew.vue'));
-Vue.component('book-detail', require('./components/BookDetail.vue'));
-Vue.component('book-trending', require('./components/BookTrending.vue'));
-Vue.component('order-pay', require('./components/OrderPay.vue'));
-Vue.component('order-detail', require('./components/OrderDetail.vue'));
-Vue.component('order-preview', require('./components/OrderPreview.vue'));
-Vue.component('category', require('./components/Category.vue'));
 Vue.component('demand', require('./components/Demand.vue'));
-Vue.component('demand-detail', require('./components/DemandDetail.vue'));
-Vue.component('demand-trending', require('./components/DemandTrending.vue'));
-Vue.component('demand-new', require('./components/DemandNew.vue'));
-Vue.component('recharges', require('./components/Recharges.vue'));
+Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('reply', require('./components/Reply.vue'));
+Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('thread-detail', require('./components/ThreadDetail.vue'));
-Vue.component('thread-reply', require('./components/ThreadReply.vue'));
-Vue.component('thread-new', require('./components/ThreadNew.vue'));
-Vue.component('thread-channels', require('./components/ThreadChannels.vue'));
-Vue.component('users-profile', require('./components/UsersProfile.vue'));
-Vue.component('users-bind-mobile', require('./components/UsersBindMobile.vue'));
+
+Vue.component('chat', require('./pages/Chat.vue'));
+Vue.component('notifications', require('./pages/Notifications.vue'));
+Vue.component('book-new', require('./pages/BookNew.vue'));
+Vue.component('book-detail', require('./pages/BookDetail.vue'));
+Vue.component('book-trending', require('./pages/BookTrending.vue'));
+Vue.component('order-pay', require('./pages/OrderPay.vue'));
+Vue.component('order-detail', require('./pages/OrderDetail.vue'));
+Vue.component('order-preview', require('./pages/OrderPreview.vue'));
+Vue.component('category', require('./pages/Category.vue'));
+Vue.component('demand-detail', require('./pages/DemandDetail.vue'));
+Vue.component('demand-trending', require('./pages/DemandTrending.vue'));
+Vue.component('demand-new', require('./pages/DemandNew.vue'));
+Vue.component('recharges', require('./pages/Recharges.vue'));
+Vue.component('thread-reply', require('./pages/ThreadReply.vue'));
+Vue.component('thread-new', require('./pages/ThreadNew.vue'));
+Vue.component('thread-channels', require('./pages/ThreadChannels.vue'));
+Vue.component('users-profile', require('./pages/UsersProfile.vue'));
+Vue.component('users-bind-mobile', require('./pages/UsersBindMobile.vue'));
+Vue.component('users-orders', require('./pages/UsersOrders.vue'));
 
 const app = new Vue({
     el: '#app'

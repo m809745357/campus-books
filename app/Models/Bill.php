@@ -16,6 +16,9 @@ class Bill extends Model
             if ($query->billed_type == 'App\Models\Recharge') {
                 $query->onwer()->increment('balances', $query->billed->money);
             }
+            if ($query->billed_type == 'App\Models\Order') {
+                $query->onwer()->decrement('balances', $query->billed->orderPrice());
+            }
         });
     }
 

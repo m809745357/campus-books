@@ -33,6 +33,7 @@ class CreateBooksTable extends Migration
             $table->string('annex')->nullable();
             $table->integer('favorites_count')->default(0);
             $table->unsignedInteger('views_count')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

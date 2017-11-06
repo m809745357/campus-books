@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import book from './Book.vue';
+    import book from '../components/Book.vue';
     export default {
         props: ['trendingpbooks', 'trendingebooks'],
         data() {

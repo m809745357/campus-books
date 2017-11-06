@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->text('address');
             $table->string('pay')->nullable();
             $table->string('remark')->nullable();
-            $table->string('status')->default(0);
+            $table->string('status')->default('0000');
             $table->timestamps();
         });
     }

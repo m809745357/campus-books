@@ -130,7 +130,7 @@
 </template>
 
 <script>
-    import ImageUpload from './ImageUpload.vue';
+    import ImageUpload from '../components/ImageUpload.vue';
 
     export default {
         props: ['attributes'],

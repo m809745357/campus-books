@@ -14,7 +14,7 @@
 
     <script>
         window.App = <?php echo json_encode([
-             'user' => Auth::user()->append('notification_count'),
+             'user' => Auth::user() ? Auth::user()->append('notification_count') : null,
              'signedIn' => Auth::check()
         ]); ?>
     </script>

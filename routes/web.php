@@ -30,6 +30,7 @@ Route::get('/users/recharges', 'UserController@recharges')->name('user.recharges
 Route::get('/users/bills', 'UserController@bills')->name('user.bills');
 Route::get('/users/notifications', 'NotificationController@index')->name('user.notifications');
 Route::get('/users/books', 'UserController@books')->name('user.books');
+Route::get('/users/orders', 'UserController@orders')->name('user.orders');
 
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
@@ -79,9 +80,12 @@ Route::post('/upload', 'UploadController@store')->name('upload.file');
 
 Route::get('/orders', 'OrderController@index')->name('order.index');
 Route::get('/orders/{order}', 'OrderController@show')->name('order.show');
+Route::post('/orders/{order}/cancel', 'OrderController@cancel')->name('order.cancel');
+Route::post('/orders/{order}/pay', 'OrderController@payment')->name('order.payment');
 Route::post('/orders', 'OrderController@store')->name('order.store');
 Route::get('/orders/{order}/pay', 'OrderController@pay')->name('order.pay');
 
+Route::post('/api/orders', 'UserController@orders');
 Route::get('/users/{user}/guest', function () {
     \Auth::login(\App\User::find(20));
 });

@@ -24,7 +24,12 @@ class BookPolicy
 
     public function preview(User $user, Book $book)
     {
-        return $user->id !== $book->onwer->id;
+        return $user->id !== $book->onwer->id && $book->status == '1';
+    }
+
+    public function addOrder(User $user, Book $book)
+    {
+        return $book->status == 1;
     }
 
     /**
