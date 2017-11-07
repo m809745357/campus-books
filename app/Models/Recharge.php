@@ -9,5 +9,8 @@ class Recharge extends Model
 {
     use Bills;
 
-
+    public function money()
+    {
+        return $this->money;
+    }
 }

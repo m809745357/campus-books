@@ -10161,7 +10161,7 @@ button.close {
 
 .bills .bills-title {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   height: 1.23rem;
   border-bottom: 2px solid #e9e9e9;
@@ -10179,7 +10179,7 @@ button.close {
 
 .bills .bills-desc {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   height: 1.23rem;
   border-bottom: 1px solid #e9e9e9;
@@ -11377,5 +11377,140 @@ button.close {
   font-size: 11px;
   background-color: #3e85fa;
   color: #fff;
+}
+
+.users-orders .order-info .order-info-center .order-info-desc .order-button button.cancel {
+  background-color: #e9e9e9;
+}
+
+.ship-model {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ship-model .model {
+  width: 6.67rem;
+  height: 5.09rem;
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.ship-model .model .close {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  justify-self: flex-end;
+  margin-top: 0.27rem;
+  margin-right: 0.27rem;
+  width: 0.21rem;
+  height: 0.21rem;
+}
+
+.ship-model .model button {
+  border: none;
+  width: 3.96rem;
+  height: 0.89rem;
+  border-radius: 4px;
+  line-height: 0.89rem;
+  font-size: 13px;
+  background-color: #3e85fa;
+  color: #fff;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+  margin-bottom: 0.44rem;
+}
+
+.ship-model .model .model-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 5.21rem;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+}
+
+.ship-model .model .model-info li {
+  list-style: none;
+  width: 100%;
+  font-size: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 0.64rem;
+  margin-bottom: 0.27rem;
+}
+
+.ship-model .model .model-info li label {
+  color: #333333;
+  font-weight: 400;
+  width: 1.73rem;
+  padding: 0;
+  margin: 0;
+}
+
+.ship-model .model .model-info li input {
+  background-color: #f8f8f8;
+  border: none;
+  height: 0.51rem;
+  color: #000000;
+  border-radius: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 0.64rem;
+}
+
+.ship-model .model .model-info li select {
+  background-color: #f8f8f8;
+  border: none;
+  height: 0.51rem;
+  color: #000000;
+  border-radius: 0;
+  text-align: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 0.64rem;
 }
 

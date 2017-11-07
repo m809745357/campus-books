@@ -20,7 +20,7 @@
         props: ['trendingpbooks', 'trendingebooks'],
         data() {
             return {
-                books: this.trendingpbooks,
+                books: this.trendingpbooks.data,
                 change: 1,
             }
         },
@@ -39,7 +39,7 @@
             changeMenu(e) {
                 $(e.target).addClass('on').siblings().removeClass('on');
                 this.change = e.target.dataset.change;
-                this.books = this.change == 1 ? this.trendingpbooks : this.trendingebooks;
+                this.books = this.change == 1 ? this.trendingpbooks.data : this.trendingebooks.data;
             }
         }
     }

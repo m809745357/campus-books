@@ -30,7 +30,17 @@ class Book extends Model
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'book_id');
+    }
+
     public function trending($num, $where){
+        dump($where);
         $hots = $this->with('onwer', 'category')->latest('views_count')->take($num);
         if ($where) {
             $hots->where($where);

@@ -44,7 +44,7 @@ class OrderController extends Controller
      */
     public function store(StoreOrderPost $request)
     {
-        $book = Book::find($request->book);
+        $book = Book::find($request->book_id);
 
         $this->authorize('addOrder', $book);
 
@@ -83,7 +83,7 @@ class OrderController extends Controller
         $this->authorize('update', $order);
 
         if (! $order->pay()) {
-            # code...
+            return response('支付失败', 400);
         }
     }
 

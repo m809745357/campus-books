@@ -29,8 +29,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('DemandTrending', function () {
             return new \App\Repository\TrendingRepository(new \App\Models\Demand);
         });
-        $this->app->bind('BookTrending', function () {
-            return new \App\Repository\TrendingRepository(new \App\Models\Book);
-        });
+        if (config('app.debug')) {
+            $this->app->register('VIACreative\SudoSu\ServiceProvider');
+        }
+
     }
 }

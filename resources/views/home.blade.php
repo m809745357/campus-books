@@ -26,7 +26,7 @@
             <demand-trending :attributes="{{ $demand }}"></demand-trending>
         @endforeach
         <div style="height: 10px;"></div>
-        <book-trending :trendingpbooks="{{ $trendingPbooks }}" :trendingebooks="{{ $trendingEbooks }}"></book-trending>
+        <book-trending :trendingpbooks="{{ json_encode($trendingPbooks) }}" :trendingebooks="{{ json_encode($trendingEbooks) }}"></book-trending>
     </div>
     <div style="height: 1.32rem"></div>
     <div class="menu con">

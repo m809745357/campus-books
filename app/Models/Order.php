@@ -16,7 +16,7 @@ class Order extends Model
         parent::bootTraits();
 
         static::creating(function ($query) {
-            $book = Book::find($query->book->id);
+            $book = Book::find($query->book_detail->id);
             $book->update(['status' => 2]);
         });
     }
@@ -41,14 +41,19 @@ class Order extends Model
         return $this->belongsTo(\App\User::class, 'user_id', 'id');
     }
 
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'book_id', 'id');
+    }
+
     /**
      * 设置添加book字段时候自动序列化
      *
      * @param [type] $book [description]
      */
-    public function setBookAttribute($book)
+    public function setBookDetailAttribute($book)
     {
-        return $this->attributes['book'] = serialize(Book::find($book));
+        return $this->attributes['book_detail'] = serialize(Book::find($book));
     }
 
     /**
@@ -57,7 +62,7 @@ class Order extends Model
      * @param  [type] $book [description]
      * @return [type]       [description]
      */
-    public function getBookAttribute($book)
+    public function getBookDetailAttribute($book)
     {
         return unserialize($book);
     }
@@ -91,7 +96,7 @@ class Order extends Model
     public function cancel()
     {
         $this->update(['status' => '-1000']);
-        Book::find($this->book->id)->update(['status' => '1']);
+        $this->book->update(['status' => '1']);
 
         return $this;
     }
@@ -106,7 +111,7 @@ class Order extends Model
         $method = $this->getPaymentMethod();
 
         if ($this->$method()) {
-            return $this->update(['status' => '0100']);
+            return $this->update(['status' => '0100', 'pay' => $method]);
         }
 
         return false;
@@ -149,7 +154,7 @@ class Order extends Model
      */
     public function ifHasEnoughMoney()
     {
-        return $this->onwer->balances > $this->orderPrice();
+        return $this->onwer->balances > $this->money();
     }
 
     /**
@@ -157,8 +162,8 @@ class Order extends Model
      *
      * @return [type] [description]
      */
-    public function orderPrice()
+    public function money()
     {
-        return $this->book->money + $this->book->freight;
+        return $this->book_detail->money + $this->book_detail->freight;
     }
 }

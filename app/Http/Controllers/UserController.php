@@ -133,7 +133,7 @@ class UserController extends Controller
             return response($orders, 200);
         }
 
-        $books = auth()->user()->books->load('category');
+        $books = auth()->user()->books->load('category', 'order');
         return view('users.orders', compact('books'));
     }
 

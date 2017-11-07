@@ -24,7 +24,8 @@ class StoreOrderPost extends FormRequest
     public function rules()
     {
         return [
-            'book' => 'required',
+            'book_detail' => 'required',
+            'book_id' => 'required',
             'address' => 'required'
         ];
     }

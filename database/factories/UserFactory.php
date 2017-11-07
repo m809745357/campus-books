@@ -173,14 +173,14 @@ $factory->define(App\Models\Address::class, function (Faker $faker) {
 });
 
 $factory->define(App\Models\Order::class, function (Faker $faker) {
+    $book = factory('App\Models\Book')->create();
 
     return [
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'book' => function () {
-            return factory('App\Models\Book')->create()->id;
-        },
+        'book_id' => $book->id,
+        'book_detail' => $book->id,
         'address' => function () {
             return factory('App\Models\Address')->create()->id;
         },

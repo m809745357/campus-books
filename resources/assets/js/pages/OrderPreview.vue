@@ -51,7 +51,8 @@
                 book: this.attrbook,
                 address: this.attraddress,
                 order: {
-                    book: this.attrbook.id,
+                    book_detail: this.attrbook.id,
+                    book_id: this.attrbook.id,
                     address: this.attraddress.id,
                     remark: '',
                 }

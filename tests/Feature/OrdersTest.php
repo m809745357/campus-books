@@ -47,7 +47,8 @@ class OrdersTest extends TestCase
 
         $response = $this->post('/orders', [
             'user_id' => $user->id,
-            'book' => $book->id,
+            'book_id' => $book->id,
+            'book_detail' => $book->id,
             'address' => $address->id,
         ]);
 
@@ -67,7 +68,8 @@ class OrdersTest extends TestCase
 
         $response = $this->post('/orders', [
             'user_id' => $user->id,
-            'book' => $book->id,
+            'book_id' => $book->id,
+            'book_detail' => $book->id,
             'address' => $address->id,
         ]);
 
@@ -80,7 +82,8 @@ class OrdersTest extends TestCase
 
         $response = $this->post('/orders', [
             'user_id' => $otherUser->id,
-            'book' => $book->id,
+            'book_id' => $book->id,
+            'book_detail' => $book->id,
             'address' => $address->id,
         ]);
 
@@ -99,13 +102,14 @@ class OrdersTest extends TestCase
         $address = factory('App\Models\Address')->create(['user_id' => $user->id]);
 
         $order = $user->addOrder([
-            'book' => $book->id,
+            'book_id' => $book->id,
+            'book_detail' => $book->id,
             'address' => $address->id,
         ]);
 
         $response = $this->get($order->path() . '/pay');
 
-        $response->assertSee($order->book->title);
+        $response->assertSee($order->book_detail->title);
     }
 
     /** @test */
@@ -120,13 +124,14 @@ class OrdersTest extends TestCase
         $address = factory('App\Models\Address')->create(['user_id' => $user->id]);
 
         $order = $user->addOrder([
-            'book' => $book->id,
+            'book_id' => $book->id,
+            'book_detail' => $book->id,
             'address' => $address->id,
         ]);
 
         $response = $this->get($order->path());
 
-        $response->assertSee($order->book->title);
+        $response->assertSee($order->book_detail->title);
     }
 
     /** @test */
@@ -138,7 +143,7 @@ class OrdersTest extends TestCase
 
         $book = factory('App\Models\Book')->create();
 
-        $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book' => $book->id]);
+        $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
         $response = $this->post($order->path() . '/cancel');
 
@@ -160,7 +165,7 @@ class OrdersTest extends TestCase
 
         $this->assertEquals('0100', $order->fresh()->status);
 
-        $balances = $user->balances - $order->book->money - $order->book->freight;
+        $balances = $user->balances - $order->book_detail->money - $order->book_detail->freight;
 
         $this->assertEquals((int)$balances, $user->fresh()->balances);
     }
@@ -176,7 +181,7 @@ class OrdersTest extends TestCase
 
         $response = $this->json('POST', '/api/orders');
 
-        $response->assertSee($order->book->title);
+        $response->assertSee($order->book_detail->title);
     }
 
     /**

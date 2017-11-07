@@ -3,7 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <order-detail :attributes="{{ $order }}"></order-detail>
+        @if ($order->book->onwer->id === auth()->id())
+            <users-order-detail :attributes="{{ $order }}"></users-order-detail>
+        @else
+            <order-detail :attributes="{{ $order }}"></order-detail>
+        @endif
+
     </div>
 </div>
 @endsection

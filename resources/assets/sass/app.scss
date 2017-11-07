@@ -365,13 +365,14 @@ $background-color: #efefef;
     justify-content: flex-start;
     align-items: center;
     height: 1.13333333rem;
-}
-.thread-form-group label {
-    width: 2.37rem /* 178/75 */;
-    font-size: 12.5px;
-    margin: 0;
-    color: #000000;
-    font-weight: unset;
+
+    label {
+        width: 2.37rem /* 178/75 */;
+        font-size: 12.5px;
+        margin: 0;
+        color: #000000;
+        font-weight: unset;
+    }
 }
 
 .thread-form-other {
@@ -1489,7 +1490,7 @@ $background-color: #efefef;
 
     .bills-title {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(3, 1fr);
         width: 100%;
         height: 1.23rem /* 92/75 */;
         border-bottom: 2px solid $border-color;
@@ -1506,7 +1507,7 @@ $background-color: #efefef;
 
     .bills-desc {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(3, 1fr);
         width: 100%;
         height: 1.23rem /* 92/75 */;
         border-bottom: 1px solid $border-color;
@@ -2404,7 +2405,107 @@ $background-color: #efefef;
                         font-size: 11px;
                         background-color: $theme-color;
                         color: #fff;
+
+                        &.cancel {
+                            background-color: $border-color;
+                        }
                     }
+                }
+            }
+        }
+    }
+}
+
+.ship-model {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .model {
+        width: 6.67rem /* 500/75 */;
+        height: 5.09rem /* 382/75 */;
+        background-color: #fff;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+
+        .close {
+            align-self: flex-start;
+            justify-self: flex-end;
+            margin-top: 0.27rem /* 20/75 */;
+            margin-right: 0.27rem /* 20/75 */;
+            width: 0.21rem /* 16/75 */;
+            height: 0.21rem /* 16/75 */;
+        }
+
+        button {
+            border: none;
+            width: 3.96rem /* 297/75 */;
+            height: 0.89rem /* 67/75 */;
+            border-radius: 4px;
+            line-height: 0.89rem /* 67/75 */;
+            font-size: 13px;
+            background-color: $theme-color;
+            color: #fff;
+            align-self: center;
+            justify-self: center;
+            margin-bottom: 0.44rem /* 33/75 */;
+        }
+
+        .model-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 5.21rem /* 391/75 */;
+            align-self: center;
+            justify-self: center;
+
+            li {
+                list-style: none;
+                width: 100%;
+                font-size: 12px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: row;
+                height: 0.64rem /* 48/75 */;
+                margin-bottom: 0.27rem /* 20/75 */;
+
+                label {
+                    color: $font-title-color;
+                    font-weight: 400;
+                    width: 1.73rem /* 130/75 */;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                input {
+                    background-color: #f8f8f8;
+                    border: none;
+                    height: 0.51rem /* 38/75 */;
+                    color: #000000;
+                    border-radius: 0;
+                    appearance: none;
+                    flex: 1;
+                    height: 0.64rem /* 48/75 */;
+                }
+
+                select {
+                    background-color: #f8f8f8;
+                    border: none;
+                    height: 0.51rem /* 38/75 */;
+                    color: #000000;
+                    border-radius: 0;
+                    text-align: center;
+                    appearance: none;
+                    flex: 1;
+                    height: 0.64rem /* 48/75 */;
                 }
             }
         }

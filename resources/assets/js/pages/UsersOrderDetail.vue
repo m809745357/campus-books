@@ -1,11 +1,6 @@
 <template lang="html">
     <div class="order-detail">
         <div class="order-detail-top" v-if="order.status == '0000'">
-            <div class="order-status yes">
-                <div class="cricle"><img src="/images/yes.png" alt=""></div>
-                <p>已拍下</p>
-            </div>
-            <img src="/images/yi.png" alt="" class="yi">
             <div class="order-status">
                 <div class="cricle"><img src="/images/no.png" alt=""></div>
                 <p>待付款</p>
@@ -18,16 +13,11 @@
             <img src="/images/yi.png" alt="" class="yi">
             <div class="order-status">
                 <div class="cricle"><img src="/images/no.png" alt=""></div>
-                <p>待完成</p>
+                <p>待确认</p>
             </div>
         </div>
 
         <div class="order-detail-top" v-if="order.status == '0100'">
-            <div class="order-status yes">
-                <div class="cricle"><img src="/images/yes.png" alt=""></div>
-                <p>已拍下</p>
-            </div>
-            <img src="/images/yi.png" alt="" class="yi">
             <div class="order-status yes">
                 <div class="cricle"><img src="/images/yes.png" alt=""></div>
                 <p>已付款</p>
@@ -40,7 +30,41 @@
             <img src="/images/yi.png" alt="" class="yi">
             <div class="order-status">
                 <div class="cricle"><img src="/images/no.png" alt=""></div>
-                <p>待完成</p>
+                <p>待确认</p>
+            </div>
+        </div>
+
+        <div class="order-detail-top" v-if="order.status == '0110'">
+            <div class="order-status yes">
+                <div class="cricle"><img src="/images/yes.png" alt=""></div>
+                <p>已付款</p>
+            </div>
+            <img src="/images/yi.png" alt="" class="yi">
+            <div class="order-status yes">
+                <div class="cricle"><img src="/images/yes.png" alt=""></div>
+                <p>已发货</p>
+            </div>
+            <img src="/images/yi.png" alt="" class="yi">
+            <div class="order-status">
+                <div class="cricle"><img src="/images/no.png" alt=""></div>
+                <p>待确认</p>
+            </div>
+        </div>
+
+        <div class="order-detail-top" v-if="order.status == '1110'">
+            <div class="order-status yes">
+                <div class="cricle"><img src="/images/yes.png" alt=""></div>
+                <p>已付款</p>
+            </div>
+            <img src="/images/yi.png" alt="" class="yi">
+            <div class="order-status yes">
+                <div class="cricle"><img src="/images/yes.png" alt=""></div>
+                <p>已发货</p>
+            </div>
+            <img src="/images/yi.png" alt="" class="yi">
+            <div class="order-status yes">
+                <div class="cricle"><img src="/images/yes.png" alt=""></div>
+                <p>已确认</p>
             </div>
         </div>
 
@@ -72,7 +96,6 @@
             </div>
 
             <div class="order-buttons" v-if="order.status == '0000'">
-                <button type="button" name="button" @click="cancel">取消订单</button>
                 <button type="button" name="button" class="submit" @click="pay">付款</button>
             </div>
 
@@ -81,7 +104,8 @@
             </div>
 
             <div class="order-buttons" v-if="order.status == '0100'">
-                <button type="button" name="button" class="cancel">取消订单</button>
+                <button type="button" name="button" @click="cancel">交易关闭</button>
+                <button type="button" name="button" class="submit" @click="send">发货</button>
             </div>
 
             <div class="order-buttons" v-if="order.status == '0110'">
@@ -92,16 +116,26 @@
                 <button type="button" name="button" class="delete">删除订单</button>
             </div>
         </div>
+        <ShipModel :show="model.show" @hide="model.show = false" @express="addExpress"></ShipModel>
     </div>
 </template>
 
 <script>
+    import ShipModel from '../components/ShipModel.vue';
+
     export default {
         props: ['attributes'],
         data() {
             return {
-                order: this.attributes
+                order: this.attributes,
+                model: {
+                    show: false
+                }
             }
+        },
+
+        components: {
+            ShipModel
         },
         methods: {
             cancel() {
@@ -113,6 +147,16 @@
             },
             pay() {
                 window.location.href = `/orders/${this.order.id}/pay`;
+            },
+            send() {
+                this.model.show = true;
+            },
+            addExpress(data) {
+                axios.post(`/orders/${this.order.id}/express`, data)
+                    .then(response => {
+                        this.order.status = '-1000';
+                        flash('发货成功');
+                    })
             }
         }
     }

@@ -17,10 +17,11 @@
                     <li>{{ $bill->created_at->toDateString() }}</li>
                     @if ($bill->billed_type == 'App\Models\Recharge')
                         <li>充值</li>
-                    @else
-                        <li>{{ $bill->billed_type }}</li>
                     @endif
-                    <li>￥ {{ $bill->billed->money }}</li>
+                    @if ($bill->billed_type == 'App\Models\Order')
+                        <li>消费</li>
+                    @endif
+                    <li>￥ {{ $bill->billed->money() }}</li>
                 </div>
             @endforeach
 
