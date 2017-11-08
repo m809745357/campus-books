@@ -96,20 +96,20 @@
             </div>
 
             <div class="order-buttons" v-if="order.status == '0000'">
-                <button type="button" name="button" class="submit" @click="pay">付款</button>
+                <button type="button" name="button" class="submit" @click="pay">关闭交易</button>
             </div>
 
             <div class="order-buttons" v-if="order.status == '-1000'">
                 <button type="button" name="button" class="delete">删除订单</button>
             </div>
 
+            <div class="order-buttons" v-if="order.status == '-0100'">
+                <button type="button" name="button" class="delete">删除订单</button>
+            </div>
+
             <div class="order-buttons" v-if="order.status == '0100'">
                 <button type="button" name="button" @click="cancel">交易关闭</button>
                 <button type="button" name="button" class="submit" @click="send">发货</button>
-            </div>
-
-            <div class="order-buttons" v-if="order.status == '0110'">
-                <button type="button" name="button" class="delete">确认订单</button>
             </div>
 
             <div class="order-buttons" v-if="order.status == '1110'">
@@ -152,9 +152,9 @@
                 this.model.show = true;
             },
             addExpress(data) {
-                axios.post(`/orders/${this.order.id}/express`, data)
+                axios.post(`/orders/${this.order.id}/ship`, data)
                     .then(response => {
-                        this.order.status = '-1000';
+                        this.order.status = '0110';
                         flash('发货成功');
                     })
             }

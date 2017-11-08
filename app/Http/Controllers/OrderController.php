@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Book;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderPost;
+use App\Http\Requests\ShipOrderPost;
 
 class OrderController extends Controller
 {
@@ -114,5 +115,66 @@ class OrderController extends Controller
         $this->authorize('update', $order);
 
         return $order->cancel();
+    }
+
+    /**
+     * 发货
+     *
+     * @param  ShipOrderPost $request [description]
+     * @param  Order         $order   [description]
+     * @return \Illuminate\Http\Response
+     */
+    public function ship(ShipOrderPost $request, Order $order)
+    {
+        $this->authorize('ship', $order);
+
+        if (! $order->ship()) {
+            return response('发货失败', 400);
+        }
+    }
+
+    /**
+     * 关闭交易
+     *
+     * @param  Order  $order [description]
+     * @return \Illuminate\Http\Response
+     */
+    public function close(Order $order)
+    {
+        $this->authorize('close', $order);
+
+        if (! $order->close()) {
+            return response('关闭交易失败', 400);
+        }
+    }
+
+    /**
+     * 确认订单
+     *
+     * @param  Order  $order [description]
+     * @return \Illuminate\Http\Response
+     */
+    public function confirms(Order $order)
+    {
+        $this->authorize('confirms', $order);
+
+        if (! $order->confirms()) {
+            return response('确认收货失败', 400);
+        }
+    }
+
+    /**
+     * 删除
+     *
+     * @param  Order  $order [description]
+     * @return \Illuminate\Http\Response
+     */
+    public function destory(Order $order)
+    {
+        $this->authorize('delete', $order);
+
+        if (! $order->destory()) {
+            return response('删除订单失败', 400);
+        }
     }
 }

@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Bills;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use Bills;
+    use Bills, SoftDeletes;
+
+    /**
+     * 需要被转换成日期的属性。
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     protected $guarded = [];
 
@@ -95,7 +103,7 @@ class Order extends Model
      */
     public function cancel()
     {
-        $this->update(['status' => '-1000']);
+        $this->update(['status' => substr_replace($this->status, "-1", 0, 1)]);
         $this->book->update(['status' => '1']);
 
         return $this;
@@ -111,8 +119,13 @@ class Order extends Model
         $method = $this->getPaymentMethod();
 
         if ($this->$method()) {
-            return $this->update(['status' => '0100', 'pay' => $method]);
+            $this->update(['status' => '0100', 'pay' => $method]);
+
+            $this->book->update(['status' => '2']);
+
+            return $this;
         }
+
 
         return false;
     }
@@ -165,5 +178,71 @@ class Order extends Model
     public function money()
     {
         return $this->book_detail->money + $this->book_detail->freight;
+    }
+
+    /**
+     * 发货
+     *
+     * @return [type] [description]
+     */
+    public function ship()
+    {
+        $this->update([
+            'express_company' => request()->company ?? '快递公司',
+            'express_number' => request()->number ?? '快递单号',
+            'status' => '0110'
+        ]);
+
+        $this->book->update(['status' => '3']);
+
+        return $this;
+    }
+
+    /**
+     * 关闭交易
+     * @return [type] [description]
+     */
+    public function close()
+    {
+        $this->update([
+            'status' => substr_replace($this->status, "-2", 0, 1)
+        ]);
+
+        $this->book->update(['status' => '1']);
+
+        return $this;
+    }
+
+    /**
+     * 删除订单
+     * @return [type] [description]
+     */
+    public function destory()
+    {
+        $this->delete();
+
+        if (! $this->isConfirms()) {
+            $this->book->update(['status' => '1']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * 确认订单
+     * @return [type] [description]
+     */
+    public function confirms()
+    {
+        $this->update(['status' => '1110']);
+
+        $this->book->update(['status' => '4']);
+
+        return $this;
+    }
+
+    public function isConfirms()
+    {
+        return $this->status === '1110';
     }
 }

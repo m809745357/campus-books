@@ -80,8 +80,12 @@ Route::post('/upload', 'UploadController@store')->name('upload.file');
 
 Route::get('/orders', 'OrderController@index')->name('order.index');
 Route::get('/orders/{order}', 'OrderController@show')->name('order.show');
+Route::delete('/orders/{order}', 'OrderController@destory')->name('order.destory');
 Route::post('/orders/{order}/cancel', 'OrderController@cancel')->name('order.cancel');
 Route::post('/orders/{order}/pay', 'OrderController@payment')->name('order.payment');
+Route::post('/orders/{order}/ship', 'OrderController@ship')->name('order.ship');
+Route::post('/orders/{order}/close', 'OrderController@close')->name('order.close');
+Route::post('/orders/{order}/confirms', 'OrderController@confirms')->name('order.confirms');
 Route::post('/orders', 'OrderController@store')->name('order.store');
 Route::get('/orders/{order}/pay', 'OrderController@pay')->name('order.pay');
 
