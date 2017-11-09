@@ -9269,6 +9269,14 @@ button.close {
   min-height: 100vh;
 }
 
+.user-changemobile {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 0.27rem 1.17rem 1.17rem 2.07rem auto;
+  justify-items: stretch;
+  min-height: 100vh;
+}
+
 .user-bindmobile-panel {
   justify-self: center;
   -ms-flex-item-align: center;
@@ -9303,6 +9311,10 @@ button.close {
   border: none;
   color: #aaaaaa;
   padding-left: 0.57rem;
+}
+
+.user-bindmobile-form input[disabled] {
+  background-color: #fff;
 }
 
 .user-bindmobile-form span {
@@ -9345,7 +9357,7 @@ button.close {
   width: 100%;
   height: 1.17rem;
   border-radius: 0.13rem;
-  background-color: #ffad00;
+  background-color: #3e85fa;
   color: #fff;
   font-size: 17px;
   border: none;

@@ -109,6 +109,7 @@
             award() {
                 axios.post(`/replies/${this.best_reply_id}/best`)
                     .then(response => {
+                        this.thread.best_reply_id = this.best_reply_id;
                         flash('打赏成功');
                     })
                     .catch(error => {

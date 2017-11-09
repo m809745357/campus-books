@@ -5,7 +5,7 @@
     <div class="row">
         <div class="search">
             <input type="text" name="" value="" placeholder="输入关键字搜索">
-            <img src="/images/reply-menu.png" alt="">
+            <img src="/images/reply-menu.png" alt="" onclick="window.location.href='{{ route('categories.index') }}'">
         </div>
         <img class="home-top" src="/images/home-top.png" alt="">
         <div class="hot-replies">

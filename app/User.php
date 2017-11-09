@@ -205,4 +205,19 @@ class User extends Authenticatable
             'order_number' => config('wechat.app_id') . date('YmdHis') . rand(1000, 9999)
         ]));
     }
+
+    public function setAvatarAttribute($avatar)
+    {
+        return $this->attributes['avatar'] = strpos($avatar, 'http') !== false ? $avatar : \Storage::url($avatar);
+    }
+
+    public function validateMobile()
+    {
+        return $this->mobile === request()->mobile && $this->validateCode();
+    }
+
+    public function validateCode()
+    {
+        return request()->code === '666666';
+    }
 }

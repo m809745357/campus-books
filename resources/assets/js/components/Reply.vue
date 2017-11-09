@@ -54,7 +54,8 @@
         computed: {
             canReward() {
                 if (this.replyThread) {
-                    return this.authorize(user => this.replyThread.user_id == user.id) && this.replyThread.best_reply_id == null;
+                    console.log(this.authorize(user => this.replyThread.user_id == user.id));
+                    return this.authorize(user => this.replyThread.user_id == user.id) && this.replyThread.user_id !== this.reply.user_id && this.replyThread.best_reply_id == null;
                 }
             },
             canDelete() {

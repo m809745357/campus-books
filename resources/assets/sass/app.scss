@@ -778,6 +778,14 @@ $background-color: #efefef;
     min-height: 100vh;
 }
 
+.user-changemobile {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 0.27rem /* 20/75 */ 1.17rem /* 88/75 */ 1.17rem /* 88/75 */ 2.07rem /* 155/75 */ auto;
+    justify-items: stretch;
+    min-height: 100vh;
+}
+
 .user-bindmobile-panel {
     justify-self: center;
     align-self: center;
@@ -810,6 +818,10 @@ $background-color: #efefef;
         border: none;
         color: $font-desc-color;
         padding-left: 0.57rem /* 43/75 */;
+    }
+
+    input[disabled]{
+        background-color: #fff;
     }
 
     span {
@@ -850,7 +862,7 @@ $background-color: #efefef;
         width: 100%;
         height: 1.17rem /* 88/75 */;
         border-radius: 0.13rem /* 10/75 */;
-        background-color: #ffad00;
+        background-color: $theme-color;
         color: #fff;
         font-size: 17px;
         border: none;
