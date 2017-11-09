@@ -101,4 +101,14 @@ class Thread extends Model implements Repository
             }
         ])->append('is_favorited');
     }
+
+    public function money()
+    {
+        return $this->money;
+    }
+
+    public function ifHasEnoughMoney()
+    {
+        return $this->onwer->balances > $this->money();
+    }
 }

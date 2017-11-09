@@ -105,7 +105,47 @@ class ReplaiesTest extends TestCase
     }
 
     /** @test*/
-    public function is_an_authenticate_user_can_reward_thread()
+    public function is_an_authenticate_user_can_play_reward_others()
+    {
+        $user = factory('App\User')->create();
+
+        $replyUser = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->create(['user_id' => $user->id]);
+
+        $reply = factory('App\Models\Reply')->create(['user_id' => $user->id, 'thread_id' => $thread->id, 'body' => 'it is best reply']);
+
+        $this->withExceptionHandling();
+
+        $response = $this->post($reply->path() . '/best');
+
+        $response->assertStatus(403);
+
+        $reply = factory('App\Models\Reply')->create(['user_id' => $replyUser->id, 'thread_id' => $thread->id, 'body' => 'it is best reply']);
+
+        $response = $this->post($reply->path() . '/best');
+
+        $response->assertStatus(400);
+
+        $user->update(['balances' => 1000]);
+
+        $response = $this->post($reply->path() . '/best');
+
+        $this->assertEquals($reply->id, $thread->fresh()->best_reply_id);
+
+        $userBalances = $user->balances - $reply->money();
+
+        $replyUserBalances = $replyUser->balances + $reply->money();
+
+        $this->assertEquals((int)$userBalances, $user->fresh()->balances);
+
+        $this->assertEquals((int)$replyUserBalances, $replyUser->fresh()->balances);
+    }
+
+    /** @test*/
+    public function is_an_authenticate_user_can_play_reward_others_only_play_once()
     {
         $user = factory('App\User')->create();
 
@@ -117,17 +157,13 @@ class ReplaiesTest extends TestCase
 
         $reply = factory('App\Models\Reply')->create(['user_id' => $replyUser->id, 'thread_id' => $thread->id, 'body' => 'it is best reply']);
 
-        $this->post($reply->path() . '/best');
+        $reply->best();
 
-        $this->assertEquals($reply->id, $thread->fresh()->best_reply_id);
+        $this->withExceptionHandling();
 
-        $userBalances = $user->balances - $reply->money();
+        $response = $this->post($reply->path() . '/best');
 
-        $replyUserBalances = $replyUser->balances + $reply->money();
-
-        $this->assertEquals((int)$userBalances, $user->fresh()->balances);
-
-        $this->assertEquals((int)$replyUserBalances, $replyUser->fresh()->balances);
+        $response->assertStatus(400);
     }
 
     /**

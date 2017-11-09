@@ -56,4 +56,16 @@ class ReplyPolicy
     {
         return $user->id == $reply->user_id;
     }
+
+    /**
+     * 是否有权限被打赏
+     *
+     * @param  \App\User  $user
+     * @param  \App\Reply  $reply
+     * @return mixed
+     */
+    public function best(User $user, Reply $reply)
+    {
+        return $user->id !== (int)$reply->user_id;
+    }
 }

@@ -59661,9 +59661,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['attributes', 'thread'],
+    props: ['attributes', 'thread', 'replyThread'],
     data: function data() {
         return {
             reply: this.attributes,
@@ -59679,11 +59680,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
-        canDelete: function canDelete() {
+        canReward: function canReward() {
             var _this = this;
 
+            if (this.replyThread) {
+                return this.authorize(function (user) {
+                    return _this.replyThread.user_id == user.id;
+                }) && this.replyThread.best_reply_id == null;
+            }
+        },
+        canDelete: function canDelete() {
+            var _this2 = this;
+
             return this.authorize(function (user) {
-                return _this.attributes.user_id == user.id;
+                return _this2.attributes.user_id == user.id;
             });
         },
         favoritedImg: function favoritedImg() {
@@ -59723,6 +59733,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         threadDetail: function threadDetail() {
             window.location.href = '/threads/' + this.thread.channel.slug + '/' + this.thread.id;
+        },
+        reward: function reward() {
+            this.$emit('reward', this.attributes.id);
         }
     }
 });
@@ -59769,7 +59782,7 @@ var render = function() {
             "h4",
             { staticClass: "thread-title", on: { click: _vm.threadDetail } },
             [
-              _c("span", [_vm._v(_vm._s(_vm.thread.title))]),
+              _c("span", [_vm._v(_vm._s(this.thread.title))]),
               _vm._v(" "),
               _c(
                 "strong",
@@ -59804,6 +59817,14 @@ var render = function() {
       _c("span", {}),
       _vm._v(" "),
       _c("div", { staticClass: "thread-options" }, [
+        _vm.canReward
+          ? _c(
+              "span",
+              { staticClass: "thread-reward", on: { click: _vm.reward } },
+              [_vm._v("赞赏")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _vm.canDelete
           ? _c(
               "span",
@@ -65928,6 +65949,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_ThreadDetail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_ThreadDetail_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ReplyNew_vue__ = __webpack_require__(264);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ReplyNew_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ReplyNew_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_AwardModel_vue__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_AwardModel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_AwardModel_vue__);
 //
 //
 //
@@ -65952,6 +65975,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -65961,7 +65992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['attributes'],
 
     components: {
-        reply: __WEBPACK_IMPORTED_MODULE_0__components_Reply_vue___default.a, threadDetail: __WEBPACK_IMPORTED_MODULE_1__components_ThreadDetail_vue___default.a, replyNew: __WEBPACK_IMPORTED_MODULE_2__components_ReplyNew_vue___default.a
+        reply: __WEBPACK_IMPORTED_MODULE_0__components_Reply_vue___default.a, threadDetail: __WEBPACK_IMPORTED_MODULE_1__components_ThreadDetail_vue___default.a, replyNew: __WEBPACK_IMPORTED_MODULE_2__components_ReplyNew_vue___default.a, AwardModel: __WEBPACK_IMPORTED_MODULE_3__components_AwardModel_vue___default.a
     },
 
     data: function data() {
@@ -65971,7 +66002,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             thread: this.attributes,
             more: false,
             more_count: 2,
-            tips: ''
+            tips: '',
+            model: {
+                show: false
+            },
+            best_reply_id: null
         };
     },
     mounted: function mounted() {},
@@ -66016,6 +66051,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // this.$emit('removed');
             this.replies_count--;
+        },
+        showModel: function showModel(id) {
+            this.best_reply_id = id;
+            this.model.show = true;
+        },
+        award: function award() {
+            axios.post('/replies/' + this.best_reply_id + '/best').then(function (response) {
+                flash('打赏成功');
+            }).catch(function (error) {
+                flash(error.response.data, 'warning');
+            });
+
+            this.model.show = false;
         }
     }
 });
@@ -66236,10 +66284,13 @@ var render = function() {
                 [
                   key < _vm.more_count
                     ? _c("reply", {
-                        attrs: { attributes: reply },
+                        attrs: { attributes: reply, replyThread: _vm.thread },
                         on: {
                           deleted: function($event) {
                             _vm.remove(key)
+                          },
+                          reward: function($event) {
+                            _vm.showModel(reply.id)
                           }
                         }
                       })
@@ -66261,7 +66312,17 @@ var render = function() {
           _c("replyNew", { on: { created: _vm.add } })
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("AwardModel", {
+        attrs: { show: _vm.model.show },
+        on: {
+          hide: function($event) {
+            _vm.model.show = false
+          },
+          submit: _vm.award
+        }
+      })
     ],
     1
   )
@@ -66693,8 +66754,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
@@ -66750,7 +66809,10 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("span", [_vm._v("\n            >\n        ")])
+          _c("img", {
+            staticClass: "arrow",
+            attrs: { src: "/images/arrow.png", alt: "" }
+          })
         ]
       )
     })
@@ -68017,6 +68079,213 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(306)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(308)
+/* template */
+var __vue_template__ = __webpack_require__(309)
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AwardModel.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] AwardModel.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-13240c49", Component.options)
+  } else {
+    hotAPI.reload("data-v-13240c49", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(307);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("18b52f0f", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-13240c49\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./AwardModel.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.7@css-loader/index.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-13240c49\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.0.5@vue-loader/lib/selector.js?type=styles&index=0!./AwardModel.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 308 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['show'],
+    data: function data() {
+        return {
+            model: {
+                show: false
+            }
+        };
+    },
+
+    methods: {
+        hide: function hide() {
+            this.$emit('hide');
+        },
+        submit: function submit() {
+
+            this.$emit('submit');
+        }
+    }
+});
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return this.show
+    ? _c("div", { staticClass: "award-model", on: { click: _vm.hide } }, [
+        _c(
+          "div",
+          {
+            staticClass: "model",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("img", {
+              staticClass: "close",
+              attrs: { src: "/images/x.png" },
+              on: { click: _vm.hide }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "model-info" }, [
+              _vm._v("\n            是否赞赏给这个用户\n        ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "cancel",
+                  attrs: { type: "button", name: "button" },
+                  on: { click: _vm.hide }
+                },
+                [_vm._v("取消")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button", name: "button" },
+                  on: { click: _vm.submit }
+                },
+                [_vm._v("打赏")]
+              )
+            ])
+          ]
+        )
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-13240c49", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

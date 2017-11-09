@@ -9,7 +9,13 @@
 
             <div class="replies-body">
                 <div v-for="(reply, key) in replies" :key="reply.id">
-                    <reply :attributes="reply" v-if="key < more_count" @deleted="remove(key)"></reply>
+                    <reply
+                    v-if="key < more_count"
+                    :attributes="reply"
+                    :replyThread="thread"
+                    @deleted="remove(key)"
+                    @reward="showModel(reply.id)"
+                    ></reply>
                 </div>
             </div>
 
@@ -19,6 +25,7 @@
 
             <replyNew @created="add"></replyNew>
         </div>
+        <AwardModel :show="model.show" @hide="model.show = false" @submit="award"></AwardModel>
     </div>
 </template>
 
@@ -26,12 +33,13 @@
     import reply from '../components/Reply.vue';
     import threadDetail from '../components/ThreadDetail.vue';
     import replyNew from '../components/ReplyNew.vue';
+    import AwardModel from '../components/AwardModel.vue';
 
     export default {
         props: ['attributes'],
 
         components: {
-            reply, threadDetail, replyNew
+            reply, threadDetail, replyNew, AwardModel
         },
 
         data() {
@@ -42,6 +50,10 @@
                 more: false,
                 more_count: 2,
                 tips: '',
+                model: {
+                    show: false
+                },
+                best_reply_id: null
             }
         },
 
@@ -89,6 +101,21 @@
 
                 // this.$emit('removed');
                 this.replies_count --;
+            },
+            showModel(id) {
+                this.best_reply_id = id;
+                this.model.show = true;
+            },
+            award() {
+                axios.post(`/replies/${this.best_reply_id}/best`)
+                    .then(response => {
+                        flash('打赏成功');
+                    })
+                    .catch(error => {
+                        flash(error.response.data, 'warning');
+                    });
+
+                this.model.show = false;
             }
         }
     }

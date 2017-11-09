@@ -15,13 +15,13 @@
             @foreach ($bills as $bill)
                 <div class="bills-desc">
                     <li>{{ $bill->created_at->toDateString() }}</li>
-                    @if ($bill->billed_type == 'App\Models\Recharge')
-                        <li>充值</li>
+                    <li>{{ $bill->remark }}</li>
+                    @if ($bill->change_type === 'increment')
+                        <li>+￥ {{ $bill->billed->money() }}</li>
                     @endif
-                    @if ($bill->billed_type == 'App\Models\Order')
-                        <li>消费</li>
+                    @if ($bill->change_type === 'decrement')
+                        <li>-￥ {{ $bill->billed->money() }}</li>
                     @endif
-                    <li>￥ {{ $bill->billed->money() }}</li>
                 </div>
             @endforeach
 

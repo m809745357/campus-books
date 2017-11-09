@@ -6,9 +6,7 @@
                 <h4 class="channel-name">{{ channel.name }}</h4>
                 <p class="channel-desc">{{ channel.desc }}</p>
             </div>
-            <span>
-                >
-            </span>
+            <img src="/images/arrow.png" alt="" class="arrow">
         </div>
     </div>
 

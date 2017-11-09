@@ -14,7 +14,7 @@
         </div>
         <div class="thread-body">
             <h4 class="thread-title" v-if="this.thread" @click="threadDetail">
-                <span>{{ thread.title }}</span>
+                <span>{{ this.thread.title }}</span>
                 <strong v-show="this.thread.is_reward" class="thread-reward-money">
                      <img src="/images/price.png" width="19"> {{ this.thread.money }}
                 </strong>
@@ -28,6 +28,7 @@
 
             </span>
             <div class="thread-options">
+                <span class="thread-reward" v-if="canReward" @click="reward">赞赏</span>
                 <span class="thread-delete" v-if="canDelete" @click="destroy">删除</span>
             </div>
         </div>
@@ -36,7 +37,7 @@
 
 <script>
     export default {
-        props: ['attributes', 'thread'],
+        props: ['attributes', 'thread', 'replyThread'],
         data() {
             return {
                 reply: this.attributes,
@@ -51,6 +52,11 @@
             }
         },
         computed: {
+            canReward() {
+                if (this.replyThread) {
+                    return this.authorize(user => this.replyThread.user_id == user.id) && this.replyThread.best_reply_id == null;
+                }
+            },
             canDelete() {
                 return this.authorize(user => this.attributes.user_id == user.id);
             },
@@ -91,6 +97,9 @@
             },
             threadDetail() {
                 window.location.href = `/threads/${this.thread.channel.slug}/${this.thread.id}`;
+            },
+            reward() {
+                this.$emit('reward', this.attributes.id);
             }
         }
     }

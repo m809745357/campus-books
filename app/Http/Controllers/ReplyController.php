@@ -38,8 +38,24 @@ class ReplyController extends Controller
         }
     }
 
+    /**
+     * 打赏
+     *
+     * @param  Reply  $reply [description]
+     * @return \Illuminate\Http\Response
+     */
     public function best(Reply $reply)
     {
+        $this->authorize('best', $reply);
+
+        if (! $reply->isBeenReward()) {
+            return response('已经打赏过一个用户', 400);
+        }
+
+        if (! $reply->ifHasEnoughMoney()) {
+            return response('没有足够的余额支付，请充值', 400);
+        }
+
         $reply->best();
     }
 

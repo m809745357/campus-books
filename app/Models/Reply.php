@@ -70,13 +70,32 @@ class Reply extends Model
     }
 
     /**
+     * 判断是否被打赏
+     * @return boolean [description]
+     */
+    public function isBeenReward()
+    {
+        return is_null($this->thread->best_reply_id);
+    }
+
+    /**
      * 获取打赏金额
      *
      * @return [type] [description]
      */
     public function money()
     {
-        return $this->thread->money;
+        return $this->thread->money();
+    }
+
+    /**
+     * 是否具有足够多的金额支付
+     *
+     * @return [type] [description]
+     */
+    public function ifHasEnoughMoney()
+    {
+        return $this->thread->ifHasEnoughMoney();
     }
 
     /**

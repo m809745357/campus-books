@@ -8509,14 +8509,26 @@ button.close {
   color: #333333;
 }
 
-.thread-reward {
-  width: .93333333rem;
-  height: .53333333rem;
-  background-color: #3e85fa;
-  line-height: .53333333rem;
-  font-size: 10px;
+.thread-delete {
+  display: block;
+  width: 1.13rem;
+  height: 0.53rem;
+  line-height: 0.53rem;
+  font-size: 11px;
+  color: #aaaaaa;
+  background-color: #e9e9e9;
   text-align: center;
+}
+
+.thread-reward {
+  display: block;
+  width: 1.13rem;
+  height: 0.53rem;
+  line-height: 0.53rem;
+  font-size: 11px;
   color: #fff;
+  background-color: #3e85fa;
+  text-align: center;
 }
 
 .thread-time,
@@ -8756,16 +8768,6 @@ button.close {
   padding: 10px;
   font-size: 12px;
   color: #aaa;
-}
-
-.thread-delete {
-  height: .57333333rem;
-  width: 1.4rem;
-  border: 1px solid #e9e9e9;
-  display: block;
-  border-radius: .28666666rem;
-  text-align: center;
-  line-height: .57333333rem;
 }
 
 /**
@@ -11512,5 +11514,98 @@ button.close {
       -ms-flex: 1;
           flex: 1;
   height: 0.64rem;
+}
+
+.award-model {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.award-model .model {
+  width: 6.67rem;
+  height: 5.09rem;
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.award-model .model .close {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  justify-self: flex-end;
+  margin-top: 0.27rem;
+  margin-right: 0.27rem;
+  width: 0.21rem;
+  height: 0.21rem;
+}
+
+.award-model .model .buttons {
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 5.32rem;
+}
+
+.award-model .model .buttons button {
+  border: none;
+  width: 2.51rem;
+  height: 0.89rem;
+  border-radius: 4px;
+  line-height: 0.89rem;
+  font-size: 13px;
+  background-color: #3e85fa;
+  color: #fff;
+  margin-bottom: 0.44rem;
+}
+
+.award-model .model .buttons button.cancel {
+  background-color: #e9e9e9;
+  color: #333333;
+}
+
+.award-model .model .model-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 5.21rem;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
 }
 

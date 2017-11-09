@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="thread-menu">
-            <li><a href="{{ route('user.threads') }}">提问</a></li>
-            <li><a class="on" href="{{ route('user.replies') }}">回答</a></li>
+            <li onclick="window.location.href='{{ route('user.threads') }}'">提问</li>
+            <li class="on" onclick="window.location.href='{{ route('user.replies') }}'">回答</li>
         </div>
         @foreach ($replies as $reply)
             <reply :attributes="{{ $reply }}" :thread="{{ $reply->thread }}"></reply>
