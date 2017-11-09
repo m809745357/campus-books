@@ -6,7 +6,7 @@
             <li :class="menu == '3' ? 'on' : ''" @click="change(3)">我的卖出</li>
         </div>
 
-        <div class="order-info" v-for="(order, index) in orders" :key="index" v-if="menu == '2'" @click="orderDetail(order.id)">
+        <div class="order-info" v-for="(order, index) in orders" :key="index" v-if="menu == '2'" @click="orderDetail(order)">
             <div class="order-info-top">
                 <h4>商品编号：{{ order.book_detail.book_number }}</h4>
                 <p>{{ order.book_detail.created_at }}</p>
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="order-info" v-for="(book, index) in books" :key="index" v-if="menu == '1' || menu == '3'" @click="orderDetail(book.order.id)">
+        <div class="order-info" v-for="(book, index) in books" :key="index" v-if="menu == '1' || menu == '3'" @click="orderDetail(book.order)">
             <div class="order-info-top" v-if="book.status >= status">
                 <h4>商品编号：{{ book.book_number }}</h4>
                 <p>{{ book.created_at }}</p>
@@ -104,8 +104,12 @@
                     window.location.hash = '#sell';
                 }
             },
-            orderDetail(id) {
-                window.location.href = `/orders/${id}`;
+            orderDetail(order) {
+                if (order) {
+                    window.location.href = `/orders/${order.id}`;
+                } else {
+                    flash('订单不存在或已经删除');
+                }
             }
         }
     }

@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="order-detail-top" v-if="order.status == '0100'">
+        <div class="order-detail-top" v-if="order.status == '0100' || order.status == '-1100'">
             <div class="order-status yes">
                 <div class="cricle"><img src="/images/yes.png" alt=""></div>
                 <p>已付款</p>
@@ -92,28 +92,23 @@
             <div class="order-detail-other">
                 <li><label>备注：</label><span>{{ order.remark }}</span></li>
                 <li><label>实付：</label><span>￥ {{ order.book_detail.money + order.book_detail.freight }}</span></li>
-                <li v-if="order.status == '0100'"><label>支付方式：</label><span>{{ order.pay }}</span></li>
+                <li v-if="order.status == '0100' || order.status == '0110' || order.status == '1110'"><label>支付方式：</label><span>{{ order.pay }}</span></li>
+                <li><label>物流方式：</label><span>{{ order.book_detail.logistics}}</span></li>
+                <li v-if="order.status == '0110' || order.status == '1110'"><label>快递公司：</label><span>{{ order.express_company }}</span></li>
+                <li v-if="order.status == '0110' || order.status == '1110'"><label>快递编号：</label><span>{{ order.express_number }}</span></li>
             </div>
 
             <div class="order-buttons" v-if="order.status == '0000'">
-                <button type="button" name="button" class="submit" @click="pay">关闭交易</button>
-            </div>
-
-            <div class="order-buttons" v-if="order.status == '-1000'">
-                <button type="button" name="button" class="delete">删除订单</button>
-            </div>
-
-            <div class="order-buttons" v-if="order.status == '-0100'">
-                <button type="button" name="button" class="delete">删除订单</button>
+                <button type="button" name="button" class="submit" @click="close">关闭交易</button>
             </div>
 
             <div class="order-buttons" v-if="order.status == '0100'">
-                <button type="button" name="button" @click="cancel">交易关闭</button>
+                <button type="button" name="button" @click="close">交易关闭</button>
                 <button type="button" name="button" class="submit" @click="send">发货</button>
             </div>
 
-            <div class="order-buttons" v-if="order.status == '1110'">
-                <button type="button" name="button" class="delete">删除订单</button>
+            <div class="order-buttons" v-if="order.status == '1110' || order.status == '-1100' || order.status == '-0100' || order.status == '-1000'">
+                <button type="button" name="button" class="delete" @click="destory">删除订单</button>
             </div>
         </div>
         <ShipModel :show="model.show" @hide="model.show = false" @express="addExpress"></ShipModel>
@@ -151,12 +146,50 @@
             send() {
                 this.model.show = true;
             },
+            close() {
+                axios.post(`/orders/${this.order.id}/close`)
+                    .then(response => {
+                        this.order.status = "-2" + this.order.status.substring(1);
+                        flash('关闭交易成功');
+                        window.location.href = '/users/orders';
+                    }).catch(error => {
+                        if (error.response.status == 422) {
+                            this.showModel(error.response.data)
+                        }
+                    });
+            },
+            destory() {
+                axios.delete(`/orders/${this.order.id}`)
+                    .then(response => {
+                        this.order.status = "-1" + this.order.status.substring(1);
+                        flash('删除订单成功');
+                        window.location.href = '/users/orders';
+                    }).catch(error => {
+                        if (error.response.status == 422) {
+                            this.showModel(error.response.data)
+                        }
+                    });
+            },
             addExpress(data) {
-                axios.post(`/orders/${this.order.id}/ship`, data)
+                axios.post(`/orders/${this.order.id}/ship`, data.data)
                     .then(response => {
                         this.order.status = '0110';
+                        this.model.show = false;
+                        this.order.express_company = data.data.company;
+                        this.order.express_number = data.data.number;
                         flash('发货成功');
+                    }).catch(error => {
+                        if (error.response.status == 422) {
+                            this.showModel(error.response.data)
+                        }
+                    });
+            },
+            showModel(data) {
+                $.each(data.errors, (index, val) => {
+                    val.map((value, key) => {
+                        flash(value, 'warning')
                     })
+                })
             }
         }
     }

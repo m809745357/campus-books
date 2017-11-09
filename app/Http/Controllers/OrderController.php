@@ -101,6 +101,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        if (! auth()->user()->can('view', $order)) {
+            return back();
+        }
+
         return view('orders.show', compact('order'));
     }
 

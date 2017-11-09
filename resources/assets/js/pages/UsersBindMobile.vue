@@ -83,6 +83,7 @@
                     code: this.code
                 }).then(response => {
                     console.log(response.data);
+                    window.location.href = "/users";
                 }).catch(error => {
                     if (error.response.status == 422) {
                         this.showModel(error.response.data)

@@ -2212,7 +2212,7 @@ $background-color: #efefef;
         }
 
         .order-detail-other {
-            height: 1.07rem /* 80/75 */;
+            min-height: 1.07rem /* 80/75 */;
             margin-top: 0.69rem /* 52/75 */;
 
             li {

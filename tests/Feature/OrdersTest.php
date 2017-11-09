@@ -242,15 +242,23 @@ class OrdersTest extends TestCase
 
         $this->actingAs($user);
 
-        $order = factory('App\Models\Order')->create(['user_id' => $user->id]);
+        $seller = factory('App\User')->create();
+
+        $book = factory('App\Models\Book')->create(['user_id' => $seller->id]);
+
+        $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
         $response = $this->post($order->path() . '/pay', ['paymet' => 'balances']);
 
         $this->assertEquals('0100', $order->fresh()->status);
 
-        $balances = $user->balances - $order->book_detail->money - $order->book_detail->freight;
+        $userBalances = $user->balances - $order->money();
 
-        $this->assertEquals((int)$balances, $user->fresh()->balances);
+        $sellerBalances = $seller->balances + $order->money();
+
+        $this->assertEquals((int)$userBalances, $user->fresh()->balances);
+
+        $this->assertEquals((int)$sellerBalances, $seller->fresh()->balances);
     }
 
     /** @test */
@@ -260,7 +268,9 @@ class OrdersTest extends TestCase
 
         $this->actingAs($user);
 
-        $book = factory('App\Models\Book')->create();
+        $seller = factory('App\User')->create();
+
+        $book = factory('App\Models\Book')->create(['user_id' => $seller->id]);
 
         $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
@@ -271,6 +281,10 @@ class OrdersTest extends TestCase
         $this->assertEquals('-1100', $order->fresh()->status);
 
         $this->assertEquals('1', $book->fresh()->status);
+
+        $this->assertEquals($user->balances, $user->fresh()->balances);
+
+        $this->assertEquals($seller->balances, $seller->fresh()->balances);
     }
 
     /** @test */

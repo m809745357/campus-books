@@ -19,7 +19,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
-        //
+        return $user->id == $order->book->user_id || $user->id == $order->user_id;
     }
 
     /**

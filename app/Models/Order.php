@@ -24,8 +24,7 @@ class Order extends Model
         parent::bootTraits();
 
         static::creating(function ($query) {
-            $book = Book::find($query->book_detail->id);
-            $book->update(['status' => 2]);
+            $query->book->update(['status' => 2]);
         });
     }
 
@@ -106,6 +105,14 @@ class Order extends Model
         $this->update(['status' => substr_replace($this->status, "-1", 0, 1)]);
         $this->book->update(['status' => '1']);
 
+        // TODO:退款
+        $this->billed(array('change_type' => 'increment', 'remark' => '退款'));
+        $this->bills()->create([
+            'user_id' => $this->book->user_id,
+            'change_type' => 'decrement',
+            'remark' => '退款'
+        ]);
+
         return $this;
     }
 
@@ -147,7 +154,19 @@ class Order extends Model
      */
     public function balances()
     {
-        return $this->ifHasEnoughMoney() ? $this->billed() : false;
+        return $this->ifHasEnoughMoney() ? $this->payRecord() : false;
+    }
+
+    public function payRecord()
+    {
+        $this->billed(array('change_type' => 'decrement', 'remark' => '支付'));
+        $this->bills()->create([
+            'user_id' => $this->book->user_id,
+            'change_type' => 'increment',
+            'remark' => '收款'
+        ]);
+
+        return $this;
     }
 
     /**
