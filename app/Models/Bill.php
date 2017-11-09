@@ -19,6 +19,9 @@ class Bill extends Model
             if ($query->billed_type == 'App\Models\Order') {
                 $query->onwer()->{$query->change_type}('balances', $query->billed->money());
             }
+            if ($query->billed_type == 'App\Models\Reply') {
+                $query->onwer()->{$query->change_type}('balances', $query->billed->money());
+            }
         });
     }
 

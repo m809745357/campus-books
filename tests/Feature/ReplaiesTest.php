@@ -107,15 +107,27 @@ class ReplaiesTest extends TestCase
     /** @test*/
     public function is_an_authenticate_user_can_reward_thread()
     {
-        // $user = factory('App\User')->create();
-        //
-        // $this->actingAs($user);
-        //
-        // $thread = factory('App\Models\Thread')->create();
-        //
-        // $reply = factory('App\Models\Reply')->create(['thread_id' => $thread->id, 'body' => 'it is best reply']);
-        //
-        // $this->post();
+        $user = factory('App\User')->create();
+
+        $replyUser = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $thread = factory('App\Models\Thread')->create(['user_id' => $user->id]);
+
+        $reply = factory('App\Models\Reply')->create(['user_id' => $replyUser->id, 'thread_id' => $thread->id, 'body' => 'it is best reply']);
+
+        $this->post($reply->path() . '/best');
+
+        $this->assertEquals($reply->id, $thread->fresh()->best_reply_id);
+
+        $userBalances = $user->balances - $reply->money();
+
+        $replyUserBalances = $replyUser->balances + $reply->money();
+
+        $this->assertEquals((int)$userBalances, $user->fresh()->balances);
+
+        $this->assertEquals((int)$replyUserBalances, $replyUser->fresh()->balances);
     }
 
     /**

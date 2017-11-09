@@ -38,6 +38,11 @@ class ReplyController extends Controller
         }
     }
 
+    public function best(Reply $reply)
+    {
+        $reply->best();
+    }
+
     /**
      * 删除回复
      *

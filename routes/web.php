@@ -45,6 +45,7 @@ Route::post('/threads/{channel}/{thread}/reply', 'ReplyController@store')->name(
 
 
 Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
+Route::post('/replies/{reply}/best', 'ReplyController@best')->name('reply.best');
 Route::post('/replies/{reply}/favorites', 'ReplyFavoriteController@store')->name('reply.favorite');
 Route::delete('/replies/{reply}/favorites', 'ReplyFavoriteController@destory')->name('reply.unfavorite');
 
