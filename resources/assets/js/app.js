@@ -57,6 +57,7 @@ Vue.component('thread', require('./components/Thread.vue'));
 Vue.component('thread-detail', require('./components/ThreadDetail.vue'));
 
 Vue.component('chat', require('./pages/Chat.vue'));
+Vue.component('withdraws', require('./pages/Withdraws.vue'));
 Vue.component('notifications', require('./pages/Notifications.vue'));
 Vue.component('book-new', require('./pages/BookNew.vue'));
 Vue.component('book-detail', require('./pages/BookDetail.vue'));

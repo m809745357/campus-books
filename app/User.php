@@ -140,6 +140,21 @@ class User extends Authenticatable
         return $this->hasMany(Models\Order::class, 'user_id');
     }
 
+    /**
+     * 用户提现
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function withdraws()
+    {
+        return $this->hasMany(Models\Withdraw::class, 'user_id');
+    }
+
+    /**
+     * 添加通讯录
+     *
+     * @param [type] $user [description]
+     */
     public function addContacts($user)
     {
         if (! $this->isContacted($user)) {
@@ -148,16 +163,33 @@ class User extends Authenticatable
         return $this->contacts();
     }
 
+    /**
+     * 判断通讯录中是否有这个人
+     *
+     * @param  [type]  $user [description]
+     * @return boolean       [description]
+     */
     public function isContacted($user)
     {
         return $this->contacts()->where(['contact_user_id' => $user->id])->exists();
     }
 
+    /**
+     * 查找所有的通讯录的人
+     *
+     * @return [type] [description]
+     */
     public function chats()
     {
         return $this->contacts;
     }
 
+    /**
+     * 打招呼
+     *
+     * @param  [type] $user [description]
+     * @return [type]       [description]
+     */
     public function sayHello($user)
     {
         if (! auth()->user()->messaged()->where(['to_user_id' => $user->id])->exists()) {
@@ -168,6 +200,11 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * 获取我的信息
+     *
+     * @return [type] [description]
+     */
     public function contact()
     {
         return $this->contacts->load(['person.messaged', 'onwer.notifications'])
@@ -183,21 +220,41 @@ class User extends Authenticatable
         });
     }
 
+    /**
+     * 添加用户地址
+     *
+     * @return [type] [description]
+     */
     public function address()
     {
         return $this->hasMany(Models\Address::class, 'user_id');;
     }
 
+    /**
+     * 查询通知记录个数
+     *
+     * @return [type] [description]
+     */
     public function getNotificationCountAttribute()
     {
         return $this->unreadNotifications()->count();
     }
 
+    /**
+     * 标记已读
+     *
+     * @return [type] [description]
+     */
     public function markAsRead()
     {
         return $this->unreadNotifications->markAsRead();
     }
 
+    /**
+     * 添加用户订单
+     *
+     * @param [type] $order [description]
+     */
     public function addOrder($order)
     {
         return $this->orders()->create(array_merge($order, [
@@ -206,18 +263,59 @@ class User extends Authenticatable
         ]));
     }
 
+    /**
+     * 设置头像
+     *
+     * @param [type] $avatar [description]
+     */
     public function setAvatarAttribute($avatar)
     {
         return $this->attributes['avatar'] = strpos($avatar, 'http') !== false ? $avatar : \Storage::url($avatar);
     }
 
+    /**
+     * 判断手机号码是否为当前用户的
+     *
+     * @return [type] [description]
+     */
     public function validateMobile()
     {
         return $this->mobile === request()->mobile && $this->validateCode();
     }
 
+    /**
+     * 判断验证码是否相同
+     *
+     * @return [type] [description]
+     */
     public function validateCode()
     {
         return request()->code === '666666';
+    }
+
+    /**
+     * 添加提现记录
+     *
+     * @param Array $widthdraw
+     */
+    public function addWithdraw($widthdraw)
+    {
+        if (! $this->ifHasEnoughBalances()) {
+            return false;
+        }
+
+        $this->decrement('balances', request()->money);
+
+        return $this->withdraws()->create($widthdraw);
+    }
+
+    /**
+     * 判断是否有足够的金额提现
+     *
+     * @return boolean
+     */
+    public function ifHasEnoughBalances()
+    {
+        return $this->balances > request()->money;
     }
 }

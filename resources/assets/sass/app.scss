@@ -2602,3 +2602,70 @@ $background-color: #efefef;
         }
     }
 }
+
+.withdraws {
+    padding-top: 0.53rem /* 40/75 */;
+    margin: 0 0.4rem /* 30/75 */;
+
+    .withdraws-panel {
+        height: 5.55rem /* 416/75 */;
+        background-color: #fff;
+        padding: 0.73rem /* 55/75 */ 0.8rem /* 60/75 */ 0.36rem /* 27/75 */  0.8rem /* 60/75 */;
+        margin-bottom: 1.19rem /* 89/75 */;
+
+        .withdraws-panel-title {
+            margin-bottom: 0.33rem /* 25/75 */;
+
+            h4 {
+                font-size: 13px;
+                color: $font-title-color;
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .withdraws-panel-content {
+            display: flex;
+            align-items: center;
+
+            input {
+                width: 100%;
+                background: none;
+                border: none;
+                border-bottom: 1px solid $border-color;
+                height: 1.99rem /* 149/75 */;
+                line-height: 1.99rem /* 149/75 */;
+                font-size: 23px;
+            }
+
+            label {
+                height: 1.99rem /* 149/75 */;
+                line-height: 1.99rem /* 149/75 */;
+                font-size: 23px;
+                margin: 0;
+                border-bottom: 1px solid $border-color;
+            }
+        }
+
+        .withdraws-panel-footer {
+            margin-top: 0.61rem /* 46/75 */;
+
+            p {
+                margin-bottom: 0.27rem /* 20/75 */;
+                font-size: 12px;
+                color: $font-desc-color;
+                padding: 0;
+            }
+        }
+    }
+
+    button {
+        width: 100%;
+        height: 1.17rem /* 88/75 */;
+        border-radius: 0.13rem /* 10/75 */;
+        background-color: $theme-color;
+        color: #fff;
+        font-size: 17px;
+        border: none;
+    }
+}
