@@ -163,6 +163,8 @@ class UsersTest extends TestCase
 
         $this->actingAs($user);
 
+        $user->mobile = '18367831980';
+        $user->save();
         $response = $this->json('post', '/users/validatemobile', [
             'mobile' => $user->mobile,
             'code' => '666666'

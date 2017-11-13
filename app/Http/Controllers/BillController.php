@@ -18,13 +18,14 @@ class BillController extends Controller
     }
 
     /**
-     * 创建充值
+     * 消费记录
      *
-     * @param  Recharge $recharge
-     * @return [type]             [description]
+     * @return \Illuminate\Http\Response
      */
-    public function store(Recharge $recharge)
+    public function index()
     {
-        $recharge->billed(array('remark' => '充值', 'change_type' => 'increment'));
+        $bills = auth()->user()->bills->load('billed');
+
+        return view('users.bills', compact('bills'));
     }
 }

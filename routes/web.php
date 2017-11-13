@@ -30,12 +30,18 @@ Route::get('/users/favorites/thread', 'ThreadFavoriteController@index')->name('u
 Route::get('/users/threads', 'UserController@threads')->name('user.threads');
 Route::get('/users/replies', 'UserController@replies')->name('user.replies');
 Route::get('/users/demands', 'UserController@demands')->name('user.demands');
-Route::get('/users/balances', 'UserController@balances')->name('user.balances');
-Route::get('/users/recharges', 'UserController@recharges')->name('user.recharges');
-Route::get('/users/bills', 'UserController@bills')->name('user.bills');
 Route::get('/users/notifications', 'NotificationController@index')->name('user.notifications');
 Route::get('/users/books', 'UserController@books')->name('user.books');
 Route::get('/users/orders', 'UserController@orders')->name('user.orders');
+
+Route::get('/bills', 'BillController@index')->name('user.bills');
+
+Route::get('/balances', 'BalanceController@index')->name('balances.index');
+Route::get('/recharges', 'RechargeController@index')->name('recharges.index');
+Route::post('/recharge/{recharge}/bill', 'RechargeController@store')->name('bill.create');
+
+Route::get('/withdraws', 'WithdrawController@index')->name('withdraws.index');
+Route::post('/withdraws', 'WithdrawController@store')->name('withdraws.store');
 
 
 Route::get('/threads', 'ThreadController@index')->name('threads.index');
@@ -65,8 +71,6 @@ Route::get('/demands', 'DemandController@index')->name('demands.index');
 Route::get('/demands/create', 'DemandController@create')->name('demands.create');
 Route::post('/demands', 'DemandController@store')->name('demands.store');
 Route::get('/demands/{demand}', 'DemandController@show')->name('demands.show');
-
-Route::post('/recharge/{recharge}/bill', 'BillController@store')->name('bill.create');
 
 Route::get('/books', 'BookController@index')->name('books.index');
 Route::get('/books/create', 'BookController@create')->name('books.create');

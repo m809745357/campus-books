@@ -45,7 +45,7 @@
                     {
                         icon: '/images/orders.png',
                         name: '账户明细',
-                        url: `users/bills`,
+                        url: `/bills`,
                     },
                     {
                         icon: '/images/posts.png',
@@ -84,7 +84,7 @@
                 window.location.href = '/users/profile';
             },
             balances() {
-                window.location.href = '/users/balances';
+                window.location.href = '/balances';
             },
             notifications() {
                 window.location.href = '/users/notifications';

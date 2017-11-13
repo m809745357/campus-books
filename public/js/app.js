@@ -67179,7 +67179,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             items: [{
                 icon: '/images/orders.png',
                 name: '账户明细',
-                url: 'users/bills'
+                url: '/bills'
             }, {
                 icon: '/images/posts.png',
                 name: '我的发布',
@@ -67213,7 +67213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.location.href = '/users/profile';
         },
         balances: function balances() {
-            window.location.href = '/users/balances';
+            window.location.href = '/balances';
         },
         notifications: function notifications() {
             window.location.href = '/users/notifications';

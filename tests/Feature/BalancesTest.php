@@ -18,7 +18,7 @@ class BalancesTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get('/users/balances');
+        $response = $this->get('/balances');
 
         $response->assertSee($user->balances);
     }
@@ -32,7 +32,7 @@ class BalancesTest extends TestCase
 
         $recharge = factory('App\Models\Recharge')->create();
 
-        $response = $this->get('/users/recharges');
+        $response = $this->get('/recharges');
 
         $response->assertSee((string)$recharge->money);
     }
