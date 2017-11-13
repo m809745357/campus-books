@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Recharge;
+use App\Http\Requests\UpdateUserPost;
 
 class UserController extends Controller
 {
@@ -152,5 +153,18 @@ class UserController extends Controller
         $user = auth()->user();
         $user->mobile = $request->mobile;
         $user->save();
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param  UpdateUserPost $request [description]
+     * @return [type]                  [description]
+     */
+    public function update(UpdateUserPost $request)
+    {
+        auth()->user()->update($request->validated());
+
+        return response(auth()->user(), 201);
     }
 }

@@ -185,6 +185,7 @@ $factory->define(App\Models\Order::class, function (Faker $faker) {
             return factory('App\Models\Address')->create()->id;
         },
         'pay' => '',
-        'order_number' => config('wechat.app_id') . date('YmdHis') . rand(1000, 9999)
+        'order_number' => config('wechat.app_id') . date('YmdHis') . rand(1000, 9999),
+        'status' => '0000'
     ];
 });

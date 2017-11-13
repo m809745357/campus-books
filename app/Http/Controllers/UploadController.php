@@ -17,6 +17,6 @@ class UploadController extends Controller
             'file' => ['required', 'file']
         ]);
 
-        return response(request()->file('file')->store('books', 'public'), 201);
+        return response(request()->file('file')->store($request->directory ?? 'books', 'public'), 201);
     }
 }

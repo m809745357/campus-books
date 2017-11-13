@@ -14,10 +14,13 @@ class Bill extends Model
 
         static::creating(function ($query) {
             if ($query->billed_type == 'App\Models\Recharge') {
-                $query->onwer()->increment('balances', $query->billed->money);
+                $query->onwer()->{$query->change_type}('balances', $query->billed->money());
             }
             if ($query->billed_type == 'App\Models\Order') {
-                $query->onwer()->decrement('balances', $query->billed->money());
+                $query->onwer()->{$query->change_type}('balances', $query->billed->money());
+            }
+            if ($query->billed_type == 'App\Models\Reply') {
+                $query->onwer()->{$query->change_type}('balances', $query->billed->money());
             }
         });
     }

@@ -48,7 +48,11 @@ class BalancesTest extends TestCase
 
         $this->post("/recharge/{$recharge->id}/bill");
 
-        $this->assertDatabaseHas('bills', ['user_id' => $user->id, 'billed_id' => $recharge->id, 'billed_type' => 'App\Models\Recharge']);
+        $this->assertDatabaseHas('bills', [
+            'user_id' => $user->id,
+            'billed_id' => $recharge->id,
+            'billed_type' => 'App\Models\Recharge',
+        ]);
 
         $this->assertEquals($user->balances + $recharge->money, $user->fresh()->balances);
     }

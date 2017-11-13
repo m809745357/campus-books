@@ -25,6 +25,6 @@ class BillController extends Controller
      */
     public function store(Recharge $recharge)
     {
-        $recharge->billed();
+        $recharge->billed(array('remark' => '充值', 'change_type' => 'increment'));
     }
 }

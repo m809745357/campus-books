@@ -1,11 +1,26 @@
 <template lang="html">
-    <div class="user-bindmobile con">
-        <div class="user-bindmobile-panel">
-            <img :src="user.avatar" alt="" class="user-bindmobile-img">
-            <h4 class="user-bindmobile-title">{{ user.nickname }}</h4>
+    <div class="user-changemobile con" v-if="! validate">
+        <div></div>
+        <div class="user-bindmobile-form con">
+            <span>原手机号</span>
+            <input type="tel" v-model="user.mobile" disabled>
         </div>
         <div class="user-bindmobile-form con">
-            <span>手机号</span>
+            <span>验证码</span>
+            <input type="text" v-model="code" placeholder="请输入短信验证码">
+            <button type="button" name="button" @click="sendMessage">
+                <span v-if="time <= 60">{{time}}秒后再次发送</span>
+                <template v-if="time > 60">获取验证码</template>
+            </button>
+        </div>
+        <div class="user-bindmobile-submit con">
+            <button type="button" name="button" @click="changeMobile">验证</button>
+        </div>
+    </div>
+    <div class="user-changemobile con" v-else>
+        <div></div>
+        <div class="user-bindmobile-form con">
+            <span>新手机号</span>
             <input type="tel" placeholder="请输入您手机号码" v-model="user.mobile">
         </div>
         <div class="user-bindmobile-form con">
@@ -17,7 +32,7 @@
             </button>
         </div>
         <div class="user-bindmobile-submit con">
-            <button type="button" name="button" v-if="bind" @click="bindMobile">绑定</button>
+            <button type="button" name="button" @click="bindMobile">绑定</button>
         </div>
     </div>
 </template>
@@ -33,7 +48,8 @@
                 },
                 time: 61,
                 send: false,
-                code: ''
+                code: '',
+                validate: false
             }
         },
         computed: {
@@ -66,6 +82,23 @@
                         }
                     })
                 }
+            },
+            changeMobile() {
+                axios.post('/users/validatemobile', {
+                    mobile: this.user.mobile,
+                    code: this.code
+                }).then(response => {
+                    console.log(response.data);
+                    this.validate = response.data.validate;
+                    this.user.mobile = '';
+                    this.time= 61;
+                    this.send= false;
+                    this.code= '';
+                }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.showModel(error.response.data)
+                    }
+                })
             },
             bindMobile() {
                 axios.post('/users/bindmobile', {

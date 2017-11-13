@@ -75,7 +75,9 @@ Vue.component('thread-new', require('./pages/ThreadNew.vue'));
 Vue.component('thread-channels', require('./pages/ThreadChannels.vue'));
 Vue.component('users-profile', require('./pages/UsersProfile.vue'));
 Vue.component('users-bind-mobile', require('./pages/UsersBindMobile.vue'));
+Vue.component('users-change-mobile', require('./pages/UsersChangeMobile.vue'));
 Vue.component('users-orders', require('./pages/UsersOrders.vue'));
+Vue.component('users-profile-items', require('./pages/UsersProfileItems.vue'));
 
 const app = new Vue({
     el: '#app'

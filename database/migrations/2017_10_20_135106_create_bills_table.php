@@ -18,6 +18,8 @@ class CreateBillsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('billed_id');
             $table->string('billed_type', 50);
+            $table->string('remark', 50);
+            $table->string('change_type', 50);
             $table->timestamps();
         });
     }

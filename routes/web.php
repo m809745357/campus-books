@@ -16,9 +16,14 @@ Route::get('/', 'WechatController@index')->name('home');
 Route::get('/oauth_callback', 'Auth\LoginController@oauthCallback');
 
 Route::get('/users', 'UserController@index')->name('user.index');
+Route::put('/users', 'UserController@update')->name('user.update');
+
 Route::get('/users/bindmobile', 'BindMobileController@index')->name('bind.mobile');
 Route::post('/users/bindmobile', 'UserController@mobile')->name('user.bindmobile');
 Route::post('/users/sendmobile', 'BindMobileController@store')->name('user.send.mobile');
+Route::get('/users/changemobile', 'BindMobileController@change')->name('user.change.mobile');
+Route::post('/users/validatemobile', 'BindMobileController@validatemobile')->name('user.validate.mobile');
+
 Route::get('/users/profile', 'UserController@profile')->name('user.profile');
 Route::get('/users/favorites/book', 'BookFavoriteController@index')->name('user.favorites.book');
 Route::get('/users/favorites/thread', 'ThreadFavoriteController@index')->name('user.favorites.thread');
@@ -45,6 +50,7 @@ Route::post('/threads/{channel}/{thread}/reply', 'ReplyController@store')->name(
 
 
 Route::delete('/replies/{reply}', 'ReplyController@destory')->name('reply.delete');
+Route::post('/replies/{reply}/best', 'ReplyController@best')->name('reply.best');
 Route::post('/replies/{reply}/favorites', 'ReplyFavoriteController@store')->name('reply.favorite');
 Route::delete('/replies/{reply}/favorites', 'ReplyFavoriteController@destory')->name('reply.unfavorite');
 
@@ -80,8 +86,12 @@ Route::post('/upload', 'UploadController@store')->name('upload.file');
 
 Route::get('/orders', 'OrderController@index')->name('order.index');
 Route::get('/orders/{order}', 'OrderController@show')->name('order.show');
+Route::delete('/orders/{order}', 'OrderController@destory')->name('order.destory');
 Route::post('/orders/{order}/cancel', 'OrderController@cancel')->name('order.cancel');
 Route::post('/orders/{order}/pay', 'OrderController@payment')->name('order.payment');
+Route::post('/orders/{order}/ship', 'OrderController@ship')->name('order.ship');
+Route::post('/orders/{order}/close', 'OrderController@close')->name('order.close');
+Route::post('/orders/{order}/confirms', 'OrderController@confirms')->name('order.confirms');
 Route::post('/orders', 'OrderController@store')->name('order.store');
 Route::get('/orders/{order}/pay', 'OrderController@pay')->name('order.pay');
 

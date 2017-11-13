@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Favorites;
+use App\Models\Traits\Bills;
 
 class Reply extends Model
 {
-    use Favorites;
+    use Favorites, Bills;
 
     protected $guarded = [];
 
@@ -47,6 +48,54 @@ class Reply extends Model
     public function onwer()
     {
         return $this->belongsTo(\App\User::class, 'user_id');
+    }
+
+    /**
+     * 打赏
+     *
+     * @return [type] [description]
+     */
+    public function best()
+    {
+        $this->billed(array('change_type' => 'decrement', 'remark' => '打赏'));
+        $this->bills()->create([
+            'user_id' => $this->user_id,
+            'change_type' => 'increment',
+            'remark' => '打赏'
+        ]);
+
+        $this->thread->update(['best_reply_id' => $this->id]);
+
+        return $this;
+    }
+
+    /**
+     * 判断是否被打赏
+     * @return boolean [description]
+     */
+    public function isBeenReward()
+    {
+        return is_null($this->thread->best_reply_id);
+    }
+
+    /**
+     * 获取打赏金额
+     *
+     * @return [type] [description]
+     */
+    public function money()
+    {
+        return $this->thread->money();
+    }
+
+    /**
+     * 是否具有足够多的金额支付
+     *
+     * @return [type] [description]
+     */
+    public function ifHasEnoughMoney()
+    {
+        return $this->thread->ifHasEnoughMoney();
     }
 
     /**

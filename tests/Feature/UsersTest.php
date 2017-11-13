@@ -136,4 +136,40 @@ class UsersTest extends TestCase
 
         $this->assertTrue($user->fresh()->mobile === '18367831980');
     }
+
+    /** @test */
+    public function is_an_authenticate_user_can_update_profile()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->json('put', '/users', [
+            'nickname' => '沈一飞',
+            'school' => '浙江工贸职业技术学院',
+            'specialty' => '软件技术'
+        ]);
+
+        $response->assertStatus(201);
+
+        $this->assertTrue($user->fresh()->school === '浙江工贸职业技术学院');
+        $this->assertTrue($user->fresh()->specialty === '软件技术');
+    }
+
+    /** @test */
+    public function is_an_authenticate_user_can_validate_mobile()
+    {
+        $user = factory('App\User')->create();
+
+        $this->actingAs($user);
+
+        $response = $this->json('post', '/users/validatemobile', [
+            'mobile' => $user->mobile,
+            'code' => '666666'
+        ]);
+
+        $response->assertStatus(201)->assertJson([
+            'validate' => true,
+        ]);
+    }
 }

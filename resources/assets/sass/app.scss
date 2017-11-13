@@ -161,14 +161,26 @@ $background-color: #efefef;
     color: $font-title-color;
 }
 
-.thread-reward {
-    width: .93333333rem;
-    height: .53333333rem;
-    background-color: $theme-color;
-    line-height: .53333333rem;
-    font-size: 10px;
+.thread-delete {
+    display: block;
+    width: 1.13rem /* 85/75 */;
+    height: 0.53rem /* 40/75 */;
+    line-height: 0.53rem /* 40/75 */;
+    font-size: 11px;
+    color: $font-desc-color;
+    background-color: $border-color;
     text-align: center;
+}
+
+.thread-reward {
+    display: block;
+    width: 1.13rem /* 85/75 */;
+    height: 0.53rem /* 40/75 */;
+    line-height: 0.53rem /* 40/75 */;
+    font-size: 11px;
     color: #fff;
+    background-color: $theme-color;
+    text-align: center;
 }
 
 .thread-time, .demand-time {
@@ -340,15 +352,15 @@ $background-color: #efefef;
     font-size: 12px;
     color: #aaa;
 }
-.thread-delete {
-    height: .57333333rem;
-    width: 1.4rem;
-    border: 1px solid $border-color;
-    display: block;
-    border-radius: .28666666rem;
-    text-align: center;
-    line-height: .57333333rem;
-}
+// .thread-delete {
+//     height: .57333333rem;
+//     width: 1.4rem;
+//     border: 1px solid $border-color;
+//     display: block;
+//     border-radius: .28666666rem;
+//     text-align: center;
+//     line-height: .57333333rem;
+// }
 
 /**
 * thread-form
@@ -766,6 +778,14 @@ $background-color: #efefef;
     min-height: 100vh;
 }
 
+.user-changemobile {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 0.27rem /* 20/75 */ 1.17rem /* 88/75 */ 1.17rem /* 88/75 */ 2.07rem /* 155/75 */ auto;
+    justify-items: stretch;
+    min-height: 100vh;
+}
+
 .user-bindmobile-panel {
     justify-self: center;
     align-self: center;
@@ -798,6 +818,10 @@ $background-color: #efefef;
         border: none;
         color: $font-desc-color;
         padding-left: 0.57rem /* 43/75 */;
+    }
+
+    input[disabled]{
+        background-color: #fff;
     }
 
     span {
@@ -838,7 +862,7 @@ $background-color: #efefef;
         width: 100%;
         height: 1.17rem /* 88/75 */;
         border-radius: 0.13rem /* 10/75 */;
-        background-color: #ffad00;
+        background-color: $theme-color;
         color: #fff;
         font-size: 17px;
         border: none;
@@ -2212,7 +2236,7 @@ $background-color: #efefef;
         }
 
         .order-detail-other {
-            height: 1.07rem /* 80/75 */;
+            min-height: 1.07rem /* 80/75 */;
             margin-top: 0.69rem /* 52/75 */;
 
             li {
@@ -2508,6 +2532,73 @@ $background-color: #efefef;
                     height: 0.64rem /* 48/75 */;
                 }
             }
+        }
+    }
+}
+
+.award-model {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .model {
+        width: 6.67rem /* 500/75 */;
+        height: 5.09rem /* 382/75 */;
+        background-color: #fff;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+
+        .close {
+            align-self: flex-start;
+            justify-self: flex-end;
+            margin-top: 0.27rem /* 20/75 */;
+            margin-right: 0.27rem /* 20/75 */;
+            width: 0.21rem /* 16/75 */;
+            height: 0.21rem /* 16/75 */;
+        }
+
+        .buttons {
+            align-self: center;
+            justify-self: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            width: 5.32rem /* 399/75 */;
+
+            button {
+                border: none;
+                width: 2.51rem /* 188/75 */;
+                height: 0.89rem /* 67/75 */;
+                border-radius: 4px;
+                line-height: 0.89rem /* 67/75 */;
+                font-size: 13px;
+                background-color: $theme-color;
+                color: #fff;
+                margin-bottom: 0.44rem /* 33/75 */;
+
+                &.cancel {
+                    background-color: $border-color;
+                    color: $font-title-color;
+                }
+            }
+        }
+
+        .model-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 5.21rem /* 391/75 */;
+            align-self: center;
+            justify-self: center;
+
         }
     }
 }

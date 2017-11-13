@@ -19,8 +19,9 @@ trait Bills
      * [bills description]
      * @return Models
      */
-    public function billed()
+    public function billed($data = null)
     {
-        return $this->bills()->create(['user_id' => auth()->id()]);
+        return $this->bills()->create(array_merge(['user_id' => auth()->id()], $data));
     }
+
 }
