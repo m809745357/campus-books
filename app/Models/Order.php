@@ -48,6 +48,11 @@ class Order extends Model
         return $this->belongsTo(\App\User::class, 'user_id', 'id');
     }
 
+    /**
+     * 订单属于书本
+     *
+     * @return [type] [description]
+     */
     public function book()
     {
         return $this->belongsTo(Book::class, 'book_id', 'id');

@@ -22,48 +22,26 @@ class BookPolicy
         return $user->id === $book->onwer->id && $book->type === 'EBook';
     }
 
+    /**
+     * 是否可以下单预览
+     *
+     * @param  User   $user [description]
+     * @param  Book   $book [description]
+     * @return [type]       [description]
+     */
     public function preview(User $user, Book $book)
     {
         return $user->id !== $book->onwer->id && $book->status == '1';
     }
 
+    /**
+     * 是否可以新增订单
+     *
+     * @param User $user [description]
+     * @param Book $book [description]
+     */
     public function addOrder(User $user, Book $book)
     {
         return $book->status == 1;
-    }
-
-    /**
-     * Determine whether the user can create books.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function create(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the book.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Book  $book
-     * @return mixed
-     */
-    public function update(User $user, Book $book)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the book.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Models\Book  $book
-     * @return mixed
-     */
-    public function delete(User $user, Book $book)
-    {
-        //
     }
 }

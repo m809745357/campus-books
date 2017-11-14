@@ -20,6 +20,10 @@ class Withdraw extends Model
         });
     }
 
+    /**
+     * 获取提现金额
+     * @return [type] [description]
+     */
     public function money()
     {
         return $this->money;

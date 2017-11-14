@@ -22,15 +22,31 @@ class Demand extends Model
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
+    /**
+     * 获取热门求购
+     * @param  [type] $num [description]
+     * @return [type]      [description]
+     */
     public function trending($num){
         return $this->with('onwer')->latest('views_count')->take($num)->get();
     }
 
+    /**
+     * 设置图片存储
+     *
+     * @param [type] $images [description]
+     */
     public function setImagesAttribute($images)
     {
         return $this->attributes['images'] = json_encode($images);
     }
 
+    /**
+     * 获取图片信息
+     *
+     * @param  [type] $images [description]
+     * @return [type]         [description]
+     */
     public function getImagesAttribute($images)
     {
         return array_map(function ($item) {

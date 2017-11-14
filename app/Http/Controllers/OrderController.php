@@ -88,11 +88,6 @@ class OrderController extends Controller
         }
     }
 
-    public function index()
-    {
-
-    }
-
     /**
      * 展示单个订单
      *

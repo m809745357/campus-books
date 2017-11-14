@@ -264,6 +264,16 @@ class User extends Authenticatable
     }
 
     /**
+     * 新增求购
+     *
+     * @param [type] $demand [description]
+     */
+    public function addDemand($demand)
+    {
+        return $this->demands()->create($demand);
+    }
+
+    /**
      * 设置头像
      *
      * @param [type] $avatar [description]

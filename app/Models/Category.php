@@ -20,7 +20,8 @@ class Category extends Model
     }
 
     /**
-     * [bills description]
+     * 获取子分类
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function childCategories()

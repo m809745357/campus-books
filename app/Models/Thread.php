@@ -48,6 +48,11 @@ class Thread extends Model implements Repository
         return $this->hasMany(Reply::class, 'thread_id');
     }
 
+    /**
+     * 添加回复
+     *
+     * @param [type] $reply [description]
+     */
     public function addReply($reply)
     {
         return $this->replies()->create([
@@ -57,13 +62,19 @@ class Thread extends Model implements Repository
         ]);
     }
 
+    /**
+     * 获取是否悬赏
+     *
+     * @return [type] [description]
+     */
     public function getIsRewardAttribute()
     {
         return $this->money !== 0;
     }
 
     /**
-     * [bills description]
+     * 获取是否喜欢
+     *
      * @return Models
      */
     public function getIsFavoritedAttribute()
@@ -83,11 +94,23 @@ class Thread extends Model implements Repository
         return $filters->apply($query);
     }
 
+    /**
+     * 热门提问
+     *
+     * @param  [type] $num   [description]
+     * @param  [type] $where [description]
+     * @return [type]        [description]
+     */
     public function trending($num, $where)
     {
         return $this->with('onwer', 'channel')->latest('replies_count')->take($num)->get();
     }
 
+    /**
+     * 提问详情
+     *
+     * @return [type] [description]
+     */
     public function detail()
     {
         return $this->load([
@@ -102,11 +125,21 @@ class Thread extends Model implements Repository
         ])->append('is_favorited');
     }
 
+    /**
+     * 获取金额
+     *
+     * @return [type] [description]
+     */
     public function money()
     {
         return $this->money;
     }
 
+    /**
+     * 判断是否有金额支付悬赏
+     *
+     * @return [type] [description]
+     */
     public function ifHasEnoughMoney()
     {
         return $this->onwer->balances > $this->money();

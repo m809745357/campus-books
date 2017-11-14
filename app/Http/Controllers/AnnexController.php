@@ -28,6 +28,13 @@ class AnnexController extends Controller
         return back();
     }
 
+    /**
+     * 下载文件
+     *
+     * @param  Category $category [description]
+     * @param  Book     $book     [description]
+     * @return [type]             [description]
+     */
     public function download(Category $category, Book $book)
     {
         if (! auth()->user()->can('view', $book)) {

@@ -19,11 +19,21 @@ class Message extends Model
         });
     }
 
+    /**
+     * 信息来源
+     *
+     * @return [type] [description]
+     */
     public function fromUser()
     {
         return $this->belongsTo(\App\User::class, 'from_user_id', 'id');
     }
 
+    /**
+     * 信息去向
+     *
+     * @return [type] [description]
+     */
     public function toUser()
     {
         return $this->belongsTo(\App\User::class, 'to_user_id', 'id');

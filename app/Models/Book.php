@@ -57,16 +57,33 @@ class Book extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    /**
+     * 获取头像完整地址
+     *
+     * @param  [type] $cover [description]
+     * @return [type]        [description]
+     */
     public function getCoverAttribute($cover)
     {
         return strpos($cover, 'http') !== false ? $cover : \Storage::url($cover);
     }
 
+    /**
+     * 设置图片存储
+     *
+     * @param [type] $images [description]
+     */
     public function setImagesAttribute($images)
     {
         return $this->attributes['images'] = json_encode($images);
     }
 
+    /**
+     * 获取图片完整地址
+     *
+     * @param  [type] $images [description]
+     * @return [type]         [description]
+     */
     public function getImagesAttribute($images)
     {
         return array_map(function ($item) {
@@ -74,31 +91,61 @@ class Book extends Model
         }, json_decode($images, true));
     }
 
+    /**
+     * 设置关键字存储
+     *
+     * @param [type] $keywords [description]
+     */
     public function setKeywordsAttribute($keywords)
     {
         return $this->attributes['keywords'] = json_encode($keywords);
     }
 
+    /**
+     * 获取关键字
+     *
+     * @param  [type] $keywords [description]
+     * @return [type]           [description]
+     */
     public function getKeywordsAttribute($keywords)
     {
         return json_decode($keywords, true);
     }
 
+    /**
+     * 判断是否有附件
+     *
+     * @return boolean [description]
+     */
     public function hasAnnex()
     {
         return $this->type == self::EBOOK;
     }
 
+    /**
+     * 获取pdf路径
+     *
+     * @return [type] [description]
+     */
     public function pdfPath()
     {
         return "books/annex/book{$this->id}.pdf";
     }
 
+    /**
+     * 获取真实路径
+     *
+     * @return [type] [description]
+     */
     public function realPath()
     {
         return public_path() . "/storage/" . $this->pdfPath();
     }
 
+    /**
+     * [downloadFileName description]
+     * @return [type] [description]
+     */
     public function downloadFileName()
     {
         return "{$this->title}-{$this->author}.pdf";

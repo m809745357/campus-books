@@ -36,14 +36,25 @@ class DemandController extends Controller
         return view('demands.show', compact('demand'));
     }
 
+    /**
+     * 创建求购页面
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('demands.create');
     }
 
+    /**
+     * 新增求购
+     *
+     * @param  StoreDemandPost $request [description]
+     * @return \Illuminate\Http\Response
+     */
     public function store(StoreDemandPost $request)
     {
-        $demand = auth()->user()->demands()->create($request->validated());
+        $demand = auth()->user()->addDemand($request->validated());
 
         if (request()->wantsJson()) {
             return response($demand, 201);
