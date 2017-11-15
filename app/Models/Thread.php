@@ -7,10 +7,35 @@ use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Traits\Favorites;
 use App\Repository\Repository;
+use Laravel\Scout\Searchable;
 
 class Thread extends Model implements Repository
 {
-    use Favorites;
+    use Favorites, Searchable;
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'body' => $this->body
+        ];
+    }
+
+    protected $mappingProperties = array(
+       'title' => array(
+            'type' => 'string',
+            'analyzer' => 'ik_max_word'
+        ),
+       'body' => array(
+            'type' => 'string',
+            'analyzer' => 'ik_max_word'
+        )
+    );
 
     protected $guarded = [];
 

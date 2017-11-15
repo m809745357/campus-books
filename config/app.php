@@ -170,6 +170,8 @@ return [
          */
         Overtrue\LaravelWeChat\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
 
         /*
          * Application Service Providers...

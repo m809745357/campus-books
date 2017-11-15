@@ -3,9 +3,36 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Demand extends Model
 {
+    use Searchable;
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'body' => $this->body
+        ];
+    }
+
+    protected $mappingProperties = array(
+       'title' => array(
+            'type' => 'string',
+            'analyzer' => 'ik_max_word'
+        ),
+       'body' => array(
+            'type' => 'string',
+            'analyzer' => 'ik_max_word'
+        )
+    );
+
     protected $guarded = [];
 
     public function path()

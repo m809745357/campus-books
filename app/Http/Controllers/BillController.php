@@ -24,7 +24,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = auth()->user()->bills->load('billed');
+        $bills = auth()->user()->bills()->with('billed')->latest()->get();
 
         return view('users.bills', compact('bills'));
     }
