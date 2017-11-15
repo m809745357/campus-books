@@ -2,7 +2,10 @@
     <div class="demand-detail">
         <div class="demand-detail-desc">
             <div class="demand-detail-gallery">
-                <img v-for="(image, index) in demand.images" :key="index" :src="image" alt="">
+                <swiper :options="swiperOption" class="swiper-box">
+                    <swiper-slide v-for="(image, index) in demand.images" :key="index" class="swiper-item"><img :src="image" alt=""></swiper-slide>
+                    <div class="swiper-pagination" slot="pagination"></div>
+                </swiper>
             </div>
             <div class="demand-detail-title">
                 <h4>{{ demand.title }}{{ demand.title }}{{ demand.title }}</h4>
@@ -34,12 +37,25 @@
 </template>
 
 <script>
+    import { swiper, swiperSlide } from 'vue-awesome-swiper'
     export default {
         props: ['attributes'],
         data() {
             return {
-                demand: this.attributes
+                demand: this.attributes,
+                swiperOption: {
+                    pagination: '.swiper-pagination',
+                    direction: 'horizontal',
+                    slidesPerView: 1,
+                    paginationClickable: true,
+                    spaceBetween: 30,
+                    mousewheelControl: true
+                }
             }
+        },
+        components: {
+            swiper,
+            swiperSlide
         },
         computed: {
             onwer() {

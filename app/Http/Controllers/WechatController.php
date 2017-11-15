@@ -23,8 +23,8 @@ class WechatController extends Controller
     {
         $trendingThreads = resolve('ThreadTrending')->trending(2);
         $trendingDemands = resolve('DemandTrending')->trending(3);
-        $trendingPbooks = Book::where(['type' => 'PBook'])->with('onwer', 'category')->latest('views_count')->paginate(6);
-        $trendingEbooks = Book::where(['type' => 'EBook'])->with('onwer', 'category')->latest('views_count')->paginate(6);
+        $trendingPbooks = Book::where(['type' => 'PBook'])->with('onwer', 'category')->latest('views_count')->paginate(4);
+        $trendingEbooks = Book::where(['type' => 'EBook'])->with('onwer', 'category')->latest('views_count')->paginate(4);
 
         return view('home', compact('trendingThreads', 'trendingDemands', 'trendingPbooks', 'trendingEbooks'));
 

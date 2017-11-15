@@ -950,7 +950,9 @@ $background-color: #efefef;
         margin-right: 0;
     }
 }
-
+.wrapper {
+    height: calc(100vh - 1.47rem - 1.32rem);
+}
 .hot-books {
     background-color: #fff;
 
@@ -1157,6 +1159,7 @@ $background-color: #efefef;
     border-bottom: 1px solid $border-color;
     position: fixed;
     background-color: #fff;
+    z-index: 1;
 
     li {
         list-style: none;

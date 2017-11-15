@@ -20,13 +20,7 @@
                 <li><a href="/books?price=desc{{ request()->search ? "&search=" . request()->search : ''}}">价格 ↑</a></li>
             @endif
         </div>
-        <div class="books">
-            <div class="books-desc">
-                @foreach ($books as $book)
-                    <book :attributes="{{ $book }}"></book>
-                @endforeach
-            </div>
-        </div>
+        <book-list :attributes="{{ $books }}"></book-list>
     </div>
     @include('posts.menu')
 </div>

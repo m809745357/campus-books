@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row">
         <search></search>
-        <img class="home-top" src="/images/home-top.png" alt="">
+        {{-- <img class="home-top" src="/images/home-top.png" alt=""> --}}
+        <slider></slider>
         <div class="hot-replies">
             <h4>热门回答</h4>
             <p onclick="location.href='/threads'">查看更多</p>
