@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Demand;
 use App\Http\Requests\StoreDemandPost;
 use Illuminate\Http\Request;
+use App\Filters\DemandFilters;
 
 class DemandController extends Controller
 {
@@ -17,9 +18,10 @@ class DemandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DemandFilters $filters)
     {
-        $demands = Demand::latest()->get();
+        $demands = Demand::filter($filters)->get();
+
         return view('demands.index', compact('demands'));
     }
 

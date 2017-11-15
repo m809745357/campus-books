@@ -29,5 +29,8 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="SCOUT_DRIVER" value="elasticsearch"/>
+        <env name="ELASTICSEARCH_INDEX" value="scout_test"/>
+        <env name="ELASTICSEARCH_HOST" value="http://elastic:syfily4er@127.0.0.1:9200"/>
     </php>
 </phpunit>

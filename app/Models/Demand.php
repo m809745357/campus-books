@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Scout\Searchable;
+use App\Filters\DemandFilters;
 
 class Demand extends Model
 {
-    use Searchable;
+    // use Searchable;
 
     /**
      * Get the indexable data array for the model.
@@ -38,6 +40,18 @@ class Demand extends Model
     public function path()
     {
         return '/demands/' . $this->id;
+    }
+
+    /**
+     * Apply all relevant thread filters.
+     *
+     * @param  Builder       $query
+     * @param  DemandFilters $filters
+     * @return Builder
+     */
+    public function scopeFilter(Builder $query, DemandFilters $filters)
+    {
+        return $filters->apply($query);
     }
 
     /**

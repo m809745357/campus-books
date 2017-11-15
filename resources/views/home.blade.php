@@ -3,10 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="search">
-            <input type="text" name="" value="" placeholder="输入关键字搜索">
-            <img src="/images/reply-menu.png" alt="" onclick="window.location.href='{{ route('categories.index') }}'">
-        </div>
+        <search></search>
         <img class="home-top" src="/images/home-top.png" alt="">
         <div class="hot-replies">
             <h4>热门回答</h4>

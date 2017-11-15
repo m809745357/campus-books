@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Traits\Favorites;
 use Laravel\Scout\Searchable;
+use App\Filters\BookFilters;
 
 class Book extends Model
 {
-    use Favorites, Searchable;
+    use Favorites; //, Searchable;
 
     /**
      * Get the indexable data array for the model.
@@ -44,6 +46,18 @@ class Book extends Model
     public function path()
     {
         return "/books/{$this->category->slug}/$this->id";
+    }
+
+    /**
+     * Apply all relevant thread filters.
+     *
+     * @param  Builder       $query
+     * @param  BookFilters $filters
+     * @return Builder
+     */
+    public function scopeFilter(Builder $query, BookFilters $filters)
+    {
+        return $filters->apply($query);
     }
 
     /**

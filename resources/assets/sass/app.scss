@@ -881,14 +881,24 @@ $background-color: #efefef;
     align-items: center;
     justify-content: center;
     background-color: #fff;
+    padding: 0 0.27rem /* 20/75 */;
+
+    select {
+        height: 0.79rem /* 59/75 */;
+        width: 1.33rem /* 100/75 */;
+        border: none;
+        background-color: $border-color;
+        appearance: none;
+        border-radius: 0;
+    }
 
     input {
         height: 0.79rem /* 59/75 */;
         width: 8.39rem /* 629/75 */;
         border: none;
         background-color: $border-color;
-        border-radius: 2px;
-        text-align: center;
+        border-radius: 0;
+        text-align: left;
     }
 
     input::placeholder {

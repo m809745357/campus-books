@@ -21,9 +21,6 @@ class WechatController extends Controller
      */
     public function index(Thread $thread)
     {
-        return Book::all();
-        // dd(Book::where('title', 'totam')->searchable());
-
         $trendingThreads = resolve('ThreadTrending')->trending(2);
         $trendingDemands = resolve('DemandTrending')->trending(3);
         $trendingPbooks = Book::where(['type' => 'PBook'])->with('onwer', 'category')->latest('views_count')->paginate(6);

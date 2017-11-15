@@ -11,7 +11,7 @@ class ThreadFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['by', 'type'];
+    protected $filters = ['by', 'type', 'search'];
 
     /**
      * Filter the query by a given username.
@@ -35,6 +35,17 @@ class ThreadFilters extends Filters
             return $this->$type();
         }
         return $this->builder;
+    }
+
+    /**
+     * 全文搜索
+     *
+     * @param  [type] $search [description]
+     * @return [type]         [description]
+     */
+    public function search($search)
+    {
+        return $this->builder->orWhere('title', 'like', "%$search%")->orWhere('body', 'like', "%$search%");
     }
 
     /**

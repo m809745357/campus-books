@@ -4,9 +4,21 @@
 <div class="container">
     <div class="row">
         <div class="books-menu con">
-            <li><a href="">新品 v</a></li>
-            <li><a href="">销量 v</a></li>
-            <li><a href="">价格 v</a></li>
+            @if (request()->time == 'desc')
+                <li><a href="/books?time=asc{{ request()->search ? "&search=" . request()->search : ''}}">新品 ↓</a></li>
+            @else
+                <li><a href="/books?time=desc{{ request()->search ? "&search=" . request()->search : ''}}">新品 ↑</a></li>
+            @endif
+            @if (request()->view == 'desc')
+                <li><a href="/books?view=asc{{ request()->search ? "&search=" . request()->search : ''}}">点击量 ↓</a></li>
+            @else
+                <li><a href="/books?view=desc{{ request()->search ? "&search=" . request()->search : ''}}">点击量 ↑</a></li>
+            @endif
+            @if (request()->price == 'desc')
+                <li><a href="/books?price=asc{{ request()->search ? "&search=" . request()->search : ''}}">价格 ↓</a></li>
+            @else
+                <li><a href="/books?price=desc{{ request()->search ? "&search=" . request()->search : ''}}">价格 ↑</a></li>
+            @endif
         </div>
         <div class="books">
             <div class="books-desc">

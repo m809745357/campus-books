@@ -9385,6 +9385,18 @@ button.close {
       -ms-flex-pack: center;
           justify-content: center;
   background-color: #fff;
+  padding: 0 0.27rem;
+}
+
+.search select {
+  height: 0.79rem;
+  width: 1.33rem;
+  border: none;
+  background-color: #e9e9e9;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
 }
 
 .search input {
@@ -9392,8 +9404,8 @@ button.close {
   width: 8.39rem;
   border: none;
   background-color: #e9e9e9;
-  border-radius: 2px;
-  text-align: center;
+  border-radius: 0;
+  text-align: left;
 }
 
 .search input::-webkit-input-placeholder {

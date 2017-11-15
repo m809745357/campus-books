@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use App\Http\Requests\StoreBookPost;
+use App\Filters\BookFilters;
 
 class BookController extends Controller
 {
@@ -19,9 +20,9 @@ class BookController extends Controller
      * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category)
+    public function index(Category $category, BookFilters $filters)
     {
-        $book = Book::with('onwer', 'category')->latest();
+        $book = Book::with('onwer', 'category')->filter($filters);
 
         if ($category->exists) {
             $book->where('category_id', $category->id);

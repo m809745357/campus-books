@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Traits\Favorites;
+use App\Filters\ThreadFilters;
 use App\Repository\Repository;
 use Laravel\Scout\Searchable;
 
 class Thread extends Model implements Repository
 {
-    use Favorites, Searchable;
+    use Favorites; //, Searchable
 
     /**
      * Get the indexable data array for the model.

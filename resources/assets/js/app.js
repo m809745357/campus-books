@@ -49,6 +49,7 @@ moment.updateLocale('en', {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('search', require('./components/Search.vue'));
 Vue.component('book', require('./components/Book.vue'));
 Vue.component('demand', require('./components/Demand.vue'));
 Vue.component('flash', require('./components/Flash.vue'));
