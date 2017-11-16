@@ -8350,6 +8350,10 @@ button.close {
   }
 }
 
+.loading-wrapper {
+  text-align: center;
+}
+
 .submit-button {
   width: 100%;
   height: 1.17rem;
@@ -8609,6 +8613,12 @@ button.close {
   font-size: 16px;
   width: 2.27rem;
   text-align: right;
+}
+
+.thread-top {
+  position: relative;
+  z-index: 1;
+  background-color: #e9e9e9;
 }
 
 .thread-header {
@@ -9397,6 +9407,7 @@ button.close {
      -moz-appearance: none;
           appearance: none;
   border-radius: 0;
+  text-align-last: center;
 }
 
 .search input {
@@ -9731,6 +9742,7 @@ button.close {
   position: fixed;
   background-color: #fff;
   z-index: 1;
+  top: 0;
 }
 
 .books-menu li {
@@ -9771,6 +9783,8 @@ button.close {
   border-bottom: 1px solid #e9e9e9;
   position: fixed;
   background-color: #fff;
+  top: 0;
+  z-index: 1;
 }
 
 .demands-menu li {

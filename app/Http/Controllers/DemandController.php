@@ -20,7 +20,13 @@ class DemandController extends Controller
      */
     public function index(DemandFilters $filters)
     {
-        $demands = Demand::filter($filters)->get();
+        $demands = Demand::filter($filters);
+
+        if (request()->wantsJson()) {
+            return response($demands->paginate(10), 200);
+        }
+
+        $demands = $demands->paginate(10)->toJson();
 
         return view('demands.index', compact('demands'));
     }

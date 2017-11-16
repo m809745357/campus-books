@@ -33,7 +33,11 @@ class ThreadController extends Controller
             $threads->where('channel_id', $channel->id);
         }
 
-        $threads = $threads->get();
+        if (request()->wantsJson()) {
+            return response($threads->paginate(10), 200);
+        }
+
+        $threads = $threads->paginate(10)->toJson();
 
         return view('threads.index', compact('threads'));
     }

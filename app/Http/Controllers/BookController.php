@@ -28,7 +28,11 @@ class BookController extends Controller
             $book->where('category_id', $category->id);
         }
 
-        $books = $book->get();
+        if (request()->wantsJson()) {
+            return response($book->paginate(10), 200);
+        }
+
+        $books = $book->paginate(10)->toJson();
 
         return view('books.index', compact('books'));
     }
