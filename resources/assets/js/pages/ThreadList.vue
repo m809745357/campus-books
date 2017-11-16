@@ -50,46 +50,46 @@
           }
         },
         created() {
-          let search = window.location.search;
-          if (search.match(/type=(\w+)/)) {
-              this.type = search.match(/type=(\w+)/)[1]
-          }
-          if (search.match(/search=(.*)&?/)) {
-              this.search = '&' + search.match(/search=(.*)&?/)[0]
-          }
+            let search = window.location.search;
+            if (search.match(/type=(\w+)/)) {
+                this.type = search.match(/type=(\w+)/)[1]
+            }
+            if (search.match(/search=(.*)&?/)) {
+                this.search = '&' + search.match(/search=(.*)&?/)[0]
+            }
         },
         components: {
-          thread,
-          scroll
+            thread,
+            scroll
         },
 
         methods: {
             loadData() {
-              if (! this.hasNext()) {
-                  return ;
-              }
+                if (! this.hasNext()) {
+                    return ;
+                }
 
-              if (this.load === true) {
-                  return ;
-              }
+                if (this.load === true) {
+                    return ;
+                }
 
-              this.load = true;
-              this.tips = '加载中';
+                this.load = true;
+                this.tips = '加载中';
 
-              axios({
-                  method: 'get',
-                  url: this.url(),
-              })
-                  .then(response => {
-                      console.log(response.data)
-                      this.threads = response.data.data.concat(this.threads)
-                      this.paginate = response.data;
-                      this.load = false;
-                      this.tips = '上拉加载更多';
-                  })
-                  .catch(function(thrown) {
+                axios({
+                    method: 'get',
+                    url: this.url(),
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        this.threads = response.data.data.concat(this.threads)
+                        this.paginate = response.data;
+                        this.load = false;
+                        this.tips = '上拉加载更多';
+                    })
+                    .catch(function(thrown) {
 
-                  });
+                    });
             },
             url() {
                 return this.paginate.next_page_url + '&' + window.location.search.substring(1);
