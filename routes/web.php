@@ -21,6 +21,7 @@ Route::put('/users', 'UserController@update')->name('user.update');
 Route::get('/users/bindmobile', 'BindMobileController@index')->name('bind.mobile');
 Route::post('/users/bindmobile', 'UserController@mobile')->name('user.bindmobile');
 Route::post('/users/sendmobile', 'BindMobileController@store')->name('user.send.mobile');
+Route::post('/users/verifymobile', 'BindMobileController@verify')->name('user.send.mobile');
 Route::get('/users/changemobile', 'BindMobileController@change')->name('user.change.mobile');
 Route::post('/users/validatemobile', 'BindMobileController@validatemobile')->name('user.validate.mobile');
 

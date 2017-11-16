@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sms;
+use App\Notifications\SmsNotification;
 
 class BindMobileController extends Controller
 {
@@ -52,7 +54,12 @@ class BindMobileController extends Controller
 
         $isValidate =  auth()->user()->validateMobile();
 
-        return response(['validate' => $isValidate], 201);
+        if ($isValidate) {
+            auth()->user()->markSmsAsRead();
+            return response(['validate' => $isValidate], 201);
+        }
+
+        return response('验证失败', 400);
     }
 
     /**
@@ -72,5 +79,32 @@ class BindMobileController extends Controller
                 return response(['code' => '666666'], 201);
             }
         }
+
+        # 通知发送短信
+        \Notification::send(auth()->user(), new SmsNotification($request->mobile));
+
+        return response()->json(['info' => '短信发送成功，请注意查收'], 201);
+    }
+
+    /**
+     * 手机验证码发送&验证
+     *
+     * @param  Request $request [description]
+     * @param  [type]  $mobile  [description]
+     * @return [type]           [description]
+     */
+    public function verify(Request $request)
+    {
+        request()->validate([
+            'mobile' => 'required',
+            'code' => 'required'
+        ]);
+
+        if (auth()->user()->validateCode()) {
+            auth()->user()->markSmsAsRead();
+            return response()->json(['info' => '验证成功'], 201);
+        }
+
+        return response('验证失败', 400);
     }
 }

@@ -78741,6 +78741,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         bindMobile: function bindMobile() {
             var _this2 = this;
 
+            axios.post('/users/mobile/verify', {
+                mobile: this.user.mobile,
+                code: this.code
+            }).then(function (response) {
+                _this2.updateUser();
+            }).catch(function (error) {
+                if (error.response.status == 422) {
+                    _this2.showModel(error.response.data);
+                }
+            });
+        },
+        updateUser: function updateUser() {
+            var _this3 = this;
+
             axios.post('/users/bindmobile', {
                 mobile: this.user.mobile,
                 code: this.code
@@ -78749,7 +78763,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 window.location.href = "/users";
             }).catch(function (error) {
                 if (error.response.status == 422) {
-                    _this2.showModel(error.response.data);
+                    _this3.showModel(error.response.data);
                 }
             });
         },
@@ -79044,10 +79058,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(response.data);
                     flash('\u77ED\u4FE1\u5DF2\u53D1\u9001\u81F3\u624B\u673A\uFF1A' + _this.user.mobile + '\u8BF7\u6CE8\u610F\u67E5\u6536', 'success');
 
-                    var times = setInterval(function () {
+                    _this.times = setInterval(function () {
                         if (_this.time == 0) {
                             _this.time = 61;
-                            clearInterval(times);
+                            clearInterval(_this.times);
                             return;
                         }
                         _this.time--;
@@ -79066,13 +79080,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 mobile: this.user.mobile,
                 code: this.code
             }).then(function (response) {
-                console.log(response.data);
+                clearInterval(_this2.times);
                 _this2.validate = response.data.validate;
                 _this2.user.mobile = '';
                 _this2.time = 61;
                 _this2.send = false;
                 _this2.code = '';
             }).catch(function (error) {
+                if (error.response.status == 400) {
+                    flash(error.response.data, 'warning');
+                }
                 if (error.response.status == 422) {
                     _this2.showModel(error.response.data);
                 }
@@ -79080,6 +79097,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         bindMobile: function bindMobile() {
             var _this3 = this;
+
+            axios.post('/users/verifymobile', {
+                mobile: this.user.mobile,
+                code: this.code
+            }).then(function (response) {
+                _this3.updateUser();
+            }).catch(function (error) {
+                if (error.response.status == 400) {
+                    flash(error.response.data, 'warning');
+                }
+                if (error.response.status == 422) {
+                    _this3.showModel(error.response.data);
+                }
+            });
+        },
+        updateUser: function updateUser() {
+            var _this4 = this;
 
             axios.post('/users/bindmobile', {
                 mobile: this.user.mobile,
@@ -79089,7 +79123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 window.location.href = "/users";
             }).catch(function (error) {
                 if (error.response.status == 422) {
-                    _this3.showModel(error.response.data);
+                    _this4.showModel(error.response.data);
                 }
             });
         },

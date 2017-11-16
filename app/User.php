@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use App\Filters\FavoriteFilters;
 use App\Notifications\UserChatNotifications;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -151,6 +152,16 @@ class User extends Authenticatable
     }
 
     /**
+     * 用户提现
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sms()
+    {
+        return $this->hasMany(Models\Sms::class, 'user_id');
+    }
+
+    /**
      * 添加通讯录
      *
      * @param [type] $user [description]
@@ -251,6 +262,16 @@ class User extends Authenticatable
     }
 
     /**
+     * 标记已读
+     *
+     * @return [type] [description]
+     */
+    public function markSmsAsRead()
+    {
+        return $this->sms->each->markAsRead();
+    }
+
+    /**
      * 添加用户订单
      *
      * @param [type] $order [description]
@@ -271,6 +292,16 @@ class User extends Authenticatable
     public function addDemand($demand)
     {
         return $this->demands()->create($demand);
+    }
+
+    /**
+     * 新增短信
+     *
+     * @param [type] $demand [description]
+     */
+    public function addSms($sms)
+    {
+        return $this->sms()->create($sms);
     }
 
     /**
@@ -300,7 +331,24 @@ class User extends Authenticatable
      */
     public function validateCode()
     {
-        return request()->code === '666666';
+        $sms = $this->sms()->where(['mobile' => request()->mobile])->whereNull('read_at')->orderBy('created_at', 'desc')->first();
+
+        if (! $sms) {
+            return false;
+        }
+
+        $now = Carbon::now('Asia/Shanghai');
+
+        $codeTime = Carbon::parse($sms->created_at, 'Asia/Shanghai')->addSeconds(30 * 60);
+
+        if ($now->gt($codeTime)) {
+            return false;
+        }
+        if (request()->code != $sms->code) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

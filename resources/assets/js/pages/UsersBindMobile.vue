@@ -68,6 +68,18 @@
                 }
             },
             bindMobile() {
+                axios.post('/users/mobile/verify', {
+                    mobile: this.user.mobile,
+                    code: this.code
+                }).then(response => {
+                    this.updateUser();
+                }).catch(error => {
+                    if (error.response.status == 422) {
+                        this.showModel(error.response.data)
+                    }
+                })
+            },
+            updateUser() {
                 axios.post('/users/bindmobile', {
                     mobile: this.user.mobile,
                     code: this.code

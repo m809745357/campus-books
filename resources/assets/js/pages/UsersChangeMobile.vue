@@ -68,10 +68,10 @@
                         console.log(response.data);
                         flash(`短信已发送至手机：${this.user.mobile}请注意查收`, 'success')
 
-                        var times = setInterval(() => {
+                        this.times = setInterval(() => {
                             if (this.time == 0) {
                                 this.time = 61;
-                                clearInterval(times);
+                                clearInterval(this.times);
                                 return ;
                             }
                             this.time -- ;
@@ -88,19 +88,37 @@
                     mobile: this.user.mobile,
                     code: this.code
                 }).then(response => {
-                    console.log(response.data);
+                    clearInterval(this.times);
                     this.validate = response.data.validate;
                     this.user.mobile = '';
                     this.time= 61;
                     this.send= false;
                     this.code= '';
                 }).catch(error => {
+                    if (error.response.status == 400) {
+                        flash(error.response.data, 'warning')
+                    }
                     if (error.response.status == 422) {
                         this.showModel(error.response.data)
                     }
                 })
             },
             bindMobile() {
+                axios.post('/users/verifymobile', {
+                    mobile: this.user.mobile,
+                    code: this.code
+                }).then(response => {
+                    this.updateUser();
+                }).catch(error => {
+                    if (error.response.status == 400) {
+                        flash(error.response.data, 'warning')
+                    }
+                    if (error.response.status == 422) {
+                        this.showModel(error.response.data)
+                    }
+                })
+            },
+            updateUser() {
                 axios.post('/users/bindmobile', {
                     mobile: this.user.mobile,
                     code: this.code
