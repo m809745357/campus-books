@@ -69031,33 +69031,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             book: this.attributes
         };
     },
-    mounted: function mounted() {
-        var _this = this;
-
-        setTimeout(function () {
-            _this._initWechat();
-        }, 40);
-    },
 
     methods: {
         detail: function detail(slug, id) {
             window.location.href = '/books/' + slug + '/' + id;
-        },
-        _initWechat: function _initWechat() {
-            var that = this;
-            wx.ready(function () {
-                wx.onMenuShareAppMessage({
-                    title: that.book.title,
-                    desc: that.book.body,
-                    link: window.location.href,
-                    imgUrl: that.book.images[0]
-                });
-                wx.onMenuShareTimeline({
-                    title: that.book.title,
-                    link: window.location.href,
-                    imgUrl: that.book.images[0]
-                });
-            });
         }
     }
 });
@@ -69179,33 +69156,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             demand: this.attributes
         };
     },
-    mounted: function mounted() {
-        var _this = this;
-
-        setTimeout(function () {
-            _this._initWechat();
-        }, 40);
-    },
 
     methods: {
         detail: function detail() {
             window.location.href = '/demands/' + this.demand.id;
-        },
-        _initWechat: function _initWechat() {
-            var that = this;
-            wx.ready(function () {
-                wx.onMenuShareAppMessage({
-                    title: that.demand.title,
-                    desc: that.demand.body,
-                    link: window.location.href,
-                    imgUrl: that.demand.images[0]
-                });
-                wx.onMenuShareTimeline({
-                    title: that.demand.title,
-                    link: window.location.href,
-                    imgUrl: that.demand.images[0]
-                });
-            });
         }
     }
 });
@@ -73050,6 +73004,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         swiper: __WEBPACK_IMPORTED_MODULE_0_vue_awesome_swiper__["swiper"],
         swiperSlide: __WEBPACK_IMPORTED_MODULE_0_vue_awesome_swiper__["swiperSlide"]
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        setTimeout(function () {
+            _this._initWechat();
+        }, 40);
+    },
+
     computed: {
         collected: function collected() {
             return this.book.is_favorited ? '/images/collected.png' : '/images/collect.png';
@@ -73087,9 +73049,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         buy: function buy() {
             if (window.App.signedIn) {
                 window.location.href = window.location.href + '/preview';
+                return;
             }
 
             window.location.href = '/login';
+        },
+        _initWechat: function _initWechat() {
+            var that = this;
+            wx.ready(function () {
+                wx.onMenuShareAppMessage({
+                    title: that.book.title,
+                    desc: that.book.body,
+                    link: window.location.href,
+                    imgUrl: that.book.images[0]
+                });
+                wx.onMenuShareTimeline({
+                    title: that.book.title,
+                    link: window.location.href,
+                    imgUrl: that.book.images[0]
+                });
+            });
         }
     }
 });
@@ -75601,15 +75580,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['attrbook', 'attraddress'],
+    props: ['attrbook'],
     data: function data() {
         return {
             book: this.attrbook,
-            address: this.attraddress,
+            address: '',
             order: {
                 book_detail: this.attrbook.id,
                 book_id: this.attrbook.id,
-                address: this.attraddress.id,
+                address: '',
                 remark: ''
             }
         };
@@ -75620,6 +75599,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/orders', this.order).then(function (response) {
                 console.log(response);
                 window.location.href = '/orders/' + response.data.id + '/pay';
+            });
+        },
+        openAddress: function openAddress() {
+            var that = this;
+            wx.openAddress({
+                success: function success(res) {
+                    that.address = {
+                        user_name: res.userName,
+                        tel_number: res.telNumber,
+                        province_name: res.provinceName,
+                        city_name: res.cityName,
+                        country_name: res.countryName,
+                        detail_info: res.detailInfo,
+                        postal_code: res.postalCode,
+                        national_code: res.nationalCode
+                    };
+                    axios.post('/api/address', that.address).then(function (response) {
+                        that.order.address = response.data.id;
+                    }).catch(function (error) {
+                        if (error.response.status == 422) {
+                            that.showModel(error.response.data);
+                        }
+                    });
+                }
+            });
+        },
+        showModel: function showModel(data) {
+            $.each(data.errors, function (index, val) {
+                val.map(function (value, key) {
+                    flash(value, 'warning');
+                });
             });
         }
     }
@@ -75662,7 +75672,16 @@ var render = function() {
             attrs: { src: "/images/arrow.png", alt: "" }
           })
         ])
-      : _c("div", { staticClass: "order-preview-address" }),
+      : _c("div", { staticClass: "order-preview-address" }, [
+          _c(
+            "button",
+            {
+              attrs: { type: "button", name: "button" },
+              on: { click: _vm.openAddress }
+            },
+            [_vm._v("请选择地址")]
+          )
+        ]),
     _vm._v(" "),
     _c("div", { staticClass: "order-preview-detail" }, [
       _c("div", { staticClass: "order-preview-detail-order" }, [
@@ -76390,13 +76409,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return window.App.user === null || window.App.user.id !== this.demand.onwer.id;
         }
     },
+    mounted: function mounted() {
+        var _this = this;
+
+        setTimeout(function () {
+            _this._initWechat();
+        }, 40);
+    },
+
     methods: {
         chat: function chat() {
             if (window.App.signedIn) {
                 window.location.href = '/users/' + this.demand.onwer.id + '/chat';
+                return;
             }
 
             window.location.href = '/login';
+        },
+        _initWechat: function _initWechat() {
+            var that = this;
+            wx.ready(function () {
+                wx.onMenuShareAppMessage({
+                    title: that.demand.title,
+                    desc: that.demand.body,
+                    link: window.location.href,
+                    imgUrl: that.demand.images[0]
+                });
+                wx.onMenuShareTimeline({
+                    title: that.demand.title,
+                    link: window.location.href,
+                    imgUrl: that.demand.images[0]
+                });
+            });
         }
     }
 });
@@ -80636,29 +80680,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.location.href = '/users/changemobile';
         },
         openAddress: function openAddress() {
-            wx.openAddress({
-
-                success: function success(res) {
-
-                    var userName = res.userName; // 收货人姓名
-
-                    var postalCode = res.postalCode; // 邮编
-
-                    var provinceName = res.provinceName; // 国标收货地址第一级地址（省）
-
-                    var cityName = res.cityName; // 国标收货地址第二级地址（市）
-
-                    var countryName = res.countryName; // 国标收货地址第三级地址（国家）
-
-                    var detailInfo = res.detailInfo; // 详细收货地址信息
-
-                    var nationalCode = res.nationalCode; // 收货地址国家码
-
-                    var telNumber = res.telNumber; // 收货人手机号码
-                    alert(userName + "|" + postalCode + "|" + provinceName + "|" + cityName + "|" + countryName + "|" + detailInfo + "|" + nationalCode + "|" + telNumber);
-                }
-
-            });
+            wx.openAddress();
         }
     }
 });

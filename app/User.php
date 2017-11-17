@@ -317,6 +317,11 @@ class User extends Authenticatable
         ]);
     }
 
+    public function addAddress($address)
+    {
+        return $this->address()->create($address);
+    }
+
     /**
      * 设置头像
      *

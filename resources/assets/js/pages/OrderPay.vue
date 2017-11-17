@@ -44,7 +44,19 @@
                     .then(response => {
                         flash('支付成功');
                         window.location.href = `/orders/${this.order.id}`;
+                    })
+                    .catch(error => {
+                        if (error.response.status == 422) {
+                            that.showModel(error.response.data)
+                        }
                     });
+            },
+            showModel(data) {
+                $.each(data.errors, (index, val) => {
+                    val.map((value, key) => {
+                        flash(value, 'warning')
+                    })
+                })
             }
         }
     }
