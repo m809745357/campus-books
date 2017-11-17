@@ -9315,7 +9315,7 @@ button.close {
 .user-bindmobile-form {
   background-color: #fff;
   display: grid;
-  grid-template-columns: 2.2rem 1fr 2.4rem;
+  grid-template-columns: 2.2rem 5.4rem 2.4rem;
   border: 1px solid #f2f2f1;
   border-left: none;
   border-right: none;

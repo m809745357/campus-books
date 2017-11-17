@@ -64,10 +64,6 @@
             }
         },
 
-        mounted() {
-            console.log('Component mounted.')
-        },
-
         methods: {
             detail(id) {
                 window.location.href = `/threads/${this.attributes.channel.slug}/${id}`;

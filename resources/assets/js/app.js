@@ -11,6 +11,23 @@ require('swiper/dist/css/swiper.css')
 
 require('amfe-flexible/index.js');
 
+window.wx = require('weixin-js-sdk');
+
+wx.config(JSON.parse(App.wxconfig));
+wx.ready(function(){
+    wx.onMenuShareTimeline({
+        title: '校园平台',
+        link: 'https://book.mandokg.com',
+        imgUrl: 'https://lorempixel.com/200/200/?47750',
+    });
+    wx.onMenuShareAppMessage({
+        title: '校园平台',
+        desc: '校园平台',
+        link: 'https://book.mandokg.com',
+        imgUrl: 'https://lorempixel.com/200/200/?47750',
+    });
+});
+
 window.Vue = require('vue');
 
 Vue.prototype.authorize = function (handler) {

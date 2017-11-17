@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use EasyWeChat\Foundation\Application;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,9 +13,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Application $app)
     {
         \Carbon\Carbon::setLocale('zh');
+        View::share('js', $app->js);
     }
 
     /**
@@ -32,6 +35,5 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.debug')) {
             $this->app->register('VIACreative\SudoSu\ServiceProvider');
         }
-
     }
 }

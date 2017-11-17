@@ -68,7 +68,9 @@
         },
 
         mounted() {
-            console.log('Component mounted.')
+            setTimeout(() => {
+                this._initWechat();
+            }, 40)
         },
 
         computed: {
@@ -99,6 +101,22 @@
 
                 this.thread.is_favorited = false;
                 this.thread.favorites_count --;
+            },
+            _initWechat() {
+                let that = this;
+                wx.ready(function(){
+                    wx.onMenuShareAppMessage({
+                        title: that.thread.title,
+                        desc: that.thread.body,
+                        link: window.location.href,
+                        imgUrl: that.onwer.avatar,
+                    });
+                    wx.onMenuShareTimeline({
+                        title: that.thread.title,
+                        link: window.location.href,
+                        imgUrl: that.onwer.avatar,
+                    });
+                });
             }
         }
     }
