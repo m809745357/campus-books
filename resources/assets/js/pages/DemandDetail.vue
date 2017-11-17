@@ -71,6 +71,7 @@
             chat() {
                 if (window.App.signedIn) {
                     window.location.href = `/users/${this.demand.onwer.id}/chat`
+                    return ;
                 }
 
                 window.location.href = '/login'

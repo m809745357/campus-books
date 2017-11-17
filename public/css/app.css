@@ -10635,6 +10635,15 @@ button.close {
   border-bottom: 1px solid #e9e9e9;
 }
 
+.order-preview .order-preview-address button {
+  width: 3rem;
+  border: none;
+  background-color: #fff;
+  border: 1px solid #e9e9e9;
+  color: #333333;
+  height: 0.8rem;
+}
+
 .order-preview .order-preview-address img {
   width: 0.45rem;
   -ms-flex-item-align: center;

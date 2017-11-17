@@ -9,7 +9,7 @@
             <img src="/images/arrow.png" alt="" class="arrow">
         </div>
         <div v-else class="order-preview-address">
-
+            <button type="button" name="button" @click="openAddress">请选择地址</button>
         </div>
         <div class="order-preview-detail">
             <div class="order-preview-detail-order">
@@ -45,15 +45,15 @@
 
 <script>
     export default {
-        props: ['attrbook', 'attraddress'],
+        props: ['attrbook'],
         data() {
             return {
                 book: this.attrbook,
-                address: this.attraddress,
+                address: '',
                 order: {
                     book_detail: this.attrbook.id,
                     book_id: this.attrbook.id,
-                    address: this.attraddress.id,
+                    address: '',
                     remark: '',
                 }
             }
@@ -65,6 +65,39 @@
                         console.log(response);
                         window.location.href = `/orders/${response.data.id}/pay`;
                     });
+            },
+            openAddress() {
+                let that = this;
+                wx.openAddress({
+                    success: function (res) {
+                        that.address = {
+                            user_name: res.userName,
+                            tel_number: res.telNumber,
+                            province_name: res.provinceName,
+                            city_name: res.cityName,
+                            country_name: res.countryName,
+                            detail_info: res.detailInfo,
+                            postal_code: res.postalCode,
+                            national_code: res.nationalCode,
+                        }
+                        axios.post('/api/address', that.address)
+                            .then(response => {
+                                that.order.address = response.data.id
+                            })
+                            .catch(error => {
+                                if (error.response.status == 422) {
+                                    that.showModel(error.response.data)
+                                }
+                            })
+                    }
+                });
+            },
+            showModel(data) {
+                $.each(data.errors, (index, val) => {
+                    val.map((value, key) => {
+                        flash(value, 'warning')
+                    })
+                })
             }
         }
     }

@@ -113,6 +113,7 @@
             buy() {
                 if (window.App.signedIn) {
                     window.location.href = window.location.href + '/preview';
+                    return ;
                 }
 
                 window.location.href = '/login'
