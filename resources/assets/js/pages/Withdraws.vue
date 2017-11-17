@@ -32,8 +32,10 @@
                         money: this.money
                     })
                     .then(response => {
-                        console.log(response.data);
-                        window.location.href = '/bills';
+                        flash('提现申请已经提交，客服将会联系您');
+                        setTimeout(() => {
+                            window.location.href = '/bills';
+                        }, 1000)
                     })
                     .catch(error => {
                         console.log(error.response.data);

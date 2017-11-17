@@ -43,11 +43,13 @@
                     })
                     .then(response => {
                         flash('支付成功');
-                        window.location.href = `/orders/${this.order.id}`;
+                        setTimeout(() => {
+                            window.location.href = `/orders/${this.order.id}`;
+                        }, 1000)
                     })
                     .catch(error => {
                         if (error.response.status == 422) {
-                            that.showModel(error.response.data)
+                            this.showModel(error.response.data)
                         }
                     });
             },

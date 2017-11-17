@@ -33,7 +33,9 @@
                 return `/recharge/${this.id}/bill`;
             },
             create() {
-                window.location.href = '/users/balances';
+                setTimeout(() => {
+                    window.location.href = '/balances';
+                }, 1000)
             }
         }
     }

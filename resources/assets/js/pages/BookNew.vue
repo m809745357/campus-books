@@ -240,7 +240,9 @@
                     });
             },
             success(data) {
-                location.href = `/books/${this.slug}/${data.id}`;
+                setTimeout(() => {
+                    window.location.href = `/books/${this.slug}/${data.id}`;
+                }, 1000)
             },
             showModel(data) {
                 $.each(data.errors, (index, val) => {

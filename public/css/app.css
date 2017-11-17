@@ -8354,6 +8354,7 @@ button.close {
   text-align: center;
 }
 
+.alert,
 .search-models {
   font-size: 12px;
 }

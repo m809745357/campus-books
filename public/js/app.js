@@ -71205,8 +71205,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/withdraws', {
                 money: this.money
             }).then(function (response) {
-                console.log(response.data);
-                window.location.href = '/bills';
+                flash('提现申请已经提交，客服将会联系您');
+                setTimeout(function () {
+                    window.location.href = '/bills';
+                }, 1000);
             }).catch(function (error) {
                 console.log(error.response.data);
                 if (error.response.status == 422) {
@@ -72125,7 +72127,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         success: function success(data) {
-            location.href = '/books/' + this.slug + '/' + data.id;
+            var _this2 = this;
+
+            setTimeout(function () {
+                window.location.href = '/books/' + _this2.slug + '/' + data.id;
+            }, 1000);
         },
         showModel: function showModel(data) {
             $.each(data.errors, function (index, val) {
@@ -73568,7 +73574,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 paymet: this.paymet
             }).then(function (response) {
                 flash('支付成功');
-                window.location.href = '/orders/' + _this.order.id;
+                setTimeout(function () {
+                    window.location.href = '/orders/' + _this.order.id;
+                }, 1000);
+            }).catch(function (error) {
+                if (error.response.status == 422) {
+                    _this.showModel(error.response.data);
+                }
+            });
+        },
+        showModel: function showModel(data) {
+            $.each(data.errors, function (index, val) {
+                val.map(function (value, key) {
+                    flash(value, 'warning');
+                });
             });
         }
     }
@@ -75596,9 +75615,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addOrder: function addOrder() {
+            var _this = this;
+
             axios.post('/orders', this.order).then(function (response) {
                 console.log(response);
                 window.location.href = '/orders/' + response.data.id + '/pay';
+            }).catch(function (error) {
+                if (error.response.status == 422) {
+                    _this.showModel(error.response.data);
+                }
             });
         },
         openAddress: function openAddress() {
@@ -77278,7 +77303,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return '/recharge/' + this.id + '/bill';
         },
         create: function create() {
-            window.location.href = '/users/balances';
+            setTimeout(function () {
+                window.location.href = '/balances';
+            }, 1000);
         }
     }
 });

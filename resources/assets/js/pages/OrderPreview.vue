@@ -67,7 +67,7 @@
                     })
                     .catch(error => {
                         if (error.response.status == 422) {
-                            that.showModel(error.response.data)
+                            this.showModel(error.response.data)
                         }
                     });
             },
