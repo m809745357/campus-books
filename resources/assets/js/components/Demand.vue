@@ -14,31 +14,10 @@
                 demand: this.attributes
             }
         },
-        mounted() {
-            setTimeout(() => {
-                this._initWechat();
-            }, 40)
-        },
         methods: {
             detail() {
                 window.location.href = `/demands/${this.demand.id}`;
             },
-            _initWechat() {
-                let that = this;
-                wx.ready(function(){
-                    wx.onMenuShareAppMessage({
-                        title: that.demand.title,
-                        desc: that.demand.body,
-                        link: window.location.href,
-                        imgUrl: that.demand.images[0],
-                    });
-                    wx.onMenuShareTimeline({
-                        title: that.demand.title,
-                        link: window.location.href,
-                        imgUrl: that.demand.images[0],
-                    });
-                });
-            }
         }
     }
 </script>

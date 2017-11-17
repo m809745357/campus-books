@@ -71,6 +71,11 @@
             swiper,
             swiperSlide
         },
+        mounted() {
+            setTimeout(() => {
+                this._initWechat();
+            }, 40)
+        },
         computed: {
             collected() {
                 return this.book.is_favorited ? '/images/collected.png' : '/images/collect.png';
@@ -111,6 +116,22 @@
                 }
 
                 window.location.href = '/login'
+            },
+            _initWechat() {
+                let that = this;
+                wx.ready(function(){
+                    wx.onMenuShareAppMessage({
+                        title: that.book.title,
+                        desc: that.book.body,
+                        link: window.location.href,
+                        imgUrl: that.book.images[0],
+                    });
+                    wx.onMenuShareTimeline({
+                        title: that.book.title,
+                        link: window.location.href,
+                        imgUrl: that.book.images[0],
+                    });
+                });
             }
         }
     }

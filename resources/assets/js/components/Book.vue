@@ -19,30 +19,9 @@
                 book: this.attributes
             }
         },
-        mounted() {
-            setTimeout(() => {
-                this._initWechat();
-            }, 40)
-        },
         methods: {
             detail(slug, id) {
                 window.location.href = `/books/${slug}/${id}`
-            },
-            _initWechat() {
-                let that = this;
-                wx.ready(function(){
-                    wx.onMenuShareAppMessage({
-                        title: that.book.title,
-                        desc: that.book.body,
-                        link: window.location.href,
-                        imgUrl: that.book.images[0],
-                    });
-                    wx.onMenuShareTimeline({
-                        title: that.book.title,
-                        link: window.location.href,
-                        imgUrl: that.book.images[0],
-                    });
-                });
             }
         }
     }
