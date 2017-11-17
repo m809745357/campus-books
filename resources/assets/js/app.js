@@ -9,6 +9,8 @@ require('./bootstrap');
 
 require('swiper/dist/css/swiper.css')
 
+require('amfe-flexible/index.js');
+
 window.Vue = require('vue');
 
 Vue.prototype.authorize = function (handler) {

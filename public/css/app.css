@@ -8354,6 +8354,10 @@ button.close {
   text-align: center;
 }
 
+.search-models {
+  font-size: 12px;
+}
+
 .submit-button {
   width: 100%;
   height: 1.17rem;
@@ -8395,6 +8399,7 @@ button.close {
 .container {
   min-height: 100vh;
   background-color: #f0eff5;
+  font-size: 12px;
 }
 
 .thread {
@@ -8413,6 +8418,7 @@ button.close {
   border-bottom: 1px solid #e5e5e5;
   padding-top: 0.37rem;
   padding-bottom: 0.24rem;
+  font-size: 12px;
 }
 
 .thread-body {
@@ -9396,6 +9402,7 @@ button.close {
           justify-content: center;
   background-color: #fff;
   padding: 0 0.27rem;
+  font-size: 12px;
 }
 
 .search select {
@@ -9422,21 +9429,25 @@ button.close {
 .search input::-webkit-input-placeholder {
   color: #aaaaaa;
   text-align: center;
+  font-size: 12px;
 }
 
 .search input:-ms-input-placeholder {
   color: #aaaaaa;
   text-align: center;
+  font-size: 12px;
 }
 
 .search input::-ms-input-placeholder {
   color: #aaaaaa;
   text-align: center;
+  font-size: 12px;
 }
 
 .search input::placeholder {
   color: #aaaaaa;
   text-align: center;
+  font-size: 12px;
 }
 
 .search img {
@@ -9467,6 +9478,7 @@ button.close {
           justify-content: space-between;
   padding: 0 0.32rem;
   background-color: #fff;
+  font-size: 12px;
 }
 
 .hot-replies h4 {
@@ -9690,6 +9702,7 @@ button.close {
   border-bottom: 1px solid #e5e5e5;
   padding-top: 0.37rem;
   padding-bottom: 0.24rem;
+  font-size: 12px;
 }
 
 .demand-gallery {
