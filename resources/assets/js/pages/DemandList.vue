@@ -66,7 +66,7 @@
                 })
                 .then(response => {
                     console.log(response.data)
-                    this.demands = response.data.data.concat(this.demands)
+                    this.demands = this.demands.concat(response.data.data)
                     this.paginate = response.data;
                     this.load = false;
                     this.tips = '上拉加载更多';

@@ -80,7 +80,7 @@
                 })
                     .then(response => {
                         console.log(response.data)
-                        this.books = response.data.data.concat(this.books)
+                        this.books = this.books.concat(response.data.data)
                         this.paginate = response.data;
                         this.load = false;
                         this.tips = '上拉加载更多';

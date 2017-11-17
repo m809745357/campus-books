@@ -82,7 +82,7 @@
                 })
                     .then(response => {
                         console.log(response.data)
-                        this.threads = response.data.data.concat(this.threads)
+                        this.threads = this.threads.concat(response.data.data)
                         this.paginate = response.data;
                         this.load = false;
                         this.tips = '上拉加载更多';

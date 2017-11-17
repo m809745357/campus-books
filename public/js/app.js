@@ -71127,7 +71127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 url: this.url()
             }).then(function (response) {
                 console.log(response.data);
-                _this.books = response.data.data.concat(_this.books);
+                _this.books = _this.books.concat(response.data.data);
                 _this.paginate = response.data;
                 _this.load = false;
                 _this.tips = '上拉加载更多';
@@ -75544,7 +75544,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 url: this.url()
             }).then(function (response) {
                 console.log(response.data);
-                _this.demands = response.data.data.concat(_this.demands);
+                _this.demands = _this.demands.concat(response.data.data);
                 _this.paginate = response.data;
                 _this.load = false;
                 _this.tips = '上拉加载更多';
@@ -76871,7 +76871,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 url: this.url()
             }).then(function (response) {
                 console.log(response.data);
-                _this.threads = response.data.data.concat(_this.threads);
+                _this.threads = _this.threads.concat(response.data.data);
                 _this.paginate = response.data;
                 _this.load = false;
                 _this.tips = '上拉加载更多';
