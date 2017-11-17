@@ -305,6 +305,19 @@ class User extends Authenticatable
     }
 
     /**
+     * 新增消息
+     *
+     * @param [type] $message [description]
+     */
+    public function addMessage($message)
+    {
+        return $this->messages()->create([
+            'from_user_id' => $this->id,
+            'message' => $message
+        ]);
+    }
+
+    /**
      * 设置头像
      *
      * @param [type] $avatar [description]
@@ -331,6 +344,10 @@ class User extends Authenticatable
      */
     public function validateCode()
     {
+        if (app()->environment('testing')) {
+            return true;
+        }
+
         $sms = $this->sms()->where(['mobile' => request()->mobile])->whereNull('read_at')->orderBy('created_at', 'desc')->first();
 
         if (! $sms) {

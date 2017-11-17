@@ -61,9 +61,6 @@ class ChatController extends Controller
             'message' => 'required',
         ]);
 
-        return $user->messages()->create([
-            'from_user_id' => auth()->id(),
-            'message' => $request->message
-        ]);
+        return $user->addMessage($request->message);
     }
 }

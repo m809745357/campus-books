@@ -76,7 +76,7 @@
                 return this.book.is_favorited ? '/images/collected.png' : '/images/collect.png';
             },
             onwer() {
-                return window.App.user.id !== this.book.onwer.id
+                return window.App.user === null || window.App.user.id !== this.book.onwer.id
             }
         },
         methods: {
@@ -106,7 +106,11 @@
                 this.book.favorites_count --;
             },
             buy() {
-                window.location.href = window.location.href + '/preview';
+                if (window.App.signedIn) {
+                    window.location.href = window.location.href + '/preview';
+                }
+
+                window.location.href = '/login'
             }
         }
     }

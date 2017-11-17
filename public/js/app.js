@@ -5311,6 +5311,58 @@ module.exports = {
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(218)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(220)
+/* template */
+var __vue_template__ = __webpack_require__(221)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Scroll.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a9b16578", Component.options)
+  } else {
+    hotAPI.reload("data-v-a9b16578", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /*!
  * better-normal-scroll v1.4.1
  * (c) 2016-2017 ustbhuangyi
@@ -7200,58 +7252,6 @@ BScroll.Version = '1.4.1';
 return BScroll;
 
 })));
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(218)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(220)
-/* template */
-var __vue_template__ = __webpack_require__(221)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Scroll.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a9b16578", Component.options)
-  } else {
-    hotAPI.reload("data-v-a9b16578", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
 
 
 /***/ }),
@@ -68950,7 +68950,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.location.href = '/threads/' + this.thread.channel.slug + '/' + this.thread.id;
         },
         reward: function reward() {
-            this.$emit('reward', this.attributes.id);
+            if (window.App.signedIn) {
+                this.$emit('reward', this.attributes.id);
+            }
+
+            window.location.href = '/login';
         }
     }
 });
@@ -70087,7 +70091,7 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__);
 //
 //
@@ -70204,7 +70208,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_better_scroll__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_better_scroll__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_better_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_better_scroll__);
 //
 //
@@ -71034,11 +71038,11 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Book_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Book_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Book_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_better_scroll__);
 //
 //
@@ -72447,7 +72451,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.book.is_favorited ? '/images/collected.png' : '/images/collect.png';
         },
         onwer: function onwer() {
-            return window.App.user.id !== this.book.onwer.id;
+            return window.App.user === null || window.App.user.id !== this.book.onwer.id;
         }
     },
     methods: {
@@ -72477,7 +72481,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.book.favorites_count--;
         },
         buy: function buy() {
-            window.location.href = window.location.href + '/preview';
+            if (window.App.signedIn) {
+                window.location.href = window.location.href + '/preview';
+            }
+
+            window.location.href = '/login';
         }
     }
 });
@@ -75460,11 +75468,11 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Demand_vue__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Demand_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Demand_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_better_scroll__);
 //
 //
@@ -75775,12 +75783,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         onwer: function onwer() {
-            return window.App.user.id !== this.demand.onwer.id;
+            return window.App.user === null || window.App.user.id !== this.demand.onwer.id;
         }
     },
     methods: {
         chat: function chat() {
-            window.location.href = '/users/' + this.demand.onwer.id + '/chat';
+            if (window.App.signedIn) {
+                window.location.href = '/users/' + this.demand.onwer.id + '/chat';
+            }
+
+            window.location.href = '/login';
         }
     }
 });
@@ -76767,11 +76779,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Thread_vue__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Thread_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Thread_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_better_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_better_scroll__);
 //
 //
@@ -77251,7 +77263,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -77287,6 +77299,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.body = '';
 
                 _this.$emit('created', response.data);
+            }).catch(function (error) {
+                if (error.response.status == 401) {
+                    flash('没有登录无法回复', 'warning');
+                    window.location.href = '/login';
+                }
             });
         }
     }

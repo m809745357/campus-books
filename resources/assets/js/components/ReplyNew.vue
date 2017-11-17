@@ -22,6 +22,12 @@
 
                         this.$emit('created', response.data);
                     })
+                    .catch(error => {
+                        if (error.response.status == 401) {
+                            flash('没有登录无法回复', 'warning');
+                            window.location.href = '/login';
+                        }
+                    })
             }
         }
     }

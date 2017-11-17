@@ -59,12 +59,16 @@
         },
         computed: {
             onwer() {
-                return window.App.user.id !== this.demand.onwer.id
+                return window.App.user === null || window.App.user.id !== this.demand.onwer.id
             }
         },
         methods: {
             chat() {
-                window.location.href = `/users/${this.demand.onwer.id}/chat`
+                if (window.App.signedIn) {
+                    window.location.href = `/users/${this.demand.onwer.id}/chat`
+                }
+
+                window.location.href = '/login'
             }
         }
     }

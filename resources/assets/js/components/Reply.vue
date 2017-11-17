@@ -100,7 +100,11 @@
                 window.location.href = `/threads/${this.thread.channel.slug}/${this.thread.id}`;
             },
             reward() {
-                this.$emit('reward', this.attributes.id);
+                if (window.App.signedIn) {
+                    this.$emit('reward', this.attributes.id);
+                }
+
+                window.location.href = '/login'
             }
         }
     }

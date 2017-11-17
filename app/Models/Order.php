@@ -135,9 +135,10 @@ class Order extends Model
 
             $this->book->update(['status' => '2']);
 
+            $this->onwer->addMessage($this->book->realPath());
+
             return $this;
         }
-
 
         return false;
     }

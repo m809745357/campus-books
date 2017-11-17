@@ -29,7 +29,7 @@ class UploadController extends Controller
 
         $file_path = request()->file('file')->store($request->directory ?? 'books', 'public');
 
-        $this->reduceSize(storage_path('app/public') . '/' . $file_path, 200, 200);
+        app()->environment('testing') || $this->reduceSize(storage_path('app/public') . '/' . $file_path, 200, 200);
 
         return response($file_path, 201);
     }
