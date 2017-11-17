@@ -80634,6 +80634,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         changemobile: function changemobile() {
             window.location.href = '/users/changemobile';
+        },
+        openAddress: function openAddress() {
+            wx.openAddress({
+
+                success: function success(res) {
+
+                    var userName = res.userName; // 收货人姓名
+
+                    var postalCode = res.postalCode; // 邮编
+
+                    var provinceName = res.provinceName; // 国标收货地址第一级地址（省）
+
+                    var cityName = res.cityName; // 国标收货地址第二级地址（市）
+
+                    var countryName = res.countryName; // 国标收货地址第三级地址（国家）
+
+                    var detailInfo = res.detailInfo; // 详细收货地址信息
+
+                    var nationalCode = res.nationalCode; // 收货地址国家码
+
+                    var telNumber = res.telNumber; // 收货人手机号码
+                    alert(userName + "|" + postalCode + "|" + provinceName + "|" + cityName + "|" + countryName + "|" + detailInfo + "|" + nationalCode + "|" + telNumber);
+                }
+
+            });
         }
     }
 });
@@ -80968,7 +80993,20 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "user-profile-item", on: { click: _vm.openAddress } },
+        [
+          _c("h4", [_vm._v("管理收货地址")]),
+          _vm._v(" "),
+          _c("p"),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "arrow",
+            attrs: { src: "/images/arrow.png", alt: "" }
+          })
+        ]
+      ),
       _vm._v(" "),
       _c("UpdateModel", {
         key: _vm.model.key,
@@ -80984,23 +81022,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "user-profile-item" }, [
-      _c("h4", [_vm._v("管理收货地址")]),
-      _vm._v(" "),
-      _c("p"),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "arrow",
-        attrs: { src: "/images/arrow.png", alt: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
