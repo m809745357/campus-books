@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\models\Book;
+use App\models\Category;
+use App\User;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -131,17 +133,13 @@ class BookController extends Controller
                 $form->textarea('body', '商品描述')->rows(10);
                 $form->display('annex', '附件信息');
             })->tab('其他信息', function ($form) {
-
                  $form->hasMany('jobs', function () {
-                     $form->text('company');
-                     $form->date('start_date');
+                     $form->display('views_count', '浏览');
+                     $form->display('favorites_count', '喜欢');
                      $form->display('created_at', '发布时间');
                  });
-
-             });
-
-
-            $form->display('updated_at', 'Updated At');
+            });
+            // $form->display('updated_at', 'Updated At');
         });
     }
 }
