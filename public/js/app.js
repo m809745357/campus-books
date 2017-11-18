@@ -69436,17 +69436,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         canReward: function canReward() {
             var _this = this;
 
-            if (this.replyThread.money == 0) {
-                return false;
-            }
-            if (this.replyThread) {
-                console.log(this.authorize(function (user) {
-                    return _this.replyThread.user_id == user.id;
-                }));
+            if (this.replyThread && this.replyThread.money > 0) {
                 return this.authorize(function (user) {
                     return _this.replyThread.user_id == user.id;
                 }) && this.replyThread.user_id !== this.reply.user_id && this.replyThread.best_reply_id == null;
             }
+
+            return false;
         },
         canDelete: function canDelete() {
             var _this2 = this;
@@ -69580,23 +69576,25 @@ var render = function() {
     _c("div", { staticClass: "thread-footer" }, [
       _c("span", {}),
       _vm._v(" "),
-      _c("div", { staticClass: "thread-options" }, [
-        _vm.canReward
-          ? _c(
-              "span",
-              { staticClass: "thread-reward", on: { click: _vm.reward } },
-              [_vm._v("赞赏")]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.canDelete
-          ? _c(
-              "span",
-              { staticClass: "thread-delete", on: { click: _vm.destroy } },
-              [_vm._v("删除")]
-            )
-          : _vm._e()
-      ])
+      !this.thread
+        ? _c("div", { staticClass: "thread-options" }, [
+            _vm.canReward
+              ? _c(
+                  "span",
+                  { staticClass: "thread-reward", on: { click: _vm.reward } },
+                  [_vm._v("赞赏")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.canDelete
+              ? _c(
+                  "span",
+                  { staticClass: "thread-delete", on: { click: _vm.destroy } },
+                  [_vm._v("删除")]
+                )
+              : _vm._e()
+          ])
+        : _vm._e()
     ])
   ])
 }
@@ -79529,7 +79527,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         bindMobile: function bindMobile() {
             var _this2 = this;
 
-            axios.post('/users/mobile/verify', {
+            axios.post('/users/verifymobile', {
                 mobile: this.user.mobile,
                 code: this.code
             }).then(function (response) {
@@ -79537,6 +79535,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 if (error.response.status == 422) {
                     _this2.showModel(error.response.data);
+                }
+                if (error.response.status == 400) {
+                    flash(error.response.data, 'warning');
                 }
             });
         },
@@ -79552,6 +79553,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 if (error.response.status == 422) {
                     _this3.showModel(error.response.data);
+                }
+                if (error.response.status == 400) {
+                    flash(error.response.data, 'warning');
                 }
             });
         },
@@ -79858,6 +79862,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (error.response.status == 422) {
                         _this.showModel(error.response.data);
                     }
+                    if (error.response.status == 400) {
+                        flash(error.response.data, 'warning');
+                    }
                 });
             }
         },
@@ -79912,6 +79919,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 if (error.response.status == 422) {
                     _this4.showModel(error.response.data);
+                }
+                if (error.response.status == 400) {
+                    flash(error.response.data, 'warning');
                 }
             });
         },

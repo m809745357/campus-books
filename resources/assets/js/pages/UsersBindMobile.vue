@@ -68,7 +68,7 @@
                 }
             },
             bindMobile() {
-                axios.post('/users/mobile/verify', {
+                axios.post('/users/verifymobile', {
                     mobile: this.user.mobile,
                     code: this.code
                 }).then(response => {
@@ -76,6 +76,9 @@
                 }).catch(error => {
                     if (error.response.status == 422) {
                         this.showModel(error.response.data)
+                    }
+                    if (error.response.status == 400) {
+                        flash(error.response.data, 'warning')
                     }
                 })
             },
@@ -89,6 +92,9 @@
                 }).catch(error => {
                     if (error.response.status == 422) {
                         this.showModel(error.response.data)
+                    }
+                    if (error.response.status == 400) {
+                        flash(error.response.data, 'warning')
                     }
                 })
             },

@@ -114,8 +114,15 @@ class UserController extends Controller
         ]);
 
         $user = auth()->user();
+
+        if (User::where('mobile', $request->mobile)->where('id', '<>', auth()->id())->exists()) {
+            return response('号码已经被他人绑定', 400);
+        }
+
         $user->mobile = $request->mobile;
         $user->save();
+
+        return response($user, 201);
     }
 
     /**

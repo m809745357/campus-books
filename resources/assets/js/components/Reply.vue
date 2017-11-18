@@ -27,7 +27,7 @@
             <span class="">
 
             </span>
-            <div class="thread-options">
+            <div class="thread-options" v-if="! this.thread">
                 <span class="thread-reward" v-if="canReward" @click="reward">赞赏</span>
                 <span class="thread-delete" v-if="canDelete" @click="destroy">删除</span>
             </div>
@@ -53,13 +53,11 @@
         },
         computed: {
             canReward() {
-                if (this.replyThread.money == 0) {
-                    return false;
-                }
-                if (this.replyThread) {
-                    console.log(this.authorize(user => this.replyThread.user_id == user.id));
+                if (this.replyThread && this.replyThread.money > 0) {
                     return this.authorize(user => this.replyThread.user_id == user.id) && this.replyThread.user_id !== this.reply.user_id && this.replyThread.best_reply_id == null;
                 }
+
+                return false;
             },
             canDelete() {
                 return this.authorize(user => this.attributes.user_id == user.id);
