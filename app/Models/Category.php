@@ -71,4 +71,14 @@ class Category extends Model
     {
         return $this->hasMany(self::class, 'parent_id');
     }
+
+    /**
+     * 获取子分类
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'category_id');
+    }
 }

@@ -574,9 +574,9 @@ $background-color: #efefef;
 * users-profile
 */
 .users-items {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-gap: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .users-item {
@@ -586,6 +586,8 @@ $background-color: #efefef;
     align-items: center;
     height: 2.52rem /* 189/75 */;
     background-color: #fff;
+    width: 3.3rem;
+    margin-bottom: 1px;
 }
 
 .users-item-icon {
@@ -607,8 +609,7 @@ $background-color: #efefef;
 }
 
 .user-profile-top {
-    display: grid;
-    grid-template-columns: 1fr 2.93rem /* 220/75 */ 1fr;
+    display: flex;
     background-image: url(/images/top.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -625,6 +626,7 @@ $background-color: #efefef;
     flex-direction: column;
     align-items: center;
     color: #fff;
+    flex: 1;
 }
 
 .user-profile-headimgurl {
@@ -644,7 +646,7 @@ $background-color: #efefef;
 .user-profile-phone {
     margin: 0;
     padding: 0;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .user-balance-panel {
@@ -696,6 +698,7 @@ $background-color: #efefef;
     margin-top: 0.41rem /* 31/75 */;
     height: 0.44rem /* 33/75 */;
     line-height: 0.44rem /* 33/75 */;
+    width: 2.67rem /* 200/75 */;
 
     img {
         margin-left: 0.45rem /* 34/75 */;
@@ -713,7 +716,7 @@ $background-color: #efefef;
     }
     &.after:after {
         content: attr(data-count);
-        font-size: 8px;
+        font-size: 9px;
         text-align: center;
         line-height: 0.35rem /* 26/75 */;
         color: #fff;
@@ -728,10 +731,10 @@ $background-color: #efefef;
 }
 
 .user-setting {
-    align-self: flex-start;
-    justify-self: flex-end;
     margin-top: 0.41rem /* 31/75 */;
     margin-right: 0.45rem /* 34/75 */;
+    width: 2.67rem /* 200/75 */;
+    text-align: right;
 
     img {
         width: 0.41rem /* 31/75 */;
@@ -751,10 +754,8 @@ $background-color: #efefef;
 .user-profile-item {
     height: 1.36rem /* 102/75 */;
     background-color: #fff;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
     justify-content: space-between;
-    justify-items: center;
     align-items: center;
     border-bottom: 1px solid $border-color;
 
@@ -766,12 +767,13 @@ $background-color: #efefef;
     }
 
     p {
-        justify-self: end;
         padding: 0;
         margin: 0;
         margin-right: 0.37rem /* 28/75 */;
         font-size: 13px;
         color: $font-desc-color;
+        flex: 1;
+        text-align: right;
 
         img {
             width: 1.25rem /* 94/75 */;
@@ -785,24 +787,24 @@ $background-color: #efefef;
  * user-bindmobile
  */
 .user-bindmobile {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 5.83rem /* 437/75 */ 1.17rem /* 88/75 */ 1.17rem /* 88/75 */ 2.07rem /* 155/75 */ auto;
-    justify-items: stretch;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
 .user-changemobile {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 0.27rem /* 20/75 */ 1.17rem /* 88/75 */ 1.17rem /* 88/75 */ 2.07rem /* 155/75 */ auto;
-    justify-items: stretch;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.27rem /* 20/75 */;
     min-height: 100vh;
 }
 
 .user-bindmobile-panel {
-    justify-self: center;
-    align-self: center;
+    height: 5.83rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
     img {
         width: 2.28rem /* 171/75 */;
@@ -820,8 +822,7 @@ $background-color: #efefef;
 
 .user-bindmobile-form {
     background-color: #fff;
-    display: grid;
-    grid-template-columns: 2.2rem /* 165/75 */ 5.4rem 2.4rem;
+    display: flex;
     border: 1px solid #f2f2f1;
     border-left: none;
     border-right: none;
@@ -832,6 +833,7 @@ $background-color: #efefef;
         border: none;
         color: $font-desc-color;
         padding-left: 0.57rem /* 43/75 */;
+        width: 5.4rem;
     }
 
     input[disabled]{
@@ -844,6 +846,8 @@ $background-color: #efefef;
         align-self: center;
         justify-self: center;
         background: none;
+        width: 2.2rem /* 165/75 */;
+        text-align: center;
     }
 
     button {
@@ -867,8 +871,7 @@ $background-color: #efefef;
 }
 
 .user-bindmobile-submit {
-    align-self: end;
-    justify-self: center;
+    margin-top: 1.07rem /* 80/75 */;
     height: 1.17rem /* 88/75 */;
     padding: 0 0.4rem /* 30/75 */;
 
@@ -1034,8 +1037,7 @@ $background-color: #efefef;
  * categories
  */
 .categories {
-    display: grid;
-    grid-template-columns: 2.41rem /* 181/75 */ auto /* 569/75 */;
+    display: flex;
     height: calc(100vh - 1.32rem);
 }
 .categories-left {
@@ -1081,16 +1083,18 @@ $background-color: #efefef;
         }
 
         .categories-content {
-            display: grid;
-            grid-template-columns: repeat(3, auto);
-            grid-gap: 0.31rem /* 23/75 */;
-            margin-top: 0.4rem /* 30/75 */;
-            margin-bottom: 0.49rem /* 37/75 */;
+            display: flex;
+            margin-top: 0.4rem;
+            margin-bottom: 0.49rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
 
             li {
                 list-style: none;
-                align-self: center;
-                justify-self: center;
+                width: 2.3rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
 
                 img {
@@ -1132,8 +1136,8 @@ $background-color: #efefef;
 }
 
 .demand-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+    display: flex;
+    justify-content: space-between;
     margin: 0 0.32rem /* 24/75 */;
     margin-bottom: 0.4rem /* 30/75 */;
 
@@ -1174,8 +1178,8 @@ $background-color: #efefef;
 
 .books-menu {
     height: 1.05rem /* 79/75 */;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+    display: flex;
+    justify-content: space-around;
     border-bottom: 1px solid $border-color;
     position: fixed;
     background-color: #fff;
@@ -1184,6 +1188,7 @@ $background-color: #efefef;
 
     li {
         list-style: none;
+        width: 3.3rem;
 
         &:not(:last-child) {
             border-right: 1px solid $border-color;
@@ -1225,9 +1230,8 @@ $background-color: #efefef;
 }
 
 .demands-desc, .books-desc {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-gap: 0.49rem /* 37/75 */;
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 0.4rem /* 30/75 */;
     margin-top: 1.05rem /* 79/75 */;
     padding-top: 0.59rem /* 44/75 */;
@@ -1235,13 +1239,12 @@ $background-color: #efefef;
 }
 
 .demands-item, .books-item {
-    align-self: center;
-    justify-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 4.15rem /* 311.5/75 */;
+    margin-bottom: 0.49rem /* 37/75 */;
 
     img {
         width: 4.31rem /* 323/75 */;
@@ -1275,13 +1278,13 @@ $background-color: #efefef;
     }
 
     .author {
-        font-size: 8px;
+        font-size: 9px;
         color: $font-desc-color;
         margin-bottom: 0.05rem /* 4/75 */;
     }
 
     .press {
-        font-size: 8px;
+        font-size: 9px;
         color: $font-desc-color;
         margin-bottom: 0.21rem /* 16/75 */;
     }
@@ -1476,9 +1479,9 @@ $background-color: #efefef;
     flex-direction: column;
 
     .recharges-items {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-gap: 0.21rem /* 16/75 */;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         margin: 1.09rem /* 82/75 */ 0.4rem /* 30/75 */;
 
 
@@ -1494,6 +1497,7 @@ $background-color: #efefef;
             align-items: center;
             color: $font-desc-color;
             font-size: 18px;
+            margin-bottom: .21rem;
         }
 
         li.on {
@@ -1549,8 +1553,8 @@ $background-color: #efefef;
     }
 
     .bills-title {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        justify-content: space-around;
         width: 100%;
         height: 1.23rem /* 92/75 */;
         border-bottom: 2px solid $border-color;
@@ -1566,8 +1570,8 @@ $background-color: #efefef;
     }
 
     .bills-desc {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        justify-content: space-around;
         width: 100%;
         height: 1.23rem /* 92/75 */;
         border-bottom: 1px solid $border-color;
@@ -1769,7 +1773,7 @@ $background-color: #efefef;
 
         .notify-left.after:after {
             content: attr(data-count);
-            font-size: 8px;
+            font-size: 9px;
             text-align: center;
             line-height: 0.35rem /* 26/75 */;
             color: #fff;
@@ -2468,7 +2472,7 @@ $background-color: #efefef;
 
                     button {
                         border: none;
-                        width: 1.12rem /* 84/75 */;
+                        width: 1.33rem /* 100/75 */;
                         height: 0.53rem /* 40/75 */;
                         line-height: 0.53rem /* 40/75 */;
                         font-size: 11px;
@@ -2500,12 +2504,12 @@ $background-color: #efefef;
         width: 6.67rem /* 500/75 */;
         height: 5.09rem /* 382/75 */;
         background-color: #fff;
-        display: grid;
-        grid-template-rows: auto 1fr auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
 
         .close {
-            align-self: flex-start;
-            justify-self: flex-end;
             margin-top: 0.27rem /* 20/75 */;
             margin-right: 0.27rem /* 20/75 */;
             width: 0.21rem /* 16/75 */;
@@ -2521,8 +2525,6 @@ $background-color: #efefef;
             font-size: 13px;
             background-color: $theme-color;
             color: #fff;
-            align-self: center;
-            justify-self: center;
             margin-bottom: 0.44rem /* 33/75 */;
         }
 
@@ -2596,21 +2598,20 @@ $background-color: #efefef;
         width: 6.67rem /* 500/75 */;
         height: 5.09rem /* 382/75 */;
         background-color: #fff;
-        display: grid;
-        grid-template-rows: auto 1fr auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
 
         .close {
-            align-self: flex-start;
-            justify-self: flex-end;
             margin-top: 0.27rem /* 20/75 */;
             margin-right: 0.27rem /* 20/75 */;
             width: 0.21rem /* 16/75 */;
             height: 0.21rem /* 16/75 */;
+            align-self: flex-end;
         }
 
         .buttons {
-            align-self: center;
-            justify-self: center;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -2641,9 +2642,6 @@ $background-color: #efefef;
             align-items: center;
             flex-direction: column;
             width: 5.21rem /* 391/75 */;
-            align-self: center;
-            justify-self: center;
-
         }
     }
 }
@@ -2712,5 +2710,22 @@ $background-color: #efefef;
         color: #fff;
         font-size: 17px;
         border: none;
+    }
+}
+
+/**
+ * none
+ */
+.none {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 3.33rem /* 250/75 */);
+    flex-direction: column;
+
+    span {
+        margin-top: 0.67rem /* 50/75 */;
+        color: $font-desc-color;
     }
 }

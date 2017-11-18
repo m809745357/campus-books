@@ -3,7 +3,7 @@
         <div class="demand-detail-desc">
             <div class="demand-detail-gallery">
                 <swiper :options="swiperOption" class="swiper-box">
-                    <swiper-slide v-for="(image, index) in book.images" :key="index" class="swiper-item"><img :src="image" alt=""></swiper-slide>
+                    <swiper-slide v-for="(image, index) in book.images" :key="index" class="swiper-item" v-if="index < 2"><img :src="image" alt=""></swiper-slide>
                     <div class="swiper-pagination" slot="pagination"></div>
                 </swiper>
             </div>

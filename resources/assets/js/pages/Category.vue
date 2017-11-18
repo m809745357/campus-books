@@ -20,7 +20,7 @@
                     <h4>{{ childCategory.name }}</h4>
                     <div class="categories-content">
                         <li v-for="(end_category, index) in childCategory.child_categories" :key="end_category.id">
-                            <img src="/images/categories/1.png" alt="" @click="books(end_category.slug)">
+                            <img :src="end_category.books ? end_category.books[0].images[0] : ''" alt="" @click="books(end_category.slug)">
                             <h4>{{ end_category.name }}</h4>
                         </li>
                     </div>

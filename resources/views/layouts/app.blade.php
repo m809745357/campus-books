@@ -33,9 +33,9 @@
         <flash message="{{ session('flash') }}"></flash>
 
     </div>
-    @if (config('app.debug'))
-        @include('sudosu::user-selector')
-    @endif
+        {{-- @if (config('app.debug'))
+            @include('sudosu::user-selector')
+        @endif --}}
     <!-- Scripts -->
     <script src="//{{ Request::getHost() }}:6002/socket.io/socket.io.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
