@@ -14,7 +14,7 @@ class Recharge extends Model
      *
      * @return [type] [description]
      */
-    public function money()
+    public function price()
     {
         return $this->money;
     }
