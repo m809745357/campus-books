@@ -83,9 +83,9 @@ class Reply extends Model
      *
      * @return [type] [description]
      */
-    public function money()
+    public function price()
     {
-        return $this->thread->money();
+        return $this->thread->price();
     }
 
     /**

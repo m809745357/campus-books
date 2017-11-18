@@ -24,7 +24,7 @@ class Withdraw extends Model
      * 获取提现金额
      * @return [type] [description]
      */
-    public function money()
+    public function price()
     {
         return $this->money;
     }

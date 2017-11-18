@@ -192,7 +192,7 @@ class Order extends Model
      */
     public function ifHasEnoughMoney()
     {
-        return $this->onwer->balances > $this->money();
+        return $this->onwer->balances > $this->price();
     }
 
     /**
@@ -200,7 +200,7 @@ class Order extends Model
      *
      * @return [type] [description]
      */
-    public function money()
+    public function price()
     {
         return $this->book_detail->money + $this->book_detail->freight;
     }

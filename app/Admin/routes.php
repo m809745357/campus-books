@@ -12,5 +12,12 @@ Route::group([
     $router->get('/', 'HomeController@index');
     $router->resource('/bookmark/categories', CategoryController::class);
     $router->resource('/bookmark/books', BookController::class);
+    $router->resource('/bookmark/demand', DemandController::class);
     $router->resource('/member', MemberController::class);
+    $router->resource('/club/channels', ChannelController::class);
+    $router->resource('/club/thread', ThreadController::class);
+    $router->resource('/club/reply', ReplyController::class);
+    $router->resource('/account/recharge', RechargeController::class);
+    $router->resource('/account/bill', BillController::class);
+
 });
