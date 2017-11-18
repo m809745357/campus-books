@@ -21,7 +21,7 @@
                  'onMenuShareQQ',
                  'onMenuShareWeibo',
                  'onMenuShareQZone',
-             ), true)
+             ), false)
         ]); ?>
     </script>
     <!-- Styles -->

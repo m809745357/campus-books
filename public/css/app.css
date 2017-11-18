@@ -9224,7 +9224,7 @@ button.close {
 
 .user-setting img {
   width: 0.41rem;
-  height: 0.41rem;
+  height: 0.39rem;
 }
 
 /**
@@ -9640,6 +9640,7 @@ button.close {
 
 .categories-right .categories-desc {
   margin-top: 0.25rem;
+  height: 100%;
 }
 
 .categories-right .categories-desc h4 {

@@ -1,19 +1,21 @@
 <template lang="html">
     <div class="categories">
-        <div class="categories-left">
-            <li
-                v-for="(category, index) in categories"
-                :key="index"
-                :data-key="index"
-                @click="change"
-                :id="'category-' + index"
-                >{{ category.name }}</li>
-        </div>
+        <scroll class="wrapper" :data="categories">
+            <div class="categories-left">
+                <li
+                    v-for="(category, index) in categories"
+                    :key="index"
+                    :data-key="index"
+                    @click="change"
+                    :id="'category-' + index"
+                    >{{ category.name }}</li>
+            </div>
+        </scroll>
 
         <div class="categories-right">
             <img src="/images/category-top.png" alt="">
 
-            <div class="categories-desc">
+            <scroll class="categories-desc" :data="categories">
                 <div v-for="(childCategory, index) in childCategories" :key="childCategory.id">
                     <h4>{{ childCategory.name }}</h4>
                     <div class="categories-content">
@@ -23,12 +25,16 @@
                         </li>
                     </div>
                 </div>
-            </div>
+            </scroll>
         </div>
     </div>
 </template>
 
 <script>
+
+    import scroll from '../components/Scroll.vue';
+    import BScroll from 'better-scroll';
+
     export default {
         props: ['attributes'],
         data() {
@@ -40,6 +46,9 @@
         },
         mounted() {
             $('#category-0').addClass('on');
+        },
+        components: {
+            scroll
         },
         methods: {
             change(e) {

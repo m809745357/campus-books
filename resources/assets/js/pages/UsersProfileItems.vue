@@ -118,7 +118,11 @@
                 window.location.href = '/users/changemobile';
             },
             openAddress() {
-                wx.openAddress();
+                wx.openAddress({
+                    success: function (res) {
+
+                    }
+                });
             }
         }
     }

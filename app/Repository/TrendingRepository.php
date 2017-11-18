@@ -20,7 +20,7 @@ class TrendingRepository implements Repository
      */
     public function trending($num, $where = null)
     {
-        return $value = \Cache::remember(get_class($this->model), 60 * 60, function () use ($num, $where) {
+        return $value = \Cache::remember($this->model->getTable() . '.treading', 60 * 60, function () use ($num, $where) {
             return $this->model->trending($num, $where);
         });
     }

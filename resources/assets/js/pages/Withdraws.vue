@@ -42,6 +42,9 @@
                         if (error.response.status == 422) {
                             this.showModel(error.response.data)
                         }
+                        if (error.response.status == 400) {
+                            flash(error.response.data, 'warning')
+                        }
                     })
             },
             showModel(data) {

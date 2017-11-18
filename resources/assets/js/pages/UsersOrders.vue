@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="order-info" v-for="(book, index) in books" :key="index" v-if="menu == '1' || menu == '3'" @click="orderDetail(book.order)">
+        <div class="order-info" v-for="(book, index) in books" :key="index" v-if="menu == '1' || menu == '3'" @click="orderDetail(book)">
             <div class="order-info-top" v-if="book.status >= status">
                 <h4>商品编号：{{ book.book_number }}</h4>
                 <p>{{ book.created_at }}</p>
@@ -104,11 +104,11 @@
                     window.location.hash = '#sell';
                 }
             },
-            orderDetail(order) {
-                if (order) {
-                    window.location.href = `/orders/${order.id}`;
+            orderDetail(book) {
+                if (book.order) {
+                    window.location.href = `/orders/${book.id}`;
                 } else {
-                    flash('订单不存在或已经删除');
+                    window.location.href = `/books/${book.category.slug}/${book.id}`;
                 }
             }
         }

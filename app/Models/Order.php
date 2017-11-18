@@ -130,17 +130,24 @@ class Order extends Model
     {
         $method = $this->getPaymentMethod();
 
-        if ($this->$method()) {
-            $this->update(['status' => '0100', 'pay' => $method]);
+        if (! $this->$method()) {
+            return false;
+        }
 
-            $this->book->update(['status' => '2']);
+        $this->update(['status' => '0100', 'pay' => $method]);
 
-            $this->onwer->addMessage($this->book->realPath());
+        $this->book->update(['status' => '2']);
 
+        if ($this->type === 'PBook') {
             return $this;
         }
 
-        return false;
+        $this->onwer->addContacts($this->book->onwer);
+        $this->book->onwer->addContacts($this->onwer);
+
+        $this->onwer->addMessage($this->book->realPath());
+
+        return $this;
     }
 
     /**

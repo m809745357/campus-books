@@ -735,7 +735,7 @@ $background-color: #efefef;
 
     img {
         width: 0.41rem /* 31/75 */;
-        height: 0.41rem /* 31/75 */;
+        height: 0.39rem /* 29/75 */;
     }
 }
 
@@ -1070,6 +1070,7 @@ $background-color: #efefef;
 
     .categories-desc {
         margin-top: 0.25rem /* 19/75 */;
+        height: 100%;
 
         h4 {
             margin: 0;

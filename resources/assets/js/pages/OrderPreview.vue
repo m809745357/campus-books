@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="order-preview">
-        <div v-if="address" class="order-preview-address">
+        <div v-if="address" class="order-preview-address" @click="openAddress">
             <img src="/images/address.png" alt="">
             <div class="order-preview-address-info">
                 <h4>{{ address.user_name }}<span>{{ address.tel_number }}</span></h4>

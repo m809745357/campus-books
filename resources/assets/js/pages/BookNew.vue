@@ -97,9 +97,14 @@
         <div class="thread-form-group">
             <label>物流方式：</label>
             <div class="thread-form-other">
-                <select name="select" v-model="book.logistics">
-                    <option value="快递">快递</option>
-                    <option value="见面交易">见面交易</option>
+                <select name="select" v-model="book.logistics" v-if="book.type === 'PBook'">
+                    <option value="">请选择</option>
+                    <option value="express">快递</option>
+                    <option value="face">见面交易</option>
+                </select>
+                <select name="select" v-model="book.logistics" v-else>
+                    <option value="">请选择</option>
+                    <option value="online">在线发送</option>
                 </select>
             </div>
         </div>
@@ -144,7 +149,7 @@
                     press: '人民邮电出版社',
                     type: 'PBook',
                     keywords: '计算机',
-                    logistics: '快递',
+                    logistics: '',
                     category_id: '',
                     money: 99,
                     freight: '5',

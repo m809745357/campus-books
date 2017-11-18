@@ -69436,6 +69436,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         canReward: function canReward() {
             var _this = this;
 
+            if (this.replyThread.money == 0) {
+                return false;
+            }
             if (this.replyThread) {
                 console.log(this.authorize(function (user) {
                     return _this.replyThread.user_id == user.id;
@@ -69493,6 +69496,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         reward: function reward() {
             if (window.App.signedIn) {
                 this.$emit('reward', this.attributes.id);
+                return;
             }
 
             window.location.href = '/login';
@@ -71214,6 +71218,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (error.response.status == 422) {
                     _this.showModel(error.response.data);
                 }
+                if (error.response.status == 400) {
+                    flash(error.response.data, 'warning');
+                }
             });
         },
         showModel: function showModel(data) {
@@ -72016,6 +72023,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -72031,7 +72043,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 press: '人民邮电出版社',
                 type: 'PBook',
                 keywords: '计算机',
-                logistics: '快递',
+                logistics: '',
                 category_id: '',
                 money: 99,
                 freight: '5',
@@ -72668,42 +72680,83 @@ var render = function() {
       _c("label", [_vm._v("物流方式：")]),
       _vm._v(" "),
       _c("div", { staticClass: "thread-form-other" }, [
-        _c(
-          "select",
-          {
-            directives: [
+        _vm.book.type === "PBook"
+          ? _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.book.logistics,
-                expression: "book.logistics"
-              }
-            ],
-            attrs: { name: "select" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.book,
-                  "logistics",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "快递" } }, [_vm._v("快递")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "见面交易" } }, [_vm._v("见面交易")])
-          ]
-        )
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.book.logistics,
+                    expression: "book.logistics"
+                  }
+                ],
+                attrs: { name: "select" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.book,
+                      "logistics",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("请选择")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "express" } }, [_vm._v("快递")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "face" } }, [_vm._v("见面交易")])
+              ]
+            )
+          : _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.book.logistics,
+                    expression: "book.logistics"
+                  }
+                ],
+                attrs: { name: "select" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.book,
+                      "logistics",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("请选择")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "online" } }, [
+                  _vm._v("在线发送")
+                ])
+              ]
+            )
       ])
     ]),
     _vm._v(" "),
@@ -75670,33 +75723,40 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "order-preview" }, [
     _vm.address
-      ? _c("div", { staticClass: "order-preview-address" }, [
-          _c("img", { attrs: { src: "/images/address.png", alt: "" } }),
-          _vm._v(" "),
-          _c("div", { staticClass: "order-preview-address-info" }, [
-            _c("h4", [
-              _vm._v(_vm._s(_vm.address.user_name)),
-              _c("span", [_vm._v(_vm._s(_vm.address.tel_number))])
+      ? _c(
+          "div",
+          {
+            staticClass: "order-preview-address",
+            on: { click: _vm.openAddress }
+          },
+          [
+            _c("img", { attrs: { src: "/images/address.png", alt: "" } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "order-preview-address-info" }, [
+              _c("h4", [
+                _vm._v(_vm._s(_vm.address.user_name)),
+                _c("span", [_vm._v(_vm._s(_vm.address.tel_number))])
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  _vm._s(_vm.address.province_name) +
+                    " " +
+                    _vm._s(_vm.address.city_name) +
+                    " " +
+                    _vm._s(_vm.address.country_name) +
+                    " " +
+                    _vm._s(_vm.address.detail_info)
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                _vm._s(_vm.address.province_name) +
-                  " " +
-                  _vm._s(_vm.address.city_name) +
-                  " " +
-                  _vm._s(_vm.address.country_name) +
-                  " " +
-                  _vm._s(_vm.address.detail_info)
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "arrow",
-            attrs: { src: "/images/arrow.png", alt: "" }
-          })
-        ])
+            _c("img", {
+              staticClass: "arrow",
+              attrs: { src: "/images/arrow.png", alt: "" }
+            })
+          ]
+        )
       : _c("div", { staticClass: "order-preview-address" }, [
           _c(
             "button",
@@ -75890,6 +75950,10 @@ exports.push([module.i, "", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_better_scroll__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_better_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_better_scroll__);
 //
 //
 //
@@ -75920,6 +75984,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['attributes'],
@@ -75934,6 +76004,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('#category-0').addClass('on');
     },
 
+    components: {
+        scroll: __WEBPACK_IMPORTED_MODULE_0__components_Scroll_vue___default.a
+    },
     methods: {
         change: function change(e) {
             $(e.target).addClass('on').siblings().removeClass('on');
@@ -75954,59 +76027,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "categories" }, [
-    _c(
-      "div",
-      { staticClass: "categories-left" },
-      _vm._l(_vm.categories, function(category, index) {
-        return _c(
-          "li",
-          {
-            key: index,
-            attrs: { "data-key": index, id: "category-" + index },
-            on: { click: _vm.change }
-          },
-          [_vm._v(_vm._s(category.name))]
-        )
-      })
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "categories-right" }, [
-      _c("img", { attrs: { src: "/images/category-top.png", alt: "" } }),
+  return _c(
+    "div",
+    { staticClass: "categories" },
+    [
+      _c(
+        "scroll",
+        { staticClass: "wrapper", attrs: { data: _vm.categories } },
+        [
+          _c(
+            "div",
+            { staticClass: "categories-left" },
+            _vm._l(_vm.categories, function(category, index) {
+              return _c(
+                "li",
+                {
+                  key: index,
+                  attrs: { "data-key": index, id: "category-" + index },
+                  on: { click: _vm.change }
+                },
+                [_vm._v(_vm._s(category.name))]
+              )
+            })
+          )
+        ]
+      ),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "categories-desc" },
-        _vm._l(_vm.childCategories, function(childCategory, index) {
-          return _c("div", { key: childCategory.id }, [
-            _c("h4", [_vm._v(_vm._s(childCategory.name))]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "categories-content" },
-              _vm._l(childCategory.child_categories, function(
-                end_category,
-                index
-              ) {
-                return _c("li", { key: end_category.id }, [
-                  _c("img", {
-                    attrs: { src: "/images/categories/1.png", alt: "" },
-                    on: {
-                      click: function($event) {
-                        _vm.books(end_category.slug)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("h4", [_vm._v(_vm._s(end_category.name))])
-                ])
-              })
-            )
-          ])
-        })
+        { staticClass: "categories-right" },
+        [
+          _c("img", { attrs: { src: "/images/category-top.png", alt: "" } }),
+          _vm._v(" "),
+          _c(
+            "scroll",
+            { staticClass: "categories-desc", attrs: { data: _vm.categories } },
+            _vm._l(_vm.childCategories, function(childCategory, index) {
+              return _c("div", { key: childCategory.id }, [
+                _c("h4", [_vm._v(_vm._s(childCategory.name))]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "categories-content" },
+                  _vm._l(childCategory.child_categories, function(
+                    end_category,
+                    index
+                  ) {
+                    return _c("li", { key: end_category.id }, [
+                      _c("img", {
+                        attrs: { src: "/images/categories/1.png", alt: "" },
+                        on: {
+                          click: function($event) {
+                            _vm.books(end_category.slug)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("h4", [_vm._v(_vm._s(end_category.name))])
+                    ])
+                  })
+                )
+              ])
+            })
+          )
+        ],
+        1
       )
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -80216,11 +80305,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 window.location.hash = '#sell';
             }
         },
-        orderDetail: function orderDetail(order) {
-            if (order) {
-                window.location.href = '/orders/' + order.id;
+        orderDetail: function orderDetail(book) {
+            if (book.order) {
+                window.location.href = '/orders/' + book.id;
             } else {
-                flash('订单不存在或已经删除');
+                window.location.href = '/books/' + book.category.slug + '/' + book.id;
             }
         }
     }
@@ -80389,7 +80478,7 @@ var render = function() {
                 staticClass: "order-info",
                 on: {
                   click: function($event) {
-                    _vm.orderDetail(book.order)
+                    _vm.orderDetail(book)
                   }
                 }
               },
@@ -80707,7 +80796,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.location.href = '/users/changemobile';
         },
         openAddress: function openAddress() {
-            wx.openAddress();
+            wx.openAddress({
+                success: function success(res) {}
+            });
         }
     }
 });
