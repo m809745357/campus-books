@@ -17,10 +17,10 @@
                     <li>{{ $bill->created_at->toDateString() }}</li>
                     <li>{{ $bill->remark }}</li>
                     @if ($bill->change_type === 'increment')
-                        <li>+￥ {{ $bill->billed->money() }}</li>
+                        <li>+￥ {{ $bill->billed->price() }}</li>
                     @endif
                     @if ($bill->change_type === 'decrement')
-                        <li>-￥ {{ $bill->billed->money() }}</li>
+                        <li>-￥ {{ $bill->billed->price() }}</li>
                     @endif
                 </div>
             @endforeach

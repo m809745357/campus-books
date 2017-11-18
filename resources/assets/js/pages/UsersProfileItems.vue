@@ -115,7 +115,13 @@
                 };
             },
             changemobile() {
-                window.location.href = '/users/changemobile';
+                if (this.user.mobile) {
+                    window.location.href = '/users/changemobile';
+                    return ;
+                }
+
+                window.location.href = '/users/bindmobile';
+
             },
             openAddress() {
                 wx.openAddress({

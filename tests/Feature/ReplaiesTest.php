@@ -135,9 +135,9 @@ class ReplaiesTest extends TestCase
 
         $this->assertEquals($reply->id, $thread->fresh()->best_reply_id);
 
-        $userBalances = $user->balances - $reply->money();
+        $userBalances = $user->balances - $reply->price();
 
-        $replyUserBalances = $replyUser->balances + $reply->money();
+        $replyUserBalances = $replyUser->balances + $reply->price();
 
         $this->assertEquals((int)$userBalances, $user->fresh()->balances);
 

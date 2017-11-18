@@ -80793,7 +80793,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         },
         changemobile: function changemobile() {
-            window.location.href = '/users/changemobile';
+            if (this.user.mobile) {
+                window.location.href = '/users/changemobile';
+                return;
+            }
+
+            window.location.href = '/users/bindmobile';
         },
         openAddress: function openAddress() {
             wx.openAddress({

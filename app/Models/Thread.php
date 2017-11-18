@@ -155,7 +155,7 @@ class Thread extends Model implements Repository
      *
      * @return [type] [description]
      */
-    public function money()
+    public function price()
     {
         return $this->money;
     }
@@ -167,6 +167,6 @@ class Thread extends Model implements Repository
      */
     public function ifHasEnoughMoney()
     {
-        return $this->onwer->balances > $this->money();
+        return $this->onwer->balances > $this->price();
     }
 }

@@ -252,9 +252,9 @@ class OrdersTest extends TestCase
 
         $this->assertEquals('0100', $order->fresh()->status);
 
-        $userBalances = $user->balances - $order->money();
+        $userBalances = $user->balances - $order->price();
 
-        $sellerBalances = $seller->balances + $order->money();
+        $sellerBalances = $seller->balances + $order->price();
 
         $this->assertEquals((int)$userBalances, $user->fresh()->balances);
 
