@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <category :attributes="{{ $categories }}"></category>
+        <category :attributes="{{ $categories }}" :image="{{ $carousel }}"></category>
     </div>
     <div style="height: 1.32rem"></div>
     <div class="menu con">

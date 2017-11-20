@@ -6,6 +6,7 @@ use App\User;
 use App\Models\Thread;
 use App\Models\Demand;
 use App\Models\Book;
+use App\Models\Carousel;
 use Illuminate\Http\Request;
 
 class WechatController extends Controller
@@ -26,7 +27,9 @@ class WechatController extends Controller
         $trendingPbooks = Book::where(['type' => 'PBook'])->with('onwer', 'category')->where('status' , 1)->latest('views_count')->paginate(4);
         $trendingEbooks = Book::where(['type' => 'EBook'])->with('onwer', 'category')->where('status' , 1)->latest('views_count')->paginate(4);
 
-        return view('home', compact('trendingThreads', 'trendingDemands', 'trendingPbooks', 'trendingEbooks'));
+        $carousels = Carousel::where(['type' => 'home'])->get();
+
+        return view('home', compact('trendingThreads', 'trendingDemands', 'trendingPbooks', 'trendingEbooks', 'carousels'));
 
     }
 }

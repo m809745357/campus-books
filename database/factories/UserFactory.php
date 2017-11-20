@@ -189,3 +189,11 @@ $factory->define(App\Models\Order::class, function (Faker $faker) {
         'status' => '0000'
     ];
 });
+
+$factory->define(App\Models\Carousel::class, function (Faker $faker) {
+    return [
+        'image' => $faker->imageUrl(375, 135),
+        'target_url' => 'https://book.mandokg.com',
+        'type' => 'home'
+    ];
+});

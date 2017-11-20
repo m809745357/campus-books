@@ -69929,13 +69929,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['attributes'],
     data: function data() {
         return {
+            carousels: this.attributes,
             swiperOption: {
                 pagination: '.swiper-pagination',
                 direction: 'horizontal',
@@ -70256,11 +70256,11 @@ var render = function() {
     "swiper",
     { staticClass: "swiper-box", attrs: { options: _vm.swiperOption } },
     [
-      _c("swiper-slide", { staticClass: "swiper-item" }, [_vm._v("Slide 1")]),
-      _vm._v(" "),
-      _c("swiper-slide", { staticClass: "swiper-item" }, [_vm._v("Slide 2")]),
-      _vm._v(" "),
-      _c("swiper-slide", { staticClass: "swiper-item" }, [_vm._v("Slide 3")]),
+      _vm._l(_vm.carousels, function(carousel, index) {
+        return _c("swiper-slide", { key: index, staticClass: "swiper-item" }, [
+          _c("img", { attrs: { src: carousel.image, alt: "" } })
+        ])
+      }),
       _vm._v(" "),
       _c("div", {
         staticClass: "swiper-pagination",
@@ -70268,7 +70268,7 @@ var render = function() {
         slot: "pagination"
       })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -75992,12 +75992,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['attributes'],
+    props: ['attributes', 'image'],
     data: function data() {
         return {
             categories: this.attributes,
             childCategories: this.attributes['0'].child_categories,
-            changeIndex: 0
+            changeIndex: 0,
+            carousel: this.image
         };
     },
     mounted: function mounted() {
@@ -76057,7 +76058,7 @@ var render = function() {
         "div",
         { staticClass: "categories-right" },
         [
-          _c("img", { attrs: { src: "/images/category-top.png", alt: "" } }),
+          _c("img", { attrs: { src: _vm.carousel.image, alt: "" } }),
           _vm._v(" "),
           _c(
             "scroll",

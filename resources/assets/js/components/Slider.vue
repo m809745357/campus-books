@@ -1,8 +1,6 @@
 <template lang="html">
     <swiper :options="swiperOption" class="swiper-box">
-        <swiper-slide class="swiper-item">Slide 1</swiper-slide>
-        <swiper-slide class="swiper-item">Slide 2</swiper-slide>
-        <swiper-slide class="swiper-item">Slide 3</swiper-slide>
+        <swiper-slide v-for="(carousel, index) in carousels" :key="index" class="swiper-item"><img :src="carousel.image" alt=""></swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
 </template>
@@ -10,8 +8,10 @@
 <script>
     import { swiper, swiperSlide } from 'vue-awesome-swiper'
     export default {
+        props: ['attributes'],
         data() {
             return {
+                carousels: this.attributes,
                 swiperOption: {
                     pagination: '.swiper-pagination',
                     direction: 'horizontal',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Carousel;
 
 class CategoryController extends Controller
 {
@@ -14,6 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('childCategories.childCategories.books')->where('parent_id', 0)->latest()->get();
-        return view('posts.categories', compact('categories'));
+
+        $carousel = Carousel::where('type', 'category')->first();
+        return view('posts.categories', compact('categories', 'carousel'));
     }
 }

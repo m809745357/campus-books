@@ -13,7 +13,7 @@
         </scroll>
 
         <div class="categories-right">
-            <img src="/images/category-top.png" alt="">
+            <img :src="carousel.image" alt="">
 
             <scroll class="categories-desc" :data="categories">
                 <div v-for="(childCategory, index) in childCategories" :key="childCategory.id">
@@ -36,12 +36,13 @@
     import BScroll from 'better-scroll';
 
     export default {
-        props: ['attributes'],
+        props: ['attributes', 'image'],
         data() {
             return {
                 categories: this.attributes,
                 childCategories: this.attributes['0'].child_categories,
-                changeIndex: 0
+                changeIndex: 0,
+                carousel: this.image
             }
         },
         mounted() {
