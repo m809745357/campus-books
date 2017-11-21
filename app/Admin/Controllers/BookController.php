@@ -78,10 +78,9 @@ class BookController extends Controller
             $grid->id('ID')->sortable();
             $grid->column('onwer.name', '发布方');
             $grid->column('category.name', '类目');
-            $grid->column('title', '书名');
-            $grid->cover('封面')->image();
+            $grid->column('title', '书名')->badge('green');
             $grid->keywords('关键词')->badge('blue');
-
+            $grid->cover('封面')->image();
             // $grid->images('组图')->image();
             $grid->column('info', '图书详情')->display(function () {
                 return '编者：'.$this->author.'<br/>'.
@@ -91,19 +90,36 @@ class BookController extends Controller
                 '商品描述：'.'<span width="250px;">'.$this->body.'</span>';
             });
             $grid->column('info', '售卖详情')->display(function () {
-                return '价格：'.$this->money.'<br/>'.
+                return '编号：'.$this->book_number.'<br/>'.
+                '价格：'.$this->money.'<br/>'.
                 '物流方式：'.$this->logistics.'<br/>'.
-                '运费：'.$this->freight;
+                '运费：'.$this->freight.'<br/>'.
+                '状态：'.$this->status.'<br/>'.
+                '发布时间：'.$this->created_at;
             });
-            $grid->column('favorites_count', '浏览')->display( function ($count) {
+            $grid->column('favorites_count', '浏览信息')->display( function ($count) {
                 return '<i class="fa fa-heart" aria-hidden="true" title="喜欢"></i> <span class="sr-only">'. $count .'</span>'
                 .'<br/>'
                 .'<i class="fa fa-eye" aria-hidden="true" title="看过"></i> <span class="sr-only">'. $this->views_count .'</span>';
             });
-            $grid->status('状态');
 
-            // $grid->created_at('发布时间');
-            // $grid->updated_at();
+            $grid->disableRowSelector();
+            $grid->disableCreation();
+            $grid->actions(function ($actions) {
+                $actions->disableDelete();
+            });
+            $grid->disableExport();
+            $grid->filter(function ($filter) {
+                // 去掉默认的id过滤器
+                $filter->disableIdFilter();
+                // 在这里添加字段过滤器
+                $filter->like('title', '书名');
+                $filter->equal('user_id', '发布方')->select(User::all()->pluck('name', 'id'));
+                $filter->like('keywords', '关键词');
+                $filter->like('author', '编者');
+                $filter->like('press', '出版社');
+                $filter->between('created_at', '发布时间')->datetime();
+            });
         });
     }
 
@@ -117,8 +133,9 @@ class BookController extends Controller
         return Admin::form(Book::class, function (Form $form) {
             $form->tab('基本信息', function ($form) {
                 $form->display('id', 'ID');
+                $form->display('book_number', '图书编号');
                 $form->select('user_id', '发布方')->options(User::all()->pluck('name', 'id'));
-                $form->select('category_id', '类目')->options(Category::all()->pluck('name', 'id'));
+                $form->select('category_id', '类目')->options(Category::buildSelectOptions());
                 $form->display('title', '书名');
                 $form->display('keywords', '关键词');
                 $form->display('money', '价格');
@@ -133,13 +150,10 @@ class BookController extends Controller
                 $form->textarea('body', '商品描述')->rows(10);
                 $form->display('annex', '附件信息');
             })->tab('其他信息', function ($form) {
-                 $form->hasMany('jobs', function () {
-                     $form->display('views_count', '浏览');
-                     $form->display('favorites_count', '喜欢');
-                     $form->display('created_at', '发布时间');
-                 });
+                $form->display('views_count', '浏览');
+                $form->display('favorites_count', '喜欢');
+                $form->display('created_at', '发布时间');
             });
-            // $form->display('updated_at', 'Updated At');
         });
     }
 }

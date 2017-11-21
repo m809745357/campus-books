@@ -17,6 +17,7 @@ class CreateWithdrawsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->integer('money');
+            $table->tinyInteger('status')->comment('1：待审核,2：已审核')->default('1');
             $table->timestamps();
         });
     }

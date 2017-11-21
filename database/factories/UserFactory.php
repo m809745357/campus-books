@@ -195,5 +195,15 @@ $factory->define(App\Models\Carousel::class, function (Faker $faker) {
         'image' => $faker->imageUrl(375, 135),
         'target_url' => 'https://book.mandokg.com',
         'type' => 'home'
+        ];
+});
+
+$factory->define(App\Models\Withdraw::class, function (Faker $faker) {
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'money' => $faker->randomNumber(2),
+        'status' => rand(1, 2)
     ];
 });

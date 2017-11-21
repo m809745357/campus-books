@@ -17,16 +17,17 @@ class Category extends Model
     //  *
     //  * @param array $attributes
     //  */
-    // public function __construct(array $attributes = [])
-    // {
-    //     $connection = config('admin.database.connection') ?: config('database.default');
-    //
-    //     $this->setConnection($connection);
-    //
-    //     $this->setTable(config('admin.database.menu_table'));
-    //
-    //     parent::__construct($attributes);
-    // }
+    public function __construct(array $attributes = [])
+    {
+        // $connection = config('admin.database.connection') ?: config('database.default');
+        // $this->setConnection($connection);
+        // $this->setTable(config('admin.database.menu_table'));
+
+        parent::__construct($attributes);
+        $this->setParentColumn('parent_id');
+        $this->setOrderColumn('order');
+        $this->setTitleColumn('name');
+    }
     //
     // /**
     //  * A Menu belongs to many roles.
@@ -52,15 +53,6 @@ class Category extends Model
     //
     //     return static::with('roles')->orderByRaw($byOrder)->get()->toArray();
     // }
-    /**
-    * Get the route key name for Laravel.
-    *
-    * @return string
-    */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
 
     /**
      * 获取子分类
@@ -69,7 +61,7 @@ class Category extends Model
      */
     public function childCategories()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id', 'id')->select('id', 'name', 'parent_id');
     }
 
     /**

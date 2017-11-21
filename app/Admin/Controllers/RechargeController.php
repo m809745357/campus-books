@@ -80,9 +80,12 @@ class RechargeController extends Controller
                 'off' => ['value' => 0, 'text' => '隐藏', 'color' => 'danger'],
             ];
             $grid->status('状态')->switch($states);
-            // $grid->column('status', '状态');
             $grid->created_at('创建时间');
-            // $grid->updated_at();
+            $grid->disableExport();
+            $grid->filter( function ($filter) {
+                $filter->disableIdFilter();
+                $filter->equal('money', '充值额度');
+            });
         });
     }
 
@@ -96,7 +99,7 @@ class RechargeController extends Controller
         return Admin::form(Recharge::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->number('money', '充值额度');
+            $form->number('money', '充值额度')->rules('required|regex:/^\d+$/|min:1');
             $states = [
                 'on'  => ['value' => 1, 'text' => '显示', 'color' => 'success'],
                 'off' => ['value' => 0, 'text' => '隐藏', 'color' => 'danger'],

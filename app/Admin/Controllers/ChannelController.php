@@ -76,10 +76,22 @@ class ChannelController extends Controller
             $grid->id('ID')->sortable();
             $grid->name('标题')->badge('green');
             $grid->slug('英文标识')->badge('blue');
-            $grid->icon('图标')->image();
+            $grid->icon('图标')->display( function ($icon) {
+                return "<i class='fa {$icon}'></i>";
+            });
             $grid->desc('简述');
             $grid->created_at('创建时间');
             // $grid->updated_at();
+            // $grid->disableCreation();
+            // $grid->disableRowSelector();
+            $grid->disableExport();
+            $grid->filter(function ($filter) {
+                $filter->disableIdFilter();
+                $filter->where( function ($query) {
+                    $query->where('name', 'like', "%{$this->input}%")
+                    ->orWhere('slug', 'like', "%{$this->input}%");
+                }, '标题或英文标识');
+            });
         });
     }
 
@@ -94,11 +106,21 @@ class ChannelController extends Controller
 
             $form->display('id', 'ID');
             $form->text('name', '标题');
-            $form->text('slug', '英文标识');
-            $form->image('icon', '图标');
+            $form->text('slug', '英文标识')->rules('required|regex:/^[a-z]+$/|min:4')->help('至少为4个字母');
+            $form->icon('icon', trans('admin.icon'))->default('fa-bars')->rules('required')->help($this->iconHelp());
             $form->textarea('desc', '简述');
             // $form->display('created_at', 'Created At');
             // $form->display('updated_at', 'Updated At');
         });
+    }
+
+    /**
+     * Help message for icon field.
+     *
+     * @return string
+     */
+    protected function iconHelp()
+    {
+        return 'For more icons please see <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a>';
     }
 }

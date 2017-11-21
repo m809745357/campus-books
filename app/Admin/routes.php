@@ -19,5 +19,6 @@ Route::group([
     $router->resource('/club/reply', ReplyController::class);
     $router->resource('/account/recharge', RechargeController::class);
     $router->resource('/account/bill', BillController::class);
-
+    $router->resource('/account/bank', WithdrawController::class);
+    $router->post('/account/bank/checkrow', 'WithdrawController@checkrow');
 });
