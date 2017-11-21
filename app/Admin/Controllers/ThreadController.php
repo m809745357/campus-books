@@ -88,6 +88,8 @@ class ThreadController extends Controller
             });
             $grid->created_at('创建时间');
             // $grid->updated_at();
+            $grid->disableCreation();
+            $grid->disableExport();
         });
     }
 
@@ -101,8 +103,8 @@ class ThreadController extends Controller
         return Admin::form(Thread::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $from->select('user_id')->options(User::all()->pluck('name', 'id'));
-            $from->select('channel_id')->options(Channel::all()->pluck('name', 'id'));
+            $form->select('user_id')->options(User::all()->pluck('name', 'id'));
+            $form->select('channel_id')->options(Channel::all()->pluck('name', 'id'));
             $form->text('title', '标题');
             $form->textarea('body', '内容');
             $form->number('money', '悬赏');

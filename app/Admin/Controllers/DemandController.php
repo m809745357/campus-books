@@ -82,6 +82,20 @@ class DemandController extends Controller
             $grid->money('价格');
             $grid->views_count('浏览');
             $grid->created_at('求购时间');
+
+            $grid->disableCreation();
+            $grid->actions(function ($actions) {
+                $actions->disableDelete();
+            });
+            $grid->disableRowSelector();
+            $grid->disableExport();
+            $grid->filter(function ($filter) {
+                // 去掉默认的id过滤器
+                $filter->disableIdFilter();
+                $filter->like('title', '书名');
+                $filter->equal('user_id', '求购者')->select(User::all()->pluck('name', 'id'));
+                $filter->between('created_at', '求购时间')->datetime();
+            });
         });
     }
 
@@ -93,12 +107,11 @@ class DemandController extends Controller
     protected function form()
     {
         return Admin::form(Demand::class, function (Form $form) {
-
             $form->display('id', 'ID');
             $form->select('user_id', '求购者')->options(User::all()->pluck('name', 'id'));
             $form->text('title', '标题');
+            $form->multipleImage('image', '图片')->uniqueName();
             $form->number('money', '价格');
-            $form->image('image', '图片');
             $form->textarea('body', '内容');
             $form->display('views_count', '浏览');
             $form->display('created_at', '创建时间');

@@ -81,7 +81,26 @@ class ReplyController extends Controller
             $grid->column('body', '回复内容');
             $grid->favorites_count('点赞');
             $grid->created_at('回复时间');
-            // $grid->updated_at();
+
+            $grid->disableCreation();
+            // $grid->disableRowSelector();
+            $grid->disableExport();
+            $grid->filter(function ($filter) {
+                $filter->disableIdFilter();
+                $filter->where( function ($query) {
+                    $query->whereHas('thread', function ($query) {
+                        $query->where('title', 'like', "%{$this->input}%");
+                    });
+                }, '问题');
+                $filter->where( function ($query) {
+                    $query->whereHas('onwer', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '回复者');
+                $filter->where( function ($query) {
+                    $query->where('body', 'like', "%{$this->input}%");
+                }, '回复内容');
+            });
         });
     }
 

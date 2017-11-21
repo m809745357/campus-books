@@ -189,3 +189,13 @@ $factory->define(App\Models\Order::class, function (Faker $faker) {
         'status' => '0000'
     ];
 });
+
+$factory->define(App\Models\Withdraw::class, function (Faker $faker) {
+    return [
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'money' => $faker->randomNumber(2),
+        'status' => rand(1, 2)
+    ];
+});

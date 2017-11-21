@@ -85,6 +85,22 @@ class MemberController extends Controller
             });
             $grid->mobile('手机');
             $grid->created_at('注册时间');
+            $grid->disableRowSelector();
+            $grid->disableCreation();
+            $grid->actions(function ($actions) {
+                $actions->disableDelete();
+            });
+            $grid->disableExport();
+            $grid->filter(function ($filter) {
+                // 去掉默认的id过滤器
+                $filter->disableIdFilter();
+                // 在这里添加字段过滤器
+                $filter->like('name', '用户名');
+                $filter->like('mobile', '手机号');
+                $filter->like('school', '学校');
+                $filter->like('specialty', '专业');
+                $filter->between('created_at', '注册时间')->datetime();
+            });
         });
     }
 

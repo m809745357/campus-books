@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Bills;
+use App\User;
 
 class Withdraw extends Model
 {
@@ -18,6 +19,15 @@ class Withdraw extends Model
         static::created(function ($query) {
             $query->billed(array('change_type' => 'decrement', 'remark' => '提现'));
         });
+    }
+
+    /**
+     * [bills description]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function onwer()
+    {
+        return $this->belongsTo(\App\User::class, 'user_id');
     }
 
     /**
