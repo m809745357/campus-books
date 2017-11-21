@@ -83,9 +83,13 @@ class OrderController extends Controller
     {
         $this->authorize('update', $order);
 
-        if (! $order->pay()) {
+        $response = $order->pay();
+
+        if (! $response) {
             return response('支付失败', 400);
         }
+
+        return $response;
     }
 
     /**

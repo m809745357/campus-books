@@ -25,8 +25,18 @@
             submit() {
                 axios.post(this.url())
                     .then(response => {
-                        flash(`充值成功`, 'success');
-                        this.create();
+                        let config = response.data
+                        wx.chooseWXPay({
+                            timestamp: config.timestamp,
+                            nonceStr: config.nonceStr,
+                            package: config.package,
+                            signType: config.signType,
+                            paySign: config.paySign, // 支付签名
+                            success: function (res) {
+                                flash(`充值成功，充值金额将在1分钟到账`, 'success');
+                                this.create();
+                            }
+                        });
                     });
             },
             url() {

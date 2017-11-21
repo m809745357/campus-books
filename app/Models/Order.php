@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Bills;
+use App\Models\Traits\Payments;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use EasyWeChat\Foundation\Application;
 
 class Order extends Model
 {
-    use Bills, SoftDeletes;
+    use Bills, SoftDeletes, Payments;
 
     /**
      * 需要被转换成日期的属性。
@@ -130,6 +132,10 @@ class Order extends Model
     {
         $method = $this->getPaymentMethod();
 
+        if ($method === 'wechatpay') {
+            return $this->$method();
+        }
+
         if (! $this->$method()) {
             return false;
         }
@@ -157,7 +163,38 @@ class Order extends Model
      */
     public function wechatpay()
     {
+        $app = new Application(config('wechat'));
+        $payment = $app->payment;
+        $attributes = [
+            'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body'             => '资料交易',
+            'detail'           => $this->title,
+            'out_trade_no'     => $this->getOutTradeNo(),
+            'total_fee'        => $this->price(), // 单位：分
+            'notify_url'       => config('app.url') . '/wechat/notify', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'openid'           => auth()->user()->openid, // trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识，
+            'attach'           => '书本交易记录'
+        ];
 
+        $order = new \EasyWeChat\Payment\Order($attributes);
+
+        $result = $payment->prepare($order);
+
+        if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+            $prepayId = $result->prepay_id;
+            $this->addPaymentRecord(array(
+                'out_trade_no' => $out_trade_no,
+                'prepay_id' => $prepayId,
+                'status' => 0
+            ));
+
+            return $payment->configForJSSDKPayment($prepayId);
+        }
+    }
+
+    private function getOutTradeNo()
+    {
+        return config('wechat.payment.merchant_id') . date('YmdHis') . rand(1000, 9999);
     }
 
     /**

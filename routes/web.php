@@ -103,8 +103,7 @@ Route::get('/orders/{order}/pay', 'OrderController@pay')->name('order.pay');
 Route::post('/api/orders', 'UserController@orders');
 
 Route::post('/api/address', 'AddressController@store');
-Route::get('/users/{user}/guest', function () {
-    \Auth::login(\App\User::find(20));
-});
+
+Route::any('/wechat/notify', 'WechatController@notify');
 
 Auth::routes();

@@ -42,14 +42,29 @@
                         paymet: this.paymet
                     })
                     .then(response => {
-                        flash('支付成功');
-                        setTimeout(() => {
-                            window.location.href = `/orders/${this.order.id}`;
-                        }, 1000)
+                        let config = response.data
+                        wx.chooseWXPay({
+                            timestamp: config.timestamp,
+                            nonceStr: config.nonceStr,
+                            package: config.package,
+                            signType: config.signType,
+                            paySign: config.paySign, // 支付签名
+                            success: function (res) {
+                                flash(`支付成功`, 'success');
+
+                                setTimeout(() => {
+                                    window.location.href = `/orders/${this.order.id}`;
+                                }, 1000)
+                            }
+                        });
+
                     })
                     .catch(error => {
                         if (error.response.status == 422) {
                             this.showModel(error.response.data)
+                        }
+                        if (error.response.status == 400) {
+                            flash(error.response.data, 'warning')
                         }
                     });
             },
