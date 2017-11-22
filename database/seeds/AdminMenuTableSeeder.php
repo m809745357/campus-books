@@ -226,6 +226,50 @@ class AdminMenuTableSeeder extends Seeder
                 'created_at' => '2017-11-17 14:55:51',
                 'updated_at' => '2017-11-18 10:57:27',
             ),
+            19 => 
+            array (
+                'id' => 20,
+                'parent_id' => 16,
+                'order' => 20,
+                'title' => '提现管理',
+                'icon' => 'fa-bank',
+                'uri' => '/account/bank',
+                'created_at' => '2017-11-21 11:05:15',
+                'updated_at' => '2017-11-21 11:06:44',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'parent_id' => 0,
+                'order' => 21,
+                'title' => '配置管理',
+                'icon' => 'fa-briefcase',
+                'uri' => '/deploy',
+                'created_at' => '2017-11-22 09:25:29',
+                'updated_at' => '2017-11-22 09:29:38',
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'parent_id' => 21,
+                'order' => 22,
+                'title' => '轮播图片',
+                'icon' => 'fa-area-chart',
+                'uri' => '/deloy/carousels',
+                'created_at' => '2017-11-22 09:27:03',
+                'updated_at' => '2017-11-22 09:29:38',
+            ),
+            22 => 
+            array (
+                'id' => 24,
+                'parent_id' => 21,
+                'order' => 23,
+                'title' => '基础配置',
+                'icon' => 'fa-cogs',
+                'uri' => 'config',
+                'created_at' => '2017-11-22 10:31:14',
+                'updated_at' => '2017-11-22 10:35:31',
+            ),
         ));
         
         
