@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\models\Book;
-use App\models\Category;
+use App\Models\Book;
+use App\Models\Category;
 use App\User;
 
 use Encore\Admin\Form;

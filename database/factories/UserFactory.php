@@ -138,7 +138,8 @@ $factory->define(App\Models\Category::class, function (Faker $faker) {
                     return factory('App\Models\Category')->create(['parent_id' => 0])->id;
                 }
             ])->id;
-        }
+        },
+        'order' => 0,
     ];
 });
 

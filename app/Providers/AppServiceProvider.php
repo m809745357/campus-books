@@ -18,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale('zh');
         View::share('js', $app->js);
-        Config::load();
+        if (! app()->environment('testing')) {
+            Config::load();
+        }
     }
 
     /**

@@ -10,13 +10,24 @@ class Category extends Model
 {
     use ModelTree, AdminBuilder;
 
-    protected $fillable = ['parent_id', 'order', 'name'];
+    // protected $fillable = ['parent_id', 'order', 'name'];
+    protected $guarded = [];
 
-    // /**
-    //  * Create a new Eloquent model instance.
-    //  *
-    //  * @param array $attributes
-    //  */
+    /**
+    * Get the route key name for Laravel.
+    *
+    * @return string
+    */
+    public function getRouteKeyName()
+    {
+       return 'slug';
+    }
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {
         // $connection = config('admin.database.connection') ?: config('database.default');
@@ -28,31 +39,6 @@ class Category extends Model
         $this->setOrderColumn('order');
         $this->setTitleColumn('name');
     }
-    //
-    // /**
-    //  * A Menu belongs to many roles.
-    //  *
-    //  * @return BelongsToMany
-    //  */
-    // public function roles() : BelongsToMany
-    // {
-    //     $pivotTable = config('admin.database.role_menu_table');
-    //
-    //     $relatedModel = config('admin.database.roles_model');
-    //
-    //     return $this->belongsToMany($relatedModel, $pivotTable, 'menu_id', 'role_id');
-    // }
-    //
-    // /**
-    //  * @return array
-    //  */
-    // public function allNodes() : array
-    // {
-    //     $orderColumn = DB::getQueryGrammar()->wrap($this->orderColumn);
-    //     $byOrder = $orderColumn.' = 0,'.$orderColumn;
-    //
-    //     return static::with('roles')->orderByRaw($byOrder)->get()->toArray();
-    // }
 
     /**
      * 获取子分类
