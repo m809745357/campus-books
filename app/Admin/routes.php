@@ -21,4 +21,6 @@ Route::group([
     $router->resource('/account/bill', BillController::class);
     $router->resource('/account/bank', WithdrawController::class);
     $router->post('/account/bank/checkrow', 'WithdrawController@checkrow');
+    $router->resource('/deloy/carousels', CarouselController::class);
+    $router->resource('/deloy/config', ConfigController::class);
 });

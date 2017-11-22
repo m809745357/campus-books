@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Encore\Admin\Config\Config;
 use Illuminate\Support\ServiceProvider;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Support\Facades\View;
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale('zh');
         View::share('js', $app->js);
+        Config::load();
     }
 
     /**
