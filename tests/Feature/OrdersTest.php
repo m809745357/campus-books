@@ -192,7 +192,7 @@ class OrdersTest extends TestCase
         $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
         // 支付后取消订单
-        $order->pay()->cancel();
+        $order->payOrder()->cancel();
 
         $this->delete($order->path());
 
@@ -226,7 +226,7 @@ class OrdersTest extends TestCase
         $order = factory('App\Models\Order')->create(['user_id' => $buyer->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
         // 支付后取消订单
-        $order->pay()->cancel();
+        $order->payOrder()->cancel();
 
         $this->delete($order->path());
 
@@ -274,7 +274,7 @@ class OrdersTest extends TestCase
 
         $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
-        $order->pay();
+        $order->payOrder();
 
         $response = $this->post($order->path() . '/cancel');
 
@@ -300,7 +300,7 @@ class OrdersTest extends TestCase
 
         $order = factory('App\Models\Order')->create(['user_id' => $buyer->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
-        $order->pay();
+        $order->payOrder();
 
         $express = ['company' => '顺丰', 'number' => '123456787'];
 
@@ -330,7 +330,7 @@ class OrdersTest extends TestCase
 
         $order = factory('App\Models\Order')->create(['user_id' => $buyer->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
-        $order->pay();
+        $order->payOrder();
 
         $this->post($order->path() . '/close');
 
@@ -350,7 +350,7 @@ class OrdersTest extends TestCase
 
         $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
-        $order->pay()->ship();
+        $order->payOrder()->ship();
 
         $this->post($order->path() . '/confirms');
 
@@ -370,7 +370,7 @@ class OrdersTest extends TestCase
 
         $order = factory('App\Models\Order')->create(['user_id' => $user->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
-        $order->pay()->ship()->confirms();
+        $order->payOrder()->ship()->confirms();
 
         $this->delete($order->path());
 
@@ -390,7 +390,7 @@ class OrdersTest extends TestCase
 
         $order = factory('App\Models\Order')->create(['user_id' => $buyer->id, 'book_id' => $book->id, 'book_detail' => $book->id]);
 
-        $order->pay()->ship()->confirms();
+        $order->payOrder()->ship()->confirms();
 
         $this->delete($order->path());
 
