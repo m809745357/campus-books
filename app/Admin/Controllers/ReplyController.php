@@ -74,19 +74,21 @@ class ReplyController extends Controller
     protected function grid()
     {
         return Admin::grid(Reply::class, function (Grid $grid) {
-
+            $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
-            $grid->column('thread.title', '问题');
-            $grid->column('onwer.name', '回复者');
-            $grid->column('body', '回复内容');
-            $grid->favorites_count('点赞');
+            $grid->column('thread.title', '问题')->badge('green');
+            $grid->column('onwer.name', '回复者')->badge('blue');
+            $grid->column('body', '回复内容')->display( function ($body) {
+                return '<div style="width:350px;height:80px;">'.mb_substr($body, 0, 150).'</div>';
+            });
+            $grid->favorites_count('点赞')->color('red');
             $grid->created_at('回复时间');
 
             $grid->disableCreation();
             // $grid->disableRowSelector();
             $grid->disableExport();
             $grid->filter(function ($filter) {
-                $filter->disableIdFilter();
+                $filter->equal('thread_id', '问题ID');
                 $filter->where( function ($query) {
                     $query->whereHas('thread', function ($query) {
                         $query->where('title', 'like', "%{$this->input}%");
@@ -97,9 +99,7 @@ class ReplyController extends Controller
                         $query->where('name', 'like', "%{$this->input}%");
                     });
                 }, '回复者');
-                $filter->where( function ($query) {
-                    $query->where('body', 'like', "%{$this->input}%");
-                }, '回复内容');
+                $filter->like('body', '回复内容');
             });
         });
     }

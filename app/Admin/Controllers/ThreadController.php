@@ -74,22 +74,36 @@ class ThreadController extends Controller
     protected function grid()
     {
         return Admin::grid(Thread::class, function (Grid $grid) {
-
+            $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
-            $grid->column('channel.name', '问答分类');
-            $grid->column('onwer.name', '提问者');
-            $grid->column('title', '标题');
-            $grid->column('body', '内容');
-            $grid->column('money', '悬赏');
+            $grid->column('channel.name', '问答分类')->badge('red');
+            $grid->column('onwer.name', '提问者')->badge('green');
+            $grid->column('title', '问题')->badge('blue');
+            $grid->column('body', '内容')->display(function ($str) {
+                return '<div style="width:350px;height:80px;">'.mb_substr($str, 0, 150).'</div>';
+            });
+            $grid->column('money', '悬赏')->color('red');
             $grid->column('favorites_count', '其他信息')->display(function ($count) {
                 return '<i class="fa fa-heart" aria-hidden="true" title="喜欢"></i> <span class="sr-only">'. $count .'</span><br/>'
                 .'<i class="fa fa-eye" aria-hidden="true" title="看过"></i> <span class="sr-only">'. $this->views_count .'</span><br/>'
-                .'<i class="fa fa-eye" aria-hidden="true" title="回复"></i> <span class="sr-only">'. $this->replies_count .'</span><br/>';
+                .'<a href="/admin/club/reply?thread_id='.$this->id.'"><i class="fa fa-bars" aria-hidden="true" title="回复 点击查看"></i> <span class="sr-only">'. $this->replies_count . '</span></a>';
             });
             $grid->created_at('创建时间');
-            // $grid->updated_at();
             $grid->disableCreation();
             $grid->disableExport();
+            $grid->filter(function ($filter) {
+                $filter->like('title', '问题');
+                $filter->where(function ($query) {
+                    $query->whereHas('onwer', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '提问者');
+                $filter->where(function ($query) {
+                    $query->whereHas('channel', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '问答分类');
+            });
         });
     }
 
@@ -103,15 +117,15 @@ class ThreadController extends Controller
         return Admin::form(Thread::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->select('user_id')->options(User::all()->pluck('name', 'id'));
-            $form->select('channel_id')->options(Channel::all()->pluck('name', 'id'));
-            $form->text('title', '标题');
+            $form->display('onwer.name', '提问者');
+            $form->display('channel.name', '问答分类');
+            $form->display('title', '问题');
             $form->textarea('body', '内容');
-            $form->number('money', '悬赏');
-            $form->number('favorites_count', '喜欢');
-            $form->number('views_count', '浏览');
-            $form->number('replies_count', '回复');
-            // $form->display('created_at', 'Created At');
+            $form->display('money', '悬赏');
+            $form->display('favorites_count', '喜欢');
+            $form->display('views_count', '浏览');
+            $form->display('replies_count', '回复');
+            $form->display('created_at', '提问时间');
             // $form->display('updated_at', 'Updated At');
         });
     }

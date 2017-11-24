@@ -78,6 +78,9 @@ class Order extends Model
      */
     public function getBookDetailAttribute($book)
     {
+        if (is_array($book)) {
+            return $book;
+        }
         return unserialize($book);
     }
 
@@ -128,7 +131,7 @@ class Order extends Model
      *
      * @return [type] [description]
      */
-    public function pay()
+    public function payOrder()
     {
         $method = $this->getPaymentMethod();
 

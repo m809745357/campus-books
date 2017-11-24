@@ -73,14 +73,16 @@ class DemandController extends Controller
     protected function grid()
     {
         return Admin::grid(Demand::class, function (Grid $grid) {
-
+            $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
-            $grid->column('onwer.name', '求购者');
-            $grid->title('标题');
-            $grid->image('图片')->image();
-            $grid->body('内容');
-            $grid->money('价格');
-            $grid->views_count('浏览');
+            $grid->column('onwer.name', '求购者')->badge('blue');
+            $grid->title('标题')->badge('green');
+            $grid->images('图片')->image('80', '80');
+            $grid->body('内容')->display(function ($body) {
+                return '<div style="width:350px;height:80px;">'. mb_substr($body, 0, 150) .'</div>';
+            });
+            $grid->money('价格')->color('red');
+            $grid->views_count('浏览')->color('green');
             $grid->created_at('求购时间');
 
             $grid->disableCreation();
@@ -93,7 +95,11 @@ class DemandController extends Controller
                 // 去掉默认的id过滤器
                 $filter->disableIdFilter();
                 $filter->like('title', '书名');
-                $filter->equal('user_id', '求购者')->select(User::all()->pluck('name', 'id'));
+                $filter->where(function ($query) {
+                    $query->whereHas('onwer', function ($query) {
+                        $query->where('name', 'like', "%{$this->input}%");
+                    });
+                }, '求购者');
                 $filter->between('created_at', '求购时间')->datetime();
             });
         });
@@ -108,10 +114,10 @@ class DemandController extends Controller
     {
         return Admin::form(Demand::class, function (Form $form) {
             $form->display('id', 'ID');
-            $form->select('user_id', '求购者')->options(User::all()->pluck('name', 'id'));
-            $form->text('title', '标题');
-            $form->multipleImage('image', '图片')->uniqueName();
-            $form->number('money', '价格');
+            $form->display('onwer.name', '求购者');
+            $form->display('title', '标题');
+            $form->multipleImage('images', '图片')->uniqueName();
+            $form->display('money', '价格');
             $form->textarea('body', '内容');
             $form->display('views_count', '浏览');
             $form->display('created_at', '创建时间');

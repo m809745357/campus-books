@@ -7,7 +7,7 @@ use Encore\Admin\Form\Field;
 class WangEditor extends Field
 {
     // protected $view = 'admin::form.editor';
-    protected $view = 'layouts.editor';
+    protected $view = 'admin.wang-editor';
 
     protected static $css = [
         '/packages/wangEditor-2.1.23/dist/css/wangEditor.min.css',

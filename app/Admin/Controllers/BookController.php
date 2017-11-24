@@ -74,13 +74,15 @@ class BookController extends Controller
     protected function grid()
     {
         return Admin::grid(Book::class, function (Grid $grid) {
-
+            $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
-            $grid->column('onwer.name', '发布方');
-            $grid->column('category.name', '类目');
+            $grid->column('onwer.name', '发布方')->badge('red');
+            $grid->column('category.name', '类目')->badge('danger');
             $grid->column('title', '书名')->badge('green');
-            $grid->keywords('关键词')->badge('blue');
-            $grid->cover('封面')->image();
+            $grid->column('keywords', '关键词')->display(function ($keywords) {
+                return implode(', ', $keywords);
+            })->badge('blue');
+            $grid->cover('封面')->image('80', '80');
             // $grid->images('组图')->image();
             $grid->column('info', '图书详情')->display(function () {
                 return '编者：'.$this->author.'<br/>'.
@@ -96,6 +98,13 @@ class BookController extends Controller
                 '运费：'.$this->freight.'<br/>'.
                 '状态：'.$this->status.'<br/>'.
                 '发布时间：'.$this->created_at;
+            });
+            $grid->type('图书类型')->display(function ($type) {
+                $datas = [
+                    'PBook' => '实体书',
+                    'EBook' => '电子书'
+                ];
+                return $type ? $datas[$type] : '';
             });
             $grid->column('favorites_count', '浏览信息')->display( function ($count) {
                 return '<i class="fa fa-heart" aria-hidden="true" title="喜欢"></i> <span class="sr-only">'. $count .'</span>'
@@ -134,10 +143,12 @@ class BookController extends Controller
             $form->tab('基本信息', function ($form) {
                 $form->display('id', 'ID');
                 $form->display('book_number', '图书编号');
-                $form->select('user_id', '发布方')->options(User::all()->pluck('name', 'id'));
-                $form->select('category_id', '类目')->options(Category::buildSelectOptions());
+                $form->display('onwer.name', '发布方');
+                $form->display('category.name', '类目');
                 $form->display('title', '书名');
-                $form->display('keywords', '关键词');
+                $form->display('keywords', '关键词')->with(function ($keywords) {
+                    return $this->getTags($keywords);
+                });
                 $form->display('money', '价格');
                 $form->display('logistics', '物流方式');
                 $form->display('freight', '运费');
@@ -147,7 +158,7 @@ class BookController extends Controller
                 $form->display('published_at', '出版时间');
                 $form->image('cover', '封面');
                 $form->multipleImage('images', '组图')->uniqueName()->removable();
-                $form->textarea('body', '商品描述')->rows(10);
+                $form->textarea('body', '商品描述')->rows(10)->help('*可修改');
                 $form->display('annex', '附件信息');
             })->tab('其他信息', function ($form) {
                 $form->display('views_count', '浏览');

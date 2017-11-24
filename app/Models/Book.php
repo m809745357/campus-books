@@ -150,6 +150,39 @@ class Book extends Model
     {
         return json_decode($keywords, true);
     }
+    public function disTags($keywords)
+    {
+        $str = '<span class="select2 select2-container select2-container--default select2-container--focus select2-container--below" dir="ltr" style="width: 100%;">'
+            . ''
+            . '<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">'
+            . '<ul class="select2-selection__rendered">';
+        foreach ($keywords as $word) {
+            $str .= '<li class="select2-selection__choice" title="'. $word .'">'. $word .'</li>';
+        }
+        $str .= '</ul>'
+             . '</span>'
+             . '</span>';
+
+        return $str;
+    }
+    public function getTags($keywords)
+    {
+        $str = '<span class="select2 select2-container select2-container--default select2-container--focus select2-container--below" dir="ltr" style="width: 100%;">'
+            . '<span class="selection">'
+            . '<span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">'
+            . '<ul class="select2-selection__rendered">';
+        foreach ($keywords as $word) {
+            $str .= '<li class="select2-selection__choice" title="'. $word .'">'. $word .'</li>';
+        }
+        $str .= '</ul>'
+             . '</span>'
+             .  '</span>'
+             .  '<span class="dropdown-wrapper" aria-hidden="true"></span>'
+             .  '</span>'
+             . '<input type="hidden" name="keywords[]">';
+
+        return $str;
+    }
 
     /**
      * 判断是否有附件

@@ -125,4 +125,11 @@ class MemberController extends Controller
             // $form->display('updated_at', 'Updated At');
         });
     }
+
+    public function users(Request $request)
+    {
+        $id = $request->get('id');
+
+        return User::where('name', 'like', "%$q%")->paginate(null, ['id', 'name as text']);
+    }
 }

@@ -14,6 +14,7 @@ Route::group([
     $router->resource('/bookmark/books', BookController::class);
     $router->resource('/bookmark/demand', DemandController::class);
     $router->resource('/member', MemberController::class);
+    $router->get('/member/api/users', 'MemberController@users');
     $router->resource('/club/channels', ChannelController::class);
     $router->resource('/club/thread', ThreadController::class);
     $router->resource('/club/reply', ReplyController::class);
@@ -22,5 +23,7 @@ Route::group([
     $router->resource('/account/bank', WithdrawController::class);
     $router->post('/account/bank/checkrow', 'WithdrawController@checkrow');
     $router->resource('/deloy/carousels', CarouselController::class);
-    $router->resource('/deloy/config', ConfigController::class);
+    $router->resource('/config', ConfigController::class);
+    $router->resource('/orders', OrderController::class);
+    // $router->get('/api/orders/{order}/book', 'OrderController@book');
 });

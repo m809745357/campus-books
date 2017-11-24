@@ -23,3 +23,12 @@ use App\Admin\Extensions\WangEditor;
 use Encore\Admin\Form;
 
 Form::extend('editor', WangEditor::class);
+
+/**
+ * berry
+ */
+ use Encore\Admin\Grid\Column;
+
+ Column::extend('color', function ($value, $color) {
+     return "<span style='color: $color'>$value</span>";
+ });

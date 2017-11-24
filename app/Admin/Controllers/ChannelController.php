@@ -72,14 +72,14 @@ class ChannelController extends Controller
     protected function grid()
     {
         return Admin::grid(Channel::class, function (Grid $grid) {
-
+            $grid->model()->orderBy('id', 'desc');
             $grid->id('ID')->sortable();
             $grid->name('标题')->badge('green');
             $grid->slug('英文标识')->badge('blue');
             $grid->icon('图标')->display( function ($icon) {
                 return "<i class='fa {$icon}'></i>";
             });
-            $grid->desc('简述');
+            $grid->column('desc', '简述');
             $grid->created_at('创建时间');
             // $grid->updated_at();
             // $grid->disableCreation();
@@ -89,8 +89,9 @@ class ChannelController extends Controller
                 $filter->disableIdFilter();
                 $filter->where( function ($query) {
                     $query->where('name', 'like', "%{$this->input}%")
-                    ->orWhere('slug', 'like', "%{$this->input}%");
-                }, '标题或英文标识');
+                    ->orWhere('slug', 'like', "%{$this->input}%")
+                    ->orWhere('desc', 'like', "%{$this->input}%");
+                }, '标题或英文标识或简述');
             });
         });
     }
