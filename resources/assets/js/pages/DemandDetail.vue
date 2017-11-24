@@ -33,6 +33,9 @@
         <div class="demand-contact-button con" v-if="onwer">
             <button type="button" name="button" @click="chat">在线联系</button>
         </div>
+        <div class="demand-contact-button con" v-else>
+            <button type="button" name="button" @click="edit">在线编辑</button>
+        </div>
     </div>
 </template>
 
@@ -91,6 +94,9 @@
                         imgUrl: that.demand.images[0],
                     });
                 });
+            },
+            edit() {
+                window.location.href = window.location.href + '/edit';
             }
         }
     }

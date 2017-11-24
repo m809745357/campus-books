@@ -51,6 +51,16 @@ class Category extends Model
     }
 
     /**
+     * 获取父分类
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function parentCategories()
+    {
+        return $this->belongsTo(self::class, 'parent_id', 'id');
+    }
+
+    /**
      * 获取子分类
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

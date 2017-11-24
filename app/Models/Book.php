@@ -104,7 +104,7 @@ class Book extends Model
      */
     public function getCoverAttribute($cover)
     {
-        return strpos($cover, 'http') !== false ? $cover : \Storage::url($cover);
+        return strpos($cover, 'http') !== false ? $cover : config('app.url') . $cover;
     }
 
     /**
@@ -126,7 +126,7 @@ class Book extends Model
     public function getImagesAttribute($images)
     {
         return array_map(function ($item) {
-            return strpos($item, 'http') !== false ? $item : \Storage::url($item);
+            return strpos($item, 'http') !== false ? $item : config('app.url') . $item;
         }, json_decode($images, true));
     }
 

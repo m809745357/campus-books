@@ -16,7 +16,7 @@
             <label>上传图片：</label>
             <div class="thread-form-other">
                 <form method="POST" enctype="multipart/form-data">
-                    <image-upload name="images" @loaded="onLoad" @canceled="onCancel"></image-upload>
+                    <image-upload :attributes="demand.images" name="images" @loaded="onLoad" @canceled="onCancel"></image-upload>
                 </form>
             </div>
         </div>
@@ -36,13 +36,14 @@
     import ImageUpload from '../components/ImageUpload.vue';
 
     export default {
+        props: ['attributes'],
         data() {
             return {
                 demand: {
-                    title: '',
-                    money: 0,
-                    body: '',
-                    images: []
+                    title: this.attributes.title,
+                    money: this.attributes.money,
+                    body: this.attributes.body,
+                    images: this.attributes.images
                 }
             }
         },
@@ -67,7 +68,10 @@
                     });
             },
             addDemand() {
-                axios.post('/demands', this.demand)
+                if (this.demand.title === this.attributes.title) {
+                    delete this.demand.title
+                }
+                axios.put(`/demands/${this.attributes.id}`, this.demand)
                     .then(response => {
                         console.log(response.data);
                         flash('发布成功!')

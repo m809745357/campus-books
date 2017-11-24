@@ -13,9 +13,10 @@
 
 <script>
     export default {
+        props: ['attributes'],
         data() {
             return {
-                images: []
+                images: this.attributes
             }
         },
         methods: {
@@ -27,7 +28,7 @@
                 reader.readAsDataURL(file);
                 reader.onload = e => {
                     let src = e.target.result;
-                    this.images.push(src);
+                    // this.images.push(src);
                     $("#image-upload").val('');
                     this.$emit('loaded', { src, file });
                 };

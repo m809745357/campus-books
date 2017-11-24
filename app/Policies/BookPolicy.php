@@ -23,6 +23,19 @@ class BookPolicy
     }
 
     /**
+     * Determine whether the user can view the book.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Models\Book  $book
+     * @return mixed
+     */
+    public function update(User $user, Book $book)
+    {
+        return $user->id === $book->onwer->id;
+    }
+
+
+    /**
      * 是否可以下单预览
      *
      * @param  User   $user [description]

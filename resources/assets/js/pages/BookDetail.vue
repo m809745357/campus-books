@@ -47,6 +47,9 @@
             <button type="button" name="button" @click="buy" v-if="book.status == '1'">立即购买</button>
             <button type="button" name="button" class="sell" v-else>已经出售</button>
         </div>
+        <div class="demand-contact-button con" v-else>
+            <button type="button" name="button" @click="edit">在线编辑</button>
+        </div>
     </div>
 </template>
 
@@ -133,6 +136,9 @@
                         imgUrl: that.book.images[0],
                     });
                 });
+            },
+            edit() {
+                window.location.href = window.location.href + '/edit';
             }
         }
     }

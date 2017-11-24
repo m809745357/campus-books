@@ -72,12 +72,16 @@ Route::get('/demands', 'DemandController@index')->name('demands.index');
 Route::get('/demands/create', 'DemandController@create')->name('demands.create');
 Route::post('/demands', 'DemandController@store')->name('demands.store');
 Route::get('/demands/{demand}', 'DemandController@show')->name('demands.show');
+Route::get('/demands/{demand}/edit', 'DemandController@edit')->name('demands.edit');
+Route::put('/demands/{demand}', 'DemandController@update')->name('demands.update');
 
 Route::get('/books', 'BookController@index')->name('books.index');
 Route::get('/books/create', 'BookController@create')->name('books.create');
 Route::post('/books', 'BookController@store')->name('books.store');
 Route::get('/books/{category}', 'BookController@index')->name('books.category.index');
 Route::get('/books/{category}/{book}', 'BookController@show')->name('books.show');
+Route::get('/books/{category}/{book}/edit', 'BookController@edit')->name('books.edit');
+Route::put('/books/{category}/{book}', 'BookController@update')->name('books.update');
 Route::post('/books/{category}/{book}/favorites', 'BookFavoriteController@store')->name('books.favorite');
 Route::delete('/books/{category}/{book}/favorites', 'BookFavoriteController@destory')->name('books.unfavorite');
 Route::get('/books/{category}/{book}/annex', 'AnnexController@index')->name('books.annex');

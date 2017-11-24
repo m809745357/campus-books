@@ -91,7 +91,7 @@ class Demand extends Model
     public function getImagesAttribute($images)
     {
         return array_map(function ($item) {
-            return strpos($item, 'http') !== false ? $item : \Storage::url($item);
+            return strpos($item, 'http') !== false ? $item : config('app.url') . $item;
         }, json_decode($images, true));
     }
 }

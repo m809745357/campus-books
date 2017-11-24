@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Demand;
 use App\Http\Requests\StoreDemandPost;
+use App\Http\Requests\UpdateDemandPost;
 use Illuminate\Http\Request;
 use App\Filters\DemandFilters;
 
@@ -70,4 +71,30 @@ class DemandController extends Controller
 
         return redirect($demand->path());
     }
+
+    /**
+     * 单个求购详情
+     *
+     * @param  Demand $demand
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Demand $demand)
+    {
+        $demand = $demand->load('onwer');
+        return view('demands.edit', compact('demand'));
+    }
+
+    /**
+     * 更新资料
+     *
+     * @param  UpdateDemandPost $request [description]
+     * @param  Demand           $demand  [description]
+     * @return [type]                    [description]
+     */
+    public function update(UpdateDemandPost $request, Demand $demand)
+    {
+        $this->authorize('update', $demand);
+        return tap($demand)->update($request->validated());
+    }
+
 }

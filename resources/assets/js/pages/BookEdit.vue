@@ -53,31 +53,29 @@
         <div class="thread-form-group">
             <label>分类：</label>
             <div class="thread-form-other">
-                <select name="category1" class="category" @change="changeMainCategory">
-                    <option>请选择</option>
+                <select name="category1" class="category" v-model='main' @change="changeMainCategory">
+                    <option value="">请选择</option>
                     <option
                         v-for="(category, index) in categories"
                         v-if="category.parent_id === 0"
-                        :value="category.slug"
-                        :data-id="category.id"
+                        :value="category.id"
                     >{{ category.name }}</option>
                 </select>
-                <select name="category2" class="category" @change="changeMinorCategory" v-if="main">
-                    <option>请选择</option>
+                <select name="category2" class="category" v-model='minor' @change="changeMinorCategory" v-if="main">
+                    <option value="">请选择</option>
                     <option
                         v-for="(category, index) in categories"
                         v-if="category.parent_id === main"
-                        :value="category.slug"
-                        :data-id="category.id"
+                        :value="category.id"
                     >{{ category.name }}</option>
                 </select>
-                <select name="category3" class="category" @change="changeCategory" v-if="minor">
-                    <option>请选择</option>
+                <select name="category3" class="category" v-model='book.category_id' v-if="minor">
+                    <option value="">请选择</option>
                     <option
                         v-for="(category, index) in categories"
                         v-if="category.parent_id === minor"
-                        :value="category.slug"
-                        :data-id="category.id"
+                        :value="category.id"
+                        :data-slug="category.slug"
                     >{{ category.name }}</option>
                 </select>
             </div>
@@ -118,7 +116,7 @@
             <label>商品图片：</label>
             <div class="thread-form-other">
                 <form method="POST" enctype="multipart/form-data">
-                    <image-upload name="images" @loaded="onLoad" @canceled="onCancel"></image-upload>
+                    <image-upload :attributes="book.images" name="images" @loaded="onLoad" @canceled="onCancel"></image-upload>
                 </form>
             </div>
         </div>
@@ -138,31 +136,31 @@
     import ImageUpload from '../components/ImageUpload.vue';
 
     export default {
-        props: ['attributes'],
+        props: ['attributes', 'bookdetail'],
         data() {
             return {
                 categories: this.attributes,
                 book: {
-                    title: '浪潮之巅',
-                    author: '吴军',
+                    title: this.bookdetail.title,
+                    author: this.bookdetail.author,
                     published_at: moment().get('year') + '-' + moment().get('month'),
-                    press: '人民邮电出版社',
-                    type: 'PBook',
-                    keywords: '计算机',
-                    logistics: '',
-                    category_id: '',
-                    money: 99,
-                    freight: '5',
-                    images: [],
-                    body: '该书主要讲述了IT产业发展的历史脉络和美国硅谷明星公司的兴衰沉浮。'
+                    press: this.bookdetail.press,
+                    type: this.bookdetail.type,
+                    keywords: this.bookdetail.keywords,
+                    logistics: this.bookdetail.logistics,
+                    category_id: this.bookdetail.category_id,
+                    money: this.bookdetail.money,
+                    freight: this.bookdetail.freight,
+                    images: this.bookdetail.images,
+                    body: this.bookdetail.body
                 },
                 years: [],
-                defaultYear: moment().get('year'),
+                defaultYear: this.bookdetail.published_at.split('-')[0],
                 months: [],
-                defaultMonth: moment().get('month') + 1,
-                main: false,
-                minor: false,
-                slug: '',
+                defaultMonth: this.bookdetail.published_at.split('-')[1],
+                main: this.bookdetail.category.parent_categories.parent_categories.id,
+                minor: this.bookdetail.category.parent_categories.id,
+                slug: this.bookdetail.category.slug,
                 file: '未选择文件'
             }
         },
@@ -180,26 +178,24 @@
         },
         methods: {
             changeMainCategory(e) {
-                this.main = parseInt(e.target.selectedOptions[0].dataset.id);
-                this.minor = false;
+                this.minor = '';
                 this.book.category_id = '';
             },
             changeMinorCategory(e) {
-                this.minor = parseInt(e.target.selectedOptions[0].dataset.id);
                 this.book.category_id = '';
             },
             changeCategory(e) {
-                this.book.category_id = parseInt(e.target.selectedOptions[0].dataset.id);
-                this.slug = e.target.selectedOptions[0].value;
+                this.slug = e.target.selectedOptions[0].dataset.slug;
             },
             changeType(e) {
                 this.type = e.target.value;
+                this.book.annex = ''
             },
             onLoad(image) {
                 this.persist(image.file);
             },
             onCancel(index) {
-                this.book.images.splice(index, 1);
+                // this.book.images.splice(index, 1);
             },
             onChange(e) {
                 this.file = e.target.value ? e.target.value : '未选择文件';
@@ -209,6 +205,7 @@
                 data.append('file', file);
                 axios.post(`/upload`, data)
                     .then(response => {
+                        that.book.annex = response.data;
                         flash('电子书上传成功!')
                     });
             },
@@ -229,12 +226,15 @@
                 if (! (this.book.keywords instanceof Array)) {
                     this.book.keywords = this.book.keywords.split(' ');
                 }
+                if (this.bookdetail.title === this.book.title) {
+                    delete this.book.title;
+                }
                 this.book.published_at = this.defaultYear + '-' + this.defaultMonth;
                 this.book.cover = this.book.images[0];
-                axios.post('/books', this.book)
+                axios.put(`/books/${this.slug}/${this.bookdetail.id}`, this.book)
                     .then(response => {
                         console.log(response.data);
-                        flash('发布成功!')
+                        flash('更新成功!')
                         this.success(response.data)
                     })
                     .catch(error => {

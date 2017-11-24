@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use App\Http\Requests\StoreBookPost;
+use App\Http\Requests\UpdateBookPost;
 use App\Filters\BookFilters;
 
 class BookController extends Controller
@@ -80,5 +81,33 @@ class BookController extends Controller
         }
 
         return redirect($book->path());
+    }
+
+    /**
+     * 编辑图书
+     *
+     * @param  Category $category
+     * @param  Book     $book
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Category $category, Book $book)
+    {
+        $categories = Category::with('childCategories', 'childCategories.childCategories')->get();
+        $book = $book->load('onwer', 'category.parentCategories.parentCategories');
+        return view('books.edit', compact('book', 'categories'));
+    }
+
+    /**
+     * 更新
+     *
+     * @param  UpdateBookPost $request  [description]
+     * @param  Category       $category [description]
+     * @param  Book           $book     [description]
+     * @return [type]                   [description]
+     */
+    public function update(UpdateBookPost $request, Category $category, Book $book)
+    {
+        $this->authorize('update', $book);
+        return tap($book)->update($request->validated());
     }
 }
